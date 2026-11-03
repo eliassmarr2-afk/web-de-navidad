@@ -7,6 +7,6 @@ export function emitSiteEvent(name, detail = {}) {
     transport: "local-event-layer",
   };
 
-  window.dispatchEvent(new CustomEvent("indumentary:event", { detail: event }));
+  window.dispatchEvent(new CustomEvent("web-de-navidad:event", { detail: event }));
   return event;
 }
