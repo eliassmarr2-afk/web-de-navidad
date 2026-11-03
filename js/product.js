@@ -90,7 +90,7 @@ function money(value) {
 
 function fallbackArtwork(label = "IND.") {
   const safe = String(label).replace(/[<&>]/g, "").slice(0, 32);
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900"><rect width="900" height="900" fill="#e9e0d4"/><path d="M315 230 395 175h110l80 55 120 92-75 115-72-48v305H342V389l-72 48-75-115 120-92Z" fill="#f7f7f4" stroke="#87c8ee" stroke-width="26"/><path d="M395 175v519M505 175v519" stroke="#87c8ee" stroke-width="18" opacity=".8"/><text x="450" y="790" text-anchor="middle" font-family="Arial,sans-serif" font-size="38" font-weight="700" fill="#111">${safe}</text><text x="450" y="835" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" fill="#666">IMAGEN TEMPORAL</text></svg>`;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900"><rect width="900" height="900" fill="#f9e5e7"/><path d="M315 230 395 175h110l80 55 120 92-75 115-72-48v305H342V389l-72 48-75-115 120-92Z" fill="#f7f7f4" stroke="#87c8ee" stroke-width="26"/><path d="M395 175v519M505 175v519" stroke="#87c8ee" stroke-width="18" opacity=".8"/><text x="450" y="790" text-anchor="middle" font-family="Arial,sans-serif" font-size="38" font-weight="700" fill="#111">${safe}</text><text x="450" y="835" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" fill="#666">IMAGEN TEMPORAL</text></svg>`;
   return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
 }
 
@@ -124,7 +124,7 @@ function renderGallery() {
   applyImage(els.image, active?.src, active?.alt);
 
   els.thumbnailRail.innerHTML = product.media.map((media) => `
-    <button class="thumbnail-button${media.id === active?.id ? " is-active" : "}" type="button" data-media-id="${media.id}" aria-label="Ver ${media.alt}">
+    <button class="thumbnail-button${media.id === active?.id ? " is-active" : ""}" type="button" data-media-id="${media.id}" aria-label="Ver ${media.alt}">
       <img src="${media.src}" alt="" loading="lazy" />
     </button>
   `).join("");
@@ -138,7 +138,7 @@ function renderGallery() {
 }
 
 function renderIntro() {
-  document.title = `${product.title} · Indumentary`;
+  document.title = `${product.title} · Web de Navidad`;
   els.category.textContent = product.category;
   els.title.textContent = product.title;
   els.subtitle.textContent = product.subtitle;
@@ -147,7 +147,7 @@ function renderIntro() {
   els.deliveryShort.textContent = product.deliveryDays <= 1 ? "Despacho en el día" : `Entrega en ${product.deliveryDays} días`;
   els.delivery.textContent = product.deliveryLabel;
   els.shortDescription.textContent = product.shortDescription;
-  els.sellerName.textContent = product.seller?.name || "IND.";
+  els.sellerName.textContent = product.seller?.name || "NAVIDAD.";
   els.sellerSubtitle.textContent = product.seller?.subtitle || "Tienda oficial";
 }
 
@@ -162,9 +162,9 @@ function renderOptions() {
     const values = option.values.map((value) => {
       const selected = value.id === selectedId;
       if (option.type === "image") {
-        return `<button class="color-image-button${selected ? " is-selected" : "}" type="button" data-option-id="${option.id}" data-value-id="${value.id}" aria-pressed="${selected}" aria-label="${value.label}"><img src="${value.image || ""}" alt="${value.label}" /></button>`;
+        return `<button class="color-image-button${selected ? " is-selected" : ""}" type="button" data-option-id="${option.id}" data-value-id="${value.id}" aria-pressed="${selected}" aria-label="${value.label}"><img src="${value.image || ""}" alt="${value.label}" /></button>`;
       }
-      return `<button class="option-button${selected ? " is-selected" : "}" type="button" data-option-id="${option.id}" data-value-id="${value.id}" aria-pressed="${selected}">${value.label}</button>`;
+      return `<button class="option-button${selected ? " is-selected" : ""}" type="button" data-option-id="${option.id}" data-value-id="${value.id}" aria-pressed="${selected}">${value.label}</button>`;
     }).join("");
 
     return `<div class="option-group"><div class="option-heading"><strong>${option.label}</strong><span>${selectedValue?.label || ""}</span></div><div class="option-values">${values}</div></div>`;
@@ -181,7 +181,7 @@ function renderOptions() {
 function renderOffers() {
   els.offers.innerHTML = product.offers.map((offer) => {
     const selected = offer.id === state.selectedOfferId;
-    return `<button class="offer-card${selected ? " is-selected" : "}" type="button" data-offer-id="${offer.id}" aria-pressed="${selected}">${offer.badge ? `<span class="offer-badge">${offer.badge}</span>` : ""}<span class="offer-card__copy"><strong>${offer.label}</strong><span>${offer.subtitle}</span></span><span class="offer-card__price"><strong>${money(offer.price)}</strong>${offer.compareAt ? `<span>${money(offer.compareAt)}</span>` : ""}</span></button>`;
+    return `<button class="offer-card${selected ? " is-selected" : ""}" type="button" data-offer-id="${offer.id}" aria-pressed="${selected}">${offer.badge ? `<span class="offer-badge">${offer.badge}</span>` : ""}<span class="offer-card__copy"><strong>${offer.label}</strong><span>${offer.subtitle}</span></span><span class="offer-card__price"><strong>${money(offer.price)}</strong>${offer.compareAt ? `<span>${money(offer.compareAt)}</span>` : ""}</span></button>`;
   }).join("");
 }
 
