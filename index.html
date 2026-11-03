@@ -1,25 +1,27 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" class="christmas-site">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#0a0a0a" />
-  <title>Indumentary — Indumentaria deportiva</title>
-  <meta name="description" content="Modelo ecommerce de indumentaria deportiva preparado para Shopify y Protocol Data." />
+  <meta name="theme-color" content="#B20B17" />
+  <title>Web de Navidad · Regalos y decoración</title>
+  <meta name="description" content="Inspiración navideña, regalos, decoración y detalles para celebrar. Catálogo de demostración, sin ventas activas." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./css/base.css" />
   <link rel="stylesheet" href="./css/home.css" />
+  <link rel="stylesheet" href="./css/navidad-home.css?v=20261103-01" />
 </head>
-<body>
+<body class="christmas-home">
   <div class="site-shell">
+    <div class="holiday-announcement">ESPECIAL NAVIDAD 2026 <span aria-hidden="true">✦</span> INSPIRACIÓN PARA CELEBRAR</div>
     <header class="site-header">
       <button class="icon-button icon-button--inverse" id="menuToggle" type="button" aria-label="Abrir menú" aria-controls="siteMenu" aria-expanded="false">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
       </button>
 
-      <a class="utility-logo" href="#top" aria-label="Ir al inicio">IND.</a>
+      <a class="utility-logo" href="#top" aria-label="Ir al inicio">NAVIDAD.a>
 
       <button class="cart-button" id="cartButton" type="button" aria-label="Abrir carrito">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 2-1.6L20.5 8H6.1M10 20h.01M17 20h.01" /></svg>
@@ -44,45 +46,63 @@
           <label class="sr-only" for="productSearch">Buscar productos</label>
           <div class="search-field">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
-            <input id="productSearch" type="search" placeholder="¿Qué producto estás buscando?" autocomplete="off" />
+            <input id="productSearch" type="search" placeholder="Buscá regalos, adornos, luces..." autocomplete="off" />
           </div>
         </section>
 
-        <section class="hero" aria-labelledby="heroTitle">
-          <img src="https://assets.adidas.com/images/h_2000%2Cf_auto%2Cq_auto%2Cfl_lossy%2Cc_fill%2Cg_auto/5ef7c9c5bf244248a8b3ae483dedd1f3_9366/Casaca_deportiva_local_seleccion_argentina_2006_Blanco_JM1091_HM1.jpg" alt="Modelo con campera deportiva celeste y blanca inspirada en la Selección Argentina" />
+<section class="hero christmas-hero" aria-labelledby="heroTitle">
+          <div class="christmas-hero__spark" aria-hidden="true">✦</div>
           <div class="hero__panel">
-            <span class="eyebrow">NUEVA COLECCIÓN</span>
-            <h1 id="heroTitle">Vestite para alentar.</h1>
-            <p>Camperas y esenciales deportivos con identidad argentina para todos los días.</p>
-            <a class="button button--light" href="#productos">Ver colección</a>
+            <span class="eyebrow">TEMPORADA NAVIDEÑA</span>
+            <h1 id="heroTitle">La magia de regalar empieza acá.</h1>
+            <p>Árboles, luces, detalles y sorpresas para hacer especial cada rincón de estas fiestas.</p>
+            <a class="button button--light" href="#categorias">Explorar Navidad</a>
           </div>
+          <span class="christmas-hero__ornament christmas-hero__ornament--one" aria-hidden="true"></span>
+          <span class="christmas-hero__ornament christmas-hero__ornament--two" aria-hidden="true"></span>
         </section>
 
-        <section class="section section--categories" aria-labelledby="categoryTitle">
+                <section class="section section--categories" id="categorias" aria-labelledby="categoryTitle">
           <div class="section-heading">
             <div>
-              <span class="eyebrow eyebrow--dark">COLECCIONES</span>
-              <h2 id="categoryTitle">Explorá por categoría</h2>
+              <span class="eyebrow eyebrow--dark">TODO PARA CELEBRAR</span>
+              <h2 id="categoryTitle">Elegí tu inspiración</h2>
             </div>
           </div>
-          <div class="category-scroller" id="categoryList" aria-label="Categorías"></div>
+          <div class="category-scroller category-two-rails" id="categoryList" aria-label="Dos filas desplazables de categorías navideñas"></div>
         </section>
 
-        <section class="section section--combos" aria-labelledby="comboTitle">
+<section class="section section--filters" aria-labelledby="filtersTitle">
+          <div class="section-heading">
+            <div><span class="eyebrow eyebrow--dark">ENCONTRÁ TU ESTILO</span><h2 id="filtersTitle">Descubrí más</h2></div>
+          </div>
+          <div class="filter-scroller" id="filterList" role="group" aria-label="Filtros rápidos de productos"></div>
+        </section>
+
+        <section class="section section--combos" id="packs" aria-labelledby="comboTitle">
           <div class="section-heading">
             <div>
-              <span class="eyebrow eyebrow--dark">OFERTAS ARMADAS</span>
-              <h2 id="comboTitle">Llevá tu combo <span>| Vestite increíble en una sola compra</span></h2>
+              <span class="eyebrow eyebrow--dark">IDEAS PARA COMPARTIR</span>
+              <h2 id="comboTitle">Regalá más <span>| Packs para disfrutar la Navidad</span></h2>
             </div>
           </div>
           <div class="combo-scroller" id="comboList" aria-label="Combos"></div>
         </section>
 
+<section class="christmas-middle-banner" aria-label="Inspiración para una Navidad especial">
+          <div class="christmas-middle-banner__content">
+            <span>PEQUEÑOS DETALLES, GRANDES MOMENTOS</span>
+            <h2>Hacé que esta Navidad se sienta en casa.</h2>
+            <a href="#productos">Descubrir ideas <span aria-hidden="true">→</span></a>
+          </div>
+          <span class="christmas-middle-banner__star" aria-hidden="true">✳</span>
+        </section>
+
         <section class="section section--products" id="productos" aria-labelledby="productTitle">
           <div class="section-heading section-heading--products">
             <div>
-              <span class="eyebrow eyebrow--dark">NOVEDADES</span>
-              <h2 id="productTitle">Productos destacados</h2>
+              <span class="eyebrow eyebrow--dark">SELECCIÓN DE TEMPORADA</span>
+              <h2 id="productTitle">Favoritos navideños</h2>
             </div>
             <span class="result-count" id="resultCount" aria-live="polite"></span>
           </div>
@@ -96,8 +116,8 @@
 
       <footer class="site-footer">
         <div class="site-footer__brand">
-          <span class="utility-logo utility-logo--footer">IND.</span>
-          <p>Modelo ecommerce de indumentaria listo para evolucionar a Shopify y Protocol Data.</p>
+          <span class="utility-logo utility-logo--footer">NAVIDAD.span>
+          <p>Web de Navidad · versión de demostración. Imágenes, precios y disponibilidad son ilustrativos; no se procesan compras.</p>
         </div>
         <nav class="site-footer__links" aria-label="Políticas">
           <button type="button" data-reserved="Política de envío">Envío</button>
@@ -110,10 +130,18 @@
     </div>
   </div>
 
+<nav class="holiday-bottom-nav" aria-label="Navegación navideña móvil">
+    <a class="is-current" href="#top" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-8 9 8v10h-6v-6H9v6H3z"/></svg><span>Inicio</span></a>
+    <a href="#categorias"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2-7 9h4l-6 8h18l-6-8h4zM12 19v3"/></svg><span>Navidad</span></a>
+    <a href="#packs"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="9" width="18" height="12" rx="2"/><path d="M2 6h20v4H2zM12 6v15M12 6C4 6 4 1 8 1c2 0 4 3 4 5Zm0 0c8 0 8-5 4-5-2 0-4 3-4 5Z"/></svg><span>Packs</span></a>
+    <a href="./tracking.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h12v11H3zM15 10h4l3 4v3h-7M7 21a2 2 0 1 1 0-4 2 2 0 0 1 0 4ZM18 21a2 2 0 1 1 0-4 2 2 0 0 1 0 4Z"/></svg><span>Pedidos</span></a>
+    <a href="./soporte.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v12H8l-4 4zM8 10h8M8 14h5"/></svg><span>Ayuda</span></a>
+  </nav>
+
   <div class="overlay" id="menuOverlay" hidden></div>
   <aside class="side-menu" id="siteMenu" aria-label="Menú principal" aria-hidden="true">
     <div class="side-menu__header">
-      <span class="utility-logo utility-logo--dark">IND.</span>
+      <span class="utility-logo utility-logo--dark">NAVIDAD.span>
       <button class="icon-button" id="menuClose" type="button" aria-label="Cerrar menú">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg>
       </button>
@@ -132,18 +160,20 @@
           <svg class="menu-chevron" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6" /></svg>
         </summary>
         <div class="menu-subnav">
-          <a href="#productos" data-category-link="Camisetas" data-close-menu>CAMISETAS</a>
-          <a href="#productos" data-category-link="Camperas" data-close-menu>CAMPERAS</a>
-          <a href="#productos" data-category-link="Pantalones" data-close-menu>PANTALONES</a>
-          <a href="#productos" data-category-link="Medias" data-close-menu>MEDIAS</a>
-          <a href="#productos" data-category-link="Botines" data-close-menu>BOTINES</a>
-          <a href="#productos" data-category-link="Gorras y Pilusos" data-close-menu>GORRAS Y PILUSOS</a>
+          <a href="#productos" data-category-link="Árboles" data-close-menu>ÁRBOLES</a>
+          <a href="#productos" data-category-link="Regalos" data-close-menu>REGALOS</a>
+          <a href="#productos" data-category-link="Decoración" data-close-menu>DECORACIÓN</a>
+          <a href="#productos" data-category-link="Luces" data-close-menu>LUCES</a>
+          <a href="#productos" data-category-link="Envoltorios" data-close-menu>ENVOLTORIOS</a>
+          <a href="#productos" data-category-link="Mesa" data-close-menu>MESA</a>
+          <a href="#productos" data-category-link="Moños" data-close-menu>MOÑOS</a>
+          <a href="#productos" data-category-link="Ofertas" data-close-menu>OFERTAS</a>
         </div>
       </details>
 
       <button class="menu-link" type="button" data-reserved="Cupones">
         <span class="menu-icon"><svg viewBox="0 0 24 24"><path d="M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2.5 2.5 0 0 0 0 4v3a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-3a2.5 2.5 0 0 0 0-4Z" /><path d="M12 7v10" /></svg></span>
-        <span>CUPONES</span>
+        <span>PROMOCIONES</span>
       </button>
 
       <a class="menu-link" href="#productos" data-close-menu>
@@ -215,6 +245,6 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script type="module" src="./js/app.js?v=20261103-1400"></script>
+  <script type="module" src="./js/app.js?v=20261103-navidad-01"></script>
 </body>
 </html>
