@@ -34,6 +34,8 @@
 .christmas-home .section--categories { padding: 24px 0 20px; border-radius: 22px; background: var(--pink); }
 .christmas-home .section--categories .section-heading { padding: 0 20px; }
 .christmas-home .category-two-rails { display: grid; gap: 14px; overflow: visible; padding: 0; scrollbar-width: auto; scroll-snap-type: none; }
+.christmas-home .category-two-rails > :first-child { margin-left: 0; }
+.christmas-home .category-two-rails > :last-child { margin-right: 0; }
 .christmas-home .category-rail-row { position: relative; min-width: 0; display: flex; align-items: center; justify-content: center; gap: 7px; }
 .christmas-home .category-rail { display: flex; width: min(100%, 630px); min-width: 0; gap: 16px; padding: 2px 4px 9px; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; scroll-padding-inline: 4px; }
 .christmas-home .category-rail::-webkit-scrollbar { display: none; }
