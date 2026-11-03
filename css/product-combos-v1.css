@@ -1,0 +1,518 @@
+/* PRODUCT OFFER CARD — single visual mock / future Commercial Offer surface */
+
+/* Order the direct product surfaces so the single offer appears immediately
+   above "Sobre este producto", matching the approved mobile composition. */
+.product-sheet {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-sheet__handle { order: 0; }
+.thumbnail-rail { order: 1; }
+.product-intro { order: 2; }
+.offer-section { order: 3; }
+.detail-section { order: 4; }
+.variant-section { order: 5; }
+.seller-section { order: 6; }
+.delivery-section { order: 7; }
+.tabs-section { order: 8; }
+.features-section { order: 9; }
+.description-section { order: 10; }
+
+.offer-section {
+  width: 100%;
+  margin: 24px 0 30px;
+  overflow: visible;
+}
+
+/* No carousel / no offer-section title: this surface is one offer card only. */
+.offer-section > h2 {
+  display: none;
+}
+
+.offer-list {
+  display: block;
+  width: 100%;
+  margin: 0;
+  overflow: visible;
+  padding: 16px 0 0;
+}
+
+/* Product Page shows ONE offer card. Combo Street is the visual best-offer mock. */
+.offer-list .product-combo-card:not(:nth-child(2)) {
+  display: none !important;
+}
+
+.product-combo-card {
+  position: relative;
+  display: grid;
+  width: 100%;
+  max-width: 690px;
+  min-width: 0;
+  min-height: 176px;
+  aspect-ratio: 16 / 7;
+  grid-template-columns: 35% 65%;
+  margin: 0 auto;
+  overflow: visible;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 0 0 1.5px #d7d7d7;
+  cursor: pointer;
+  transition: box-shadow 150ms ease, transform 150ms ease;
+}
+
+.product-combo-card.is-selected {
+  box-shadow: 0 0 0 3px #2479ff;
+}
+
+.product-combo-card:active {
+  transform: scale(.995);
+}
+
+/* Radio-style selector: empty gray ring when OFF. */
+.product-combo-card::after {
+  content: "";
+  position: absolute;
+  z-index: 8;
+  top: 50%;
+  right: 14px;
+  width: 24px;
+  height: 24px;
+  box-sizing: border-box;
+  border: 2px solid #b9b9b9;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,.08);
+  transform: translateY(-50%);
+  transition: background 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+  pointer-events: none;
+}
+
+/* ON: blue outer ring + white inner ring + blue center dot. */
+.product-combo-card.is-selected::after {
+  border-color: #2479ff;
+  background: #2479ff;
+  box-shadow:
+    inset 0 0 0 5px #fff,
+    0 0 0 3px rgba(36,121,255,.10),
+    0 2px 6px rgba(36,121,255,.20);
+}
+
+.product-combo-card__media {
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 8px 0 0 8px;
+  background: #eee8e0;
+}
+
+.product-combo-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-combo-card__content {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  padding: 14px 54px 14px 15px;
+  border-radius: 0 8px 8px 0;
+  background: #fff;
+}
+
+.product-combo-card__content h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -.04em;
+}
+
+.product-combo-card__content p {
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 6px 0 8px;
+  color: #74706b;
+  font-size: 10px;
+  line-height: 1.42;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.product-combo-card .stars {
+  color: #111;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .06em;
+}
+
+.product-combo-card__price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  margin-top: 8px;
+}
+
+.product-combo-card__price {
+  color: #111;
+  font-size: 17px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.product-combo-card__compare {
+  color: #9b9b9b;
+  font-size: 10px;
+  text-decoration: line-through;
+  white-space: nowrap;
+}
+
+.product-combo-card__details {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 5px;
+  margin-top: 9px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #111;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.product-combo-card__details svg {
+  width: 12px;
+  height: 12px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+/* Existing best-offer widget, now green. */
+.product-combo-card__best {
+  position: absolute;
+  z-index: 9;
+  top: -13px;
+  right: 12px;
+  display: inline-flex;
+  min-height: 29px;
+  align-items: center;
+  gap: 6px;
+  padding: 0 11px;
+  border-radius: 999px;
+  background: #169b62;
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(22,155,98,.28);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .01em;
+  white-space: nowrap;
+}
+
+.product-combo-card__best svg {
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+}
+
+.combo-detail-backdrop {
+  position: fixed;
+  z-index: 260;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(10,10,10,.46);
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.combo-detail-backdrop[hidden] { display: none !important; }
+.combo-detail-backdrop.is-open { opacity: 1; }
+
+.combo-detail-sheet {
+  width: min(100%, 480px);
+  max-height: min(86vh, 760px);
+  overflow-y: auto;
+  padding: 10px 22px calc(24px + env(safe-area-inset-bottom));
+  border-radius: 28px 28px 0 0;
+  background: #fff;
+  transform: translateY(28px);
+  transition: transform 180ms ease;
+}
+
+.combo-detail-backdrop.is-open .combo-detail-sheet { transform: translateY(0); }
+
+.combo-detail-sheet__handle {
+  width: 46px;
+  height: 4px;
+  margin: 0 auto 18px;
+  border-radius: 999px;
+  background: #ddd7d0;
+}
+
+.combo-detail-sheet__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.combo-detail-sheet__top span {
+  color: #7a736c;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+
+.combo-detail-sheet__top h2 {
+  margin: 5px 0 0;
+  font-size: 26px;
+  line-height: 1.08;
+  letter-spacing: -.04em;
+}
+
+.combo-detail-sheet__close {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: #f0ebe5;
+  color: #111;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+.combo-detail-sheet__media {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin-top: 18px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #eee8e0;
+}
+
+.combo-detail-sheet__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.combo-detail-sheet__copy {
+  margin: 16px 0 0;
+  color: #6f6963;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.combo-detail-sheet__list {
+  display: grid;
+  gap: 8px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.combo-detail-sheet__list li {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #4e4945;
+  font-size: 12px;
+}
+
+.combo-detail-sheet__list li::before {
+  content: "✓";
+  display: grid;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  place-items: center;
+  border-radius: 50%;
+  background: #edf4ff;
+  color: #2479ff;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.combo-detail-sheet__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #eee8e2;
+}
+
+.combo-detail-sheet__prices strong,
+.combo-detail-sheet__prices span { display: block; }
+.combo-detail-sheet__prices strong { font-size: 22px; }
+.combo-detail-sheet__prices span {
+  margin-top: 3px;
+  color: #9a948d;
+  font-size: 11px;
+  text-decoration: line-through;
+}
+
+.combo-detail-sheet__select {
+  min-height: 46px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 10px;
+  background: #111;
+  color: #fff;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.combo-detail-sheet__select.is-selected { background: #2479ff; }
+
+@media (min-width: 721px) {
+  .product-combo-card__content { padding: 22px 66px 22px 24px; }
+  .product-combo-card__content h3 { font-size: 22px; }
+  .product-combo-card__content p { font-size: 12px; }
+  .product-combo-card__price { font-size: 21px; }
+  .product-combo-card__details { font-size: 12px; }
+}
+
+/* --------------------------------------------------------------------------
+   COMMERCIAL INFO DENSITY / FULL-BLEED HIERARCHY
+   Approved compact pattern inspired by dense marketplace information rows.
+   The runtime owns content and behavior; these rules only control presentation.
+   -------------------------------------------------------------------------- */
+
+.product-commercial-body .commercial-info-stack {
+  position: relative !important;
+  width: calc(100% + 60px) !important;
+  margin-right: -30px !important;
+  margin-left: -30px !important;
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  background: #fff !important;
+}
+
+/* Address keeps the same content alignment as the product sheet. */
+.product-commercial-body .commercial-address-row {
+  gap: 8px !important;
+  padding: 10px 30px 11px !important;
+}
+
+.product-commercial-body .commercial-address-row__label {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+}
+
+.product-commercial-body .commercial-address-row__button {
+  min-height: 40px !important;
+  grid-template-columns: 20px minmax(0, 1fr) 17px !important;
+  gap: 7px !important;
+  padding: 6px 9px !important;
+  border-radius: 5px !important;
+  background: #f2f2f2 !important;
+}
+
+.product-commercial-body .commercial-address-row__icon,
+.product-commercial-body .commercial-address-row__icon svg {
+  width: 19px !important;
+  height: 19px !important;
+}
+
+.product-commercial-body .commercial-address-row__text {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+}
+
+/* All separators truly reach both lateral edges. */
+.product-commercial-body .commercial-divider {
+  width: 100% !important;
+  height: 1px !important;
+  margin: 0 !important;
+  background: #e9e6e2 !important;
+}
+
+/* The first separator becomes a pastel depth band above Envío gratis. */
+.product-commercial-body .commercial-address-row + .commercial-divider {
+  height: 8px !important;
+  background: #f2efeb !important;
+  border-top: 1px solid #e9e5e0 !important;
+  border-bottom: 1px solid #e9e5e0 !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.78), inset 0 -1px 0 rgba(0,0,0,.015) !important;
+}
+
+/* Compact action rows: less vertical space, smaller iconography and chevrons. */
+.product-commercial-body .commercial-action-row {
+  min-height: 54px !important;
+  grid-template-columns: 21px minmax(0, 1fr) 17px !important;
+  gap: 10px !important;
+  padding: 9px 30px !important;
+}
+
+.product-commercial-body .commercial-action-row--delivery {
+  min-height: 64px !important;
+  padding-top: 9px !important;
+  padding-bottom: 9px !important;
+}
+
+.product-commercial-body .commercial-action-row__icon,
+.product-commercial-body .commercial-action-row__icon svg {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.product-commercial-body .commercial-action-row__content strong {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 1.25 !important;
+}
+
+.product-commercial-body .commercial-action-row--delivery .commercial-action-row__content strong {
+  color: #169b62 !important;
+  font-weight: 600 !important;
+}
+
+.product-commercial-body .commercial-action-row__content > span {
+  margin-top: 3px !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  line-height: 1.35 !important;
+}
+
+.product-commercial-body .commercial-row-chevron,
+.product-commercial-body .commercial-row-chevron svg {
+  width: 17px !important;
+  height: 17px !important;
+}
+
+.product-commercial-body .commercial-row-chevron {
+  color: #8e8a86 !important;
+}
+
+/* Bottom pastel depth band after the policy/security row. */
+.product-commercial-body .commercial-info-stack::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 8px;
+  background: #f2efeb;
+  border-top: 1px solid #e9e5e0;
+  border-bottom: 1px solid #e9e5e0;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.78), inset 0 -1px 0 rgba(0,0,0,.015);
+}
+
+@media (max-width: 380px) {
+  .product-commercial-body .commercial-address-row__label { font-size: 15px !important; }
+  .product-commercial-body .commercial-address-row__text { font-size: 12px !important; }
+  .product-commercial-body .commercial-action-row__content strong { font-size: 13px !important; }
+  .product-commercial-body .commercial-action-row__content > span { font-size: 11px !important; }
+}
