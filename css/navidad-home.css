@@ -1,0 +1,134 @@
+/* WEB DE NAVIDAD — Home V1. Seasonal override; original layout modules remain intact. */
+.christmas-site { --page: #fff8f7; --surface: #fff; --ink: #40191d; --muted: #775b60; --line: #eedadc; --soft: #f7e7e8; --radius: 18px; --red: #b20b17; --red-dark: #850c17; --pink: #fff0f1; --content-max: 1240px; background: var(--page); }
+.christmas-home { background: var(--page); }
+.christmas-home :is(button, a):focus-visible { outline: 3px solid #ec8390; outline-offset: 3px; }
+.christmas-home .holiday-announcement { padding: 9px 12px; background: #8c0d17; color: #fff; text-align: center; font-size: 10px; font-weight: 800; letter-spacing: .13em; }
+.christmas-home .holiday-announcement span { padding: 0 12px; color: #ffbec1; }
+.christmas-home .site-header { background: var(--red); color: #fff; }
+.christmas-home .cart-count { border-color: var(--red); color: var(--red); }
+.christmas-home .utility-logo { color: #fff; letter-spacing: .045em; font-size: 18px; }
+.christmas-home .utility-logo--dark { color: var(--red); }
+.christmas-home .location-strip { background: #f8e9e9; border-radius: 16px; }
+.christmas-home .location-strip__icon { color: var(--red); }
+.christmas-home .location-strip__copy small { color: #795d60; }
+.christmas-home .search-field { border: 1px solid #f0dede; border-radius: 16px; }
+.christmas-home .search-field:focus-within { border-color: var(--red); }
+.christmas-home .button { border-radius: 12px; }
+.christmas-home .button--dark { background: var(--red); }
+.christmas-home .eyebrow--dark { color: #a3414a; }
+.christmas-home .section-heading h2 { color: #44151c; }
+.christmas-home .section-heading h2 span { color: #916a70; }
+
+.christmas-home .christmas-hero { position: relative; aspect-ratio: 16 / 9; min-height: 310px; isolation: isolate; border-radius: 24px; background: var(--red); overflow: hidden; }
+.christmas-home .christmas-hero::before { position: absolute; content: ""; z-index: -1; right: -12%; top: -55%; width: 76%; aspect-ratio: 1; border: 2px solid rgba(255,255,255,.22); border-radius: 50%; box-shadow: 0 0 0 42px rgba(255,255,255,.04), 0 0 0 100px rgba(255,255,255,.035); }
+.christmas-home .christmas-hero::after { content: ""; position: absolute; z-index: -1; inset: 0; background: radial-gradient(circle at 82% 77%, rgba(255,255,255,.18) 0 4px, transparent 5px), radial-gradient(circle at 73% 23%, rgba(255,255,255,.32) 0 3px, transparent 4px), radial-gradient(circle at 94% 46%, rgba(255,255,255,.3) 0 5px, transparent 6px); }
+.christmas-home .christmas-hero .hero__panel { left: clamp(24px, 5.5vw, 74px); bottom: auto; top: 50%; width: min(570px, 72%); transform: translateY(-50%); text-shadow: none; }
+.christmas-home .christmas-hero .hero__panel h1 { margin: 10px 0 12px; font-size: clamp(30px, 4.7vw, 64px); line-height: 1.05; letter-spacing: -.05em; }
+.christmas-home .christmas-hero .hero__panel p { font-size: clamp(12px, 1.6vw, 16px); }
+.christmas-home .christmas-hero .eyebrow { color: #ffd7da; }
+.christmas-home .christmas-hero__spark { position: absolute; right: 11%; top: 15%; color: #ffe7e8; font-size: clamp(60px, 15vw, 200px); line-height: 1; opacity: .5; }
+.christmas-home .christmas-hero__ornament { position: absolute; right: 18%; bottom: 10%; width: clamp(54px, 11vw, 150px); aspect-ratio: 1; border: 3px solid rgba(255,255,255,.55); border-radius: 50%; }
+.christmas-home .christmas-hero__ornament::before { content: ""; position: absolute; left: 50%; bottom: 100%; width: 2px; height: 170px; background: rgba(255,255,255,.45); }
+.christmas-home .christmas-hero__ornament--two { right: 6%; bottom: 24%; width: clamp(28px, 6vw, 90px); opacity: .65; }
+
+.christmas-home .section--categories { padding: 24px 0 20px; border-radius: 22px; background: var(--pink); }
+.christmas-home .section--categories .section-heading { padding: 0 20px; }
+.christmas-home .category-two-rails { display: grid; gap: 14px; overflow: visible; padding: 0; scrollbar-width: auto; scroll-snap-type: none; }
+.christmas-home .category-rail-row { position: relative; min-width: 0; display: flex; align-items: center; justify-content: center; gap: 7px; }
+.christmas-home .category-rail { display: flex; width: min(100%, 630px); min-width: 0; gap: 16px; padding: 2px 4px 9px; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; scroll-padding-inline: 4px; }
+.christmas-home .category-rail::-webkit-scrollbar { display: none; }
+.christmas-home .category-card { flex: 0 0 120px; width: 120px; padding: 0; color: #5b1821; scroll-snap-align: start; }
+.christmas-home .category-card__image { display: grid; width: 106px; height: 106px; margin: 0 auto; place-items: center; border-radius: 50%; background: var(--red); color: #fff; transition: transform .18s ease, background .18s ease; }
+.christmas-home .category-card__image svg { width: 57%; height: 57%; fill: none; stroke: currentColor; stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+.christmas-home .category-card__label { display: block; margin-top: 9px; font-size: 12px; font-weight: 800; }
+.christmas-home .category-card[aria-pressed="true"] .category-card__image { background: #7f0511; outline: 4px solid #eab5b9; outline-offset: 2px; }
+.christmas-home .category-card:hover .category-card__image { transform: translateY(-3px); }
+.christmas-home .rail-arrow { flex: 0 0 32px; width: 32px; height: 32px; padding: 0 0 3px; border-radius: 50%; background: #f6d9dc; color: var(--red-dark); font-size: 30px; line-height: 1; cursor: pointer; }
+.christmas-home .section--filters { margin-top: 28px; }
+.christmas-home .filter-scroller { display: flex; gap: 10px; overflow-x: auto; padding: 4px 2px 8px; scrollbar-width: none; scroll-snap-type: x proximity; }
+.christmas-home .filter-scroller::-webkit-scrollbar { display: none; }
+.christmas-home .filter-chip { display: flex; flex: 0 0 auto; align-items: center; gap: 8px; min-height: 42px; padding: 0 16px; border: 1px solid #f0d7da; border-radius: 999px; background: #fff; color: #6a1b24; font-size: 12px; font-weight: 800; cursor: pointer; scroll-snap-align: start; }
+.christmas-home .filter-chip svg { width: 20px; height: 20px; stroke-width: 3; }
+.christmas-home .filter-chip[aria-pressed="true"] { background: var(--red); color: white; border-color: var(--red); }
+.christmas-home .combo-card { border-radius: 20px; }
+.christmas-home .combo-card__media, .christmas-home .product-card__media { background: #fae5e6; }
+.christmas-home .holiday-media { display: flex; width: 100%; height: 100%; min-height: 100%; flex-direction: column; align-items: center; justify-content: center; gap: 10px; background: #f4d5d8; color: #9d2731; }
+.christmas-home .holiday-media svg { width: 33%; height: auto; aspect-ratio: 1; stroke-width: 2.7; }
+.christmas-home .holiday-media span { max-width: 90%; font-size: 9px; font-weight: 800; letter-spacing: .07em; text-align: center; text-transform: uppercase; }
+.christmas-home .combo-card__content h3 { color: #57141c; }
+.christmas-home .offer-link { color: var(--red); }
+.christmas-home .stars { color: #8d111b; }
+.christmas-home .product-card { border-radius: 18px; cursor: pointer; }
+.christmas-home .product-card:hover { outline: 1px solid #eab9bd; }
+.christmas-home .product-card__media { aspect-ratio: 4 / 3; }
+.christmas-home .product-card__media img { object-fit: contain; }
+.christmas-home .product-card__content h3 { color: #52151c; }
+.christmas-home .delivery-badge { background: #247d48; }
+.christmas-home .trust-badge { color: #81656a; }
+.christmas-home .empty-state { border-radius: 18px; }
+.christmas-home #productos { scroll-margin-top: 90px; }
+.christmas-home :is(#categorias, #packs) { scroll-margin-top: 92px; }
+
+.christmas-home .christmas-middle-banner { position: relative; width: 100%; aspect-ratio: 2.6 / 1; display: flex; align-items: center; margin-top: 34px; padding: clamp(18px, 4vw, 60px); border-radius: 22px; background: #8c0e19; color: #fff; overflow: hidden; isolation: isolate; }
+.christmas-home .christmas-middle-banner::before { content: ""; position: absolute; z-index: -1; top: -40%; right: -10%; width: 55%; aspect-ratio: 1; border: 2px solid #ffffff55; border-radius: 50%; box-shadow: 0 0 0 26px #ffffff14, 0 0 0 62px #ffffff0c; }
+.christmas-home .christmas-middle-banner__content { position: relative; z-index: 1; width: min(65%, 620px); }
+.christmas-home .christmas-middle-banner__content > span { color: #ffced0; font-size: clamp(8px, 1.1vw, 12px); font-weight: 800; letter-spacing: .12em; }
+.christmas-home .christmas-middle-banner h2 { margin: 8px 0 14px; font-size: clamp(19px, 3.5vw, 40px); line-height: 1.12; letter-spacing: -.045em; }
+.christmas-home .christmas-middle-banner a { display: inline-flex; gap: 8px; align-items: center; font-size: clamp(10px, 1.3vw, 14px); font-weight: 800; text-decoration: underline; text-underline-offset: 4px; }
+.christmas-home .christmas-middle-banner__star { position: absolute; right: 12%; top: 50%; transform: translateY(-50%); color: #fff; font-size: clamp(60px, 13vw, 160px); opacity: .55; }
+
+.christmas-home .site-footer { border-radius: 20px; background: var(--red-dark); }
+.christmas-home .site-footer__brand p { color: #ffe2e3; }
+.christmas-home .side-menu .menu-link:hover, .christmas-home .side-menu .menu-subnav a:hover { color: var(--red); }
+.christmas-home .location-modal { border-radius: 20px; }
+.christmas-home .toast { background: var(--red-dark); }
+.christmas-home .holiday-bottom-nav { display: none; }
+
+@media (max-width: 720px) {
+  .christmas-home .holiday-announcement { font-size: 8px; letter-spacing: .07em; padding: 8px 5px; }
+  .christmas-home .holiday-announcement span { padding: 0 6px; }
+  .christmas-home .site-header { height: 61px; }
+  .christmas-home .page-content { padding: 12px 12px calc(94px + env(safe-area-inset-bottom)); }
+  .christmas-home .christmas-hero { aspect-ratio: 4 / 3; min-height: 250px; border-radius: 20px; }
+  .christmas-home .christmas-hero .hero__panel { left: 20px; top: 50%; bottom: auto; width: min(85%, 370px); transform: translateY(-50%); }
+  .christmas-home .christmas-hero .hero__panel h1 { max-width: 12ch; margin: 7px 0 8px; font-size: clamp(29px, 8vw, 38px); }
+  .christmas-home .christmas-hero .hero__panel p { max-width: 29ch; margin-bottom: 12px; font-size: 10px; }
+  .christmas-home .christmas-hero .button { min-height: 36px; padding: 0 12px; font-size: 11px; }
+  .christmas-home .christmas-hero__spark { top: 3%; right: 4%; font-size: 80px; }
+  .christmas-home .christmas-hero__ornament { right: -9%; bottom: 4%; opacity: .5; }
+  .christmas-home .christmas-hero__ornament--two { right: 5%; bottom: 14%; opacity: .4; }
+  .christmas-home .section--categories { margin-top: 26px; padding: 20px 0 17px; border-radius: 20px; }
+  .christmas-home .section--categories .section-heading { padding: 0 15px; }
+  .christmas-home .category-two-rails { width: 100%; margin: 0; gap: 10px; }
+  .christmas-home .category-rail-row { gap: 0; }
+  .christmas-home .category-rail { gap: 10px; width: 100%; padding-left: 14px; padding-right: 14px; scroll-padding-inline: 14px; }
+  .christmas-home .category-card { flex-basis: 91px; width: 91px; }
+  .christmas-home .category-card__image { width: 83px; height: 83px; }
+  .christmas-home .category-card__label { font-size: 10px; margin-top: 8px; }
+  .christmas-home .rail-arrow { position: absolute; top: 27px; z-index: 2; width: 27px; height: 27px; font-size: 25px; opacity: .82; }
+  .christmas-home .rail-arrow:first-child { left: -4px; }
+  .christmas-home .rail-arrow:last-child { right: -4px; }
+  .christmas-home .filter-scroller { width: calc(100% + 24px); margin-left: -12px; padding: 4px 12px 8px; }
+  .christmas-home .filter-chip { padding: 0 13px; min-height: 40px; font-size: 11px; }
+  .christmas-home .combo-card { border-radius: 16px; }
+  .christmas-home .combo-card__content { padding: 12px; }
+  .christmas-home .holiday-media svg { width: 48%; }
+  .christmas-home .holiday-media span { font-size: 7px; }
+  .christmas-home .christmas-middle-banner { margin-top: 26px; border-radius: 18px; padding: 16px; }
+  .christmas-home .christmas-middle-banner__content { width: 78%; }
+  .christmas-home .christmas-middle-banner__content > span { font-size: 7px; letter-spacing: .08em; }
+  .christmas-home .christmas-middle-banner h2 { margin: 4px 0 8px; font-size: clamp(16px, 4.5vw, 22px); }
+  .christmas-home .christmas-middle-banner a { font-size: 9px; }
+  .christmas-home .christmas-middle-banner__star { right: 4%; font-size: 64px; }
+  .christmas-home .product-card { border-radius: 16px; }
+  .christmas-home .holiday-bottom-nav { position: fixed; display: grid; z-index: 90; right: 0; bottom: 0; left: 0; grid-template-columns: repeat(5, minmax(0, 1fr)); padding: 8px 3px calc(6px + env(safe-area-inset-bottom)); background: #fff; box-shadow: 0 -3px 16px rgba(97,0,10,.09); border-top: 1px solid #f2d9db; }
+  .christmas-home .holiday-bottom-nav a { display: flex; align-items: center; justify-content: center; flex-direction: column; min-width: 0; min-height: 47px; gap: 4px; color: #8a5257; font-size: 9px; font-weight: 800; }
+  .christmas-home .holiday-bottom-nav a svg { width: 22px; height: 22px; stroke-width: 1.8; }
+  .christmas-home .holiday-bottom-nav a:is(:hover, .is-current) { color: var(--red); }
+  .christmas-home .toast { bottom: calc(78px + env(safe-area-inset-bottom)); }
+}
+@media (max-width: 370px) {
+  .christmas-home .category-card { flex-basis: 86px; width: 86px; }
+  .christmas-home .category-card__image { width: 78px; height: 78px; }
+  .christmas-home .christmas-middle-banner h2 { font-size: 15px; }
+}
