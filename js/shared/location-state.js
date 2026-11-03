@@ -1,4 +1,4 @@
-const LOCATION_KEY = "indumentary.sessionLocation.v1";
+const LOCATION_KEY = "web-de-navidad.sessionLocation.v1";
 
 export function getSessionLocation() {
   try {
@@ -20,11 +20,11 @@ export function saveSessionLocation({ postalCode, address }) {
   };
 
   sessionStorage.setItem(LOCATION_KEY, JSON.stringify(location));
-  window.dispatchEvent(new CustomEvent("indumentary:location-change", { detail: location }));
+  window.dispatchEvent(new CustomEvent("web-de-navidad:location-change", { detail: location }));
   return location;
 }
 
 export function clearSessionLocation() {
   sessionStorage.removeItem(LOCATION_KEY);
-  window.dispatchEvent(new CustomEvent("indumentary:location-change", { detail: null }));
+  window.dispatchEvent(new CustomEvent("web-de-navidad:location-change", { detail: null }));
 }
