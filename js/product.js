@@ -12,7 +12,7 @@ const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 const params = new URLSearchParams(window.location.search);
 const requestedProductId = params.get("id") || "prod-002";
 const product = getProductDetail(requestedProductId);
-const SUPPORT_KEY = `indumentary.productSupport.${product?.id || "unknown"}`;
+const SUPPORT_KEY = `web-de-navidad.productSupport.${product?.id || "unknown"}`;
 
 const state = {
   mediaId: product?.media?.[0]?.id || null,
@@ -490,7 +490,7 @@ function bindEvents() {
   els.locationClose.addEventListener("click", closeLocation);
   els.locationBackdrop.addEventListener("click", (event) => { if (event.target === els.locationBackdrop) closeLocation(); });
   els.locationForm.addEventListener("submit", saveLocation);
-  window.addEventListener("indumentary:location-change", (event) => updateLocationUI(event.detail));
+  window.addEventListener("web-de-navidad:location-change", (event) => updateLocationUI(event.detail));
   window.addEventListener("keydown", (event) => {
     if (event.key !== "Escape") return;
     if (!els.supportBackdrop.hidden) closeSupport();
