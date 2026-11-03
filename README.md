@@ -53,3 +53,9 @@ Ver `CHRISTMAS_DESIGN_CONTRACT.md`.
 ## Referencia estructural
 
 `eliassmarr2-afk/indumentary` permanece independiente y no recibe cambios desde este repositorio.
+
+## Vista previa de GitHub Pages
+
+URL prevista: https://eliassmarr2-afk.github.io/web-de-navidad/
+
+GitHub Pages configurado por el operador desde la rama `main`, carpeta `/ (root)` el 2026-11-03. El repositorio incluye `.nojekyll` para servir HTML/CSS/JS estáticos sin proceso Jekyll. Este commit posterior a la configuración solicita una nueva publicación; la publicación exitosa aún debe verificarse en la pestaña Actions o Pages.
