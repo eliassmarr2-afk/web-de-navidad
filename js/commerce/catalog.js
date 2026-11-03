@@ -1,99 +1,55 @@
-export const categories = [
-  { id: "camisetas", label: "Camisetas", image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=500&q=82" },
-  { id: "pantalones", label: "Pantalones", image: "https://images.unsplash.com/photo-1506629082955-511b1aa562c8?auto=format&fit=crop&w=500&q=82" },
-  { id: "camperas", label: "Camperas", image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=500&q=82" },
-  { id: "gorras", label: "Gorras y Pilusos", image: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=500&q=82" },
-  { id: "medias", label: "Medias", image: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=500&q=82" },
-  { id: "botines", label: "Botines", image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=500&q=82" },
-  { id: "pelotas", label: "Pelotas", image: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=500&q=82" },
-];
+// Catálogo de demostración. No constituye inventario, precio ni promesa comercial real.
+// Reemplazar por adapter de proveedor cuando se habilite Shopify.
+export const categories = Object.freeze([
+  { id: "arboles", label: "Árboles", icon: "tree" },
+  { id: "regalos", label: "Regalos", icon: "gift" },
+  { id: "decoracion", label: "Decoración", icon: "ornament" },
+  { id: "luces", label: "Luces", icon: "lights" },
+  { id: "envoltorios", label: "Envoltorios", icon: "wrap" },
+  { id: "mesa", label: "Mesa", icon: "table" },
+  { id: "monos", label: "Moños", icon: "bow" },
+  { id: "ofertas", label: "Ofertas", icon: "sale" },
+]);
 
-export const combos = [
-  {
-    id: "combo-training",
-    title: "Combo Training",
-    subtitle: "Camiseta técnica + pantalón + medias deportivas.",
-    price: 89990,
-    compareAt: 112000,
-    image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=900&q=82",
-  },
-  {
-    id: "combo-street",
-    title: "Combo Street",
-    subtitle: "Campera liviana + jogger para usar dentro y fuera del entrenamiento.",
-    price: 124900,
-    compareAt: 149500,
-    image: "https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=900&q=82",
-  },
-  {
-    id: "combo-match",
-    title: "Combo Match Day",
-    subtitle: "Camiseta + short + botines para llegar listo a la cancha.",
-    price: 159900,
-    compareAt: 188000,
-    image: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=900&q=82",
-  },
-];
+export const filters = Object.freeze([
+  { id: "packs", label: "Packs", icon: "gift" },
+  { id: "promociones", label: "Promociones", icon: "sale" },
+  { id: "para-regalar", label: "Para regalar", icon: "bow" },
+  { id: "decoracion", label: "Decoración", icon: "ornament" },
+  { id: "envoltorios", label: "Envoltorios", icon: "wrap" },
+]);
 
-export const products = [
-  {
-    id: "prod-001",
-    category: "Camisetas",
-    title: "Camiseta Motion",
-    subtitle: "Dry fit · corte regular · negro",
-    price: 38990,
-    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=84",
-  },
-  {
-    id: "prod-002",
-    category: "Camperas",
-    title: "Campera Core",
-    subtitle: "Liviana · urbana · entrenamiento",
-    price: 74990,
-    image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=900&q=84",
-  },
-  {
-    id: "prod-003",
-    category: "Pantalones",
-    title: "Jogger Active",
-    subtitle: "Tapered fit · algodón técnico",
-    price: 56990,
-    image: "https://images.unsplash.com/photo-1506629082955-511b1aa562c8?auto=format&fit=crop&w=900&q=84",
-  },
-  {
-    id: "prod-004",
-    category: "Botines",
-    title: "Botín Vector",
-    subtitle: "Cancha · ajuste firme · tracción",
-    price: 92990,
-    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=84",
-  },
-  {
-    id: "prod-005",
-    category: "Gorras y Pilusos",
-    title: "Gorra Pace",
-    subtitle: "Liviana · visera curva · negra",
-    price: 24990,
-    image: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=900&q=84",
-  },
-  {
-    id: "prod-006",
-    category: "Medias",
-    title: "Medias Crew Pro",
-    subtitle: "Pack x3 · soporte medio",
-    price: 19990,
-    image: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=84",
-  },
-];
+export const combos = Object.freeze([
+  { id: "pack-fiestas", title: "Pack Fiestas", subtitle: "Ideas para ambientar y celebrar.", price: 58990, compareAt: 74990 },
+  { id: "pack-regalos", title: "Pack Regalos", subtitle: "Detalles especiales listos para regalar.", price: 42990, compareAt: 54990 },
+  { id: "pack-mesa", title: "Pack Mesa", subtitle: "Una mesa preparada para compartir.", price: 62990, compareAt: 80990 },
+]);
 
+const image = "./assets/christmas-placeholder.svg";
+export const products = Object.freeze([
+  { id: "nav-001", category: "Árboles", title: "Árbol navideño clásico", subtitle: "Una Navidad para recordar", price: 89990, compareAt: 109990, tags: ["decoracion", "para-regalar"], image },
+  { id: "nav-002", category: "Regalos", title: "Set de regalos festivos", subtitle: "Detalles para sorprender", price: 35990, compareAt: 42990, tags: ["packs", "para-regalar", "promociones"], image },
+  { id: "nav-003", category: "Decoración", title: "Corona decorativa", subtitle: "Un recibimiento especial", price: 24990, compareAt: 29990, tags: ["decoracion"], image },
+  { id: "nav-004", category: "Luces", title: "Luces cálidas navideñas", subtitle: "Iluminá tus mejores momentos", price: 19990, compareAt: 25990, tags: ["decoracion", "promociones"], image },
+  { id: "nav-005", category: "Envoltorios", title: "Papeles festivos x3", subtitle: "Para envolver cada sorpresa", price: 10990, compareAt: 13990, tags: ["envoltorios", "para-regalar"], image },
+  { id: "nav-006", category: "Mesa", title: "Centro de mesa navideño", subtitle: "El detalle de una gran noche", price: 29990, compareAt: 36990, tags: ["decoracion"], image },
+  { id: "nav-007", category: "Moños", title: "Moños navideños x12", subtitle: "El toque final para regalar", price: 8990, compareAt: 11990, tags: ["envoltorios", "promociones", "para-regalar"], image },
+  { id: "nav-008", category: "Ofertas", title: "Kit Navidad en casa", subtitle: "Un conjunto para toda la celebración", price: 67990, compareAt: 84990, tags: ["packs", "promociones", "para-regalar"], image },
+]);
+
+function normalized(value) {
+  return String(value || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("es").trim();
+}
+
+export function filterProducts({ query = "", category = null, filter = null } = {}) {
+  const needle = normalized(query);
+  return products.filter(product => {
+    const matchesCategory = !category || product.category === category;
+    const matchesFilter = !filter || product.tags.includes(filter);
+    const haystack = normalized([product.title, product.subtitle, product.category, ...product.tags].join(" "));
+    return matchesCategory && matchesFilter && (!needle || haystack.includes(needle));
+  });
+}
 export function searchProducts(query) {
-  const normalized = String(query || "").trim().toLocaleLowerCase("es");
-  if (!normalized) return products;
-
-  return products.filter((product) =>
-    [product.title, product.subtitle, product.category]
-      .join(" ")
-      .toLocaleLowerCase("es")
-      .includes(normalized)
-  );
+  return filterProducts({ query });
 }
