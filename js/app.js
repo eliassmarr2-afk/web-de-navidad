@@ -1,5 +1,5 @@
 import { SITE_CONFIG } from "./config/site.js";
-import { categories, combos, products, searchProducts } from "./commerce/catalog.js";
+import { categories, filters, combos, products, filterProducts } from "./commerce/catalog.js";
 import { getCartCount } from "./commerce/cart.js";
 import { getSessionLocation, saveSessionLocation } from "./shared/location-state.js";
 import { emitSiteEvent } from "./shared/events.js";
@@ -27,6 +27,7 @@ const elements = {
   productSearch: $("#productSearch"),
   categoryList: $("#categoryList"),
   comboList: $("#comboList"),
+  filterList: $("#filterList"),
   productGrid: $("#productGrid"),
   resultCount: $("#resultCount"),
   emptyState: $("#emptyState"),
@@ -34,6 +35,8 @@ const elements = {
 };
 
 let toastTimer;
+let activeCategory = null;
+let activeFilter = null;
 
 function formatMoney(value) {
   return new Intl.NumberFormat(SITE_CONFIG.locale, {
@@ -93,79 +96,122 @@ function updateLocationUI(location = getSessionLocation()) {
   elements.locationSecondary.textContent = `CP ${location.postalCode} · guardado durante esta sesión`;
 }
 
+const iconMarkup = {
+  tree: '<path d="M32 5 19 22h7L14 37h9L10 52h44L41 37h9L38 22h7Z"/><path d="M32 52v7M25 21l7-8 7 8"/><circle cx="30" cy="32" r="1"/><circle cx="39" cy="44" r="1"/>',
+  gift: '<rect x="11" y="27" width="42" height="30" rx="3"/><path d="M8 20h48v10H8zM32 20v37"/><path d="M32 20C18 20 11 14 16 7c6-8 16 5 16 13Zm0 0c14 0 21-6 16-13-6-8-16 5-16 13Z"/>',
+  ornament: '<circle cx="32" cy="37" r="19"/><path d="M26 18v-5h12v5M32 13V6M32 22v30M17 37h30M22 27l20 20M42 27 22 47"/><path d="M10 13v10M5 18h10M54 51v8M50 55h8"/>',
+  lights: '<path d="M4 16c15 20 41 20 56 0M11 23v6M24 30v6M39 30v6M53 23v6"/><path d="M8 29h6l2 7-5 7-5-7Zm13 7h6l2 7-5 7-5-7Zm15 0h6l2 7-5 7-5-7Zm14-7h6l2 7-5 7-5-7Z"/>',
+  wrap: '<path d="m8 22 33-13 14 33-33 13zM22 55l-5-13L50 29M16 25l12 28M39 9l13 31"/><path d="m22 17 4 5-4 5-4-5Zm22 19 4 5-4 5-4-5Z"/>',
+  table: '<circle cx="32" cy="37" r="16"/><circle cx="32" cy="37" r="11"/><path d="M11 18v38M6 18v14h10V18M52 18v38M56 18v17h-8"/><path d="M30 7v9M26 9l4-6 4 6"/>',
+  bow: '<path d="M32 31C23 15 8 12 6 24c-2 13 18 14 26 7Zm0 0c9-16 24-19 26-7 2 13-18 14-26 7Z"/><rect x="28" y="27" width="8" height="10" rx="2"/><path d="m28 35-13 23-3-12-10-2 17-11m17 2 13 23 3-12 10-2-17-11"/>',
+  sale: '<path d="M9 10h27l19 19-26 26L9 35Z"/><circle cx="22" cy="23" r="4"/><path d="m25 45 17-17M30 32h1M39 41h1"/>'
+};
+
+function iconSVG(name) {
+  return '<svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">' +
+    (iconMarkup[name] || iconMarkup.gift) + '</svg>';
+}
+
 function renderCategories() {
-  elements.categoryList.innerHTML = categories.map((category) => `
-    <button class="category-card" type="button" data-category="${category.label}">
-      <span class="category-card__image">
-        <img src="${category.image}" alt="${category.label}" loading="lazy" />
-      </span>
-      <span>${category.label}</span>
-    </button>
-  `).join("");
+  const groups = [categories.slice(0, 4), categories.slice(4, 8)];
+  elements.categoryList.innerHTML = groups.map((group, index) => `
+    <div class="category-rail-row">
+      <button class="rail-arrow" type="button" data-rail-direction="-1" data-rail-index="${index}" aria-label="Desplazar categorías a la izquierda">‹</button>
+      <div class="category-rail" data-category-rail="${index}" role="group" aria-label="Categorías, fila ${index + 1}">
+        ${group.map(category => `
+          <button class="category-card" type="button" data-category="${category.label}" aria-pressed="false">
+            <span class="category-card__image">${iconSVG(category.icon)}</span>
+            <span class="category-card__label">${category.label}</span>
+          </button>`).join("")}
+      </div>
+      <button class="rail-arrow" type="button" data-rail-direction="1" data-rail-index="${index}" aria-label="Desplazar categorías a la derecha">›</button>
+    </div>`).join("");
+}
+
+function renderFilters() {
+  elements.filterList.innerHTML = filters.map(filter => `
+    <button class="filter-chip" type="button" data-filter="${filter.id}" aria-pressed="false">
+      ${iconSVG(filter.icon)}<span>${filter.label}</span>
+    </button>`).join("");
 }
 
 function renderCombos() {
-  elements.comboList.innerHTML = combos.map((combo) => `
+  elements.comboList.innerHTML = combos.map(combo => `
     <article class="combo-card">
-      <div class="combo-card__media">
-        <img src="${combo.image}" alt="${combo.title}" loading="lazy" />
+      <div class="combo-card__media" aria-label="Fotografía comercial pendiente">
+        <div class="holiday-media holiday-media--combo" aria-hidden="true">${iconSVG("gift")}<span>Imagen próximamente</span></div>
       </div>
       <div class="combo-card__content">
         <h3>${combo.title}</h3>
         <p>${combo.subtitle}</p>
-        <div class="stars" aria-label="5 de 5 estrellas">★★★★★</div>
+        <div class="stars" aria-label="Representación visual de estrellas; sin reseñas verificadas">★★★★★</div>
         <div class="price-row">
           <strong class="price-current">${formatMoney(combo.price)}</strong>
           <span class="price-old">${formatMoney(combo.compareAt)}</span>
         </div>
-        <button class="offer-link" type="button" data-offer="${combo.id}">Ver oferta →</button>
+        <button class="offer-link" type="button" data-offer="${combo.id}">Explorar packs →</button>
       </div>
-    </article>
-  `).join("");
+    </article>`).join("");
 }
 
 function renderProducts(list = products) {
-  elements.resultCount.textContent = `${list.length} producto${list.length === 1 ? "" : "s"}`;
+  elements.resultCount.textContent = `${list.length} producto${list.length === 1 ? "" : "s"} · demo`;
   elements.emptyState.hidden = list.length > 0;
-
-  elements.productGrid.innerHTML = list.map((product) => `
+  elements.productGrid.innerHTML = list.map(product => `
     <article class="product-card" data-product-id="${product.id}" tabindex="0" role="link" aria-label="Ver ${product.title}">
       <div class="product-card__media">
-        <img src="${product.image}" alt="${product.title}" loading="lazy" />
+        <img src="${product.image}" alt="Imagen temporal de ${product.title}" loading="lazy" />
       </div>
       <div class="product-card__content">
         <h3>${product.title}</h3>
         <p class="product-card__subtitle">${product.subtitle}</p>
-        <div class="stars" aria-label="5 de 5 estrellas">★★★★★</div>
-        <span class="delivery-badge" title="Demo visual. Protocol Data Logistics todavía no está integrado.">
+        <div class="stars" aria-label="Estrellas ilustrativas, no valoraciones reales">★★★★★</div>
+        <span class="delivery-badge" title="Demo visual. Logistics todavía no está integrado.">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h11v10H3Z" /><path d="M14 9h4l3 3v4h-7Z" /><circle cx="7" cy="18" r="2" /><circle cx="17" cy="18" r="2" /></svg>
-          Llega a tu dirección
+          Envío a tu dirección
         </span>
-        <small class="delivery-demo-note">Demo visual · pendiente de resolución logística</small>
+        <small class="delivery-demo-note">Envío y precio ilustrativos · sin compra real</small>
         <div class="product-card__divider"></div>
       </div>
       <div class="product-card__commerce">
-        <span class="trust-badge">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v5c0 5.2 3.4 8.5 8 10 4.6-1.5 8-4.8 8-10V6Z" /><path d="m9 12 2 2 4-4" /></svg>
-          Compra segura con Mercado Pago
-        </span>
+        <span class="trust-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v5c0 5.2 3.4 8.5 8 10 4.6-1.5 8-4.8 8-10V6Z" /><path d="m9 12 2 2 4-4" /></svg>Comercio de demostración</span>
         <strong class="product-card__price">${formatMoney(product.price)}</strong>
       </div>
-    </article>
-  `).join("");
+    </article>`).join("");
+}
+
+function applyCatalog() {
+  renderProducts(filterProducts({ query: elements.productSearch.value, category: activeCategory, filter: activeFilter }));
+  $$("[data-category]", elements.categoryList).forEach(button => button.setAttribute("aria-pressed", String(button.dataset.category === activeCategory)));
+  $$("[data-filter]", elements.filterList).forEach(button => button.setAttribute("aria-pressed", String(button.dataset.filter === activeFilter)));
 }
 
 function runSearch(query) {
-  const result = searchProducts(query);
-  renderProducts(result);
-  emitSiteEvent("catalog_search_changed", { query: String(query || "").trim(), resultCount: result.length });
+  activeCategory = null;
+  activeFilter = null;
+  applyCatalog();
+  emitSiteEvent("catalog_search_changed", {
+    query: String(query || "").trim(),
+    resultCount: filterProducts({ query }).length,
+  });
 }
 
 function selectCategory(category) {
-  elements.productSearch.value = category;
-  runSearch(category);
+  activeCategory = activeCategory === category ? null : category;
+  activeFilter = null;
+  elements.productSearch.value = "";
+  applyCatalog();
   $("#productos")?.scrollIntoView({ behavior: "smooth", block: "start" });
-  emitSiteEvent("category_selected", { category });
+  emitSiteEvent("category_selected", { category: activeCategory || "all" });
+}
+
+function selectFilter(filter) {
+  activeFilter = activeFilter === filter ? null : filter;
+  activeCategory = null;
+  elements.productSearch.value = "";
+  applyCatalog();
+  $("#productos")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  emitSiteEvent("catalog_filter_selected", { filter: activeFilter || "all" });
 }
 
 function openProduct(productId) {
@@ -215,15 +261,26 @@ function bindEvents() {
   elements.productSearch.addEventListener("input", (event) => runSearch(event.target.value));
 
   elements.categoryList.addEventListener("click", (event) => {
+    const arrow = event.target.closest("[data-rail-direction]");
+    if (arrow) {
+      const rail = elements.categoryList.querySelector(`[data-category-rail="${arrow.dataset.railIndex}"]`);
+      rail?.scrollBy({ left: Number(arrow.dataset.railDirection) * 210, behavior: "smooth" });
+      return;
+    }
     const button = event.target.closest("[data-category]");
     if (button) selectCategory(button.dataset.category);
+  });
+
+  elements.filterList.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-filter]");
+    if (button) selectFilter(button.dataset.filter);
   });
 
   elements.comboList.addEventListener("click", (event) => {
     const button = event.target.closest("[data-offer]");
     if (!button) return;
     emitSiteEvent("commercial_offer_opened", { offerId: button.dataset.offer, source: "home_combo" });
-    showToast("Oferta demo. La Combo Page se construirá en el próximo movimiento.");
+    selectFilter("packs");
   });
 
   elements.productGrid.addEventListener("click", (event) => {
@@ -255,7 +312,7 @@ function bindEvents() {
     showToast(`${control.dataset.reserved}: superficie reservada para un próximo build.`);
   }));
 
-  window.addEventListener("indumentary:cart-change", () => {
+  window.addEventListener("web-de-navidad:cart-change", () => {
     elements.cartCount.textContent = String(getCartCount());
   });
 
@@ -268,6 +325,7 @@ function bindEvents() {
 
 function init() {
   renderCategories();
+  renderFilters();
   renderCombos();
   renderProducts(products);
   updateLocationUI();
