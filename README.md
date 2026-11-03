@@ -1,55 +1,55 @@
-# INDUMENTARY
+# WEB DE NAVIDAD
 
-Modelo ecommerce del vertical **Indumentaria** dentro del proyecto **SITIOS WEB DE NICHO**.
+Tienda modelo navideña **reutilizable cada temporada**, construida a partir de la arquitectura de `eliassmarr2-afk/indumentary` y personalizada sin modificar el repositorio de origen.
 
-## Estado
-
-```text
-SITE INITIALIZATION
-=
-PASS
-
-CONSTRUCTION
-=
-NOT YET STARTED
-```
-
-## Objetivo
-
-Construir una tienda modelo de indumentaria deportiva, visualmente neutra y escalable, preparada desde origen para:
-
-- adaptación comercial por cliente;
-- futura migración/adaptación a Shopify;
-- integración con Protocol Data;
-- desktop + mobile;
-- Shipping, Tracking, Support, Conversation, Experience y Policies;
-- Event Layer y medición desacoplable.
-
-## Stack inicial
+## Estado actual
 
 ```text
-HTML + CSS + JavaScript
+PHASE                    STATUS
+Repository initialization  COMPLETE · PUBLIC
+Home mobile V1             IMPLEMENTED · REVIEW PENDING
+Home desktop responsive    IMPLEMENTED · REVIEW PENDING
+Commercial photography     PENDING · NEXT VISUAL PHASE
+Product detail holiday UI  LEGACY BASE · NEXT PHASE
+Tracking / Support UI      INHERITED · HOLIDAY SKIN PENDING
+Shopify integration        NOT ACTIVE
+Protocol Data integration  NOT ACTIVE
+Payments / live orders     NOT ACTIVE
 ```
 
-Se utilizarán datos mockeados durante la primera construcción visual. Los mocks no serán autoridad de negocio.
+## Implementación V1
 
-## Documentación
+- Cabecera roja con navegación, ubicación de sesión, carrito demo y búsqueda local de productos.
+- Hero navideño de composición visual sin fotografía definitiva.
+- Ocho categorías con **íconos blancos sobre círculos rojo navideño**, en dos filas horizontalmente desplazables: Árboles, Regalos, Decoración, Luces / Envoltorios, Mesa, Moños, Ofertas.
+- Filtros interactivos: Packs, Promociones, Para regalar, Decoración y Envoltorios.
+- Tres packs demo; banner intermedio **2,6:1**; tarjetas de productos mock con precios ilustrativos.
+- Navegación móvil inferior: Inicio / Navidad / Packs / Pedidos / Ayuda.
+- Diseño Manrope, tarjetas blancas, canvas rosado suave, responsive móvil/escritorio.
 
-- `SITE_CONTEXT.md` — qué negocio/modelo estamos construyendo.
-- `ARCHITECTURE.md` — cómo se separan las responsabilidades.
-- `PROTOCOL_DATA_READINESS.md` — readiness y activation por capacidad.
-- `SHOPIFY.md` — estrategia de compatibilidad/migración.
-- `DESIGN_BRIEF.md` — dirección visual y composición acordada.
-- `PROJECT_DECISIONS.md` — decisiones site-specific.
-- `CURRENT_WAYPOINT.md` — estado y próximo movimiento.
-- `SITE_INITIALIZATION.md` — checklist del Documento 008.
+## Arquitectura
 
-## Foundation heredada
+```text
+index.html                       Home y navegación
+css/base.css                    Base heredada, no duplicada
+css/home.css                    Composiciones base
+css/navidad-home.css            Tema estacional V1
+js/app.js                       Interacciones de Home
+js/commerce/catalog.js          Categorías, packs, filtros, productos demo
+js/commerce/cart.js             Carrito de sesión (sin checkout live)
+js/shared/location-state.js     Ubicación compartida dentro de este sitio
+js/config/site.js               Identidad y límites de integración
+assets/christmas-placeholder.svg Media temporal, no creatividad final
+```
 
-Este repo consume la arquitectura congelada en `Ecosistema-para-negocios/docs/sitios-web-de-nicho/`, incluyendo Documentos 002–008.
+Las páginas `product.html`, `tracking.html` y `soporte.html` conservan la infraestructura heredada; **su estética y contenido navideño todavía no están finalizados**.
 
-Protocol Data V2 permanece como dependencia canónica externa. Antes de cualquier integración real se releerán sus contratos vigentes.
+El storefront no infiere disponibilidad, descuentos, plazos ni costos de logística reales a partir de mocks. La búsqueda funciona sobre el catálogo demo. Los pedidos, pagos y conversaciones productivas requieren integraciones futuras independientes y autorización específica.
 
-## Próximo movimiento
+## Contrato visual
 
-Construcción de la primera Home pública/responsive según `DESIGN_BRIEF.md`, sin integración live todavía.
+Ver `CHRISTMAS_DESIGN_CONTRACT.md`.
+
+## Referencia estructural
+
+`eliassmarr2-afk/indumentary` permanece independiente y no recibe cambios desde este repositorio.
