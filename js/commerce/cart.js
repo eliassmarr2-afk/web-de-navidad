@@ -1,4 +1,4 @@
-const CART_KEY = "indumentary.cart.v2";
+const CART_KEY = "web-de-navidad.cart.v1";
 
 function readCart() {
   try {
@@ -11,7 +11,7 @@ function readCart() {
 
 function writeCart(items) {
   sessionStorage.setItem(CART_KEY, JSON.stringify(items));
-  window.dispatchEvent(new CustomEvent("indumentary:cart-change", { detail: items }));
+  window.dispatchEvent(new CustomEvent("web-de-navidad:cart-change", { detail: items }));
 }
 
 export function getCartCount() {
