@@ -1,9 +1,9 @@
 export const SITE_CONFIG = Object.freeze({
-  project: "indumentary",
-  vertical: "Indumentaria",
-  firstExpression: "Indumentaria deportiva",
+  project: "web-de-navidad",
+  vertical: "Navidad: decoración, regalos y accesorios",
+  firstExpression: "Tienda navideña reutilizable",
   brand: {
-    displayName: "IND.",
+    displayName: "NAVIDAD.",
     isPlaceholder: true,
   },
   locale: "es-AR",
