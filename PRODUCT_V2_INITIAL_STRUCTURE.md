@@ -1,9 +1,11 @@
 # WEB DE NAVIDAD — PRODUCT PAGE V2 / ESTRUCTURA INICIAL
 
 **Fecha:** 2026-11-04  
-**Estado:** DEFINICIÓN PARCIAL DE DISEÑO / GALERÍA PENDIENTE DE IMAGEN DE REFERENCIA / SIN CAMBIOS EN CÓDIGO FUNCIONAL  
+**Estado:** HISTÓRICO / SUPERADO POR PRODUCT_V2_APPROVED_STRUCTURE.md (2026-11-04)  
 **Ruta objetivo:** `product.html`  
 **Identidad visual:** SantaClaus Store
+
+**Autoridad posterior:** [PRODUCT_V2_APPROVED_STRUCTURE.md](./PRODUCT_V2_APPROVED_STRUCTURE.md). La referencia visual ya fue aportada; el contrato definitivo fija el orden del bloque, imagen 1:1 borde a borde, valoración y badges con border-radius 4px. Este documento se conserva solo como antecedente.
 
 ## Autoridad de este documento
 
