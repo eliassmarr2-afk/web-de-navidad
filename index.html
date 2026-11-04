@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#B20B17" />
+  <meta name="theme-color" content="#16878C" />
   <title>Web de Navidad · Regalos y decoración</title>
   <meta name="description" content="Inspiración navideña, regalos, decoración y detalles para celebrar. Catálogo de demostración, sin ventas activas." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -11,65 +11,68 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./css/base.css" />
   <link rel="stylesheet" href="./css/home.css" />
-  <link rel="stylesheet" href="./css/navidad-home.css?v=20261103-01" />
+  <link rel="stylesheet" href="./css/navidad-home.css?v=20261104-02" />
 </head>
 <body class="christmas-home">
-  <div class="site-shell">
-    <div class="holiday-announcement">ESPECIAL NAVIDAD 2026 <span aria-hidden="true">✦</span> INSPIRACIÓN PARA CELEBRAR</div>
-    <header class="site-header">
-      <button class="icon-button icon-button--inverse" id="menuToggle" type="button" aria-label="Abrir menú" aria-controls="siteMenu" aria-expanded="false">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
-      </button>
+  <div class="site-shell" id="top">
+    <section class="hero christmas-hero christmas-hero--app" aria-labelledby="heroTitle">
+      <div class="christmas-hero__art" aria-hidden="true">
+        <span class="christmas-hero__snow christmas-hero__snow--one"></span>
+        <span class="christmas-hero__snow christmas-hero__snow--two"></span>
+        <span class="christmas-hero__moon"></span>
+        <span class="christmas-hero__horizon"></span>
+      </div>
 
-      <a class="utility-logo" href="#top" aria-label="Ir al inicio">NAVIDAD.a>
+      <header class="site-header christmas-hero__topbar" aria-label="Accesos superiores">
+        <button class="location-strip" id="locationTrigger" type="button" aria-label="Elegir domicilio de entrega" aria-haspopup="dialog" aria-controls="locationModal">
+          <span class="location-strip__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          </span>
+          <span class="location-strip__copy">
+            <strong id="locationPrimary">¿A dónde lo enviamos?</strong>
+            <small id="locationSecondary" class="sr-only">Ingresá tu código postal y dirección opcional</small>
+          </span>
+          <svg class="location-strip__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <nav class="christmas-hero__actions" aria-label="Accesos rápidos">
+          <button class="icon-button icon-button--inverse" id="menuToggle" type="button" aria-label="Abrir menú" aria-controls="siteMenu" aria-expanded="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          </button>
+          <a class="icon-button icon-button--inverse christmas-hero__tracking-link" href="./tracking.html" aria-label="Consultar mi pedido">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h11v10H3Z"/><path d="M14 9h4l3 3v4h-7Z"/><circle cx="7" cy="19" r="2"/><circle cx="17" cy="19" r="2"/></svg>
+          </a>
+          <button class="cart-button" id="cartButton" type="button" aria-label="Abrir carrito de demostración">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 2-1.6L20.5 8H6.1M10 20h.01M17 20h.01"/></svg>
+            <span class="cart-count" id="cartCount">0</span>
+          </button>
+        </nav>
+      </header>
 
-      <button class="cart-button" id="cartButton" type="button" aria-label="Abrir carrito">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 2-1.6L20.5 8H6.1M10 20h.01M17 20h.01" /></svg>
-        <span class="cart-count" id="cartCount">0</span>
-      </button>
-    </header>
-
-    <div class="page-content" id="top">
-      <button class="location-strip" id="locationTrigger" type="button" aria-haspopup="dialog">
-        <span class="location-strip__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.5" /></svg>
-        </span>
-        <span class="location-strip__copy">
-          <strong id="locationPrimary">¿A dónde lo enviamos?</strong>
-          <small id="locationSecondary">Ingresá tu código postal y dirección opcional</small>
-        </span>
-        <svg class="location-strip__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
-      </button>
-
-      <main>
+      <h1 class="sr-only" id="heroTitle">Web de Navidad: regalos, decoración y packs</h1>
+      <div class="christmas-hero__bottom">
         <section class="search-block" aria-label="Buscar productos">
-          <label class="sr-only" for="productSearch">Buscar productos</label>
+          <label class="sr-only" for="productSearch">Buscar productos navideños</label>
           <div class="search-field">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
-            <input id="productSearch" type="search" placeholder="Buscá regalos, adornos, luces..." autocomplete="off" />
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="productSearch" type="search" placeholder="Buscá regalos, adornos, luces..." autocomplete="off"/>
           </div>
         </section>
+        <button class="christmas-hero__map-button" id="mapTrigger" type="button" aria-label="Elegir ubicación de envío" aria-haspopup="dialog" aria-controls="locationModal">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3Z"/><path d="M9 3v15M15 6v15"/><circle cx="15" cy="10" r="2"/></svg>
+        </button>
+      </div>
+    </section>
 
-<section class="hero christmas-hero" aria-labelledby="heroTitle">
-          <div class="christmas-hero__spark" aria-hidden="true">✦</div>
-          <div class="hero__panel">
-            <span class="eyebrow">TEMPORADA NAVIDEÑA</span>
-            <h1 id="heroTitle">La magia de regalar empieza acá.</h1>
-            <p>Árboles, luces, detalles y sorpresas para hacer especial cada rincón de estas fiestas.</p>
-            <a class="button button--light" href="#categorias">Explorar Navidad</a>
-          </div>
-          <span class="christmas-hero__ornament christmas-hero__ornament--one" aria-hidden="true"></span>
-          <span class="christmas-hero__ornament christmas-hero__ornament--two" aria-hidden="true"></span>
-        </section>
-
-                <section class="section section--categories" id="categorias" aria-labelledby="categoryTitle">
+    <div class="page-content">
+      <main>
+        <section class="section section--categories" id="categorias" aria-labelledby="categoryTitle">
           <div class="section-heading">
             <div>
               <span class="eyebrow eyebrow--dark">TODO PARA CELEBRAR</span>
               <h2 id="categoryTitle">Elegí tu inspiración</h2>
             </div>
           </div>
-          <div class="category-scroller category-two-rails" id="categoryList" aria-label="Dos filas desplazables de categorías navideñas"></div>
+          <div class="category-scroller category-one-rail" id="categoryList" aria-label="Categorías navideñas, una fila desplazable"></div>
         </section>
 
 <section class="section section--filters" aria-labelledby="filtersTitle">
@@ -77,6 +80,16 @@
             <div><span class="eyebrow eyebrow--dark">ENCONTRÁ TU ESTILO</span><h2 id="filtersTitle">Descubrí más</h2></div>
           </div>
           <div class="filter-scroller" id="filterList" role="group" aria-label="Filtros rápidos de productos"></div>
+        </section>
+
+        <section class="christmas-middle-banner" aria-label="Inspiración para una Navidad especial">
+          <img class="christmas-middle-banner__hat" src="./assets/christmas-santa-hat.svg" alt="" aria-hidden="true" />
+          <div class="christmas-middle-banner__content">
+            <span>PEQUEÑOS DETALLES, GRANDES MOMENTOS</span>
+            <h2>Hacé que esta Navidad se sienta en casa.</h2>
+            <a href="#productos">Descubrir ideas <span aria-hidden="true">→</span></a>
+          </div>
+          <span class="christmas-middle-banner__star" aria-hidden="true">✳</span>
         </section>
 
         <section class="section section--combos" id="packs" aria-labelledby="comboTitle">
@@ -87,15 +100,6 @@
             </div>
           </div>
           <div class="combo-scroller" id="comboList" aria-label="Combos"></div>
-        </section>
-
-<section class="christmas-middle-banner" aria-label="Inspiración para una Navidad especial">
-          <div class="christmas-middle-banner__content">
-            <span>PEQUEÑOS DETALLES, GRANDES MOMENTOS</span>
-            <h2>Hacé que esta Navidad se sienta en casa.</h2>
-            <a href="#productos">Descubrir ideas <span aria-hidden="true">→</span></a>
-          </div>
-          <span class="christmas-middle-banner__star" aria-hidden="true">✳</span>
         </section>
 
         <section class="section section--products" id="productos" aria-labelledby="productTitle">
@@ -116,7 +120,7 @@
 
       <footer class="site-footer">
         <div class="site-footer__brand">
-          <span class="utility-logo utility-logo--footer">NAVIDAD.span>
+          <span class="utility-logo utility-logo--footer">NAVIDAD</span>
           <p>Web de Navidad · versión de demostración. Imágenes, precios y disponibilidad son ilustrativos; no se procesan compras.</p>
         </div>
         <nav class="site-footer__links" aria-label="Políticas">
@@ -141,7 +145,7 @@
   <div class="overlay" id="menuOverlay" hidden></div>
   <aside class="side-menu" id="siteMenu" aria-label="Menú principal" aria-hidden="true">
     <div class="side-menu__header">
-      <span class="utility-logo utility-logo--dark">NAVIDAD.span>
+      <span class="utility-logo utility-logo--dark">NAVIDAD</span>
       <button class="icon-button" id="menuClose" type="button" aria-label="Cerrar menú">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg>
       </button>
@@ -245,6 +249,6 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script type="module" src="./js/app.js?v=20261103-navidad-01"></script>
+  <script type="module" src="./js/app.js?v=20261104-navidad-02"></script>
 </body>
 </html>

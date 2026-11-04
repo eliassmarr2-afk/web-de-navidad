@@ -16,6 +16,7 @@ const elements = {
   cartButton: $("#cartButton"),
   cartCount: $("#cartCount"),
   locationTrigger: $("#locationTrigger"),
+  mapTrigger: $("#mapTrigger"),
   locationPrimary: $("#locationPrimary"),
   locationSecondary: $("#locationSecondary"),
   locationModal: $("#locationModal"),
@@ -113,19 +114,12 @@ function iconSVG(name) {
 }
 
 function renderCategories() {
-  const groups = [categories.slice(0, 4), categories.slice(4, 8)];
-  elements.categoryList.innerHTML = groups.map((group, index) => `
-    <div class="category-rail-row">
-      <button class="rail-arrow" type="button" data-rail-direction="-1" data-rail-index="${index}" aria-label="Desplazar categorías a la izquierda">‹</button>
-      <div class="category-rail" data-category-rail="${index}" role="group" aria-label="Categorías, fila ${index + 1}">
-        ${group.map(category => `
-          <button class="category-card" type="button" data-category="${category.label}" aria-pressed="false">
-            <span class="category-card__image">${iconSVG(category.icon)}</span>
-            <span class="category-card__label">${category.label}</span>
-          </button>`).join("")}
-      </div>
-      <button class="rail-arrow" type="button" data-rail-direction="1" data-rail-index="${index}" aria-label="Desplazar categorías a la derecha">›</button>
-    </div>`).join("");
+  // One rail is the only category view. Category and filtering state stay unchanged.
+  elements.categoryList.innerHTML = categories.map(category => `
+    <button class="category-card" type="button" data-category="${category.label}" aria-pressed="false">
+      <span class="category-card__image">${iconSVG(category.icon)}</span>
+      <span class="category-card__label">${category.label}</span>
+    </button>`).join("");
 }
 
 function renderFilters() {
@@ -245,12 +239,23 @@ async function handleLocationSubmit(event) {
   showToast(`Ubicación guardada: ${location.visibleLabel}.`);
 }
 
+function syncBottomNav() {
+  const hash = window.location.hash || "#top";
+  $('a[href^="#"]', $(".holiday-bottom-nav")).forEach(link => {
+    const active = link.getAttribute("href") === hash;
+    link.classList.toggle("is-current", active);
+    if (active) link.setAttribute("aria-current", "location");
+    else link.removeAttribute("aria-current");
+  });
+}
+
 function bindEvents() {
   elements.menuToggle.addEventListener("click", openMenu);
   elements.menuClose.addEventListener("click", closeMenu);
   elements.menuOverlay.addEventListener("click", closeMenu);
 
   elements.locationTrigger.addEventListener("click", openLocationModal);
+  elements.mapTrigger.addEventListener("click", openLocationModal);
   elements.locationClose.addEventListener("click", closeLocationModal);
   elements.locationCancel.addEventListener("click", closeLocationModal);
   elements.locationModal.addEventListener("click", (event) => {
@@ -261,12 +266,6 @@ function bindEvents() {
   elements.productSearch.addEventListener("input", (event) => runSearch(event.target.value));
 
   elements.categoryList.addEventListener("click", (event) => {
-    const arrow = event.target.closest("[data-rail-direction]");
-    if (arrow) {
-      const rail = elements.categoryList.querySelector(`[data-category-rail="${arrow.dataset.railIndex}"]`);
-      rail?.scrollBy({ left: Number(arrow.dataset.railDirection) * 210, behavior: "smooth" });
-      return;
-    }
     const button = event.target.closest("[data-category]");
     if (button) selectCategory(button.dataset.category);
   });
@@ -316,6 +315,8 @@ function bindEvents() {
     elements.cartCount.textContent = String(getCartCount());
   });
 
+  window.addEventListener("hashchange", syncBottomNav);
+
   window.addEventListener("keydown", (event) => {
     if (event.key !== "Escape") return;
     if (!elements.locationModal.hidden) closeLocationModal();
@@ -331,6 +332,7 @@ function init() {
   updateLocationUI();
   elements.cartCount.textContent = String(getCartCount());
   bindEvents();
+  syncBottomNav();
   emitSiteEvent("home_viewed", { environment: SITE_CONFIG.environment });
 }
 

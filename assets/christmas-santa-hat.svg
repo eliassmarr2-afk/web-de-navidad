@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 88" role="img" aria-label="Sombrero de Navidad">
+  <defs><linearGradient id="h" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#EE3949"/><stop offset=".57" stop-color="#D41B2C"/><stop offset="1" stop-color="#9A0A17"/></linearGradient></defs>
+  <path d="M15 61C24 39 37 17 60 13c10-2 21 2 26 8-6 6-12 13-16 23L64 63Z" fill="url(#h)" stroke="#890B16" stroke-width="2.4" stroke-linejoin="round"/>
+  <path d="M60 14c10-5 18-1 24 7" fill="none" stroke="#FF7180" stroke-width="3.3" stroke-linecap="round"/>
+  <circle cx="85" cy="19" r="10.5" fill="#FFFDF7" stroke="#D9E3E0" stroke-width="2"/>
+  <path d="M11 59c15-7 39-9 59-4 4 1 7 5 6 10-2 6-8 9-15 7-16-4-33-2-46 2-8 2-12-5-11-10 1-2 3-4 7-5Z" fill="#FFFFFF" stroke="#DDE5E1" stroke-width="2.6" stroke-linejoin="round"/>
+  <path d="M18 68c19-5 35-6 48-3" fill="none" stroke="#F1F5F2" stroke-width="3" stroke-linecap="round"/>
+</svg>

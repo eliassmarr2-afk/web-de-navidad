@@ -134,3 +134,394 @@
   .christmas-home .category-card__image { width: 78px; height: 78px; }
   .christmas-home .christmas-middle-banner h2 { font-size: 15px; }
 }
+
+
+/* ===========================================================
+   HOME V1 REVISION 2026-11-04 — APPROVED MOBILE COMPOSITION
+   This is a scoped override over the initial seasonal skin.
+   No global Product/Tracking/Support or Protocol Data changes.
+   =========================================================== */
+.christmas-home { overflow-x: clip; }
+.christmas-home .christmas-hero.christmas-hero--app {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: clamp(195px, 25svh, 330px);
+  min-height: 0;
+  aspect-ratio: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(165deg, #19878e 0%, #65afb0 49%, #a5d7d0 100%);
+}
+.christmas-home .christmas-hero.christmas-hero--app::before,
+.christmas-home .christmas-hero.christmas-hero--app::after {
+  content: none;
+  display: none;
+}
+.christmas-home .christmas-hero__art {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.christmas-home .christmas-hero__art::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: .65;
+  background-image:
+    radial-gradient(circle at 6% 28%, #fff 0 1px, transparent 2px),
+    radial-gradient(circle at 23% 47%, #fff 0 2px, transparent 3px),
+    radial-gradient(circle at 49% 13%, #fff 0 1px, transparent 2px),
+    radial-gradient(circle at 81% 39%, #fff 0 2px, transparent 3px),
+    radial-gradient(circle at 68% 12%, #fff 0 1px, transparent 2px),
+    radial-gradient(circle at 94% 67%, #fff 0 1px, transparent 2px);
+}
+.christmas-home .christmas-hero__art::after {
+  content: "";
+  position: absolute;
+  left: -15%;
+  bottom: -36%;
+  width: 130%;
+  height: 59%;
+  border-radius: 50% 50% 0 0;
+  background: #eaf6f3;
+  opacity: .72;
+}
+.christmas-home .christmas-hero__moon {
+  position: absolute;
+  top: 36%;
+  right: 25%;
+  width: 29px;
+  height: 29px;
+  border-radius: 50%;
+  box-shadow: -8px 5px 0 -2px rgba(248, 255, 244, .83);
+  transform: rotate(-25deg);
+}
+.christmas-home .christmas-hero__snow--one,
+.christmas-home .christmas-hero__snow--two {
+  position: absolute;
+  width: 95px;
+  height: 18px;
+  border-radius: 60%;
+  background: rgba(255,255,255,.52);
+  filter: blur(3px);
+}
+.christmas-home .christmas-hero__snow--one { top: 35%; left: 13%; }
+.christmas-home .christmas-hero__snow--two { top: 62%; right: 8%; width: 62px; }
+.christmas-home .christmas-hero__horizon {
+  position: absolute;
+  inset: auto 0 0;
+  height: 22%;
+  background: linear-gradient(0deg, rgba(232,249,246,.22), transparent);
+}
+.christmas-home .christmas-hero .site-header.christmas-hero__topbar {
+  position: absolute;
+  z-index: 4;
+  top: calc(12px + env(safe-area-inset-top, 0px));
+  right: max(12px, calc((100% - 1240px)/2));
+  left: max(12px, calc((100% - 1240px)/2));
+  display: flex;
+  width: auto;
+  height: auto;
+  min-height: 42px;
+  padding: 0;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  color: #283a38;
+}
+.christmas-home .christmas-hero .location-strip {
+  display: flex;
+  flex: 0 1 290px;
+  width: auto;
+  min-width: 0;
+  min-height: 42px;
+  padding: 6px 11px;
+  gap: 6px;
+  border: 1px solid rgba(41,77,73,.1);
+  border-radius: 999px;
+  background: rgba(255,255,255,.97);
+  color: #2a3d38;
+  box-shadow: 0 3px 12px rgba(24,72,74,.09);
+}
+.christmas-home .christmas-hero .location-strip__icon {
+  flex: 0 0 19px;
+  width: 19px;
+  height: 19px;
+  background: transparent;
+  color: #2d635d;
+}
+.christmas-home .christmas-hero .location-strip__icon svg { width: 19px; height: 19px; }
+.christmas-home .christmas-hero .location-strip__copy { flex: 1 1 auto; min-width: 0; }
+.christmas-home .christmas-hero .location-strip__copy strong {
+  display: block;
+  overflow: hidden;
+  color: #293b36;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.christmas-home .christmas-hero .location-strip__copy small.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  white-space: nowrap;
+  clip: rect(0,0,0,0);
+}
+.christmas-home .christmas-hero .location-strip__chevron { flex: 0 0 15px; width: 15px; height: 15px; }
+.christmas-home .christmas-hero__actions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 7px;
+}
+.christmas-home .christmas-hero__actions :is(.icon-button, .cart-button) {
+  display: inline-grid;
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255,255,255,.97);
+  color: #2b433e;
+  box-shadow: 0 3px 12px rgba(24,72,74,.09);
+}
+.christmas-home .christmas-hero__actions :is(.icon-button, .cart-button) svg {
+  width: 21px;
+  height: 21px;
+}
+.christmas-home .christmas-hero__actions .cart-count {
+  top: -4px;
+  right: -3px;
+  border: 2px solid #fff;
+  background: var(--red);
+  color: #fff;
+}
+.christmas-home .christmas-hero__bottom {
+  position: absolute;
+  z-index: 4;
+  right: max(12px, calc((100% - 1240px)/2));
+  bottom: 15px;
+  left: max(12px, calc((100% - 1240px)/2));
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.christmas-home .christmas-hero .search-block {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+}
+.christmas-home .christmas-hero .search-field {
+  height: 48px;
+  border: 1px solid rgba(46,82,79,.09);
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 4px 14px rgba(24,72,74,.1);
+}
+.christmas-home .christmas-hero .search-field input { min-width: 0; font-size: 12px; }
+.christmas-home .christmas-hero__map-button {
+  display: grid;
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  color: #2d514b;
+  box-shadow: 0 4px 14px rgba(24,72,74,.1);
+  cursor: pointer;
+}
+.christmas-home .christmas-hero__map-button svg { width: 24px; height: 24px; }
+
+/* Categories: one genuine rail, always on the page canvas. */
+.christmas-home .section--categories {
+  margin-top: 23px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.christmas-home .section--categories .section-heading { padding: 0; }
+.christmas-home .category-one-rail {
+  display: flex;
+  gap: 13px;
+  width: 100%;
+  min-width: 0;
+  padding: 1px 0 9px;
+  margin: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  scroll-snap-type: x proximity;
+  scroll-padding-inline: 0;
+  -webkit-overflow-scrolling: touch;
+}
+.christmas-home .category-one-rail::-webkit-scrollbar { display: none; }
+.christmas-home .category-one-rail .category-card {
+  display: block;
+  flex: 0 0 94px;
+  width: 94px;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  scroll-snap-align: start;
+}
+.christmas-home .category-one-rail .category-card__image {
+  display: grid;
+  width: 77px;
+  height: 77px;
+  margin: 0 auto;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--red);
+  color: #fff;
+}
+.christmas-home .category-one-rail .category-card__label { margin-top: 8px; color: #4b2429; font-size: 11px; }
+
+/* Filters share the page canvas; no external panel. */
+.christmas-home .section--filters { margin-top: 17px; }
+.christmas-home .filter-scroller {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* The second banner precedes the packs and wears the decorative hat. */
+.christmas-home .christmas-middle-banner {
+  margin-top: 23px;
+  aspect-ratio: 2.6 / 1;
+  border-radius: 22px;
+  overflow: visible;
+}
+.christmas-home .christmas-middle-banner__hat {
+  position: absolute;
+  z-index: 5;
+  top: -22px;
+  left: -17px;
+  width: clamp(56px, 7vw, 77px);
+  height: auto;
+  transform: rotate(-13deg);
+  pointer-events: none;
+  user-select: none;
+}
+.christmas-home .christmas-middle-banner__content { z-index: 2; }
+.christmas-home .section--combos { margin-top: 30px; }
+
+@media (max-width: 720px) {
+  .christmas-home .page-content { padding: 15px 12px calc(94px + env(safe-area-inset-bottom)); }
+  .christmas-home .christmas-hero.christmas-hero--app {
+    height: clamp(195px, 25svh, 285px);
+    min-height: 0;
+    aspect-ratio: auto;
+    margin: 0;
+    border-radius: 0;
+  }
+  .christmas-home .christmas-hero .site-header.christmas-hero__topbar {
+    top: calc(10px + env(safe-area-inset-top, 0px));
+    right: 12px;
+    left: 12px;
+    height: auto;
+    min-height: 38px;
+  }
+  .christmas-home .christmas-hero .location-strip {
+    flex: 1 1 auto;
+    max-width: none;
+    min-height: 39px;
+    padding: 5px 8px;
+  }
+  .christmas-home .christmas-hero .location-strip__copy strong { font-size: 10px; }
+  .christmas-home .christmas-hero__actions { gap: 5px; }
+  .christmas-home .christmas-hero__actions :is(.icon-button, .cart-button) {
+    flex-basis: 36px;
+    width: 36px;
+    height: 36px;
+  }
+  .christmas-home .christmas-hero__actions :is(.icon-button, .cart-button) svg { width: 19px; height: 19px; }
+  .christmas-home .christmas-hero__bottom { right: 12px; bottom: 13px; left: 12px; gap: 8px; }
+  .christmas-home .christmas-hero .search-field { height: 46px; }
+  .christmas-home .christmas-hero__map-button { flex-basis: 46px; width: 46px; height: 46px; }
+  .christmas-home .section--categories { margin-top: 17px; padding: 0; border-radius: 0; }
+  .christmas-home .section--categories .section-heading { padding: 0; margin-bottom: 11px; }
+  .christmas-home .category-one-rail {
+    width: calc(100% + 24px);
+    margin: 0 -12px;
+    padding: 0 0 8px;
+    gap: 8px;
+    scroll-padding-inline: 0;
+  }
+  .christmas-home .category-one-rail > :first-child,
+  .christmas-home .category-one-rail > :last-child { margin: 0; }
+  .christmas-home .category-one-rail .category-card { flex-basis: 82px; width: 82px; }
+  .christmas-home .category-one-rail .category-card__image { width: 68px; height: 68px; }
+  .christmas-home .category-one-rail .category-card__label { margin-top: 7px; font-size: 10px; }
+  .christmas-home .section--filters { margin-top: 13px; }
+  .christmas-home .section--filters .section-heading { margin-bottom: 9px; }
+  .christmas-home .filter-scroller {
+    width: calc(100% + 24px);
+    margin-left: -12px;
+    margin-right: -12px;
+    padding: 2px 0 7px;
+  }
+  .christmas-home .christmas-middle-banner {
+    margin-top: 21px;
+    padding: 14px 15px 12px 24px;
+    border-radius: 19px;
+    aspect-ratio: 2.6 / 1;
+  }
+  .christmas-home .christmas-middle-banner__hat {
+    top: -18px;
+    left: -15px;
+    width: 60px;
+  }
+  .christmas-home .christmas-middle-banner__content { width: 83%; }
+  .christmas-home .christmas-middle-banner__content > span { font-size: 7px; }
+  .christmas-home .christmas-middle-banner h2 {
+    margin: 4px 0 7px;
+    font-size: clamp(16px, 4.45vw, 21px);
+    line-height: 1.12;
+  }
+  .christmas-home .christmas-middle-banner a { font-size: 9px; }
+  .christmas-home .section--combos { margin-top: 25px; }
+  .christmas-home .holiday-bottom-nav { padding-bottom: calc(6px + env(safe-area-inset-bottom)); }
+}
+@media (max-width: 350px) {
+  .christmas-home .christmas-hero .site-header.christmas-hero__topbar { gap: 6px; }
+  .christmas-home .christmas-hero__actions { gap: 4px; }
+  .christmas-home .christmas-hero__actions :is(.icon-button, .cart-button) { flex-basis: 34px; width: 34px; height: 34px; }
+  .christmas-home .christmas-hero .location-strip__copy strong { font-size: 9px; }
+  .christmas-home .christmas-hero .search-field input { font-size: 11px; }
+  .christmas-home .christmas-middle-banner h2 { font-size: 14px; }
+}
+
+/* Mobile reference has categories and filters immediately under the hero,
+   without heading blocks interrupting the app-style merchandising rails. */
+@media (max-width: 720px) {
+  .christmas-home .section--categories .section-heading,
+  .christmas-home .section--filters .section-heading {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    padding: 0;
+    margin: -1px;
+    white-space: nowrap;
+    clip: rect(0, 0, 0, 0);
+  }
+}

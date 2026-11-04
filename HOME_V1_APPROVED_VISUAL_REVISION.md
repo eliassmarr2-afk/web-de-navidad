@@ -2,7 +2,7 @@
 
 **Fecha:** 2026-11-04  
 **Repositorio:** `eliassmarr2-afk/web-de-navidad`  
-**Estado:** DISEÑO CERRADO / IMPLEMENTACIÓN DE ESTA REVISIÓN PENDIENTE  
+**Estado:** DISEÑO CERRADO / IMPLEMENTACIÓN DE CÓDIGO PREPARADA / VALIDACIÓN VISUAL PENDIENTE  
 **Autoridad:** instrucciones visuales expresas del operador, basadas en la captura de referencia compartida en el chat.  
 **Precedencia:** este documento **sustituye únicamente** las disposiciones incompatibles de `CHRISTMAS_DESIGN_CONTRACT.md` (2026-11-03). Conserva las restantes decisiones V1 relativas a colores de categorías, catálogo mock, accesibilidad, rutas y límites de integración.
 
@@ -61,3 +61,9 @@ Adaptar la Home actual al patrón de aplicación móvil de la referencia **sin r
 ## Estado y siguiente movimiento
 
 El commit de documentación cierra las **decisiones visuales**. **No declara que los cambios estén desplegados ni validados visualmente**. El siguiente movimiento técnico es adaptar los archivos citados y realizar pruebas en móvil/escritorio. La ilustración hero y fotografías comerciales definitivas son una fase separada, a elección del operador.
+
+## Recepción de implementación — 2026-11-04
+
+Se preparó la actualización de Home en `index.html`, `css/navidad-home.css`, `js/app.js` y `assets/christmas-santa-hat.svg`. La implementación reutiliza búsqueda, ubicación, carrito de demostración, filtros, categorías, tracking y soporte. No activa Shopify ni Protocol Data.
+
+**La entrega de código no equivale a certificación visual o funcional en navegador real.** Antes del cierre operativo se requiere revisar el sitio publicado en móvil y escritorio, incluyendo acceso al modal, scroll horizontal, navegación fija, teclado y tamaños de pantalla.
