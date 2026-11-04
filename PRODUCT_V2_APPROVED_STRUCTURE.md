@@ -14,6 +14,8 @@
 > **NUEVA AUTORIDAD DE MARCA Y ENCABEZADO (2026-11-04):** [SANTA_CLAUSULA_BRAND_HEADER_V1.md](./SANTA_CLAUSULA_BRAND_HEADER_V1.md) prevalece sobre el nombre «SantaClaus Store» y el encabezado beige: marca **SANTA CLAUSULA**, fondo verde **#1E7437**, franja de domicilio **blanca #FFFFFF** con texto negro y solo línea inferior gris, títulos importantes negros **#000000** y badge verde **#1E7437**, radio 4px. El logo WebP va centrado y compacto **una vez subido y verificado**. No afecta la arquitectura ni la zona inferior.
 
 
+> **ENMIENDA DE STICKY (2026-11-04):** El operador aprobó una nueva barra de compra. Ver [PRODUCT_V2_STICKY_APPROVED.md](./PRODUCT_V2_STICKY_APPROVED.md), autoridad específica posterior para el sticky de `product.html`. Sustituye la barra fija anterior, no modifica los bloques inferiores ni el marco visual del producto. Los estados Logistics y checkout aún no están activos.
+
 ## 1. Autoridad y alcance
 
 Este contrato reproduce las decisiones del operador sobre la nueva Product Page de Web de Navidad, tomando como **referencia de composición** la captura móvil que compartió el 4 de noviembre de 2026 (ficha de producto de Shopify con franja de navegación, título, rating, badge, información de llegada e imagen grande).

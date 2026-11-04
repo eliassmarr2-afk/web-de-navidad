@@ -122,3 +122,13 @@ Original `eliassmarr2-afk/indumentary` intacto. Documentos heredados que todaví
 - `js/product-runtime-v4.js`: nombre de marca del título dinámico y vendedor alineado; imagen 1:1 y secciones inferiores conservadas.
 - Autoridad vigente de identidad y color: `SANTA_CLAUSULA_BRAND_HEADER_V1.md`. La imagen anterior «Jingle» es solo una referencia cromática, NO el logo.
 - **Siguiente movimiento:** esperar la confirmación de publicación en GitHub Pages y verificar en móvil el tamaño del logo, fondo verde, selector blanco con línea gris inferior, títulos negros y badge verde.
+
+## Producto V2 — Sticky de Compra aprobado e implementado — 2026-11-04
+
+- **Referencia:** captura de compra móvil del operador. Diseño aprobado explícitamente.
+- Nuevo `PRODUCT_V2_STICKY_APPROVED.md`: contrato definitivo de barra fija blanca, total e importe de la oferta seleccionada, shipping/badge a la derecha, cuotas, CTA azul `#2579FF` único y de ancho completo, sin botón negro de carrito.
+- **Umbral:** aparece al alcanzar el 30% de la distancia desplazable real de la página; se oculta al retroceder. CSS inicial oculto; JS maneja `aria-hidden`, `inert` y listeners pasivos.
+- `product.html`: reemplaza **solo** la barra `.purchase-bar`, conservando el único `#productPrice` para mantener los cálculos existentes y el `#oldPrice` oculto para compatibilidad; ID del nuevo CTA `#startCheckout` para desacoplarlo del demo cart.
+- `css/product-v2-sticky.css` y `js/product-v2-sticky.js`: CSS responsive, visibilidad al 30% y estados de envío/cuotas. Sin Protocol Data/Shopify activos: se muestran «Calculá el envío con tu CP», «Ingresá tu CP» o «Entrega por confirmar», «Cuotas por confirmar». **No anunciar gratis/mañana** sin Logistics; los futuros eventos locales de adapter se detallan en el contrato.
+- «Iniciar compra» muestra aviso de demo, no genera orden ni simula checkout. Precio actual todavía es mock y no representa un total real con logística.
+- **Importante:** el resto de la estructura inferior, las ofertas, las variantes y la fotografía 1:1 se mantienen sin cambios. Revisión visual y publicación de Pages pendientes.

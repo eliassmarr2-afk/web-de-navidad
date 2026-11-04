@@ -1,0 +1,155 @@
+/* SANTA CLAUSULA — Sticky Purchase V2
+   Design approved by the operator, 2026-11-04.
+   Scoped to the Product V2 page; no lower-section layout changes. */
+.christmas-product-v2 .purchase-bar.christmas-sticky {
+  position: fixed;
+  z-index: 75;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  width: min(100%, 480px);
+  min-height: 0;
+  max-height: min(85dvh, 330px);
+  overflow-y: auto;
+  gap: 12px;
+  margin: 0 auto;
+  padding: 13px 18px calc(13px + env(safe-area-inset-bottom, 0px));
+  border: 0;
+  border-top: 1px solid #ECEDEF;
+  border-radius: 0;
+  background: #FFFFFF;
+  color: #24272D;
+  box-shadow: 0 -7px 22px rgba(20, 22, 29, .075);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(105%);
+  transition: opacity 180ms ease, transform 220ms ease, visibility 220ms ease;
+}
+.christmas-product-v2 .purchase-bar.christmas-sticky.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.christmas-product-v2 .christmas-sticky__summary {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+}
+.christmas-product-v2 .christmas-sticky__total-row,
+.christmas-product-v2 .christmas-sticky__shipping-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+.christmas-product-v2 .christmas-sticky__total-row {
+  align-items: baseline;
+}
+.christmas-product-v2 .christmas-sticky__total-label {
+  color: #24272D;
+  font-size: clamp(16px, 4.25vw, 19px);
+  font-weight: 800;
+  line-height: 1.2;
+}
+.christmas-product-v2 .christmas-sticky__total-amount {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  align-items: flex-end;
+}
+.christmas-product-v2 .christmas-sticky__total-amount #productPrice {
+  color: #24272D;
+  font-size: clamp(20px, 5.8vw, 27px);
+  font-weight: 800;
+  line-height: 1.15;
+  white-space: nowrap;
+  letter-spacing: -.04em;
+}
+.christmas-product-v2 .christmas-sticky__total-amount #oldPrice {
+  display: none !important;
+}
+.christmas-product-v2 .christmas-sticky__shipping-label,
+.christmas-product-v2 .christmas-sticky__installments {
+  color: #818791;
+  font-size: clamp(12px, 3.5vw, 15px);
+  font-weight: 700;
+  line-height: 1.35;
+}
+.christmas-product-v2 .christmas-sticky__shipping-label {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.christmas-product-v2 .christmas-sticky__delivery-badge {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  min-height: 26px;
+  padding: 5px 9px;
+  border-radius: 4px;
+  background: #09A458;
+  color: #FFFFFF;
+  font-size: clamp(10px, 3.1vw, 13px);
+  font-weight: 800;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.christmas-product-v2 .christmas-sticky__delivery-badge[data-status="pending"] {
+  background: #ECEFF1;
+  color: #505A63;
+}
+.christmas-product-v2 .christmas-sticky__installments {
+  margin: 1px 0 0;
+  font-weight: 600;
+}
+.christmas-product-v2 .christmas-sticky__button.buy-button {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 49px;
+  gap: 7px;
+  padding: 11px 14px;
+  border: 0;
+  border-radius: 7px;
+  background: #2579FF;
+  color: #FFFFFF;
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.2;
+  cursor: pointer;
+}
+.christmas-product-v2 .christmas-sticky__button.buy-button:focus-visible {
+  outline: 3px solid #1D2E19;
+  outline-offset: 3px;
+}
+.christmas-product-v2 .christmas-sticky__button span {
+  font-size: 23px;
+  line-height: .8;
+}
+@media (max-width: 360px) {
+  .christmas-product-v2 .purchase-bar.christmas-sticky {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+  .christmas-product-v2 .christmas-sticky__total-label { font-size: 15px; }
+  .christmas-product-v2 .christmas-sticky__total-amount #productPrice { font-size: 21px; }
+}
+@media (min-width: 481px) {
+  .christmas-product-v2 .purchase-bar.christmas-sticky {
+    bottom: 24px;
+    border-radius: 0 0 30px 30px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .christmas-product-v2 .purchase-bar.christmas-sticky {
+    transition: none;
+  }
+}

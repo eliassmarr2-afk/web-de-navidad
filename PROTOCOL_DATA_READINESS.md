@@ -203,3 +203,14 @@ No deberán enviarse a analytics ordinarios:
 Antes de mover cualquier capacidad a `INTEGRATED` se releerá el contrato vigente de Protocol Data correspondiente.
 
 Este documento registra readiness del sitio; no congela endpoints, payloads ni versiones runtime.
+
+---
+
+## 11. STICKY DE COMPRA — SEAM RESERVADO
+
+- Autoridad de diseño: `PRODUCT_V2_STICKY_APPROVED.md` (2026-11-04).
+- Readiness Logistics: `RESERVED`, activation `NOT ACTIVE`. El sticky toma el CP de `web-de-navidad.sessionLocation.v1` y reserva exclusivamente un **evento de presentación interno** `santa-clausula:shipping-quote` para un futuro adaptador autorizado. No es contrato de API ni endpoint público.
+- Badges de «Envío gratis» y «Llega mañana» únicamente cuando lo confirma Logistics para el CP de sesión; sin servicio, placeholders de consulta.
+- Cuotas dependen de Commerce/checkout (no Logistics); adapter local reservado `santa-clausula:payment-terms`.
+- La cifra `#productPrice` se deriva de la oferta seleccionada en Commerce mock. **No es total de checkout autorizado** hasta agregar cotización logística y precio definitivo por la integración correcta.
+- El botón `#startCheckout` permanece no transaccional; futuras activaciones requieren revisión del contrato de Shopify/checkout.

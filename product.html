@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#1E7437" />
-  <meta name="web-de-navidad-product-build" content="20261104-v2-brand-02" />
+  <meta name="web-de-navidad-product-build" content="20261104-sticky-v2-01" />
   <title>Proyector de formas navideñas portable · SANTA CLAUSULA</title>
   <meta name="description" content="Proyector navideño de iluminación LED para hogar. Ficha comercial en desarrollo de SANTA CLAUSULA." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="./css/product-offer-callout-v1.css?v=20261101-1832" />
   <link rel="stylesheet" href="./css/product-refinements-v1.css?v=20261102-0145" />
   <link rel="stylesheet" href="./css/product-v2-top.css?v=20261104-brand-02" />
+  <link rel="stylesheet" href="./css/product-v2-sticky.css?v=20261104-01" />
 </head>
 <body class="product-body christmas-product-v2">
   <div class="product-shell">
@@ -127,7 +128,23 @@
       <section class="description-section" aria-labelledby="descriptionTitle"><span class="description-eyebrow">CONTENIDO SHOPIFY</span><h2 id="descriptionTitle">Descripción</h2><div id="productDescription" class="rich-content product-description"><h2>Campera Core</h2><p>Contenido temporal de prueba. Cuando se integre Shopify, esta superficie renderizará la descripción enriquecida del producto.</p></div></section>
     </main>
 
-    <div class="purchase-bar"><div class="purchase-price"><span>Precio total</span><strong id="productPrice">$ 74.990</strong><small id="oldPrice">$ 89.990</small></div><button id="addToCart" class="buy-button" type="button">Comprar ahora</button></div>
+    <aside class="purchase-bar christmas-sticky" id="christmasPurchaseSticky" aria-label="Resumen de compra" aria-hidden="true" inert>
+      <div class="christmas-sticky__summary">
+        <div class="christmas-sticky__total-row">
+          <span class="christmas-sticky__total-label">Total a pagar</span>
+          <div class="christmas-sticky__total-amount">
+            <strong id="productPrice">$ 74.990</strong>
+            <small id="oldPrice" hidden>$ 89.990</small>
+          </div>
+        </div>
+        <div class="christmas-sticky__shipping-row">
+          <span id="stickyShippingLabel" class="christmas-sticky__shipping-label">Calculá el envío con tu CP</span>
+          <span id="stickyDeliveryBadge" class="christmas-sticky__delivery-badge" data-status="pending">Ingresá tu CP</span>
+        </div>
+        <p id="stickyInstallmentsLabel" class="christmas-sticky__installments">Cuotas por confirmar</p>
+      </div>
+      <button id="startCheckout" class="christmas-sticky__button buy-button" type="button" title="Compra aún no habilitada; tienda de demostración">Iniciar compra <span aria-hidden="true">›</span></button>
+    </aside>
 
     <div id="comboDetailBackdrop" class="combo-detail-backdrop" hidden>
       <section class="combo-detail-sheet" role="dialog" aria-modal="true" aria-labelledby="comboDetailTitle">
@@ -176,5 +193,6 @@
   <script defer src="./js/product-commercial-v1.js?v=20261104-v2"></script>
   <script defer src="./js/product-policies-v1.js?v=20261102-0145"></script>
   <script type="module" src="./js/product-v2-top.js?v=20261104-01"></script>
+  <script type="module" src="./js/product-v2-sticky.js?v=20261104-01"></script>
 </body>
 </html>
