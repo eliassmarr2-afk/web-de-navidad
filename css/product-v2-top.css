@@ -428,3 +428,111 @@
     font-size: 12px;
   }
 }
+
+
+/* SANTA CLAUSULA HEADER V1 2026-11-04
+   Exact solid green sampled from the operator's Jingle reference: #1E7437.
+   Scope: product page only. Logo will be embedded after uploading asset. */
+.christmas-product-v2 {
+  --ink: #000000;
+  --green: #1E7437;
+  color: #000000;
+}
+.christmas-product-v2 .product-topbar.christmas-product-header {
+  background: #1E7437;
+  color: #FFFFFF;
+}
+.christmas-product-v2 .christmas-product-header__brand {
+  color: #FFFFFF;
+  font-size: clamp(13px, 3.9vw, 17px);
+  font-weight: 800;
+  letter-spacing: .01em;
+}
+.christmas-product-v2 .christmas-product-header .round-control {
+  color: #FFFFFF;
+}
+/* Reserved visual slot for the transparent WebP after its upload. */
+.christmas-product-v2 .christmas-product-header__logo {
+  display: block;
+  width: 58px;
+  height: 58px;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: center;
+  margin: auto;
+}
+.christmas-product-v2 .christmas-product-location {
+  background: #FFFFFF;
+  color: #000000;
+  border-bottom: 1px solid #D5D5D5;
+}
+.christmas-product-v2 .christmas-product-location svg {
+  stroke: #000000;
+}
+.christmas-product-v2 #productLocationLabel {
+  color: #000000;
+}
+.christmas-product-v2 .christmas-product-intro h1,
+.christmas-product-v2 .product-sheet :is(
+  .detail-section,
+  .variant-section,
+  .offer-section,
+  .seller-section,
+  .delivery-section,
+  .tabs-section,
+  .features-section,
+  .description-section
+) > h2 {
+  color: #000000;
+}
+.christmas-product-v2 .christmas-product-rating,
+.christmas-product-v2 .christmas-product-best-badge {
+  color: #FFFFFF;
+}
+.christmas-product-v2 .christmas-product-rating {
+  color: #1E7437;
+}
+.christmas-product-v2 .christmas-product-best-badge {
+  background: #1E7437;
+  color: #FFFFFF;
+  border-radius: 4px;
+}
+.christmas-product-v2 .christmas-product-delivery-message {
+  color: #666666;
+}
+.christmas-product-v2 .product-sheet :is(
+  h2,
+  h3,
+  .offer-card__copy strong,
+  .offer-card__price strong,
+  .product-combo-card__price
+),
+.christmas-product-v2 .purchase-price strong {
+  color: #000000;
+}
+/* Preserve neutral gray for secondary labels, captions and descriptions. */
+.christmas-product-v2 .christmas-product-meta,
+.christmas-product-v2 .product-sheet :is(
+  .product-subtitle,
+  .detail-section p,
+  .offer-card__copy span,
+  .offer-card__price span
+) {
+  color: #777777;
+}
+@media (max-width: 360px) {
+  .christmas-product-v2 .christmas-product-header__logo {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* Active small central store logo — SVG-style transparency in uploaded WebP. */
+.christmas-product-v2 .christmas-product-header__logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 0;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}

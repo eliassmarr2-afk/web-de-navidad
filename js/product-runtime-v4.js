@@ -175,7 +175,7 @@
   const selectedMedia = () => media.find((item) => item.id === state.mediaId) || media[0];
 
   function renderIdentity() {
-    document.title = `${product.title} · SantaClaus Store`;
+    document.title = `${product.title} · SANTA CLAUSULA`;
     if (els.category) els.category.textContent = product.category;
     if (els.title) els.title.textContent = product.title;
     if (els.subtitle) els.subtitle.textContent = product.subtitle;
@@ -183,7 +183,7 @@
     if (els.deliveryShort) els.deliveryShort.textContent = "Entrega por consultar";
     if (els.buyers) els.buyers.textContent = "";
     if (els.shortDescription) els.shortDescription.textContent = `${product.subtitle}. Esta descripción es temporal para visualizar la landing antes de conectar Shopify.`;
-    if (els.sellerName) els.sellerName.textContent = "SantaClaus Store";
+    if (els.sellerName) els.sellerName.textContent = "SANTA CLAUSULA";
     if (els.sellerSubtitle) els.sellerSubtitle.textContent = "Tienda oficial";
   }
 

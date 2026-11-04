@@ -5,6 +5,9 @@
 **Estado:** CÓDIGO PREPARADO / VALIDACIÓN VISUAL EN DISPOSITIVO PENDIENTE  
 **Precedencia:** este documento modifica exclusivamente el título, texto informativo superior y colores de PRODUCT_V2_APPROVED_STRUCTURE.md; preserva la arquitectura y la distribución ya aprobadas.
 
+> **NUEVA AUTORIDAD DE MARCA Y ENCABEZADO (2026-11-04):** [SANTA_CLAUSULA_BRAND_HEADER_V1.md](./SANTA_CLAUSULA_BRAND_HEADER_V1.md) prevalece sobre el nombre «SantaClaus Store» y el encabezado beige: marca **SANTA CLAUSULA**, fondo verde **#1E7437**, franja de domicilio **blanca #FFFFFF** con texto negro y solo línea inferior gris, títulos importantes negros **#000000** y badge verde **#1E7437**, radio 4px. El logo WebP va centrado y compacto **una vez subido y verificado**. No afecta la arquitectura ni la zona inferior.
+
+
 ## Ajustes de texto
 
 - Título anterior: `Proyector de formas navideñas portable | Iluminación LED para hogar`.

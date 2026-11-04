@@ -112,3 +112,13 @@ Original `eliassmarr2-afk/indumentary` intacto. Documentos heredados que todaví
 - Se redistribuyen acentos rojos/bordó en botones comerciales, badges secundarios y selección; **ningún componente bajo la imagen cambia de orden ni funcionalidad**.
 - Autoridad de cambio: `PRODUCT_V2_PALETTE_REVISION.md`, que prevalece sobre colores/título del contrato anterior.
 - **Pendiente:** publicación GitHub Pages, revisión visual y sustitución de datos comerciales simulados antes de lanzamiento real.
+
+## Santa Clausula — encabezado verde y logo pendiente — 2026-11-04
+
+- El operador confirmó la identidad **SANTA CLAUSULA**, representada por un logo transparente con leyenda STORE; la imagen de referencia «Jingle» establece **el nuevo verde del encabezado #1E7437**.
+- El logo **ya fue subido por el operador y verificado en main**: `assets/santa-clausula-logo.webp`, 800×800, 107242 bytes, Git SHA `f2700940ec6f65b9975b5c07adc9e6730f0ca9e0`. **Está insertado en el centro del encabezado** con tamaño compacto 58×58px (50×50 en pantallas estrechas), manteniendo transparencia.
+- `product.html`: marca y metadatos actualizados; CSS/JS versionados para evitar caché.
+- `css/product-v2-top.css`: cabecera verde y controles blancos, **franja de domicilio blanca pura con texto negro e iconos negros, únicamente borde inferior gris de 1px**, títulos principales y precios negros puros, subtextos grises, badge «MÁS ELEGIDO» mismo verde y 4px de radio.
+- `js/product-runtime-v4.js`: nombre de marca del título dinámico y vendedor alineado; imagen 1:1 y secciones inferiores conservadas.
+- Autoridad vigente de identidad y color: `SANTA_CLAUSULA_BRAND_HEADER_V1.md`. La imagen anterior «Jingle» es solo una referencia cromática, NO el logo.
+- **Siguiente movimiento:** esperar la confirmación de publicación en GitHub Pages y verificar en móvil el tamaño del logo, fondo verde, selector blanco con línea gris inferior, títulos negros y badge verde.
