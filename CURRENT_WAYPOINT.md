@@ -83,3 +83,14 @@ Original `eliassmarr2-afk/indumentary` intacto. Documentos heredados que todaví
 - Tipografía **Manrope**, verificada en el repositorio Camping `eliassmarr2-afk/ecommerce-v2`.
 - **Guardas:** corregir el uso heredado de `indumentary.sessionLocation.v1` en la página anterior y reutilizar `web-de-navidad.sessionLocation.v1`; no inventar fechas, precios ni reputación verificada; Shopify/Protocol Data no activos. Imagen real se aborda después de cerrar la implementación estructural.
 - No se ha modificado `product.html` en esta aceptación; sigue siendo el build heredado de Indumentary hasta el movimiento técnico autorizado.
+
+## Producto V2 — implementación superior — 2026-11-04
+
+- El operador confirmó que se cambia **exclusivamente lo anterior a la imagen** y el marco 1:1 de la propia imagen. **El cuerpo inferior se preserva**, sin reestructurar módulos deportivos/combos/soporte/compra demo heredados.
+- `product.html` y `css/product-v2-top.css`: marca `SantaClaus Store` sobre rojo, franja verde de domicilio, título de proyector, valoración `(4.7)` de ejemplo con cinco estrellas verdes llenas, badge `MÁS ELEGIDO` de radio **4px**, información de ubicación y galería cuadrada full-width con placeholder.
+- `js/product-v2-top.js` enlaza la banda y botón de entrega al **modal original**, leyendo `web-de-navidad.sessionLocation.v1` desde el módulo común.
+- `js/product-runtime-v4.js` corrige **cuatro errores de interpolación de templates preexistentes** que hacían inválido el JavaScript original; ajusta fixture demo y flujo de ubicación, sin reescribir las ofertas ni el resto de la página.
+- `js/product-commercial-v1.js` alinea la sesión compartida y deja de afirmar gratuitamente «mañana / envío gratis» sin Logistics; se escapan sugerencias de domicilio que antes eran interpretadas como HTML.
+- `js/product-support-camping-v1.js`: el widget de reanudación del chat se mantiene **debajo de la imagen** tras mover la presentación arriba.
+- Documento técnico: `PRODUCT_V2_IMPLEMENTATION_RECEIPT.md`.
+- **Pendiente:** revisión visual/navegación de la nueva ficha en móvil; despliegue de Pages; futura foto real del proyector; cambio de ofertas y contenidos heredados solo mediante acuerdo separado. Shopify y Protocol Data continúan NOT ACTIVE.

@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const LOCATION_KEY = "indumentary.sessionLocation.v1";
+  const LOCATION_KEY = "web-de-navidad.sessionLocation.v1";
   const offerSection = document.querySelector(".offer-section");
   const detailSection = document.querySelector(".detail-section");
   const productPrice = document.querySelector("#productPrice");
@@ -37,9 +37,13 @@
     };
 
     try { sessionStorage.setItem(LOCATION_KEY, JSON.stringify(saved)); } catch {}
-    window.dispatchEvent(new CustomEvent("indumentary:location-change", { detail: saved }));
+    window.dispatchEvent(new CustomEvent("web-de-navidad:location-change", { detail: saved }));
     return saved;
   };
+
+  const escapeHtml = (value) => String(value || "").replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  }[char]));
 
   const toast = (message) => {
     const el = document.querySelector("#toast");
@@ -96,7 +100,7 @@
       <button id="commercialDeliveryRow" class="commercial-action-row commercial-action-row--delivery" type="button">
         <span class="commercial-action-row__icon" aria-hidden="true">${iconTruck}</span>
         <span class="commercial-action-row__content">
-          <strong>Envío gratis</strong>
+          <strong>Condiciones de envío</strong>
           <span id="commercialDeliveryEstimate">Calculá la entrega para tu zona</span>
         </span>
         <span class="commercial-row-chevron" aria-hidden="true">${iconChevron}</span>
@@ -337,9 +341,9 @@
     addressButton.setAttribute("aria-label", location ? `Cambiar dirección de envío. Actual: ${label}` : "Completar dirección de envío");
 
     if (location) {
-      deliveryEstimate.innerHTML = `Entrega estimada: mañana a <span class="is-green">${label}</span>`;
-      deliveryHeadline.textContent = `Llega gratis / mañana a ${label}`;
-      deliveryCaption.textContent = "Estimación visual. Protocol Data Logistics resolverá tiempos y tarifas según zona.";
+      deliveryEstimate.textContent = `Destino: ${label}. Fecha y tarifa aún no disponibles.`;
+      deliveryHeadline.textContent = "Entrega pendiente de confirmación";
+      deliveryCaption.textContent = "Protocol Data Logistics resolverá las fechas y tarifas cuando se integre.";
     } else {
       deliveryEstimate.textContent = "Calculá la entrega para tu zona";
       deliveryHeadline.textContent = "Calculá la entrega para tu zona";
@@ -408,8 +412,8 @@
     const alternatives = [`${value}, ${city}`, `${value}, Ciudad Autónoma de Buenos Aires`];
     const unique = [...new Set(alternatives)].slice(0, 3);
     addressSuggestions.innerHTML = unique.map((label, index) => `
-      <button class="delivery-suggestion" type="button" data-address-value="${label.replace(/"/g, "&quot;")}">
-        ${iconPin}<span>${index === 0 ? `<strong>${value}</strong>${label.slice(value.length)}` : label}</span>
+      <button class="delivery-suggestion" type="button" data-address-value="${escapeHtml(label)}">
+        ${iconPin}<span>${index === 0 ? `<strong>${escapeHtml(value)}</strong>${escapeHtml(label.slice(value.length))}` : escapeHtml(label)}</span>
       </button>
     `).join("");
     addressSuggestions.hidden = unique.length === 0;
@@ -446,7 +450,7 @@
   returnsRow.addEventListener("click", () => toast("Política de devoluciones: superficie preparada para contenido configurable."));
   securityRow.addEventListener("click", () => toast("Pagos seguros y privacidad: superficie preparada para políticas del comercio."));
   section.querySelector(".product-commercial-body__payment-link")?.addEventListener("click", () => toast("Medios de pago: superficie preparada para Shopify / proveedor de pagos."));
-  window.addEventListener("indumentary:location-change", syncAddress);
+  window.addEventListener("web-de-navidad:location-change", syncAddress);
 
   postalInput.addEventListener("input", renderPostalSuggestions);
   addressInput.addEventListener("input", renderAddressSuggestions);

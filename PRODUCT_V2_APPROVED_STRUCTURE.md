@@ -1,11 +1,13 @@
 # WEB DE NAVIDAD — PRODUCTO V2 / ESTRUCTURA VISUAL APROBADA
 
 **Fecha de aprobación:** 2026-11-04  
-**Estado:** **DISEÑO ESTRUCTURAL APROBADO / IMPLEMENTACIÓN PENDIENTE**  
+**Estado:** **DISEÑO APROBADO / CÓDIGO IMPLEMENTADO EN PREPARACIÓN / VALIDACIÓN VISUAL PENDIENTE**  
 **Repositorio:** `eliassmarr2-afk/web-de-navidad`  
 **Página:** `product.html`  
 **Marca temporal visible:** **SantaClaus Store**  
 **Documento anterior:** `PRODUCT_V2_INITIAL_STRUCTURE.md` (antecedente parcial; sustituido por este contrato para el diseño de la página)
+
+> **ENMIENDA DE ALCANCE FINAL — 2026-11-04 (prevalece sobre referencias a una reconstrucción posterior a la imagen):** El operador confirmó que únicamente deben modificarse **el encabezado, la franja de domicilio, el título/valoración/badge/entrega previos a la fotografía y el encuadre 1:1 de esta**. **Todas las secciones que actualmente están debajo de la imagen conservan su estructura existente**: miniaturas, detalles, variantes, ofertas, secciones comerciales, soporte, pestañas, descripción y barra de compra. La frase previa «Elegí tu oferta comienza después de la imagen» indica continuidad comercial conceptual, **no autoriza a mover ni eliminar los bloques intermedios del legado**. La adaptación navideña de esa zona será una etapa separada.
 
 ## 1. Autoridad y alcance
 
@@ -95,3 +97,7 @@ La página clonada actual usa todavía claves como `indumentary.sessionLocation.
 ## 7. Estado y siguiente movimiento
 
 **ESTRUCTURA APROBADA — AÚN NO IMPLEMENTADA.** El siguiente movimiento es una implementación controlada en `product.html`, CSS scoped y módulos de interacción/ubicación necesarios, con verificación de integridad. La imagen real del proyector se abordará en la fase visual posterior. No declarar la página publicada ni validada solo por este contrato.
+
+## 8. Recepción de implementación — 2026-11-04
+
+La implementación superior se registra en `PRODUCT_V2_IMPLEMENTATION_RECEIPT.md`. El HTML inferior original se conserva desde `#detailSection` en adelante; la sección de miniaturas y handle siguen presentes inmediatamente después de la imagen. La fotografía real del proyector no se ha incorporado: se utiliza temporalmente `assets/christmas-placeholder.svg` (cuadrado 1:1). La comprobación móvil y la certificación del despliegue siguen pendientes.

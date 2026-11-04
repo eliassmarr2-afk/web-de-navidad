@@ -357,7 +357,9 @@
     const session = getActiveConversation();
     if (!session) return;
 
-    const target = $(".product-intro") || $("main");
+    // Product V2 moves the intro ABOVE the image. Keep resume-chat widget
+    // in the untouched lower product sheet instead of inserting it over media.
+    const target = $(".thumbnail-rail") || $("main");
     if (!target) return;
 
     const wrapper = document.createElement("div");

@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#eee4d7" />
-  <meta name="indumentary-build" content="20261102-0208" />
-  <title>Campera Core · Indumentary</title>
-  <meta name="description" content="Detalle de producto de Indumentary, preparado para Shopify y Protocol Data." />
+  <meta name="theme-color" content="#B20B17" />
+  <meta name="web-de-navidad-product-build" content="20261104-v2-top" />
+  <title>Proyector de formas navideñas portable | Iluminación LED para hogar · SantaClaus Store</title>
+  <meta name="description" content="Proyector navideño de iluminación LED para hogar. Ficha comercial en desarrollo de SantaClaus Store." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -16,19 +16,52 @@
   <link rel="stylesheet" href="./css/product-combos-v1.css?v=20261031-2145" />
   <link rel="stylesheet" href="./css/product-offer-callout-v1.css?v=20261101-1832" />
   <link rel="stylesheet" href="./css/product-refinements-v1.css?v=20261102-0145" />
+  <link rel="stylesheet" href="./css/product-v2-top.css?v=20261104-01" />
 </head>
-<body class="product-body">
+<body class="product-body christmas-product-v2">
   <div class="product-shell">
-    <header class="product-hero">
-      <img id="productImage" class="product-hero__image" src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=1200&q=86" alt="Campera Core" />
-      <div class="product-hero__shade"></div>
-      <div class="product-topbar">
-        <a class="round-control" href="./index.html" aria-label="Volver"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></a>
-        <div class="product-topbar__actions">
-          <button id="shareButton" class="round-control" type="button" aria-label="Compartir"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.5-4.4M8.2 13.2l7.5 4.4"/></svg></button>
-          <button id="favoriteButton" class="round-control" type="button" aria-label="Favorito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button>
+    <header class="product-topbar christmas-product-header" aria-label="Encabezado SantaClaus Store">
+      <a class="round-control" href="./index.html" aria-label="Volver a la tienda"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></a>
+      <span class="christmas-product-header__brand">SantaClaus Store</span>
+      <div class="product-topbar__actions">
+        <button id="shareButton" class="round-control" type="button" aria-label="Compartir producto"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.5-4.4M8.2 13.2l7.5 4.4"/></svg></button>
+        <button id="favoriteButton" class="round-control" type="button" aria-label="Guardar como favorito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button>
+      </div>
+    </header>
+
+    <button id="productLocationBanner" class="christmas-product-location" type="button" aria-label="Colocá tu dirección de envío" aria-controls="locationBackdrop" aria-haspopup="dialog">
+      <svg class="christmas-product-location__house" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10H3Z"/><path d="M9 20v-7h6v7"/></svg>
+      <span id="productLocationLabel">Colocá tu dirección de envío</span>
+      <svg class="christmas-product-location__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+    </button>
+
+    <section class="product-intro christmas-product-intro" aria-labelledby="productTitle">
+      <div class="christmas-product-intro__heading">
+        <h1 id="productTitle">Proyector de formas navideñas portable | Iluminación LED para hogar</h1>
+        <div class="christmas-product-rating" role="img" aria-label="Valoración de demostración: 4,7 de 5">
+          <span class="christmas-product-rating__stars" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m12 2.3 3.05 6.2 6.85 1-4.95 4.83 1.17 6.82L12 17.93 5.88 21.15l1.17-6.82L2.1 9.5l6.85-1L12 2.3Z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m12 2.3 3.05 6.2 6.85 1-4.95 4.83 1.17 6.82L12 17.93 5.88 21.15l1.17-6.82L2.1 9.5l6.85-1L12 2.3Z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m12 2.3 3.05 6.2 6.85 1-4.95 4.83 1.17 6.82L12 17.93 5.88 21.15l1.17-6.82L2.1 9.5l6.85-1L12 2.3Z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m12 2.3 3.05 6.2 6.85 1-4.95 4.83 1.17 6.82L12 17.93 5.88 21.15l1.17-6.82L2.1 9.5l6.85-1L12 2.3Z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m12 2.3 3.05 6.2 6.85 1-4.95 4.83 1.17 6.82L12 17.93 5.88 21.15l1.17-6.82L2.1 9.5l6.85-1L12 2.3Z"/></svg></span>
+          <span id="productRating" class="christmas-product-rating__value">(4.7)</span>
         </div>
       </div>
+      <div class="christmas-product-intro__action-row">
+        <span class="christmas-product-best-badge">MÁS ELEGIDO</span>
+        <button id="productDeliveryAction" class="christmas-product-delivery-action" type="button" aria-controls="locationBackdrop" aria-haspopup="dialog">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <span>Ver cuándo llega</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+        </button>
+      </div>
+      <p id="productDeliveryMessage" class="christmas-product-delivery-message" role="status">Ingresá tu domicilio para consultar la entrega.</p>
+      <span id="productCategory" hidden>Luces</span>
+      <span id="productSubtitle" hidden>Iluminación LED para hogar</span>
+      <span id="deliveryShort" hidden>Entrega por consultar</span>
+      <span id="productBuyers" hidden></span>
+      <button id="reviewsButton" type="button" hidden>Ver reseñas</button>
+    </section>
+
+    <header class="product-hero christmas-product-media" aria-label="Imagen y galería del producto">
+      <img id="productImage" class="product-hero__image" src="./assets/christmas-placeholder.svg" alt="Imagen del proyector navideño pendiente de incorporar" />
+      <div class="product-hero__shade" aria-hidden="true"></div>
       <button class="gallery-pill" id="galleryButton" type="button" aria-label="Ver galería"><span class="gallery-pill__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 15-5-5L5 19"/></svg></span><span>Ver galería</span></button>
     </header>
 
@@ -36,19 +69,7 @@
       <div class="product-sheet__handle" aria-hidden="true"></div>
       <div id="thumbnailRail" class="thumbnail-rail" aria-label="Imágenes del producto"></div>
 
-      <section class="product-intro">
-        <span id="productCategory" class="product-category">Camperas</span>
-        <h1 id="productTitle">Campera Core</h1>
-        <p id="productSubtitle" class="product-subtitle">Liviana · urbana · entrenamiento</p>
-        <div class="product-facts">
-          <span class="fact-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.7 5.5 6 .9-4.4 4.2 1 6-5.3-2.8-5.3 2.8 1-6-4.4-4.2 6-.9L12 3Z"/></svg><span id="productRating">4.8 · 128 reseñas</span></span>
-          <span class="fact-item"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h11v11H3z"/><path d="M14 10h4l3 3v4h-7"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg><span id="deliveryShort">Entrega en 2 días</span></span>
-        </div>
-        <div class="social-row">
-          <div class="buyers-cluster"><span class="buyer-avatars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span id="productBuyers" class="buyers-count">420+</span></div>
-          <button class="reviews-link" type="button" id="reviewsButton">Ver reseñas</button>
-        </div>
-      </section>
+
 
       <section class="detail-section" id="detailSection"><h2>Sobre este producto</h2><p id="productShortDescription">Liviana · urbana · entrenamiento. Esta descripción es temporal para visualizar la landing antes de conectar Shopify.</p><button id="readMoreButton" class="inline-link" type="button">Leer más</button></section>
       <section class="variant-section"><h2>Elegí tu variante</h2><div id="productOptions" class="product-options"></div></section>
@@ -147,11 +168,12 @@
     <div id="toast" class="toast product-toast" role="status" aria-live="polite"></div>
   </div>
 
-  <script defer src="./js/product-runtime-v4.js?v=20261030-1812"></script>
-  <script defer src="./js/product-support-camping-v1.js?v=20261030-1812"></script>
+  <script defer src="./js/product-runtime-v4.js?v=20261104-v2"></script>
+  <script defer src="./js/product-support-camping-v1.js?v=20261104-v2"></script>
   <script defer src="./js/product-combos-controller-v2.js?v=20261102-0208"></script>
   <script defer src="./js/product-offer-callout-v1.js?v=20261101-1832"></script>
-  <script defer src="./js/product-commercial-v1.js?v=20261031-2145"></script>
+  <script defer src="./js/product-commercial-v1.js?v=20261104-v2"></script>
   <script defer src="./js/product-policies-v1.js?v=20261102-0145"></script>
+  <script type="module" src="./js/product-v2-top.js?v=20261104-01"></script>
 </body>
 </html>

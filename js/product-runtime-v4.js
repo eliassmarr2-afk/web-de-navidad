@@ -12,11 +12,11 @@
     },
     {
       id: "prod-002",
-      category: "Camperas",
-      title: "Campera Core",
-      subtitle: "Liviana · urbana · entrenamiento",
-      price: 74990,
-      image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=1200&q=86"
+      category: "Luces",
+      title: "Proyector de formas navideñas portable | Iluminación LED para hogar",
+      subtitle: "Iluminación LED para hogar",
+      price: 74990, // Precio MOCK heredado; no es una cotización comercial.
+      image: "./assets/christmas-placeholder.svg"
     },
     {
       id: "prod-003",
@@ -59,7 +59,7 @@
   const product = PRODUCTS.find((item) => item.id === requestedId) || PRODUCTS[1];
   const supportKey = `indumentary.productSupport.${product.id}`;
   const cartKey = "indumentary.cart.v3";
-  const locationKey = "indumentary.sessionLocation.v1";
+  const locationKey = "web-de-navidad.sessionLocation.v1";
 
   const money = (value) => new Intl.NumberFormat("es-AR", {
     style: "currency",
@@ -83,12 +83,15 @@
     img.src = src || fallbackSvg(product.title);
   };
 
-  const media = [
-    product.image,
-    `${product.image}&sat=-10`,
-    `${product.image}&con=8`,
-    `${product.image}&bri=6`
-  ].map((src, i) => ({ id: `media-${i + 1}`, src, alt: `${product.title} · vista ${i + 1}` }));
+  const mediaSources = product.image.startsWith("./")
+    ? [product.image] // Placeholder local único; las vistas reales vendrán del catálogo/provider.
+    : [
+        product.image,
+        `${product.image}&sat=-10`,
+        `${product.image}&con=8`,
+        `${product.image}&bri=6`
+      ];
+  const media = mediaSources.map((src, i) => ({ id: `media-${i + 1}`, src, alt: `${product.title} · vista ${i + 1}` }));
 
   const offers = [
     { id: "single", label: "1 unidad", subtitle: "Compra individual", price: product.price, compareAt: null, badge: "" },
@@ -172,15 +175,15 @@
   const selectedMedia = () => media.find((item) => item.id === state.mediaId) || media[0];
 
   function renderIdentity() {
-    document.title = `${product.title} · Indumentary`;
+    document.title = `${product.title} · SantaClaus Store`;
     if (els.category) els.category.textContent = product.category;
     if (els.title) els.title.textContent = product.title;
     if (els.subtitle) els.subtitle.textContent = product.subtitle;
-    if (els.rating) els.rating.textContent = "4.8 · 128 reseñas";
-    if (els.deliveryShort) els.deliveryShort.textContent = "Entrega en 2 días";
-    if (els.buyers) els.buyers.textContent = "420+";
+    if (els.rating) els.rating.textContent = "(4.7)";
+    if (els.deliveryShort) els.deliveryShort.textContent = "Entrega por consultar";
+    if (els.buyers) els.buyers.textContent = "";
     if (els.shortDescription) els.shortDescription.textContent = `${product.subtitle}. Esta descripción es temporal para visualizar la landing antes de conectar Shopify.`;
-    if (els.sellerName) els.sellerName.textContent = "IND.";
+    if (els.sellerName) els.sellerName.textContent = "SantaClaus Store";
     if (els.sellerSubtitle) els.sellerSubtitle.textContent = "Tienda oficial";
   }
 
@@ -189,7 +192,7 @@
     setImage(els.image, active.src, active.alt);
     if (!els.thumbnailRail) return;
     els.thumbnailRail.innerHTML = media.map((item) => `
-      <button class="thumbnail-button${item.id === active.id ? " is-active" : "}" type="button" data-media-id="${item.id}">
+      <button class="thumbnail-button${item.id === active.id ? " is-active" : ""}" type="button" data-media-id="${item.id}">
         <img src="${item.src}" alt="${item.alt}" loading="lazy" />
       </button>
     `).join("");
@@ -201,12 +204,12 @@
   function renderOptions() {
     if (!els.options) return;
     const colorButtons = media.map((item, index) => `
-      <button class="color-image-button${state.color === `opcion-${index + 1}` ? " is-selected" : "}" type="button" data-color="opcion-${index + 1}" data-media-id="${item.id}" aria-label="Opción ${index + 1}">
+      <button class="color-image-button${state.color === `opcion-${index + 1}` ? " is-selected" : ""}" type="button" data-color="opcion-${index + 1}" data-media-id="${item.id}" aria-label="Opción ${index + 1}">
         <img src="${item.src}" alt="Opción ${index + 1}" />
       </button>
     `).join("");
     const sizes = ["XS","S","M","L","XL","XXL"].map((size) => `
-      <button class="option-button${state.talle === size ? " is-selected" : "}" type="button" data-size="${size}">${size}</button>
+      <button class="option-button${state.talle === size ? " is-selected" : ""}" type="button" data-size="${size}">${size}</button>
     `).join("");
     els.options.innerHTML = `
       <div class="option-group"><div class="option-heading"><strong>Color</strong><span>${state.color.replace("opcion-", "Opción ")}</span></div><div class="option-values">${colorButtons}</div></div>
@@ -220,7 +223,7 @@
   function renderOffers() {
     if (!els.offers) return;
     els.offers.innerHTML = offers.map((offer) => `
-      <button class="offer-card${offer.id === state.offerId ? " is-selected" : "}" type="button" data-offer-id="${offer.id}">
+      <button class="offer-card${offer.id === state.offerId ? " is-selected" : ""}" type="button" data-offer-id="${offer.id}">
         ${offer.badge ? `<span class="offer-badge">${offer.badge}</span>` : ""}
         <span class="offer-card__copy"><strong>${offer.label}</strong><span>${offer.subtitle}</span></span>
         <span class="offer-card__price"><strong>${money(offer.price)}</strong>${offer.compareAt ? `<span>${money(offer.compareAt)}</span>` : ""}</span>
@@ -269,9 +272,12 @@
     if (!els.delivery) return;
     try {
       const saved = JSON.parse(sessionStorage.getItem(locationKey) || "null");
-      els.delivery.textContent = saved ? `Enviar a ${saved.visibleLabel} · CP ${saved.postalCode}` : "Llega entre mañana y el sábado";
+      const label = String(saved?.visibleLabel || saved?.address || "").trim();
+      els.delivery.textContent = label
+        ? `Destino: ${label}. Fecha de entrega aún no disponible.`
+        : "Ingresá una dirección para consultar las condiciones de entrega.";
     } catch {
-      els.delivery.textContent = "Llega entre mañana y el sábado";
+      els.delivery.textContent = "Ingresá una dirección para consultar las condiciones de entrega.";
     }
   }
 
@@ -372,6 +378,11 @@
 
   function openLocation() {
     if (!els.locationBackdrop) return;
+    try {
+      const saved = JSON.parse(sessionStorage.getItem(locationKey) || "null");
+      if (els.postalCode) els.postalCode.value = saved?.postalCode || "";
+      if (els.streetAddress) els.streetAddress.value = saved?.address || "";
+    } catch {}
     els.locationBackdrop.hidden = false;
     requestAnimationFrame(() => els.locationBackdrop.classList.add("is-open"));
     document.body.classList.add("no-scroll");
@@ -429,6 +440,7 @@
       if (els.supportMessageInput) els.supportMessageInput.value = "";
     });
     els.locationTrigger?.addEventListener("click", openLocation);
+    window.addEventListener("web-de-navidad:location-change", updateDelivery);
     els.locationClose?.addEventListener("click", closeLocation);
     els.locationBackdrop?.addEventListener("click", (event) => { if (event.target === els.locationBackdrop) closeLocation(); });
     els.locationForm?.addEventListener("submit", (event) => {
@@ -438,6 +450,7 @@
       if (!/^(?:\d{4}|[A-Z]\d{4}[A-Z]{3})$/.test(postalCode)) { toast("Ingresá un CP válido."); return; }
       const saved = { postalCode, address, visibleLabel: address || `CP ${postalCode}`, savedAt: new Date().toISOString() };
       try { sessionStorage.setItem(locationKey, JSON.stringify(saved)); } catch {}
+      window.dispatchEvent(new CustomEvent("web-de-navidad:location-change", { detail: saved }));
       updateDelivery(); closeLocation(); toast(`Ubicación guardada: ${saved.visibleLabel}.`);
     });
     els.addToCart?.addEventListener("click", addToCart);
@@ -446,7 +459,7 @@
       const expanded = els.detailSection?.classList.toggle("is-expanded");
       if (els.readMore) els.readMore.textContent = expanded ? "Ver menos" : "Leer más";
     });
-    els.reviews?.addEventListener("click", () => toast("4.8 ★ · 128 reseñas temporales."));
+    els.reviews?.addEventListener("click", () => toast("Valoración 4.7: dato visual de demostración."));
     els.phoneSupport?.addEventListener("click", () => toast("Canal telefónico reservado."));
     els.favorite?.addEventListener("click", () => { els.favorite.classList.toggle("is-favorite"); });
     els.share?.addEventListener("click", async () => {

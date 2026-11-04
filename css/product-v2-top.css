@@ -1,0 +1,299 @@
+/* WEB DE NAVIDAD — PRODUCT V2 TOP ONLY
+   Approved 2026-11-04. Scope: header, delivery band, product intro and
+   square edge-to-edge main media. Existing post-image modules remain intact. */
+.christmas-product-v2 {
+  background: #ffffff;
+  color: #222222;
+  font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+.christmas-product-v2 .product-shell {
+  background: #ffffff;
+}
+.christmas-product-v2 .product-topbar.christmas-product-header {
+  position: relative;
+  inset: auto;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 72px;
+  gap: 9px;
+  padding: calc(13px + env(safe-area-inset-top, 0px)) 14px 13px;
+  background: #B20B17;
+  color: #ffffff;
+}
+.christmas-product-v2 .christmas-product-header__brand {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: clamp(15px, 4.6vw, 19px);
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -.035em;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.christmas-product-v2 .christmas-product-header .round-control {
+  display: grid;
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  padding: 5px;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  color: #ffffff;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+.christmas-product-v2 .christmas-product-header .round-control svg {
+  width: 21px;
+  height: 21px;
+  stroke: currentColor;
+}
+.christmas-product-v2 .christmas-product-header .product-topbar__actions {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  gap: 4px;
+}
+.christmas-product-v2 .christmas-product-header :is(a, button):focus-visible,
+.christmas-product-v2 .christmas-product-location:focus-visible,
+.christmas-product-v2 .christmas-product-delivery-action:focus-visible {
+  outline: 3px solid #efcc78;
+  outline-offset: -3px;
+}
+.christmas-product-v2 .christmas-product-location {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 52px;
+  gap: 10px;
+  margin: 0;
+  padding: 12px 17px;
+  border: 0;
+  border-radius: 0;
+  background: #17643F;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: left;
+}
+.christmas-product-v2 .christmas-product-location svg {
+  display: block;
+  flex: 0 0 21px;
+  width: 21px;
+  height: 21px;
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.christmas-product-v2 .christmas-product-location__house {
+  width: 22px;
+  height: 22px;
+}
+.christmas-product-v2 .christmas-product-location__chevron {
+  margin-left: auto;
+  width: 18px !important;
+  height: 18px !important;
+}
+.christmas-product-v2 #productLocationLabel {
+  display: block;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.christmas-product-v2 .christmas-product-intro {
+  margin: 0;
+  padding: 20px 17px 19px;
+  border: 0;
+  border-radius: 0;
+  background: #ffffff;
+  color: #242424;
+}
+.christmas-product-v2 .christmas-product-intro__heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+}
+.christmas-product-v2 .christmas-product-intro h1 {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  font-size: clamp(23px, 5.7vw, 29px);
+  font-weight: 750;
+  line-height: 1.2;
+  letter-spacing: -.043em;
+  overflow-wrap: break-word;
+}
+.christmas-product-v2 .christmas-product-rating {
+  display: flex;
+  flex: 0 0 76px;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+  padding-top: 5px;
+  white-space: nowrap;
+  color: #16834D;
+}
+.christmas-product-v2 .christmas-product-rating__stars {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+.christmas-product-v2 .christmas-product-rating__stars svg {
+  display: block;
+  width: 13px;
+  height: 13px;
+  flex: 0 0 13px;
+  fill: currentColor !important;
+  stroke: none !important;
+}
+.christmas-product-v2 .christmas-product-rating__value {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+}
+.christmas-product-v2 .christmas-product-intro__action-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 9px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+.christmas-product-v2 .christmas-product-best-badge {
+  display: inline-flex;
+  min-height: 27px;
+  align-items: center;
+  padding: 5px 9px;
+  border-radius: 4px;
+  background: #14834A;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: .025em;
+}
+.christmas-product-v2 .christmas-product-delivery-action {
+  display: inline-flex;
+  min-height: 30px;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 7px;
+  border: 1px solid #d2e5d8;
+  border-radius: 4px;
+  background: #ffffff;
+  color: #17643F;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 750;
+  line-height: 1.25;
+}
+.christmas-product-v2 .christmas-product-delivery-action svg {
+  display: block;
+  flex: 0 0 15px;
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+}
+.christmas-product-v2 .christmas-product-delivery-message {
+  margin: 14px 0 0;
+  color: #4f5751;
+  font-size: 14px;
+  font-weight: 550;
+  line-height: 1.55;
+}
+.christmas-product-v2 .product-hero.christmas-product-media {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 1 / 1;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  overflow: hidden;
+  background: #ffffff;
+}
+.christmas-product-v2 .christmas-product-media .product-hero__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center;
+  border: 0;
+  border-radius: 0;
+}
+.christmas-product-v2 .christmas-product-media .product-hero__shade {
+  display: none;
+}
+.christmas-product-v2 .christmas-product-media .gallery-pill {
+  position: absolute;
+  top: auto;
+  right: 12px;
+  bottom: 12px;
+  left: auto;
+  min-height: 36px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transform: none;
+  font-size: 11px;
+}
+/* Only neutralize the inherited image/sheet overlap. The post-image HTML,
+   cards, offers, tabs and purchase bar remain in their original structure. */
+.christmas-product-v2 .product-sheet {
+  margin-top: 0;
+  border-radius: 0;
+}
+/* Badges throughout this page have the approved 4px radius; not pills. */
+.christmas-product-v2 :is(
+  .offer-badge,
+  .product-combo-card__best,
+  .product-commercial-body__discount,
+  .product-best-badge
+) {
+  border-radius: 4px !important;
+}
+@media (max-width: 360px) {
+  .christmas-product-v2 .product-topbar.christmas-product-header {
+    min-height: 62px;
+    padding-inline: 10px;
+    gap: 4px;
+  }
+  .christmas-product-v2 .christmas-product-header__brand {
+    font-size: 15px;
+  }
+  .christmas-product-v2 .christmas-product-header .round-control {
+    flex-basis: 30px;
+    width: 30px;
+    height: 30px;
+  }
+  .christmas-product-v2 .christmas-product-intro {
+    padding-inline: 14px;
+  }
+  .christmas-product-v2 .christmas-product-intro h1 {
+    font-size: 23px;
+  }
+  .christmas-product-v2 .christmas-product-rating {
+    flex-basis: 70px;
+  }
+  .christmas-product-v2 .christmas-product-rating__stars svg {
+    width: 12px;
+    height: 12px;
+    flex-basis: 12px;
+  }
+}
