@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="385" viewBox="0 0 1000 385" preserveAspectRatio="none">
+  <!-- Alpha mask: image remains rectangular; only the page container cuts ticket notches. -->
+  <defs>
+    <mask id="ticket-cut" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse">
+      <rect width="1000" height="385" fill="#fff"/>
+      <g fill="#000">
+        <circle cx="0" cy="0" r="28"/>
+        <circle cx="1000" cy="0" r="28"/>
+        <circle cx="1000" cy="385" r="28"/>
+        <circle cx="0" cy="385" r="28"/>
+        <circle cx="724" cy="0" r="14"/>
+        <circle cx="724" cy="385" r="14"/>
+      </g>
+    </mask>
+  </defs>
+  <rect width="1000" height="385" fill="#fff" mask="url(#ticket-cut)"/>
+</svg>

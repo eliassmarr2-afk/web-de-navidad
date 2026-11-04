@@ -65,4 +65,12 @@ Original `eliassmarr2-afk/indumentary` intacto. Documentos heredados que todaví
 - El operador seleccionó una imagen navideña panorámica con Papá Noel a la derecha, regalos a la izquierda y centro verde/rojo sin textos.
 - Fuente suministrada por el operador; se preparó copia WebP **1536×864** para subir a `assets/christmas-hero-banner.webp`.
 - `css/navidad-home.css` referencia el asset relativo `../assets/christmas-hero-banner.webp` con fondo degradado de reserva y centrado `cover`, ocultando las decoraciones del placeholder anterior.
-- La imagen **aún requiere subida del operador** a GitHub; no declarar el banner visualmente instalado hasta verificar ese archivo en la rama `main` y revisar su recorte en teléfono.
+- La imagen fue subida y verificada en el árbol de `main` (2026-11-04); el recorte visual definitivo en teléfono continúa sujeto a revisión.
+
+## Segundo banner — cupón navideño aprobado — 2026-11-04
+
+- El operador subió el arte rectangular completo `assets/christmas-coupon-banner.png`, confirmado SHA `9aa98256b76b3feefb935546a37210ed32c89c54`, 2022×778 px; el archivo inicialmente tenía un nombre automático de GitHub y fue asignado a una ruta canónica sin modificar el contenido binario.
+- `index.html` reemplaza el banner rojo previo y su sombrerito superpuesto por **una sola imagen completa**. No se insertan textos duplicados sobre ella.
+- `css/navidad-home.css` y `assets/coupon-ticket-mask.svg` crean la silueta de cupón (muescas, recorte y sombra) **en el contenedor**, no en la imagen; se conserva relación 2022:778.
+- Contrato específico: `CHRISTMAS_COUPON_BANNER_V1.md`, que prevalece sobre la anterior especificación del segundo banner con sombrerito en la Home V1.
+- **Pendiente de revisión visual** en móvil y desktop; la publicidad de 20% en el área izquierda y 25% en el talón verde es una inconsistencia textual solicitada expresamente y pendiente de aclaración comercial antes de producción. Ningún descuento/cupón fue integrado al motor comercial.

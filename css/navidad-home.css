@@ -71,13 +71,6 @@
 .christmas-home #productos { scroll-margin-top: 90px; }
 .christmas-home :is(#categorias, #packs) { scroll-margin-top: 92px; }
 
-.christmas-home .christmas-middle-banner { position: relative; width: 100%; aspect-ratio: 2.6 / 1; display: flex; align-items: center; margin-top: 34px; padding: clamp(18px, 4vw, 60px); border-radius: 22px; background: #8c0e19; color: #fff; overflow: hidden; isolation: isolate; }
-.christmas-home .christmas-middle-banner::before { content: ""; position: absolute; z-index: -1; top: -40%; right: -10%; width: 55%; aspect-ratio: 1; border: 2px solid #ffffff55; border-radius: 50%; box-shadow: 0 0 0 26px #ffffff14, 0 0 0 62px #ffffff0c; }
-.christmas-home .christmas-middle-banner__content { position: relative; z-index: 1; width: min(65%, 620px); }
-.christmas-home .christmas-middle-banner__content > span { color: #ffced0; font-size: clamp(8px, 1.1vw, 12px); font-weight: 800; letter-spacing: .12em; }
-.christmas-home .christmas-middle-banner h2 { margin: 8px 0 14px; font-size: clamp(19px, 3.5vw, 40px); line-height: 1.12; letter-spacing: -.045em; }
-.christmas-home .christmas-middle-banner a { display: inline-flex; gap: 8px; align-items: center; font-size: clamp(10px, 1.3vw, 14px); font-weight: 800; text-decoration: underline; text-underline-offset: 4px; }
-.christmas-home .christmas-middle-banner__star { position: absolute; right: 12%; top: 50%; transform: translateY(-50%); color: #fff; font-size: clamp(60px, 13vw, 160px); opacity: .55; }
 
 .christmas-home .site-footer { border-radius: 20px; background: var(--red-dark); }
 .christmas-home .site-footer__brand p { color: #ffe2e3; }
@@ -116,12 +109,6 @@
   .christmas-home .combo-card__content { padding: 12px; }
   .christmas-home .holiday-media svg { width: 48%; }
   .christmas-home .holiday-media span { font-size: 7px; }
-  .christmas-home .christmas-middle-banner { margin-top: 26px; border-radius: 18px; padding: 16px; }
-  .christmas-home .christmas-middle-banner__content { width: 78%; }
-  .christmas-home .christmas-middle-banner__content > span { font-size: 7px; letter-spacing: .08em; }
-  .christmas-home .christmas-middle-banner h2 { margin: 4px 0 8px; font-size: clamp(16px, 4.5vw, 22px); }
-  .christmas-home .christmas-middle-banner a { font-size: 9px; }
-  .christmas-home .christmas-middle-banner__star { right: 4%; font-size: 64px; }
   .christmas-home .product-card { border-radius: 16px; }
   .christmas-home .holiday-bottom-nav { position: fixed; display: grid; z-index: 90; right: 0; bottom: 0; left: 0; grid-template-columns: repeat(5, minmax(0, 1fr)); padding: 8px 3px calc(6px + env(safe-area-inset-bottom)); background: #fff; box-shadow: 0 -3px 16px rgba(97,0,10,.09); border-top: 1px solid #f2d9db; }
   .christmas-home .holiday-bottom-nav a { display: flex; align-items: center; justify-content: center; flex-direction: column; min-width: 0; min-height: 47px; gap: 4px; color: #8a5257; font-size: 9px; font-weight: 800; }
@@ -132,7 +119,6 @@
 @media (max-width: 370px) {
   .christmas-home .category-card { flex-basis: 86px; width: 86px; }
   .christmas-home .category-card__image { width: 78px; height: 78px; }
-  .christmas-home .christmas-middle-banner h2 { font-size: 15px; }
 }
 
 
@@ -404,24 +390,6 @@
 }
 
 /* The second banner precedes the packs and wears the decorative hat. */
-.christmas-home .christmas-middle-banner {
-  margin-top: 23px;
-  aspect-ratio: 2.6 / 1;
-  border-radius: 22px;
-  overflow: visible;
-}
-.christmas-home .christmas-middle-banner__hat {
-  position: absolute;
-  z-index: 5;
-  top: -22px;
-  left: -17px;
-  width: clamp(56px, 7vw, 77px);
-  height: auto;
-  transform: rotate(-13deg);
-  pointer-events: none;
-  user-select: none;
-}
-.christmas-home .christmas-middle-banner__content { z-index: 2; }
 .christmas-home .section--combos { margin-top: 30px; }
 
 @media (max-width: 720px) {
@@ -479,25 +447,6 @@
     margin-right: -12px;
     padding: 2px 0 7px;
   }
-  .christmas-home .christmas-middle-banner {
-    margin-top: 21px;
-    padding: 14px 15px 12px 24px;
-    border-radius: 19px;
-    aspect-ratio: 2.6 / 1;
-  }
-  .christmas-home .christmas-middle-banner__hat {
-    top: -18px;
-    left: -15px;
-    width: 60px;
-  }
-  .christmas-home .christmas-middle-banner__content { width: 83%; }
-  .christmas-home .christmas-middle-banner__content > span { font-size: 7px; }
-  .christmas-home .christmas-middle-banner h2 {
-    margin: 4px 0 7px;
-    font-size: clamp(16px, 4.45vw, 21px);
-    line-height: 1.12;
-  }
-  .christmas-home .christmas-middle-banner a { font-size: 9px; }
   .christmas-home .section--combos { margin-top: 25px; }
   .christmas-home .holiday-bottom-nav { padding-bottom: calc(6px + env(safe-area-inset-bottom)); }
 }
@@ -507,7 +456,6 @@
   .christmas-home .christmas-hero__actions :is(.icon-button, .cart-button) { flex-basis: 34px; width: 34px; height: 34px; }
   .christmas-home .christmas-hero .location-strip__copy strong { font-size: 9px; }
   .christmas-home .christmas-hero .search-field input { font-size: 11px; }
-  .christmas-home .christmas-middle-banner h2 { font-size: 14px; }
 }
 
 /* Mobile reference has categories and filters immediately under the hero,
@@ -572,3 +520,68 @@
   background-size: cover;
 }
 .christmas-home .christmas-hero__art { display: none; }
+
+/* CHRISTMAS COUPON V1 — rectangular artwork, shaped by the CSS container.
+   No dark mockup background, no duplicated text, no separate hat overlay.
+   The right green ticket stub and perforation are already in the image. */
+.christmas-home .christmas-middle-banner--ticket {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 2022 / 778;
+  height: auto;
+  margin-top: 23px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  overflow: visible;
+  isolation: isolate;
+  background: transparent;
+  filter: drop-shadow(0 10px 13px rgba(6, 50, 51, .22));
+}
+.christmas-home .christmas-middle-banner--ticket::before,
+.christmas-home .christmas-middle-banner--ticket::after {
+  content: none;
+  display: none;
+}
+.christmas-home .coupon-ticket__frame {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 2022 / 778;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 15px;
+  overflow: hidden;
+  background: #fff;
+  cursor: pointer;
+  -webkit-mask-image: url("../assets/coupon-ticket-mask.svg");
+  mask-image: url("../assets/coupon-ticket-mask.svg");
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-mode: alpha;
+  mask-mode: alpha;
+}
+.christmas-home .coupon-ticket__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 2022 / 778;
+  object-fit: contain;
+  object-position: center;
+  background: #fff;
+}
+@media (max-width: 720px) {
+  .christmas-home .christmas-middle-banner--ticket {
+    margin-top: 22px;
+    aspect-ratio: 2022 / 778;
+    filter: drop-shadow(0 6px 8px rgba(6, 50, 51, .18));
+  }
+  .christmas-home .coupon-ticket__frame { border-radius: 10px; }
+}

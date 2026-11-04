@@ -67,3 +67,7 @@ El commit de documentación cierra las **decisiones visuales**. **No declara que
 Se preparó la actualización de Home en `index.html`, `css/navidad-home.css`, `js/app.js` y `assets/christmas-santa-hat.svg`. La implementación reutiliza búsqueda, ubicación, carrito de demostración, filtros, categorías, tracking y soporte. No activa Shopify ni Protocol Data.
 
 **La entrega de código no equivale a certificación visual o funcional en navegador real.** Antes del cierre operativo se requiere revisar el sitio publicado en móvil y escritorio, incluyendo acceso al modal, scroll horizontal, navegación fija, teclado y tamaños de pantalla.
+
+## Revisión posterior — segundo banner de cupón — 2026-11-04
+
+El operador aprobó el **reemplazo íntegro del segundo banner con sombrerito** por un cupón navideño rectangular con dos secciones: blanca principal y talón verde con perforación interna. La imagen rectangular es un asset gráfico; la silueta troquelada, muescas y sombra son responsabilidad exclusiva del contenedor CSS. Ver `CHRISTMAS_COUPON_BANNER_V1.md`, autoridad posterior **solo para el segundo banner**. Mantener intactos el hero superior, categoría, filtros y el resto de las decisiones anteriores.
