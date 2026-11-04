@@ -1,3 +1,5 @@
+> **REVISIÓN VIGENTE (2026-11-04):** La composición móvil de este contrato fue modificada por [HOME_V1_APPROVED_VISUAL_REVISION.md](./HOME_V1_APPROVED_VISUAL_REVISION.md). En caso de conflicto prevalece la revisión posterior: hero full-bleed 25 % del alto, ubicación e íconos dentro del hero, buscador + mapa dentro del hero, una sola fila de categorías sin caja, banner medio con sombrero. La implementación de esta revisión está pendiente.
+
 # WEB DE NAVIDAD — CONTRATO VISUAL Y FUNCIONAL V1
 
 **Fecha:** 2026-11-03  
