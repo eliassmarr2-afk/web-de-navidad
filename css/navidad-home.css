@@ -525,3 +525,39 @@
     clip: rect(0, 0, 0, 0);
   }
 }
+
+/* HOME V1.1: mobile viewport-width alignment / remove right-side blank strip */
+@media (max-width: 720px) {
+  /* Some mobile embedded browsers reserve width on the normal-flow root
+     while fixed navigation still spans the layout viewport. Keep the Home
+     shell, its background and its full-bleed header on the same viewport. */
+  html.christmas-site {
+    overflow-x: clip;
+  }
+  body.christmas-home {
+    box-sizing: border-box;
+    width: 100vw;
+    max-width: 100vw;
+    margin: 0;
+    overflow-x: clip;
+  }
+  body.christmas-home > .site-shell {
+    box-sizing: border-box;
+    width: 100vw;
+    max-width: 100vw;
+    margin: 0;
+    padding: 0;
+  }
+  body.christmas-home .christmas-hero.christmas-hero--app {
+    box-sizing: border-box;
+    width: 100vw;
+    max-width: 100vw;
+  }
+  body.christmas-home .page-content {
+    box-sizing: border-box;
+    width: 100vw;
+    max-width: 100vw;
+    margin-right: 0;
+    margin-left: 0;
+  }
+}

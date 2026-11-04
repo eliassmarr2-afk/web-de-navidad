@@ -51,3 +51,11 @@ Original `eliassmarr2-afk/indumentary` intacto. Documentos heredados que todaví
 - `js/app.js`: render de una sola fila, control mapa delegado a modal de ubicación, sincronización del indicador del menú inferior; sin cambios en adapters.
 - `assets/christmas-santa-hat.svg`: adorno local para la esquina del segundo banner.
 - **Pendiente:** revisión visual real del operador en móvil y desktop; creatividad definitiva del hero y fotografías de catálogo; pruebas funcionales en navegador. Este registro no certifica producción.
+
+## Ajuste visual correctivo — 2026-11-04
+
+- Operador verificó visualmente la Home V1 en móvil y aprobó su composición general.
+- Incidencia detectada en captura: franja vacía a la derecha del hero y del contenido principal, mientras la barra inferior sí ocupa el ancho del viewport.
+- Corrección específica en `css/navidad-home.css` (solo Home móvil, hasta 720 px): alinear el ancho del body, el shell, el hero y `page-content` con `100vw`, y mantener el recorte horizontal dentro del viewport. Se incrementó el parámetro de versión de CSS en `index.html` para evitar caché de estilos obsoletos.
+- **Estado:** ajuste de código listo; comprobación visual del operador pendiente. No declarar el defecto cerrado hasta capturar una nueva pantalla.
+- **Siguiente fase tras validar:** diseño de las creatividades de los banners; todavía sin modificar fotografía final, catálogo, ni Protocol Data/Shopify.
