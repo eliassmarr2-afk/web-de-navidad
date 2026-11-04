@@ -16,7 +16,7 @@
       title: "Proyector de formas navideñas portable | Iluminación LED para hogar",
       subtitle: "Iluminación LED para hogar",
       price: 74990, // Precio MOCK heredado; no es una cotización comercial.
-      image: "./assets/christmas-placeholder.svg"
+      image: "./assets/proyector-navideno-producto.webp"
     },
     {
       id: "prod-003",
@@ -84,7 +84,7 @@
   };
 
   const mediaSources = product.image.startsWith("./")
-    ? [product.image] // Placeholder local único; las vistas reales vendrán del catálogo/provider.
+    ? [product.image] // Fuente local temporal de demostración; el proveedor futuro definirá media.
     : [
         product.image,
         `${product.image}&sat=-10`,

@@ -94,3 +94,10 @@ Original `eliassmarr2-afk/indumentary` intacto. Documentos heredados que todaví
 - `js/product-support-camping-v1.js`: el widget de reanudación del chat se mantiene **debajo de la imagen** tras mover la presentación arriba.
 - Documento técnico: `PRODUCT_V2_IMPLEMENTATION_RECEIPT.md`.
 - **Pendiente:** revisión visual/navegación de la nueva ficha en móvil; despliegue de Pages; futura foto real del proyector; cambio de ofertas y contenidos heredados solo mediante acuerdo separado. Shopify y Protocol Data continúan NOT ACTIVE.
+
+## Producto V2 — imagen principal del proyector — 2026-11-04
+
+- El operador subió `assets/proyector-navideno-producto.webp`; GitHub verificó el blob `51e1b138a5a0ff82beef41a351897f03fe1db030` (292326 bytes).
+- La fotografía cuadrada se vinculó al `#productImage` de `product.html` y a la fuente media de la ficha demo `prod-002` en `js/product-runtime-v4.js`. La miniatura usa esa fuente existente, sin cambios en el módulo inferior.
+- Se conserva composición **1:1 de borde a borde**, sin radios ni separaciones. Foto subida es un asset de demostración local; Shopify aún no está integrado.
+- **Pendiente:** confirmar visualmente la publicación de GitHub Pages en móvil. La actualización del código no equivale a validación final del navegador.

@@ -44,3 +44,10 @@
 - `product.html?id=nav-xxx` conserva fallback de la ficha heredada; la vinculación completa de cada artículo del catálogo navideño debe pactarse separadamente.
 - Nombres e identificadores `indumentary` aún existen en módulos legacy de soporte y carrito; requieren migración controlada posterior, no una sustitución global improvisada.
 - La ficha del proyector usa imagen placeholder hasta recibir la fotografía final.
+
+## Imagen real seleccionada para maqueta — 2026-11-04
+
+- Imagen entregada por el operador, subida a `assets/proyector-navideno-producto.webp` (Git blob `51e1b138a5a0ff82beef41a351897f03fe1db030`, 292326 bytes).
+- Reemplaza el SVG provisional tanto en el elemento de imagen inicial de `product.html` como en la media de la ficha demo `prod-002` que renderiza `js/product-runtime-v4.js`.
+- No modifica la estructura ni los flujos de los módulos inferiores. Se mantiene la relación cuadrada 1:1.
+- Pendiente: comprobar carga efectiva y encuadre en GitHub Pages. La fotografía es un asset de maqueta, no una media sincronizada desde Shopify.
