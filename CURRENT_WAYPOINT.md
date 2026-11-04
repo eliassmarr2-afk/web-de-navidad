@@ -74,3 +74,12 @@ Original `eliassmarr2-afk/indumentary` intacto. Documentos heredados que todaví
 - `css/navidad-home.css` y `assets/coupon-ticket-mask.svg` crean la silueta de cupón (muescas, recorte y sombra) **en el contenedor**, no en la imagen; se conserva relación 2022:778.
 - Contrato específico: `CHRISTMAS_COUPON_BANNER_V1.md`, que prevalece sobre la anterior especificación del segundo banner con sombrerito en la Home V1.
 - **Pendiente de revisión visual** en móvil y desktop; la publicidad de 20% en el área izquierda y 25% en el talón verde es una inconsistencia textual solicitada expresamente y pendiente de aclaración comercial antes de producción. Ningún descuento/cupón fue integrado al motor comercial.
+
+## Producto V2 — estructura aprobada — 2026-11-04
+
+- **Autoridad vigente:** `PRODUCT_V2_APPROVED_STRUCTURE.md`. Sustituye el borrador `PRODUCT_V2_INITIAL_STRUCTURE.md` solo para el diseño de la nueva página de producto.
+- **DISEÑO APROBADO / CÓDIGO FUNCIONAL PENDIENTE:** encabezado rojo `SantaClaus Store`; franja verde de domicilio borde a borde con mismo flujo Home; título del proyector sobre blanco; valoración `(4.7)` con cinco estrellas verdes rellenas pequeñas a la derecha; badge `MÁS ELEGIDO` debajo del título; mensaje contextual de entrega; foto principal 1:1 borde a borde; ofertas a continuación.
+- **Enmienda final:** **todos los contenedores de badge de la Product V2 tienen `border-radius: 4px`**. No redondearlos como pills.
+- Tipografía **Manrope**, verificada en el repositorio Camping `eliassmarr2-afk/ecommerce-v2`.
+- **Guardas:** corregir el uso heredado de `indumentary.sessionLocation.v1` en la página anterior y reutilizar `web-de-navidad.sessionLocation.v1`; no inventar fechas, precios ni reputación verificada; Shopify/Protocol Data no activos. Imagen real se aborda después de cerrar la implementación estructural.
+- No se ha modificado `product.html` en esta aceptación; sigue siendo el build heredado de Indumentary hasta el movimiento técnico autorizado.
