@@ -59,3 +59,10 @@ Original `eliassmarr2-afk/indumentary` intacto. Documentos heredados que todaví
 - Corrección específica en `css/navidad-home.css` (solo Home móvil, hasta 720 px): alinear el ancho del body, el shell, el hero y `page-content` con `100vw`, y mantener el recorte horizontal dentro del viewport. Se incrementó el parámetro de versión de CSS en `index.html` para evitar caché de estilos obsoletos.
 - **Estado:** ajuste de código listo; comprobación visual del operador pendiente. No declarar el defecto cerrado hasta capturar una nueva pantalla.
 - **Siguiente fase tras validar:** diseño de las creatividades de los banners; todavía sin modificar fotografía final, catálogo, ni Protocol Data/Shopify.
+
+## Banner superior aprobado — 2026-11-04
+
+- El operador seleccionó una imagen navideña panorámica con Papá Noel a la derecha, regalos a la izquierda y centro verde/rojo sin textos.
+- Fuente suministrada por el operador; se preparó copia WebP **1536×864** para subir a `assets/christmas-hero-banner.webp`.
+- `css/navidad-home.css` referencia el asset relativo `../assets/christmas-hero-banner.webp` con fondo degradado de reserva y centrado `cover`, ocultando las decoraciones del placeholder anterior.
+- La imagen **aún requiere subida del operador** a GitHub; no declarar el banner visualmente instalado hasta verificar ese archivo en la rama `main` y revisar su recorte en teléfono.

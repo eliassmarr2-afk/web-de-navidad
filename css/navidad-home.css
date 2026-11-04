@@ -561,3 +561,14 @@
     margin-left: 0;
   }
 }
+
+/* HOME HERO ART — approved 2026-11-04, file to be uploaded by operator */
+.christmas-home .christmas-hero.christmas-hero--app {
+  background-image:
+    url("../assets/christmas-hero-banner.webp"),
+    linear-gradient(165deg, #08684c 0%, #168060 50%, #b00b19 100%);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.christmas-home .christmas-hero__art { display: none; }
