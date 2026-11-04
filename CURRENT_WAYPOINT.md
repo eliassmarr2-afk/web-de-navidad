@@ -132,3 +132,12 @@ Original `eliassmarr2-afk/indumentary` intacto. Documentos heredados que todaví
 - `css/product-v2-sticky.css` y `js/product-v2-sticky.js`: CSS responsive, visibilidad al 30% y estados de envío/cuotas. Sin Protocol Data/Shopify activos: se muestran «Calculá el envío con tu CP», «Ingresá tu CP» o «Entrega por confirmar», «Cuotas por confirmar». **No anunciar gratis/mañana** sin Logistics; los futuros eventos locales de adapter se detallan en el contrato.
 - «Iniciar compra» muestra aviso de demo, no genera orden ni simula checkout. Precio actual todavía es mock y no representa un total real con logística.
 - **Importante:** el resto de la estructura inferior, las ofertas, las variantes y la fotografía 1:1 se mantienen sin cambios. Revisión visual y publicación de Pages pendientes.
+
+## Producto V2 — galería reservada y contorno azul del combo — 2026-11-04
+
+- Cambio **limitado** a la superficie visual de Producto: eliminar el hueco visible de galería entre la foto 1:1 y el combo seleccionable. Mientras no se apruebe una galería, se ocultan visualmente el separador `.product-sheet__handle`, la tira `#thumbnailRail` y el botón «Ver galería». Los nodos permanecen para compatibilidad y habilitación futura; no se reescribe el runtime de fotografías.
+- La oferta seleccionable `.product-combo-card` pasa a tener **radio de 4px siempre**, también en bordes izquierdo de imagen y derecho de contenido, sin cambiar su composición.
+- El estado `.is-selected` recupera **contorno azul #2479FF de 3px** y marcador circular azul, desplazando únicamente la recolorización roja posterior. Los eventos existentes y la fuente de precio del sticky permanecen intactos.
+- `css/product-v2-combo-refinement.css`: hoja scoped cargada **después** de `css/product-v2-sticky.css` para resolver la precedencia sin tocar colores de otros componentes.
+- La reanudación contextual de Soporte se mantiene visible **debajo del combo** mediante el orden flex del widget, aunque la tira de miniaturas permanezca oculta.
+- **Sin cambios** al resto del sitio, al HTML estructural inferior, al sticky, a la imagen principal 1:1, a las ofertas/variantes, ni a Shopify/Protocol Data. Pendiente inspección en móvil tras desplegar GitHub Pages.

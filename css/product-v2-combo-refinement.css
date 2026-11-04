@@ -1,0 +1,47 @@
+/* SANTA CLAUSULA — Product V2 gallery-free single combo refinement
+   Authorized 2026-11-04. UI scope only: no gallery until approved.
+   Keep DOM/gallery hooks intact for future reactivation. */
+.christmas-product-v2 .christmas-product-media .gallery-pill,
+.christmas-product-v2 .product-sheet > .product-sheet__handle,
+.christmas-product-v2 .product-sheet > .thumbnail-rail {
+  display: none !important;
+}
+/* Image goes straight to the selectable combo, with only the minimal
+   badge clearance retained so the "Mejor oferta" chip is not clipped. */
+.christmas-product-v2 .product-sheet {
+  padding-top: 0;
+}
+.christmas-product-v2 .product-sheet > .offer-section {
+  margin-top: 0;
+}
+.christmas-product-v2 .product-sheet > .offer-section > .offer-list {
+  padding-top: 16px;
+}
+/* The contextual support-resume widget may be inserted dynamically after
+   the hidden gallery rail. Keep it BELOW the combo in the flex order. */
+.christmas-product-v2 .product-sheet > .conversation-resume-widget {
+  order: 4;
+}
+/* Combo surface has exactly 4 px corners, selected or not. */
+.christmas-product-v2 .offer-list .product-combo-card {
+  border-radius: 4px;
+}
+.christmas-product-v2 .offer-list .product-combo-card__media {
+  border-radius: 4px 0 0 4px;
+}
+.christmas-product-v2 .offer-list .product-combo-card__content {
+  border-radius: 0 4px 4px 0;
+}
+/* Restore the approved original blue outline and blue selection dot.
+   Overrides the later Christmas red recoloring of selected combos. */
+.christmas-product-v2 .offer-list .product-combo-card.is-selected {
+  box-shadow: 0 0 0 3px #2479FF;
+}
+.christmas-product-v2 .offer-list .product-combo-card.is-selected::after {
+  border-color: #2479FF;
+  background: #2479FF;
+  box-shadow:
+    inset 0 0 0 5px #FFFFFF,
+    0 0 0 3px rgba(36, 121, 255, .10),
+    0 2px 6px rgba(36, 121, 255, .20);
+}
