@@ -297,3 +297,134 @@
     flex-basis: 12px;
   }
 }
+
+
+/* PRODUCT V2 PALETTE REFINEMENT 2026-11-04
+   Artwork reference palette:
+   primary-red #A60B08 | burgundy #5E0001 | evergreen #1D2E19
+   warm-beige #CFCABF | taupe #76584C.
+   Only scoped color refinements below the image; no layout changes. */
+.christmas-product-v2 {
+  --ink: #1D2E19;
+  --green: #1D2E19;
+  --surface-pastel: #F6F2ED;
+  --surface-pastel-border: rgba(118, 88, 76, .18);
+  background: #CFCABF;
+  color: #1D2E19;
+}
+.christmas-product-v2 .product-topbar.christmas-product-header {
+  background: #CFCABF;
+  color: #1D2E19;
+}
+.christmas-product-v2 .christmas-product-header .round-control {
+  color: #1D2E19;
+}
+.christmas-product-v2 .christmas-product-location {
+  background: #1D2E19;
+  color: #FFFFFF;
+}
+.christmas-product-v2 .christmas-product-intro {
+  background: #FFFFFF;
+}
+.christmas-product-v2 .christmas-product-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 13px;
+  color: #777773;
+  font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.25;
+}
+.christmas-product-v2 .christmas-product-meta__divider {
+  color: #ACABA7;
+  font-weight: 400;
+}
+.christmas-product-v2 .christmas-product-intro h1 {
+  color: #1D2E19;
+  font-size: clamp(21px, 5.6vw, 27px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -.035em;
+}
+.christmas-product-v2 .christmas-product-rating {
+  color: #1D2E19;
+}
+.christmas-product-v2 .christmas-product-best-badge {
+  background: #1D2E19;
+  color: #FFFFFF;
+  border-radius: 4px;
+}
+.christmas-product-v2 .christmas-product-delivery-action {
+  border-color: #CFCABF;
+  color: #5E0001;
+}
+.christmas-product-v2 .christmas-product-delivery-message {
+  color: #76584C;
+}
+.christmas-product-v2 .product-sheet {
+  background: #FFFFFF;
+}
+.christmas-product-v2 .product-sheet :is(
+  .detail-section,
+  .variant-section,
+  .offer-section,
+  .seller-section,
+  .delivery-section,
+  .tabs-section,
+  .features-section,
+  .description-section
+) > h2 {
+  color: #1D2E19;
+}
+.christmas-product-v2 .purchase-bar {
+  border-top: 1px solid #CFCABF;
+  background: #F9F7F3;
+}
+.christmas-product-v2 .purchase-price strong {
+  color: #5E0001;
+}
+.christmas-product-v2 .buy-button {
+  background: #A60B08;
+  color: #FFFFFF;
+}
+.christmas-product-v2 .product-combo-card.is-selected {
+  box-shadow: 0 0 0 3px #A60B08;
+}
+.christmas-product-v2 .product-combo-card.is-selected::after {
+  border-color: #A60B08;
+  background: #A60B08;
+}
+.christmas-product-v2 .product-combo-card__best,
+.christmas-product-v2 .offer-badge {
+  background: #5E0001;
+  color: #FFFFFF;
+  border-radius: 4px !important;
+}
+.christmas-product-v2 .product-commercial-body__discount {
+  background: #A60B08;
+  border-radius: 4px !important;
+}
+.christmas-product-v2 .thumbnail-button.is-active,
+.christmas-product-v2 .color-image-button.is-selected {
+  border-color: #A60B08;
+}
+.christmas-product-v2 .tab-button[aria-selected="true"],
+.christmas-product-v2 .option-button.is-selected {
+  background: #1D2E19;
+  color: #FFFFFF;
+}
+.christmas-product-v2 .seller-row {
+  background: #F6F2ED;
+}
+/* Keep mobile title readable without crowding the fixed right-side rating. */
+@media (max-width: 360px) {
+  .christmas-product-v2 .christmas-product-intro h1 {
+    font-size: 20px;
+  }
+  .christmas-product-v2 .christmas-product-meta {
+    font-size: 12px;
+  }
+}

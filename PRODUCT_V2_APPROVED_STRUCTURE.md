@@ -9,6 +9,8 @@
 
 > **ENMIENDA DE ALCANCE FINAL — 2026-11-04 (prevalece sobre referencias a una reconstrucción posterior a la imagen):** El operador confirmó que únicamente deben modificarse **el encabezado, la franja de domicilio, el título/valoración/badge/entrega previos a la fotografía y el encuadre 1:1 de esta**. **Todas las secciones que actualmente están debajo de la imagen conservan su estructura existente**: miniaturas, detalles, variantes, ofertas, secciones comerciales, soporte, pestañas, descripción y barra de compra. La frase previa «Elegí tu oferta comienza después de la imagen» indica continuidad comercial conceptual, **no autoriza a mover ni eliminar los bloques intermedios del legado**. La adaptación navideña de esa zona será una etapa separada.
 
+> **ENMIENDA POSTERIOR DE TÍTULO Y COLORES (2026-11-04):** La autoridad vigente para el título abreviado, la línea gris «Nuevo | +600 vendidos», la correspondencia tipográfica Manrope/Camping y la nueva paleta es [PRODUCT_V2_PALETTE_REVISION.md](./PRODUCT_V2_PALETTE_REVISION.md). Sustituye las disposiciones visuales incompatibles del presente contrato, conservando **sin cambios** el orden, el bloque inferior, el radio de badges de 4px y el marco de imagen 1:1. Los números comerciales son demostrativos, no verificados.
+
 ## 1. Autoridad y alcance
 
 Este contrato reproduce las decisiones del operador sobre la nueva Product Page de Web de Navidad, tomando como **referencia de composición** la captura móvil que compartió el 4 de noviembre de 2026 (ficha de producto de Shopify con franja de navegación, título, rating, badge, información de llegada e imagen grande).

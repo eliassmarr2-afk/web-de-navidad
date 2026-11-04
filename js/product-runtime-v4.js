@@ -13,7 +13,7 @@
     {
       id: "prod-002",
       category: "Luces",
-      title: "Proyector de formas navideñas portable | Iluminación LED para hogar",
+      title: "Proyector de formas navideñas portable",
       subtitle: "Iluminación LED para hogar",
       price: 74990, // Precio MOCK heredado; no es una cotización comercial.
       image: "./assets/proyector-navideno-producto.webp"

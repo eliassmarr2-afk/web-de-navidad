@@ -101,3 +101,14 @@ Original `eliassmarr2-afk/indumentary` intacto. Documentos heredados que todaví
 - La fotografía cuadrada se vinculó al `#productImage` de `product.html` y a la fuente media de la ficha demo `prod-002` en `js/product-runtime-v4.js`. La miniatura usa esa fuente existente, sin cambios en el módulo inferior.
 - Se conserva composición **1:1 de borde a borde**, sin radios ni separaciones. Foto subida es un asset de demostración local; Shopify aún no está integrado.
 - **Pendiente:** confirmar visualmente la publicación de GitHub Pages en móvil. La actualización del código no equivale a validación final del navegador.
+
+## Producto V2 — nueva paleta beige, título y metadatos — 2026-11-04
+
+- Fuente: imagen de paleta compartida por el operador. Valores exactos: `#A60B08` rojo, `#5E0001` bordó, `#1D2E19` verde, `#CFCABF` beige, `#76584C` marrón.
+- **Encabezado** beige navideño con íconos/brand verde oscuro; **franja de domicilio** verde oscuro con texto blanco. Introducción y fondo de la imagen permanecen blancos.
+- Sobre el título aparece en gris **«Nuevo | +600 vendidos»**, dato ilustrativo no verificado. Título se acorta a **«Proyector de formas navideñas portable»** (sin «| Iluminación LED para hogar»).
+- Se verificó **Manrope** en `eliassmarr2-afk/ecommerce-v2` (Camping); el nuevo título adopta peso **600** y menor tamaño (21–27px) para acercarse a su jerarquía tipográfica.
+- Badge `MÁS ELEGIDO` conserva verde oscuro y radio **4px**. La puntuación `4.7` y ventas son demo hasta obtener evidencia real.
+- Se redistribuyen acentos rojos/bordó en botones comerciales, badges secundarios y selección; **ningún componente bajo la imagen cambia de orden ni funcionalidad**.
+- Autoridad de cambio: `PRODUCT_V2_PALETTE_REVISION.md`, que prevalece sobre colores/título del contrato anterior.
+- **Pendiente:** publicación GitHub Pages, revisión visual y sustitución de datos comerciales simulados antes de lanzamiento real.
