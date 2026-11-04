@@ -141,3 +141,13 @@ Original `eliassmarr2-afk/indumentary` intacto. Documentos heredados que todaví
 - `css/product-v2-combo-refinement.css`: hoja scoped cargada **después** de `css/product-v2-sticky.css` para resolver la precedencia sin tocar colores de otros componentes.
 - La reanudación contextual de Soporte se mantiene visible **debajo del combo** mediante el orden flex del widget, aunque la tira de miniaturas permanezca oculta.
 - **Sin cambios** al resto del sitio, al HTML estructural inferior, al sticky, a la imagen principal 1:1, a las ofertas/variantes, ni a Shopify/Protocol Data. Pendiente inspección en móvil tras desplegar GitHub Pages.
+
+## Recordatorio de Compra V1 — modal aprobado e integrado — 2026-11-04
+
+- El operador aprobó el módulo **«Programá un recordatorio para comprar este producto»** inmediatamente debajo de los tres ítems del cuerpo comercial. Fila blanca, reloj negro y chevron, con subtexto gris.
+- **Contrato:** `PRODUCT_V2_PURCHASE_REMINDERS_APPROVED.md`, autoridad para UI y arquitectura futura del Reminder Service.
+- **Archivos nuevos:** `js/product-purchase-reminder-v1.js` y `css/product-purchase-reminder-v1.css`; se cargan con `defer` después del cuerpo comercial y con CSS posterior a las hojas de producto. No cambia el HTML estructural de la foto, el combo, las ofertas ni el sticky.
+- **Modal:** «Recordame comprar», email, fecha y hora de Argentina (GMT−3), privacidad sin marketing y botón verde, radios 4px. Validación de datos y navegación con teclado. Se admiten fechas futuras hasta 25 de diciembre de cada temporada.
+- El frontend reserva `window.SantaClausulaReminderAdapter.create`; respuestas de éxito solo si provienen de un adaptador real. **No existe todavía backend de recordatorios ni emisor de correo integrado.**
+- **Fase actual UI PREVIEW:** al abrir muestra aviso de servicio no habilitado. Sin backend, no transmite, guarda ni programa correos y no declara éxito. No activar accidentalmente sobre Supabase `protocol-data-v2`, único proyecto conectado: requiere servicio aislado y autorización.
+- **Próximo movimiento operativo:** configurar servicio de backend + verificación de correo + scheduler + proveedor de email + cancelación y seguridad; pruebas end-to-end. Inspección visual móvil de esta UI pendiente del despliegue de Pages.

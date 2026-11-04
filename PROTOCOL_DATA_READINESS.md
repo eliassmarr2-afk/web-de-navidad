@@ -214,3 +214,21 @@ Este documento registra readiness del sitio; no congela endpoints, payloads ni v
 - Cuotas dependen de Commerce/checkout (no Logistics); adapter local reservado `santa-clausula:payment-terms`.
 - La cifra `#productPrice` se deriva de la oferta seleccionada en Commerce mock. **No es total de checkout autorizado** hasta agregar cotización logística y precio definitivo por la integración correcta.
 - El botón `#startCheckout` permanece no transaccional; futuras activaciones requieren revisión del contrato de Shopify/checkout.
+
+---
+
+## 12. PURCHASE REMINDERS — CAPACIDAD PROPIA DEL STOREFRONT
+
+**Propietario:** nueva capacidad de Reminder Service propia del storefront; **NO es Logistics, Support, Experiencias ni Orders**.
+
+```text
+READINESS = RESERVED / UI IMPLEMENTED
+ACTIVATION = NOT ACTIVE
+```
+
+- UX contractual aprobada en `PRODUCT_V2_PURCHASE_REMINDERS_APPROVED.md`. Un correo puntual tras consentimiento y verificación del titular. No es marketing consent.
+- La UI inserta una fila después de los tres ítems comerciales y un modal inferior con fecha/hora `America/Argentina/Buenos_Aires`.
+- Seam local `window.SantaClausulaReminderAdapter.create` **sin implementación**. Requiere backend de tienda independiente, contra-abuso, email verification, protección de PII, scheduler, proveedor de correo y cancelación.
+- El único proyecto Supabase conectado ahora es `protocol-data-v2`; no se utiliza para esta nueva función sin autorización explícita.
+- Al no estar activo, la UI informa el estado de preparación y jamás afirma una programación real.
+- Event Layer y futura atribución de compra deben preservar privacidad, no enviar emails crudos a UTM, no atribuir venta sin Orders/Commerce confirmado.

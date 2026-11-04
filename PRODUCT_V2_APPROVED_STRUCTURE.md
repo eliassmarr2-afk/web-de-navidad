@@ -16,6 +16,8 @@
 
 > **ENMIENDA DE STICKY (2026-11-04):** El operador aprobó una nueva barra de compra. Ver [PRODUCT_V2_STICKY_APPROVED.md](./PRODUCT_V2_STICKY_APPROVED.md), autoridad específica posterior para el sticky de `product.html`. Sustituye la barra fija anterior, no modifica los bloques inferiores ni el marco visual del producto. Los estados Logistics y checkout aún no están activos.
 
+> **NUEVA CAPACIDAD DE PRODUCTO (2026-11-04):** El operador aprobó el acceso **«Programá un recordatorio para comprar este producto»**, colocado debajo de los tres ítems del cuerpo comercial. Autoridad específica [PRODUCT_V2_PURCHASE_REMINDERS_APPROVED.md](./PRODUCT_V2_PURCHASE_REMINDERS_APPROVED.md). Esta fila y su modal **no modifican** arquitectura ni orden comercial, foto, combo o sticky. UI integrada; Backend/email/scheduler **NO ACTIVOS**.
+
 ## 1. Autoridad y alcance
 
 Este contrato reproduce las decisiones del operador sobre la nueva Product Page de Web de Navidad, tomando como **referencia de composición** la captura móvil que compartió el 4 de noviembre de 2026 (ficha de producto de Shopify con franja de navegación, título, rating, badge, información de llegada e imagen grande).
