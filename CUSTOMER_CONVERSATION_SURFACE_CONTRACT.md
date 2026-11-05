@@ -1,5 +1,7 @@
 # CUSTOMER CONVERSATION SURFACE CONTRACT — INDUMENTARY
 
+> **ENMIENDA DE TRES ORÍGENES / 2026-11-05:** [SANTA_CLAUSULA_CONVERSACIONES_TRES_ORIGENES.md](./SANTA_CLAUSULA_CONVERSACIONES_TRES_ORIGENES.md) es la autoridad local posterior aprobada para A (Soporte general con favicon), B (Soporte con Order verificado) y C (chat contextual desde producto), todos bajo un único Support/Conversations. No confundir origen de entrada con asociación canónica a Order. Public Start es anónimo **pero emite una capability**; la UI no exige mostrarla al cliente en el inicio. «Chats por productos» puede usar Queue/Segment, pero la clasificación automática aún necesita un workflow confiable. **Sin código UI ni integración live autorizados todavía.**
+
 **Date:** 2026-11-03  
 **Status:** SEMANTIC CONTRACT AGREED / SITE-LEVEL DESIGN CANDIDATE / NOT IMPLEMENTED  
 **Future canonical owner:** Protocol Data V2 · Support / Conversations  

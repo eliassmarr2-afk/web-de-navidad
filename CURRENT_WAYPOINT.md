@@ -167,3 +167,13 @@ Original `eliassmarr2-afk/indumentary` intacto. Documentos heredados que todaví
 - Riesgo actual: `js/product-support-camping-v1.js` usa almacenamiento y namespace `indumentary`; `js/product-runtime-v4.js` contiene otra lógica de soporte demo. No duplicar inicializaciones ni confundir mocks con casos backend.
 - Distinción Support Case sin asociación Order vs caso con asociación canónica: no inferir comprador por email ni por Shopify; la proyección pública actual **no expone** Order association ni contexto buyer. `SUPPORT 014` es candidato congelado, sin evidencia de ejecución live.
 - La **imagen 4:5** está implementada (commit previo); para chat esta fase es diseño y contrato **PENDIENTE DE APROBACIÓN**, sin nuevas páginas o enlaces customer live.
+
+## Conversaciones — tres orígenes, un único backend — 2026-11-05
+
+- **Nueva autoridad local aprobada:** `SANTA_CLAUSULA_CONVERSACIONES_TRES_ORIGENES.md`. Supera el modelo anterior de «dos modos» al distinguir **entrada** (Soporte general vs landing product) de **asociación** (sin/ con Order confirmada).
+- A: soporte general con nombre/correo/motivo y cabecera «Soporte | SANTA CLAUSULA» + favicon; ninguna fotografía de producto.
+- B: Support con contexto de compra **únicamente** después de identidad/Order verificados y proyección customer-safe autorizada; no detectar como comprador por coincidencia de correo.
+- C: acceso vía botón existente de Producto, formulario sencillo nombre/correo, cabecera de tienda y tarjeta de producto/offer como contexto, sin suponer compra.
+- **Todas** las entradas llegan al dominio Support / Conversations. El Public Start no requiere token previo del usuario, pero **emite capability** para leer/responder después; no hay canal de continuación persistente sin autorización.
+- La base canónica dispone de Queues y Segments Store-scoped: `Chats por productos` es una clasificación/cola futura posible, **no** un módulo de mensajes independiente. Public Start hoy crea `support_queue_id=NULL`, por lo que asignación automática exige un flujo confiable, no un selector público arbitrary.
+- El operador **no autorizó aún rediseño ni reemplazo de JS del chat**. Todo nuevo desarrollo queda pendiente de fase posterior de UI y certificación backend.
