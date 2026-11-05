@@ -158,3 +158,12 @@ Original `eliassmarr2-afk/indumentary` intacto. Documentos heredados que todaví
 - `css/product-v2-top.css`: las reglas del contenedor `.christmas-product-media` y la imagen `.product-hero__image` usan `aspect-ratio: 4 / 5`; `object-fit: cover` y centrado se conservan. **La fuente WebP actual sigue siendo 1:1**, así que el marco 4:5 puede recortar laterales: se deberá evaluar el encuadre en móvil y producir un asset vertical 4:5 si se necesita conservar absolutamente todas las formas proyectadas.
 - `product.html`: se invalida únicamente caché de la hoja V2 mediante parámetro de versión; no se modifica HTML inferior ni la lógica de combos, selector, sticky o recordatorio.
 - **Fase siguiente, sin frontend aún:** diseño y preflight del chat visual del cliente para enlazar con Protocol Data V2 Support/Conversations, siguiendo contratos públicos canónicos, sin reutilizar ni ampliar por suposición el actual chat mock de producto.
+
+## Chat visual cliente — propuesta de arquitectura (sin código UI) — 2026-11-04
+
+- Referencias auditadas: `CUSTOMER_CONVERSATION_SURFACE_CONTRACT.md` de sitio, documento 006 de Ecosistema y contratos Support/Conversations canónicos de Protocol Data V2 (core, customer edge y SUPPORT 014).
+- **Nueva propuesta local candidata:** `SANTA_CLAUSULA_CUSTOMER_CHAT_VISUAL_CANDIDATE.md`. **No aprobada visualmente todavía**; no se presenta como criterio central FROZEN.
+- Propuesta: acceso de Producto por `#productSupportButton` existente, continuidad con una única interfaz autorizada, móvil alto/full-screen y escritorio panel lateral; verde de marca, mensajes públicos, metadatos case safe, estados vacíos/cerrados/denegados y composer/adjuntos reservados.
+- Riesgo actual: `js/product-support-camping-v1.js` usa almacenamiento y namespace `indumentary`; `js/product-runtime-v4.js` contiene otra lógica de soporte demo. No duplicar inicializaciones ni confundir mocks con casos backend.
+- Distinción Support Case sin asociación Order vs caso con asociación canónica: no inferir comprador por email ni por Shopify; la proyección pública actual **no expone** Order association ni contexto buyer. `SUPPORT 014` es candidato congelado, sin evidencia de ejecución live.
+- La **imagen 4:5** está implementada (commit previo); para chat esta fase es diseño y contrato **PENDIENTE DE APROBACIÓN**, sin nuevas páginas o enlaces customer live.
