@@ -1,64 +1,50 @@
 <!doctype html>
-<html lang="es">
+<html lang="es-AR">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#090909" />
-  <meta name="indumentary-build" content="20261103-1530" />
-  <title>Soporte · IND.</title>
-  <meta name="description" content="Iniciá una consulta de Soporte en IND." />
+  <meta name="theme-color" content="#1E7437" />
+  <meta name="santa-clausula-support-build" content="20261105-case-a-01" />
+  <title>Soporte | SANTA CLAUSULA</title>
+  <meta name="description" content="Contactá con Soporte de SANTA CLAUSULA. Iniciá una consulta general." />
+  <link rel="icon" type="image/webp" href="./assets/santa-clausula-logo.webp" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./css/support.css?v=20261103-1530" />
+  <link rel="stylesheet" href="./css/support.css?v=20261105-case-a-01" />
 </head>
 <body class="support-body">
-  <header class="support-header">
-    <button id="supportMenuButton" class="support-header__icon" type="button" aria-label="Abrir menú" aria-controls="supportDrawer" aria-expanded="false">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-    </button>
-    <a class="support-header__brand" href="./index.html" aria-label="Ir al inicio">IND.</a>
-    <a class="support-header__cart" href="./index.html#cart" aria-label="Ver carrito">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 1.9-1.4L21 7H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg><span class="support-header__count">0</span>
+  <header class="support-header" aria-label="Soporte de SANTA CLAUSULA">
+    <a class="support-header__back" href="./index.html" aria-label="Volver a la tienda">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>
+    </a>
+    <div class="support-header__identity">
+      <strong>Soporte | SANTA CLAUSULA</strong>
+      <span>Estamos para ayudarte</span>
+    </div>
+    <a class="support-header__avatar" href="./index.html" aria-label="Ir al inicio de SANTA CLAUSULA">
+      <img src="./assets/santa-clausula-logo.webp" width="42" height="42" alt="" />
     </a>
   </header>
-  <div id="supportDrawerBackdrop" class="support-drawer-backdrop" hidden></div>
-  <aside id="supportDrawer" class="support-drawer" aria-hidden="true" inert>
-    <div class="support-drawer__top"><span class="support-drawer__brand">IND.</span>
-      <button id="supportDrawerClose" class="support-drawer__close" type="button" aria-label="Cerrar menú">×</button>
-    </div>
-    <nav class="support-nav" aria-label="Navegación principal">
-      <a href="./index.html">INICIO</a>
-      <a href="./index.html#categorias">COLECCIONES</a>
-      <a href="./index.html#productos">NOVEDADES</a>
-      <a href="./tracking.html">SABER DE MI ENVÍO</a>
-      <a class="is-active" href="./soporte.html" aria-current="page">SOPORTE</a>
-      <a href="./index.html">POLÍTICAS</a>
-    </nav>
-  </aside>
 
   <main class="support-main">
-    <div class="support-illustration" aria-hidden="true">
-      <img src="./assets/support-illustration-approved.webp" alt="" width="1030" height="490" decoding="async" />
-    </div>
-
     <section class="support-intro" aria-labelledby="supportTitle">
       <h1 id="supportTitle">Contactá con Soporte</h1>
-      <p>Podés iniciar una consulta desde acá. Cuando se habilite la atención, recibirás en tu correo un acceso seguro para continuar la conversación.</p>
+      <p>Contanos qué necesitás. Cuando habilitemos la atención, podrás continuar mediante un acceso seguro a tu conversación.</p>
     </section>
 
-    <section class="support-form-card" aria-label="Formulario de contacto">
-      <form id="supportStartForm">
+    <section class="support-form-card" aria-label="Iniciar consulta de Soporte">
+      <form id="supportStartForm" novalidate>
         <div class="support-field">
           <label for="supportName">Nombre</label>
           <input id="supportName" name="name" type="text" autocomplete="name" maxlength="120" placeholder="Tu nombre y apellido" required />
         </div>
         <div class="support-field">
-          <label for="supportEmail">Correo</label>
-          <input id="supportEmail" name="email" type="email" autocomplete="email" maxlength="254" placeholder="Tu correo electrónico" required />
+          <label for="supportEmail">Correo electrónico</label>
+          <input id="supportEmail" name="email" type="email" autocomplete="email" maxlength="254" placeholder="tuemail@ejemplo.com" required />
         </div>
         <div class="support-field">
-          <label for="supportSubject">Asunto</label>
+          <label for="supportSubject">Motivo de consulta</label>
           <select id="supportSubject" name="subject" required>
             <option value="" selected disabled>Seleccioná un motivo</option>
             <option value="pedido">Consulta sobre mi pedido</option>
@@ -73,16 +59,25 @@
           <label for="supportOther">Contanos el asunto</label>
           <input id="supportOther" name="other_subject" type="text" maxlength="160" placeholder="¿Sobre qué necesitás ayuda?" />
         </div>
+        <div class="support-field">
+          <label for="supportMessage">¿En qué podemos ayudarte?</label>
+          <textarea id="supportMessage" name="message" rows="4" maxlength="4000" placeholder="Escribí tu consulta..." required></textarea>
+        </div>
 
-        <button class="support-submit" type="submit" aria-describedby="supportDemoNote">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
-          <span>Contactar con Soporte</span>
+        <button id="supportSubmit" class="support-submit" type="submit" aria-describedby="supportDemoNote">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z" /><path d="M22 2 11 13" /></svg>
+          <span>Iniciar consulta</span>
         </button>
-        <p id="supportDemoNote" class="support-disclaimer">Versión de demostración. Este formulario todavía no envía consultas reales.</p>
+        <p id="supportDemoNote" class="support-disclaimer">Versión de demostración: este formulario todavía no envía mensajes ni crea casos reales.</p>
         <p id="supportFeedback" class="support-feedback" role="status" aria-live="polite" hidden></p>
       </form>
+      <a class="support-preview-link" href="./conversacion.html?demo=1">
+        <span>Ver vista previa del chat</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+      </a>
+      <p class="support-preview-note">La vista previa usa mensajes de ejemplo; no muestra conversaciones reales.</p>
     </section>
   </main>
-  <script defer src="./js/support.js?v=20261103-1530"></script>
+  <script defer src="./js/support.js?v=20261105-case-a-01"></script>
 </body>
 </html>

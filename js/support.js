@@ -1,47 +1,50 @@
 (() => {
   "use strict";
-  const $ = (id) => document.getElementById(id);
-  const menu = $("supportDrawer");
-  const backdrop = $("supportDrawerBackdrop");
-  const openMenu = $("supportMenuButton");
-  const closeMenu = $("supportDrawerClose");
-  const form = $("supportStartForm");
-  const subject = $("supportSubject");
-  const otherField = $("supportOtherField");
-  const otherInput = $("supportOther");
-  const feedback = $("supportFeedback");
-  const setMenu = (open) => {
-    menu.classList.toggle("is-open", open);
-    menu.setAttribute("aria-hidden", String(!open));
-    menu.inert = !open;
-    backdrop.hidden = !open;
-    openMenu.setAttribute("aria-expanded", String(open));
-    document.body.style.overflow = open ? "hidden" : "";
-  };
-  setMenu(false);
-  openMenu.addEventListener("click", () => setMenu(true));
-  closeMenu.addEventListener("click", () => setMenu(false));
-  backdrop.addEventListener("click", () => setMenu(false));
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && menu.classList.contains("is-open")) setMenu(false);
-  });
 
-  const syncOther = () => {
+  // SANTA CLAUSULA / Support Start Case A — UI-only.
+  // No network calls, session persistence, token creation or simulated case creation.
+  const form = document.getElementById("supportStartForm");
+  const subject = document.getElementById("supportSubject");
+  const otherField = document.getElementById("supportOtherField");
+  const otherInput = document.getElementById("supportOther");
+  const message = document.getElementById("supportMessage");
+  const feedback = document.getElementById("supportFeedback");
+
+  if (!form || !subject || !otherField || !otherInput || !message || !feedback) return;
+
+  function resetFeedback() {
+    feedback.hidden = true;
+    feedback.textContent = "";
+  }
+
+  function syncOtherField() {
     const show = subject.value === "otro";
     otherField.hidden = !show;
     otherInput.required = show;
+    otherInput.disabled = !show;
     if (!show) otherInput.value = "";
-    feedback.hidden = true;
-    // Never focus a field automatically; opening the keyboard requires explicit intent.
-  };
-  subject.addEventListener("change", syncOther);
-  syncOther();
+    resetFeedback();
+  }
+
+  syncOtherField();
+  subject.addEventListener("change", syncOtherField);
+  for (const field of form.querySelectorAll("input, select, textarea")) {
+    field.addEventListener("input", resetFeedback);
+  }
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     if (!form.reportValidity()) return;
-    feedback.textContent = "Esta página todavía funciona en modo demostración. No se enviaron tus datos ni se creó un caso. El envío estará disponible cuando se active el boundary autorizado de Protocol Data.";
+    if (!message.value.trim()) {
+      message.setCustomValidity("Escribí el motivo de tu consulta.");
+      message.reportValidity();
+      message.addEventListener("input", () => message.setCustomValidity(""), { once: true });
+      return;
+    }
+    feedback.textContent =
+      "Esta es una vista de demostración. No se creó ningún caso, no se enviaron tus datos ni se guardó el mensaje. Podés utilizar «Ver vista previa del chat» para revisar el diseño.";
     feedback.hidden = false;
-    // No network request, persistence, analytics or logging of user-entered data.
+    // Public start, capability delivery and first message are reserved for the
+    // authorized Protocol Data Support boundary, NOT implemented in this module.
   });
 })();

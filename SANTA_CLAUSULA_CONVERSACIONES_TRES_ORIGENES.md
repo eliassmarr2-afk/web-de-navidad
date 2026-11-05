@@ -91,3 +91,9 @@ La detección y asociación de Order puede ocurrir **posteriormente** al inicio 
 **NO ACTIVADO:** rediseño del chat heredado, Support/Conversations conectado, segmentación automática pública, buyer detection/Order projection, correos de acceso seguros ni respuestas reales desde la web.
 
 Esta enmienda **prevalece** frente a cualquier descripción anterior del chat como dos únicas categorías de entrada o como un chat de producto que pudiera mantenerse sin autorización de lectura/respuesta.
+
+## 8. Implementación visual — Caso A, 2026-11-05
+
+El operador aprobó expresamente el diseño A de Soporte general: logo de SANTA CLAUSULA y texto de tienda, inicio por nombre/correo/motivo/mensaje inicial, presentación de mensajes de ambos interlocutores sin producto ni Order, y composer fijo.
+
+La implementación aislada de la UI A está documentada en `SANTA_CLAUSULA_SUPPORT_GENERAL_V1_IMPLEMENTATION.md` y está incorporada al repositorio mediante `soporte.html` y `conversacion.html`. **El modo demo no crea ningún Support Case ni admite capacidades reales**. Los escenarios B y C no se han construido con esta aprobación; mantienen fases independientes. Los contratos de Support siguen siendo autoridad para abrir/leer/responder casos reales.

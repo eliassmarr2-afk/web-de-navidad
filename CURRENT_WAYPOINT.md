@@ -177,3 +177,13 @@ Original `eliassmarr2-afk/indumentary` intacto. Documentos heredados que todaví
 - **Todas** las entradas llegan al dominio Support / Conversations. El Public Start no requiere token previo del usuario, pero **emite capability** para leer/responder después; no hay canal de continuación persistente sin autorización.
 - La base canónica dispone de Queues y Segments Store-scoped: `Chats por productos` es una clasificación/cola futura posible, **no** un módulo de mensajes independiente. Public Start hoy crea `support_queue_id=NULL`, por lo que asignación automática exige un flujo confiable, no un selector público arbitrary.
 - El operador **no autorizó aún rediseño ni reemplazo de JS del chat**. Todo nuevo desarrollo queda pendiente de fase posterior de UI y certificación backend.
+
+## Caso A — Soporte general UI V1 — implementado — 2026-11-05
+
+- El operador aprobó expresamente el 05-11-2026 la maqueta de Soporte general: cabecera verde `#1E7437`, avatar/favicon de SANTA CLAUSULA, campos nombre/correo/motivo/**mensaje inicial**, burbujas de diálogo y composer.
+- **Autoridad local de implementación:** `SANTA_CLAUSULA_SUPPORT_GENERAL_V1_IMPLEMENTATION.md`.
+- `soporte.html`: nueva identidad de marca, formulario de cuatro campos, acción `Iniciar consulta` que valida localmente sin enviar datos, y enlace `Ver vista previa del chat`.
+- `conversacion.html`: nueva vista visual customer. **Sin `?demo=1` no existe conversación activa; con demo se muestran únicamente mensajes ficticios bien señalizados** y composer/adjuntos deshabilitados.
+- `css/support.css`, `js/support.js`, `css/customer-conversation-v1.css`, `js/customer-conversation-v1.js`: UI aislada, sin backend ni token persistido. Favicon temporal reutiliza `assets/santa-clausula-logo.webp`.
+- **NO tocar** la lógica de consulta de Producto/escenario C en esta fase. B/C pendientes; no duplicar motores de Support cuando se integren.
+- **Estado:** UI code ready; Pages/visual mobile review PENDING; Protocol Data Support Start/Customer NOT ACTIVE; emails reales NOT ACTIVE.

@@ -1,5 +1,7 @@
 # SUPPORT SURFACE CONTRACT — INDUMENTARY (SUPPORT START V0)
 
+> **ACTUALIZACIÓN SANTA CLAUSULA / 2026-11-05:** El operador aprobó una nueva composición visual de Soporte general que prevalece **para web-de-navidad** sobre el branding heredado INDUMENTARY: [SANTA_CLAUSULA_SUPPORT_GENERAL_V1_IMPLEMENTATION.md](./SANTA_CLAUSULA_SUPPORT_GENERAL_V1_IMPLEMENTATION.md). `soporte.html` añade un primer mensaje y `conversacion.html` presenta una vista previa explícita, no conectada. Esta enmienda no modifica la autoridad canónica de Protocol Data, no activa el envío ni implica identificación automática de compradores.
+
 **Approved visual design:** 2026-11-03  
 **State:** SITE-SPECIFIC IMPLEMENTED DEMO / REUSABLE CANDIDATE  
 **Backend activation:** NOT ACTIVE  

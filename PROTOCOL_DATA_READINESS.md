@@ -232,3 +232,15 @@ ACTIVATION = NOT ACTIVE
 - El único proyecto Supabase conectado ahora es `protocol-data-v2`; no se utiliza para esta nueva función sin autorización explícita.
 - Al no estar activo, la UI informa el estado de preparación y jamás afirma una programación real.
 - Event Layer y futura atribución de compra deben preservar privacidad, no enviar emails crudos a UTM, no atribuir venta sin Orders/Commerce confirmado.
+
+---
+
+## 13. SOPORTE GENERAL V1 — UI DESACOPLADA
+
+**READINESS:** CASE A UI IMPLEMENTED / BACKEND RESERVED. **ACTIVATION:** NOT ACTIVE.
+
+- Entrada pública `soporte.html`: formulario con nombre/correo/motivo/primer mensaje, sin envío de datos en demo.
+- Vista customer `conversacion.html`: empty por defecto; `?demo=1` solo muestra contenido ficticio claramente señalado y composer deshabilitado. No se procesan ni guardan tokens de capacidad.
+- Documentación local: `SANTA_CLAUSULA_SUPPORT_GENERAL_V1_IMPLEMENTATION.md` y `SANTA_CLAUSULA_CONVERSACIONES_TRES_ORIGENES.md`.
+- Support Public Start real deberá seguir los contratos exactos de Protocol Data V2, con capability emitida y continuidad autorizada; no se heredan permisos por formulario, correo o Shopify.
+- Escenarios B (buyer) y C (landing product), colas/segmentos y consultas reales siguen PENDIENTES. Ninguna conexión Supabase ni secrets se modificó.

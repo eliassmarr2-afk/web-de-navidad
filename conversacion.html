@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#1E7437" />
+  <meta name="santa-clausula-conversation-build" content="20261105-case-a-01" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Conversación de Soporte | SANTA CLAUSULA</title>
+  <meta name="description" content="Interfaz de conversación de Soporte. Actualmente disponible solamente como demostración." />
+  <link rel="icon" type="image/webp" href="./assets/santa-clausula-logo.webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/customer-conversation-v1.css?v=20261105-case-a-01" />
+</head>
+<body class="customer-conversation-body">
+  <main class="conversation-shell" aria-labelledby="conversationHeading">
+    <header class="conversation-header">
+      <a class="conversation-header__back" href="./soporte.html" aria-label="Volver a Soporte">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>
+      </a>
+      <div class="conversation-header__avatar" aria-hidden="true">
+        <img src="./assets/santa-clausula-logo.webp" alt="" width="46" height="46" decoding="async" />
+      </div>
+      <div class="conversation-header__copy">
+        <h1 id="conversationHeading">Soporte | SANTA CLAUSULA</h1>
+        <p>Consulta general</p>
+      </div>
+      <a class="conversation-header__close" href="./soporte.html" aria-label="Cerrar vista y volver a Soporte">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
+      </a>
+    </header>
+
+    <section id="conversationDemo" class="conversation-panel" aria-label="Vista previa de conversación" hidden>
+      <div class="conversation-demo-notice" role="status">
+        <span class="conversation-demo-notice__dot" aria-hidden="true"></span>
+        Vista previa de diseño · mensajes ficticios · sin conexión con Soporte
+      </div>
+      <div class="conversation-context">
+        <div class="conversation-context__row">
+          <span>Motivo: Cambios y devoluciones</span>
+          <span class="conversation-context__status">En proceso (ejemplo)</span>
+        </div>
+      </div>
+      <div id="conversationMessagesDemo" class="conversation-messages" role="log" aria-label="Mensajes de ejemplo">
+        <p class="conversation-day">Hoy · Conversación de ejemplo</p>
+        <article class="conversation-message conversation-message--customer">
+          <div class="conversation-message__bubble">
+            <p>Hola, quería consultar sobre las opciones de devolución.</p>
+            <span>Vos · 10:32</span>
+          </div>
+        </article>
+        <article class="conversation-message conversation-message--support">
+          <span class="conversation-message__avatar" aria-hidden="true">
+            <img src="./assets/santa-clausula-logo.webp" alt="" width="28" height="28" decoding="async" />
+          </span>
+          <div class="conversation-message__bubble">
+            <p>¡Hola! Recibimos tu consulta. Vamos a ayudarte con la información correspondiente.</p>
+            <span>Soporte · 10:35</span>
+          </div>
+        </article>
+        <p class="conversation-privacy">Los mensajes reales serán privados de cada conversación autorizada.</p>
+      </div>
+      <div class="conversation-composer" aria-label="Redacción de mensajes: no disponible en demostración">
+        <div class="conversation-composer__bar">
+          <button type="button" disabled aria-label="Adjuntar archivo, no habilitado" title="Adjuntos disponibles tras activar Soporte">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m19 13-7.6 7.6a5 5 0 0 1-7-7L13 4.9a3.4 3.4 0 0 1 4.8 4.8l-8.5 8.5a1.7 1.7 0 0 1-2.4-2.4L14.5 8" /></svg>
+          </button>
+          <textarea rows="1" disabled aria-label="Escribir mensaje, no habilitado" placeholder="Escribí tu mensaje..."></textarea>
+          <button type="button" class="conversation-composer__send" disabled aria-label="Enviar mensaje, no habilitado" title="Envío disponible al conectar Protocol Data">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z" /><path d="M22 2 11 13" /></svg>
+          </button>
+        </div>
+        <p>Vista previa: no podés enviar mensajes desde esta pantalla.</p>
+      </div>
+    </section>
+
+    <section id="conversationEmpty" class="conversation-empty" aria-labelledby="conversationEmptyTitle">
+      <div class="conversation-empty__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8Z" /></svg>
+      </div>
+      <h2 id="conversationEmptyTitle">No hay una conversación activa</h2>
+      <p>La continuidad segura por correo todavía no está conectada a Protocol Data. Esta página no busca casos por correo ni muestra conversaciones sin autorización.</p>
+      <a class="conversation-empty__return" href="./soporte.html">Volver a Soporte</a>
+      <a class="conversation-empty__preview" href="./conversacion.html?demo=1">Ver una conversación de ejemplo</a>
+    </section>
+  </main>
+  <script defer src="./js/customer-conversation-v1.js?v=20261105-case-a-01"></script>
+</body>
+</html>
