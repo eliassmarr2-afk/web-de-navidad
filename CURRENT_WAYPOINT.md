@@ -151,3 +151,10 @@ Original `eliassmarr2-afk/indumentary` intacto. Documentos heredados que todaví
 - El frontend reserva `window.SantaClausulaReminderAdapter.create`; respuestas de éxito solo si provienen de un adaptador real. **No existe todavía backend de recordatorios ni emisor de correo integrado.**
 - **Fase actual UI PREVIEW:** al abrir muestra aviso de servicio no habilitado. Sin backend, no transmite, guarda ni programa correos y no declara éxito. No activar accidentalmente sobre Supabase `protocol-data-v2`, único proyecto conectado: requiere servicio aislado y autorización.
 - **Próximo movimiento operativo:** configurar servicio de backend + verificación de correo + scheduler + proveedor de email + cancelación y seguridad; pruebas end-to-end. Inspección visual móvil de esta UI pendiente del despliegue de Pages.
+
+## Product V2 — media principal 4:5 — 2026-11-04
+
+- El operador autorizó convertir únicamente el **marco visual de la imagen principal** de **1:1 a 4:5 (ancho:alto)**, manteniendo **borde a borde**, blanco, sin radios ni márgenes y sin galería visible.
+- `css/product-v2-top.css`: las reglas del contenedor `.christmas-product-media` y la imagen `.product-hero__image` usan `aspect-ratio: 4 / 5`; `object-fit: cover` y centrado se conservan. **La fuente WebP actual sigue siendo 1:1**, así que el marco 4:5 puede recortar laterales: se deberá evaluar el encuadre en móvil y producir un asset vertical 4:5 si se necesita conservar absolutamente todas las formas proyectadas.
+- `product.html`: se invalida únicamente caché de la hoja V2 mediante parámetro de versión; no se modifica HTML inferior ni la lógica de combos, selector, sticky o recordatorio.
+- **Fase siguiente, sin frontend aún:** diseño y preflight del chat visual del cliente para enlazar con Protocol Data V2 Support/Conversations, siguiendo contratos públicos canónicos, sin reutilizar ni ampliar por suposición el actual chat mock de producto.
