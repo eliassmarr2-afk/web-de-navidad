@@ -208,3 +208,11 @@ Original `eliassmarr2-afk/indumentary` intacto. Documentos heredados que todaví
 - `conversacion.html?demo=product`: extensión de la misma UI de A/B, con un fixture navideño explícitamente ilustrativo. Las consultas reales de Producto no se crean ni simulan; formulario y composer seguros/inactivos.
 - **Regla visual vigente:** tarjetas/badges/widgets sin contornos decorativos de color; fondos blancos/grises, sombra leve poco difuminada y radios 4px.
 - **Próximo paso:** inspección móvil y, posteriormente, diseñar y certificar el vínculo real Shopify (producto, variantes y ofertas) ↔ Support Public Start / Customer y la clasificación confiable `Chats por productos` de Protocol Data.
+
+## Slide de calificación post-cierre — candidato de diseño — 2026-11-05
+
+- **Pedido del operador:** cuando Protocol Data V2 marque un caso de Conversaciones como finalizado, el chat del cliente entra en modo solo lectura y se abre un slide para calificar la atención. El operador refiere un antecedente funcional en V1, sin medición de datos confiable.
+- **Revisión canónica:** `close_case` fija `status=cerrada` y `closed_at`, no genera mensaje; customer reply de casos cerrados se rechaza; `reopen_case` vuelve a `en_proceso`. V1 Conversaciones auditada confirma cierre/reapertura, mientras V1 Experiencias sí contiene rating 1–5 pero **para experiencias postcompra**, no evidencia suficiente de rating post-cierre por caso.
+- **Nuevo documento candidato:** `SANTA_CLAUSULA_SUPPORT_CLOSURE_RATING_SLIDE_CANDIDATE.md`. Propuesta: sheet blanco de CSAT de atención (1–5 estrellas, comentario opcional, ahora no), apertura solo después de confirmación autorizada de cierre; compositor deshabilitado; estados omitido/enviado/vencido/reabierto. Cero bordes decorativos de color, sombras cortas.
+- **Requiere contrato central nuevo:** elegibilidad y submit seguro asociado a Support Case + ciclo de cierre, idempotencia y métricas reales. NO reutilizar sin autorización las reseñas de compra/producto de Experiencias.
+- **Estado:** diseño **PENDIENTE DE APROBACIÓN**; no se modifica HTML/CSS/JS del chat ni backend con este movimiento. Queda para mock visual siguiente después del acuerdo explícito.
