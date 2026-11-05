@@ -105,3 +105,13 @@ La implementación aislada de la UI A está documentada en `SANTA_CLAUSULA_SUPPO
 - **Regla visual expresa y transversal:** tarjetas, badges, widgets sin contornos de color; cuando convenga, sombras leves con desenfoque mínimo. Se mantiene una señal de foco por subrayado/sombra accesible.
 - El frontend no introduce Orders en la proyección `support-customer`, no realiza detección de comprador, ni crea un caso en segundo backend. El modo verificado real depende de una futura proyección buyer customer-safe y asociación canónica verificada.
 - C (product landing) permanece pendiente y sin alteración del mock heredado.
+
+## 10. Caso C visual — diseño aprobado e integrado (2026-11-05)
+
+- **Autoridad local posterior:** `SANTA_CLAUSULA_SUPPORT_PRODUCT_V1_IMPLEMENTATION.md`.
+- **Frontend único:** el botón original `#productSupportButton` abre formulario contextual con nombre/correo/mensaje inicial y tarjeta comercial de producto con foto 4:5, título y oferta seleccionada si corresponde; no hay selector de motivos redundante.
+- La UI `conversacion.html` contiene ahora A, B y C bajo **un mismo layout** y añade `?demo=product` únicamente para visualizar contexto ficticio del proyector navideño. Sin doble chat ni almacenamiento de conversación por navegador.
+- El `product-runtime-v4.js` ya no registra handlers de soporte, ni escribe `indumentary.productSupport`; el script legado `product-support-camping-v1.js` fue desvinculado del HTML. No ampliar el mock.
+- Las referencias comerciales del DOM **no son identidades de backend**. Futura clasificación `Chats por productos` exige rule server-side confiable y Queue/Segment Store-scoped autorizados por contrato de Protocol Data. Shopify/Commerce deberá brindar referencias canónicas de producto y oferta.
+- Continúa **NO LIVE**: Support Start, customer capability/continuity, mensajes del operador, buyer association y clasificación automática. El caso B verificado requiere proyección customer-safe separada.
+- Regla visual sin contornos, con sombras compactas, se conserva íntegra.

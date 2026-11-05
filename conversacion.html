@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#1E7437" />
-  <meta name="santa-clausula-conversation-build" content="20261105-case-b-01" />
+  <meta name="santa-clausula-conversation-build" content="20261105-case-c-01" />
   <meta name="robots" content="noindex, nofollow" />
   <title>Conversación de Soporte | SANTA CLAUSULA</title>
   <meta name="description" content="Interfaz de conversación de Soporte. Actualmente disponible solamente como demostración." />
@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./css/customer-conversation-v1.css?v=20261105-case-b-01" />
+  <link rel="stylesheet" href="./css/customer-conversation-v1.css?v=20261105-case-c-01" />
 </head>
 <body class="customer-conversation-body">
   <main class="conversation-shell" aria-labelledby="conversationHeading">
@@ -41,6 +41,7 @@
         <a href="./conversacion.html?demo=1" data-conversation-preview="general">General</a>
         <a href="./conversacion.html?demo=buyer-pending" data-conversation-preview="buyer-pending">Sin verificar</a>
         <a href="./conversacion.html?demo=buyer-verified" data-conversation-preview="buyer-verified">Pedido verificado</a>
+        <a href="./conversacion.html?demo=product" data-conversation-preview="product">Producto</a>
       </nav>
       <div class="conversation-context">
         <div class="conversation-context__row">
@@ -82,6 +83,17 @@
           <div class="conversation-order-card__status">
             <span>Estado del pedido</span>
             <strong>En preparación (ejemplo)</strong>
+          </div>
+        </div>
+      </section>
+      <section id="conversationProductContext" class="conversation-product-context" aria-label="Contexto de producto de ejemplo" hidden>
+        <p class="conversation-product-context__label">Estás consultando por este producto</p>
+        <div class="conversation-product-card">
+          <img class="conversation-product-card__image" src="./assets/proyector-navideno-producto.webp" alt="Proyector de formas navideñas portable" width="64" height="80" decoding="async" />
+          <div class="conversation-product-card__copy">
+            <strong>Proyector de formas navideñas portable</strong>
+            <span>Producto consultado · Ejemplo</span>
+            <small>La oferta seleccionada se mostrará cuando exista un contexto comercial autorizado.</small>
           </div>
         </div>
       </section>
@@ -127,8 +139,9 @@
       <a class="conversation-empty__return" href="./soporte.html">Volver a Soporte</a>
       <a class="conversation-empty__preview" href="./conversacion.html?demo=1">Ver una conversación de ejemplo</a>
       <a class="conversation-empty__preview" href="./conversacion.html?demo=buyer-pending">Ver consulta de pedido de ejemplo</a>
+      <a class="conversation-empty__preview" href="./conversacion.html?demo=product">Ver consulta de producto de ejemplo</a>
     </section>
   </main>
-  <script defer src="./js/customer-conversation-v1.js?v=20261105-case-b-01"></script>
+  <script defer src="./js/customer-conversation-v1.js?v=20261105-case-c-01"></script>
 </body>
 </html>

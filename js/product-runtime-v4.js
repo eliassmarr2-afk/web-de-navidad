@@ -57,7 +57,6 @@
   const params = new URLSearchParams(location.search);
   const requestedId = params.get("id") || "prod-002";
   const product = PRODUCTS.find((item) => item.id === requestedId) || PRODUCTS[1];
-  const supportKey = `indumentary.productSupport.${product.id}`;
   const cartKey = "indumentary.cart.v3";
   const locationKey = "web-de-navidad.sessionLocation.v1";
 
@@ -128,23 +127,6 @@
     tabPanel: qs("#tabPanel"),
     features: qs("#featureGrid"),
     description: qs("#productDescription"),
-    supportButton: qs("#productSupportButton"),
-    supportBackdrop: qs("#productSupportBackdrop"),
-    closeSupport: qs("#closeProductSupport"),
-    supportFormView: qs("#productSupportFormView"),
-    supportChatView: qs("#productSupportChatView"),
-    supportForm: qs("#productSupportForm"),
-    supportName: qs("#productSupportName"),
-    supportEmail: qs("#productSupportEmail"),
-    supportNameError: qs("#productSupportNameError"),
-    supportEmailError: qs("#productSupportEmailError"),
-    supportProductImage: qs("#supportProductImage"),
-    supportProductTitle: qs("#supportProductTitle"),
-    supportProductPrice: qs("#supportProductPrice"),
-    supportMessages: qs("#productSupportMessages"),
-    supportQuickQuestions: qs("#productSupportQuickQuestions"),
-    supportMessageForm: qs("#productSupportMessageForm"),
-    supportMessageInput: qs("#productSupportMessageInput"),
     addToCart: qs("#addToCart"),
     share: qs("#shareButton"),
     favorite: qs("#favoriteButton"),
@@ -281,101 +263,6 @@
     }
   }
 
-  function readSupport() {
-    try { return JSON.parse(sessionStorage.getItem(supportKey) || "null"); } catch { return null; }
-  }
-  function writeSupport(data) {
-    try { sessionStorage.setItem(supportKey, JSON.stringify(data)); } catch {}
-  }
-
-  function renderSupportMessages(session) {
-    if (!els.supportMessages) return;
-    els.supportMessages.innerHTML = session.messages.map((message) => `
-      <div class="product-support-message ${message.role === "customer" ? "product-support-message--customer" : "product-support-message--operator"}">
-        <span class="product-support-message__sender">${message.role === "customer" ? session.customer.name : "Operador"}</span>
-        <div class="product-support-message__bubble"></div>
-      </div>
-    `).join("");
-    qsa(".product-support-message__bubble", els.supportMessages).forEach((bubble, index) => {
-      bubble.textContent = session.messages[index].text;
-    });
-    els.supportMessages.scrollTop = els.supportMessages.scrollHeight;
-  }
-
-  function sendSupportMessage(text) {
-    const clean = String(text || "").trim();
-    if (!clean) return;
-    const session = readSupport();
-    if (!session) return;
-    session.messages.push({ role: "customer", text: clean, createdAt: new Date().toISOString() });
-    writeSupport(session);
-    renderSupportMessages(session);
-  }
-
-  function renderQuickQuestions() {
-    if (!els.supportQuickQuestions) return;
-    const questions = ["¿Qué talle me recomendás?", "¿Qué incluye exactamente esta oferta?", "¿Cuánto tarda el envío?"];
-    els.supportQuickQuestions.innerHTML = "";
-    questions.forEach((question) => {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "product-support-quick-question";
-      button.textContent = question;
-      button.addEventListener("click", () => sendSupportMessage(question));
-      els.supportQuickQuestions.appendChild(button);
-    });
-  }
-
-  function showSupportChat(session) {
-    if (els.supportFormView) els.supportFormView.hidden = true;
-    if (els.supportChatView) els.supportChatView.hidden = false;
-    renderSupportMessages(session);
-    renderQuickQuestions();
-  }
-
-  function openSupport() {
-    if (!els.supportBackdrop) return;
-    setImage(els.supportProductImage, selectedMedia().src, product.title);
-    if (els.supportProductTitle) els.supportProductTitle.textContent = product.title;
-    if (els.supportProductPrice) els.supportProductPrice.textContent = money(selectedOffer().price);
-    const session = readSupport();
-    if (session) showSupportChat(session);
-    else {
-      if (els.supportFormView) els.supportFormView.hidden = false;
-      if (els.supportChatView) els.supportChatView.hidden = true;
-    }
-    els.supportBackdrop.hidden = false;
-    requestAnimationFrame(() => els.supportBackdrop.classList.add("is-open"));
-    document.body.classList.add("no-scroll");
-  }
-
-  function closeSupport() {
-    if (!els.supportBackdrop) return;
-    els.supportBackdrop.classList.remove("is-open");
-    document.body.classList.remove("no-scroll");
-    setTimeout(() => { els.supportBackdrop.hidden = true; }, 190);
-  }
-
-  function startSupport(event) {
-    event.preventDefault();
-    const name = (els.supportName?.value || "").trim();
-    const email = (els.supportEmail?.value || "").trim();
-    let valid = true;
-    if (name.length < 3) { if (els.supportNameError) { els.supportNameError.hidden = false; els.supportNameError.textContent = "Ingresá tu nombre y apellido."; } valid = false; }
-    else if (els.supportNameError) els.supportNameError.hidden = true;
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { if (els.supportEmailError) { els.supportEmailError.hidden = false; els.supportEmailError.textContent = "Ingresá un correo válido."; } valid = false; }
-    else if (els.supportEmailError) els.supportEmailError.hidden = true;
-    if (!valid) return;
-    const firstName = name.split(/\s+/)[0];
-    const session = {
-      customer: { name, email },
-      product: { id: product.id, title: product.title },
-      messages: [{ role: "operator", text: `Hola ${firstName}, ¿qué te gustaría saber de ${product.title}?`, createdAt: new Date().toISOString() }]
-    };
-    writeSupport(session);
-    showSupportChat(session);
-  }
-
   function openLocation() {
     if (!els.locationBackdrop) return;
     try {
@@ -428,16 +315,6 @@
       if (!button) return;
       state.tab = button.dataset.tabId;
       renderTabs();
-    });
-    els.supportButton?.addEventListener("click", openSupport);
-    els.closeSupport?.addEventListener("click", closeSupport);
-    els.supportBackdrop?.addEventListener("click", (event) => { if (event.target === els.supportBackdrop) closeSupport(); });
-    els.supportForm?.addEventListener("submit", startSupport);
-    els.supportMessageForm?.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const text = els.supportMessageInput?.value || "";
-      sendSupportMessage(text);
-      if (els.supportMessageInput) els.supportMessageInput.value = "";
     });
     els.locationTrigger?.addEventListener("click", openLocation);
     window.addEventListener("web-de-navidad:location-change", updateDelivery);

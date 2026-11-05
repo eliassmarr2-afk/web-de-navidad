@@ -259,3 +259,20 @@ SUPPORT PUBLIC/CUSTOMER LIVE = NOT ACTIVE
 - `SANTA_CLAUSULA_SUPPORT_BUYER_V1_IMPLEMENTATION.md` congela el alcance visual y el requisito de cards/badges/widgets sin bordes de color, con sombras compactas.
 - En producción, identidad comprador y asociación Order requieren verificación y proyección customer-safe expresamente autorizada. `SUPPORT 014` sigue siendo contrato candidato en los documentos auditados.
 - La capa A, el demo C legado, Product/Shopify/Orders/Logistics y Supabase no fueron conectados o modificados.
+
+---
+
+## 15. SOPORTE CASO C — PRODUCT LANDING VISUAL
+
+```text
+CASE C UI / PRODUCT CONTEXT = IMPLEMENTED / DEMO ONLY
+COMMERCE PRODUCT / OFFER IDENTIFIERS = MOCK / UI ONLY
+SUPPORT PUBLIC/CUSTOMER LIVE = NOT ACTIVE
+TRUSTED PRODUCT ROUTING = NOT ACTIVE
+```
+
+- `product.html` conserva acceso existente al chat, reemplaza el demo con `js/product-support-v2.js` y `css/product-support-v2.css`. Formulario nombre/correo/mensaje sin selector de motivo, imagen 4:5 y nombre de oferta solo si se selecciona; no realiza network ni persiste PII.
+- `js/product-runtime-v4.js` ya no genera sesiones locales del soporte ni registra otro handler. `js/product-support-camping-v1.js` permanece como fuente histórica **sin cargar en el producto**.
+- `conversacion.html?demo=product` usa mismo diseño A/B y un fixture ilustrativo de producto, sin datos de cliente ni traslado de consulta por URL.
+- Contrato exacto de alcance `SANTA_CLAUSULA_SUPPORT_PRODUCT_V1_IMPLEMENTATION.md`.
+- Futura integración: Shopify/Commerce resuelve producto y oferta; Protocol Data Support posee identidad de caso, mensajes, acceso por capability y routing de Product después de validación server-side.

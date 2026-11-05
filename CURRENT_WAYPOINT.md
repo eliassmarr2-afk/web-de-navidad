@@ -198,3 +198,13 @@ Original `eliassmarr2-afk/indumentary` intacto. Documentos heredados que todaví
 - El escenario C (consulta desde Landing Product) y el soporte real B quedan pendientes. `product.html` no se modifica.
 - **Seguridad:** el inicio público produce `order_id=NULL`; la consulta customer aún no proyecta buyer/Order. Una vista visual `?demo=buyer-verified` NUNCA confiere acceso seguro ni confirma ninguna compra.
 - Pendiente inspección móvil/desktop y despliegue GitHub Pages del commit final.
+
+## Caso C — chat contextual de Producto V1 — 2026-11-05
+
+- **Diseño expresamente aprobado:** botón de chat existente en la landing, bottom sheet de marca verde `#1E7437`, fotografía 4:5, título de producto y oferta seleccionada si corresponde, formulario con nombre/correo/mensaje inicial, y mismo chat visual compartido A/B con tarjeta de producto arriba de los mensajes.
+- **Contrato:** `SANTA_CLAUSULA_SUPPORT_PRODUCT_V1_IMPLEMENTATION.md`; UI integrada. Sin backend, Shopify ni correos.
+- `product.html`: reemplazado modal heredado de Camping por el modal contextual de SANTA CLAUSULA. Nuevos `js/product-support-v2.js`, `css/product-support-v2.css`; uso del mismo `#productSupportButton` y ningún widget flotante adicional.
+- `js/product-runtime-v4.js`: quitada ruta duplicada de chat (soporte ficticio, almacenamiento `indumentary.productSupport`, listeners). Script `js/product-support-camping-v1.js` / CSS de Camping desvinculados; fuente histórica inactiva. No existe chat paralelo.
+- `conversacion.html?demo=product`: extensión de la misma UI de A/B, con un fixture navideño explícitamente ilustrativo. Las consultas reales de Producto no se crean ni simulan; formulario y composer seguros/inactivos.
+- **Regla visual vigente:** tarjetas/badges/widgets sin contornos decorativos de color; fondos blancos/grises, sombra leve poco difuminada y radios 4px.
+- **Próximo paso:** inspección móvil y, posteriormente, diseñar y certificar el vínculo real Shopify (producto, variantes y ofertas) ↔ Support Public Start / Customer y la clasificación confiable `Chats por productos` de Protocol Data.

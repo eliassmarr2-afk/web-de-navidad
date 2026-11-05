@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#1E7437" />
-  <meta name="web-de-navidad-product-build" content="20261104-product-media-4x5-01" />
+  <meta name="web-de-navidad-product-build" content="20261105-product-chat-c-01" />
   <title>Proyector de formas navideñas portable · SANTA CLAUSULA</title>
   <meta name="description" content="Proyector navideño de iluminación LED para hogar. Ficha comercial en desarrollo de SANTA CLAUSULA." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -12,7 +12,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./css/base.css?v=20261030-1812" />
   <link rel="stylesheet" href="./css/product.css?v=20261030-1812" />
-  <link rel="stylesheet" href="./css/product-support-camping.css?v=20261030-1812" />
   <link rel="stylesheet" href="./css/product-combos-v1.css?v=20261031-2145" />
   <link rel="stylesheet" href="./css/product-offer-callout-v1.css?v=20261101-1832" />
   <link rel="stylesheet" href="./css/product-refinements-v1.css?v=20261102-0145" />
@@ -20,6 +19,7 @@
   <link rel="stylesheet" href="./css/product-v2-sticky.css?v=20261104-01" />
   <link rel="stylesheet" href="./css/product-v2-combo-refinement.css?v=20261104-01" />
   <link rel="stylesheet" href="./css/product-purchase-reminder-v1.css?v=20261104-01" />
+  <link rel="stylesheet" href="./css/product-support-v2.css?v=20261105-case-c-01" />
 </head>
 <body class="product-body christmas-product-v2">
   <div class="product-shell">
@@ -159,24 +159,52 @@
       </section>
     </div>
 
-    <div id="productSupportBackdrop" class="product-support-backdrop" hidden>
-      <section id="productSupportSheet" class="product-support-sheet" role="dialog" aria-modal="true" aria-label="Consulta sobre producto">
-        <div class="product-support-product-header"><div class="product-support-sheet__handle" aria-hidden="true"></div><div class="product-support-product-header__row"><img id="supportProductImage" alt="" /><div class="product-support-product-header__copy"><strong id="supportProductTitle">Campera Core</strong><small id="supportProductPrice">$ 74.990</small></div><button id="closeProductSupport" class="product-support-sheet__close" type="button" aria-label="Cerrar">×</button></div></div>
-        <div class="product-support-sheet__body">
-          <div id="productSupportFormView">
-            <form id="productSupportForm" class="product-support-form" novalidate>
-              <div class="product-support-field"><label for="productSupportName">Nombre y Apellido</label><input id="productSupportName" name="name" type="text" autocomplete="name" placeholder="Nombre completo" /><span id="productSupportNameError" class="product-support-error" hidden></span></div>
-              <div class="product-support-field"><label for="productSupportEmail">Correo</label><input id="productSupportEmail" name="email" type="email" autocomplete="email" placeholder="tu@email.com" /><span id="productSupportEmailError" class="product-support-error" hidden></span></div>
-              <button class="product-support-submit" type="submit">Contactar</button>
-            </form>
-            <p class="product-support-note">Tus datos se usan para identificar esta consulta dentro de la sesión actual.</p>
+    <div id="productSupportBackdrop" class="product-inquiry-backdrop" hidden>
+      <section id="productSupportSheet" class="product-inquiry-sheet" role="dialog" aria-modal="true" aria-labelledby="productSupportTitle" aria-describedby="productSupportDescription">
+        <header class="product-inquiry-header">
+          <button class="product-inquiry-header__back" id="productInquiryBack" type="button" aria-label="Volver a la ficha del producto">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+          <img class="product-inquiry-header__logo" src="./assets/santa-clausula-logo.webp" alt="" width="38" height="38" decoding="async" />
+          <div class="product-inquiry-header__text">
+            <strong>Soporte | SANTA CLAUSULA</strong>
+            <small>Consulta sobre producto</small>
           </div>
-          <div id="productSupportChatView" class="product-support-chat" hidden>
-            <div class="product-support-chat__notices"><div class="product-support-chat__notice"><p>En esta versión de prueba, el chat se mantiene mientras esta sesión del navegador siga activa. Si cerrás la pestaña, puede perderse.</p></div><div class="product-support-chat__notice product-support-chat__notice--security"><p>Si hiciste una compra, no podemos darte información sensible sobre ella hasta validar tu identidad.</p></div></div>
-            <div id="productSupportMessages" class="product-support-messages" aria-live="polite"></div>
-            <div id="productSupportQuickQuestions" class="product-support-quick-questions" aria-label="Preguntas sugeridas"></div>
-            <form id="productSupportMessageForm" class="product-support-composer" novalidate><input id="productSupportMessageInput" type="text" autocomplete="off" maxlength="800" placeholder="Escribí tu mensaje..." aria-label="Escribí tu mensaje" /><button type="submit">Enviar</button></form>
+          <button id="closeProductSupport" class="product-inquiry-header__close" type="button" aria-label="Cerrar consulta">×</button>
+        </header>
+        <div class="product-inquiry-context">
+          <span class="product-inquiry-context__label">Estás consultando por este producto</span>
+          <div class="product-inquiry-product-card" aria-label="Contexto comercial del producto">
+            <img id="supportProductImage" class="product-inquiry-product-card__image" src="./assets/proyector-navideno-producto.webp" alt="" width="64" height="80" decoding="async" />
+            <div class="product-inquiry-product-card__text">
+              <strong id="supportProductTitle">Proyector de formas navideñas portable</strong>
+              <small id="supportProductOffer">Producto consultado</small>
+            </div>
           </div>
+        </div>
+        <div class="product-inquiry-sheet__body">
+          <h2 id="productSupportTitle">Consultá por este producto</h2>
+          <p id="productSupportDescription" class="product-inquiry-sheet__description">Dejanos tus datos y contanos qué necesitás saber.</p>
+          <form id="productSupportForm" class="product-inquiry-form" novalidate>
+            <div class="product-inquiry-field">
+              <label for="productSupportName">Nombre y apellido</label>
+              <input id="productSupportName" name="name" type="text" maxlength="120" autocomplete="name" placeholder="Tu nombre completo" required />
+            </div>
+            <div class="product-inquiry-field">
+              <label for="productSupportEmail">Correo electrónico</label>
+              <input id="productSupportEmail" name="email" type="email" inputmode="email" maxlength="254" autocomplete="email" placeholder="tuemail@ejemplo.com" required />
+            </div>
+            <div class="product-inquiry-field">
+              <label for="productSupportMessage">¿Qué querés consultar?</label>
+              <textarea id="productSupportMessage" name="message" rows="3" minlength="1" maxlength="4000" placeholder="Escribí tu consulta..." required></textarea>
+            </div>
+            <button id="productSupportSubmit" type="submit" class="product-inquiry-submit">Iniciar consulta</button>
+            <p class="product-inquiry-note">Podrás continuar la conversación mediante un acceso seguro cuando activemos la atención.</p>
+            <p class="product-inquiry-note">Versión de demostración: por ahora no se crean consultas reales ni se envían mensajes.</p>
+            <p id="productSupportFeedback" class="product-inquiry-feedback" role="status" aria-live="polite" hidden></p>
+          </form>
+          <a class="product-inquiry-preview" href="./conversacion.html?demo=product">Ver vista previa del chat</a>
+          <p class="product-inquiry-preview-note">La vista previa utiliza mensajes y contexto ilustrativos.</p>
         </div>
       </section>
     </div>
@@ -188,8 +216,8 @@
     <div id="toast" class="toast product-toast" role="status" aria-live="polite"></div>
   </div>
 
-  <script defer src="./js/product-runtime-v4.js?v=20261104-v4-brand"></script>
-  <script defer src="./js/product-support-camping-v1.js?v=20261104-v2"></script>
+  <script defer src="./js/product-runtime-v4.js?v=20261105-case-c-01"></script>
+  <script defer src="./js/product-support-v2.js?v=20261105-case-c-01"></script>
   <script defer src="./js/product-combos-controller-v2.js?v=20261102-0208"></script>
   <script defer src="./js/product-offer-callout-v1.js?v=20261101-1832"></script>
   <script defer src="./js/product-commercial-v1.js?v=20261104-v2"></script>
