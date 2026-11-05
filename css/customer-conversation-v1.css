@@ -336,3 +336,201 @@ button, textarea { font: inherit; }
   .conversation-header__copy h1 { font-size: 11px; }
   .conversation-context__row { font-size: 10px; }
 }
+
+/* ---------------------------------------------------------------------
+   Case B — buyer context is UI-only, NOT a verified customer projection.
+   Approved 2026-11-05: NO colored outlines on cards, badges or widgets.
+   Background separation + tight, soft shadows instead of borders.
+   --------------------------------------------------------------------- */
+.conversation-preview-switch {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  flex: none;
+  gap: 5px;
+  padding: 8px 10px;
+  background: #F1F2F1;
+}
+.conversation-preview-switch a {
+  display: flex;
+  min-width: 0;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 5px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: #5D665E;
+  text-align: center;
+  text-decoration: none;
+  font-size: 10.5px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.conversation-preview-switch a[aria-current="page"] {
+  background: #FFFFFF;
+  color: #1E7437;
+  box-shadow: 0 1px 3px rgba(20, 35, 24, .13);
+}
+.conversation-preview-switch a:focus-visible,
+.conversation-empty a:focus-visible {
+  outline: 0;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  box-shadow: 0 1px 4px rgba(15, 27, 18, .24);
+}
+.conversation-buyer-context {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  gap: 12px;
+  padding: 13px 14px;
+  background: #F7F8F7;
+}
+.conversation-buyer-context__intro {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.conversation-buyer-context__symbol {
+  display: grid;
+  width: 29px;
+  height: 29px;
+  flex: none;
+  place-items: center;
+  border: 0;
+  border-radius: 4px;
+  background: #E7F1E9;
+  color: #1E7437;
+}
+.conversation-buyer-context--pending .conversation-buyer-context__symbol {
+  background: #EDEDED;
+  color: #5E5E5E;
+}
+.conversation-buyer-context__symbol svg,
+.conversation-order-card__icon svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.conversation-buyer-context__copy { flex: 1; min-width: 0; }
+.conversation-buyer-context__copy strong {
+  display: block;
+  color: #202220;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.4;
+}
+.conversation-buyer-context__copy p {
+  margin: 4px 0 0;
+  color: #777777;
+  font-size: 11px;
+  line-height: 1.5;
+}
+.conversation-order-card {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  padding: 12px;
+  border: 0;
+  border-radius: 4px;
+  background: #FFFFFF;
+  box-shadow: 0 1px 3px rgba(18, 30, 19, .12);
+}
+.conversation-order-card__top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.conversation-order-card__icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  flex: none;
+  place-items: center;
+  border: 0;
+  border-radius: 4px;
+  background: #E7F1E9;
+  color: #1E7437;
+}
+.conversation-order-card__icon svg {
+  width: 22px;
+  height: 22px;
+}
+.conversation-order-card__identity {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 3px;
+}
+.conversation-order-card__identity strong {
+  color: #202220;
+  font-size: 13px;
+  font-weight: 800;
+}
+.conversation-order-card__identity span {
+  color: #777777;
+  font-size: 11px;
+}
+.conversation-order-card__status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.conversation-order-card__status span {
+  color: #777777;
+  font-size: 11px;
+}
+.conversation-order-card__status strong {
+  color: #1E7437;
+  text-align: right;
+  font-size: 11px;
+  font-weight: 700;
+}
+/* Remove legacy colored/visible card or widget outlines also in Case A. */
+.conversation-demo-notice,
+.conversation-context,
+.conversation-composer,
+.conversation-composer__bar,
+.conversation-empty__return,
+.conversation-empty__preview {
+  border: 0;
+}
+.conversation-context,
+.conversation-composer {
+  box-shadow: 0 1px 2px rgba(18, 30, 19, .08);
+}
+.conversation-composer__bar {
+  background: #F8F9F8;
+  box-shadow: 0 1px 3px rgba(20, 35, 24, .1);
+}
+.conversation-empty__preview {
+  box-shadow: 0 1px 3px rgba(20, 35, 24, .13);
+}
+@media (max-width: 350px) {
+  .conversation-preview-switch { padding: 7px 8px; gap: 3px; }
+  .conversation-preview-switch a { padding: 6px 3px; font-size: 10px; }
+  .conversation-order-card__status { align-items: flex-start; }
+}
+
+/* Keyboard-accessible focus without a colored frame. */
+.conversation-header__back:focus-visible,
+.conversation-header__close:focus-visible {
+  outline: 0;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, .13);
+  box-shadow: 0 1px 3px rgba(10, 20, 12, .23);
+}
+@media (min-width: 461px) {
+  .conversation-shell {
+    box-shadow: 0 1px 5px rgba(15, 25, 18, .09);
+  }
+}

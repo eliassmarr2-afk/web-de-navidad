@@ -243,3 +243,34 @@ button, a, select { -webkit-tap-highlight-color: transparent; }
   .support-main { padding-right: 12px; padding-left: 12px; }
   .support-form-card { padding: 19px 14px 15px; }
 }
+
+/* 2026-11-05 — approved site UI rule: cards/widgets without colored
+   outlines. Separation uses minimal shadows, preserving keyboard focus. */
+.support-form-card {
+  border: 0;
+  box-shadow: 0 1px 4px rgba(20,30,25,.10);
+}
+.support-preview-link {
+  border: 0;
+  box-shadow: 0 1px 3px rgba(20,35,24,.13);
+}
+.support-feedback {
+  border: 0;
+  box-shadow: 0 1px 3px rgba(30,30,30,.08);
+}
+.support-field input:focus-visible,
+.support-field select:focus-visible,
+.support-field textarea:focus-visible {
+  border-color: #D7D7D7;
+  outline: 0;
+  box-shadow: 0 1px 4px rgba(20,30,25,.24);
+}
+.support-header__back:focus-visible,
+.support-header__avatar:focus-visible,
+.support-submit:focus-visible,
+.support-preview-link:focus-visible {
+  outline: 0;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  box-shadow: 0 1px 4px rgba(20,30,25,.26);
+}

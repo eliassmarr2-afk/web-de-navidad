@@ -244,3 +244,18 @@ ACTIVATION = NOT ACTIVE
 - Documentación local: `SANTA_CLAUSULA_SUPPORT_GENERAL_V1_IMPLEMENTATION.md` y `SANTA_CLAUSULA_CONVERSACIONES_TRES_ORIGENES.md`.
 - Support Public Start real deberá seguir los contratos exactos de Protocol Data V2, con capability emitida y continuidad autorizada; no se heredan permisos por formulario, correo o Shopify.
 - Escenarios B (buyer) y C (landing product), colas/segmentos y consultas reales siguen PENDIENTES. Ninguna conexión Supabase ni secrets se modificó.
+
+---
+
+## 14. SOPORTE CASO B — PREVIEW DE PEDIDO
+
+```text
+CASE B VISUAL READINESS = UI IMPLEMENTED / DEMO ONLY
+ORDER ASSOCIATION CUSTOMER PROJECTION = NOT AVAILABLE
+SUPPORT PUBLIC/CUSTOMER LIVE = NOT ACTIVE
+```
+
+- El mismo `conversacion.html` soporta modo `buyer-pending` sin exponer Order y modo `buyer-verified` con datos inequívocamente ficticios. Ningún parámetro URL es credencial ni prueba de compra.
+- `SANTA_CLAUSULA_SUPPORT_BUYER_V1_IMPLEMENTATION.md` congela el alcance visual y el requisito de cards/badges/widgets sin bordes de color, con sombras compactas.
+- En producción, identidad comprador y asociación Order requieren verificación y proyección customer-safe expresamente autorizada. `SUPPORT 014` sigue siendo contrato candidato en los documentos auditados.
+- La capa A, el demo C legado, Product/Shopify/Orders/Logistics y Supabase no fueron conectados o modificados.

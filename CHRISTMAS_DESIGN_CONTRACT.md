@@ -1,3 +1,5 @@
+> **REGLA TRANSVERSAL DE SUPERFICIES SIN CONTORNOS (APROBADA 2026-11-05):** En SANTA CLAUSULA no incorporar contornos decorativos coloreados a tarjetas, badges, estados o widgets. Su separación visual se resuelve por blancos/grises, espaciado y sombras suaves, cortas y de poco desenfoque. Las nuevas superficies deben usar preferentemente radio de 4px y conservar feedback accesible de foco por sombras/subrayados sin contornos coloreados. Esta revisión visual posterior prevalece sobre estilos de borde decorativo anteriores en superficies que se diseñen o refinen a partir de ahora. No autoriza cambiar en masa los demás módulos ya aprobados ni sus controles comerciales.
+
 > **REVISIÓN VIGENTE (2026-11-04):** La composición móvil de este contrato fue modificada por [HOME_V1_APPROVED_VISUAL_REVISION.md](./HOME_V1_APPROVED_VISUAL_REVISION.md). En caso de conflicto prevalece la revisión posterior: hero full-bleed 25 % del alto, ubicación e íconos dentro del hero, buscador + mapa dentro del hero, una sola fila de categorías sin caja, banner medio con sombrero. La implementación de esta revisión está pendiente.
 
 # WEB DE NAVIDAD — CONTRATO VISUAL Y FUNCIONAL V1

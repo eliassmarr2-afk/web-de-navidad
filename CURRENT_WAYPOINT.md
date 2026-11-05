@@ -187,3 +187,14 @@ Original `eliassmarr2-afk/indumentary` intacto. Documentos heredados que todaví
 - `css/support.css`, `js/support.js`, `css/customer-conversation-v1.css`, `js/customer-conversation-v1.js`: UI aislada, sin backend ni token persistido. Favicon temporal reutiliza `assets/santa-clausula-logo.webp`.
 - **NO tocar** la lógica de consulta de Producto/escenario C en esta fase. B/C pendientes; no duplicar motores de Support cuando se integren.
 - **Estado:** UI code ready; Pages/visual mobile review PENDING; Protocol Data Support Start/Customer NOT ACTIVE; emails reales NOT ACTIVE.
+
+## Caso B — contexto de pedido en Conversaciones, sin contornos — 2026-11-05
+
+- El operador aprobó el diseño del escenario B **con la condición expresa de NUNCA utilizar contornos de color en tarjetas, badges o widgets**. Se prefieren sombras leves, cortas y poco difuminadas y la separación por fondo/espaciado.
+- **Contrato/recibo:** `SANTA_CLAUSULA_SUPPORT_BUYER_V1_IMPLEMENTATION.md`.
+- Se amplía el **mismo** `conversacion.html`, sin duplicar chats ni integrar todavía Protocol Data. La UI admite tres previews: A `?demo=1`, B sin verificar `?demo=buyer-pending`, B ficticiamente verificado `?demo=buyer-verified`.
+- **Pendiente:** ninguna referencia de compra expuesta; **verificado demo:** solo `Pedido #SC-DEMO` y `En preparación (ejemplo)` con tarjetas sin bordes y sombras compactas. Los datos no provienen de Orders.
+- `js/customer-conversation-v1.js`: control exclusivo de previews, sin requests ni persistencia. `css/customer-conversation-v1.css`: bloc buyer + regla sin bordes para A/B. `css/support.css` y `soporte.html`: se eliminan contornos decorativos del formulario A (sin cambiar sus campos o envíos).
+- El escenario C (consulta desde Landing Product) y el soporte real B quedan pendientes. `product.html` no se modifica.
+- **Seguridad:** el inicio público produce `order_id=NULL`; la consulta customer aún no proyecta buyer/Order. Una vista visual `?demo=buyer-verified` NUNCA confiere acceso seguro ni confirma ninguna compra.
+- Pendiente inspección móvil/desktop y despliegue GitHub Pages del commit final.

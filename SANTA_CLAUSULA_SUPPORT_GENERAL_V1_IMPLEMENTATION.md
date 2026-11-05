@@ -64,3 +64,7 @@ El sitio tiene actualmente `soporte.html` y un mock de chat **separado en Produc
 5. Integración real Support public/customer solo mediante autorización independiente.
 
 **Controles de entrega:** no inventar envío, buyer association, segmento automático, caso persistente, mensaje del operador ni capability en esta fase.
+
+## 6. Ampliación B y regla de contornos (2026-11-05)
+
+El diseño A fue recibido y expresamente aprobado por el operador. Luego fue aprobada la ampliación B, documentada en `SANTA_CLAUSULA_SUPPORT_BUYER_V1_IMPLEMENTATION.md`. Se reutiliza `conversacion.html` y se preserva A; se agregan vistas de pedido **exclusivamente ficticias**. Se eliminaron los contornos decorativos coloreados del frontend A (formulario, CTA de preview, enlaces de la conversación) por nueva regla visual global; no se modifica ninguna seguridad ni capacidad real.

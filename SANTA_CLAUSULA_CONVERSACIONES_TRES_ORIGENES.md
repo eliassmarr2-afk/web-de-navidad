@@ -97,3 +97,11 @@ Esta enmienda **prevalece** frente a cualquier descripción anterior del chat co
 El operador aprobó expresamente el diseño A de Soporte general: logo de SANTA CLAUSULA y texto de tienda, inicio por nombre/correo/motivo/mensaje inicial, presentación de mensajes de ambos interlocutores sin producto ni Order, y composer fijo.
 
 La implementación aislada de la UI A está documentada en `SANTA_CLAUSULA_SUPPORT_GENERAL_V1_IMPLEMENTATION.md` y está incorporada al repositorio mediante `soporte.html` y `conversacion.html`. **El modo demo no crea ningún Support Case ni admite capacidades reales**. Los escenarios B y C no se han construido con esta aprobación; mantienen fases independientes. Los contratos de Support siguen siendo autoridad para abrir/leer/responder casos reales.
+
+## 9. Caso B visual — aprobado e integrado (2026-11-05)
+
+- **Autoridad local:** `SANTA_CLAUSULA_SUPPORT_BUYER_V1_IMPLEMENTATION.md`.
+- El mismo cliente visual `conversacion.html` tiene el escenario A (general) y dos estados B: compra sin verificar (sin Order mostrado) y compra verificada **ficticia/solo demo** (tarjeta con referencia/estado ficticios). La cabecera de Soporte y el favicon se conservan.
+- **Regla visual expresa y transversal:** tarjetas, badges, widgets sin contornos de color; cuando convenga, sombras leves con desenfoque mínimo. Se mantiene una señal de foco por subrayado/sombra accesible.
+- El frontend no introduce Orders en la proyección `support-customer`, no realiza detección de comprador, ni crea un caso en segundo backend. El modo verificado real depende de una futura proyección buyer customer-safe y asociación canónica verificada.
+- C (product landing) permanece pendiente y sin alteración del mock heredado.
