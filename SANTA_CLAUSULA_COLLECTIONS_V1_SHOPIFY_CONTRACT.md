@@ -111,3 +111,10 @@ Crear las **colecciones como datos** en Shopify y asociar productos es una tarea
 - [Shopify / Storefront API Collection](https://shopify.dev/docs/api/storefront/latest/objects/collection)
 
 **Fase siguiente:** aprobación visual de colección; incorporación de fotografía definitiva por categoría/colección y posterior Shopify adapter/conexión cuando esté autorizado.
+
+## 8. Extensión de navegación global — 2026-11-05
+
+- Nuevo contrato `SANTA_CLAUSULA_SHARED_TABBAR_V1_CONTRACT.md`.
+- Las ocho páginas generadas de colecciones incorporan `data-site-tabbar` con el mismo `js/shared/site-tabbar.js` y `css/site-tabbar.css`, mediante el builder `scripts/build-collection-pages.mjs`.
+- El tab `Navidad` enlaza a nuevo hub `navidad.html`; el tab central `Regalos` enlaza a hub `regalos.html`. La colección `colecciones/regalos.html` sigue siendo entidad separada.
+- Cinco destinos globales y ninguna barra duplicada; el diseño del banner/colección `#EDEDED` y `25svh` queda intacto.

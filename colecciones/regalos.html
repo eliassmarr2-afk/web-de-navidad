@@ -12,6 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../css/collection-page.css?v=20261105-collection-01" />
+  <link rel="stylesheet" href="../css/site-tabbar.css?v=20261105-tabbar-v1" />
 </head>
 <body class="sc-collection-page">
   <section class="sc-collection-hero" aria-label="Imagen de cabecera de Regalos">
@@ -75,13 +76,8 @@
     <p>La magia de la Navidad, en un solo lugar.</p>
     <a href="../soporte.html">Soporte</a>
   </footer>
-  <nav class="sc-collection-bottom-nav" aria-label="Navegación de la tienda">
-    <a href="../index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-8 9 8v10h-6v-6H9v6H3z"/></svg><span>Inicio</span></a>
-    <a href="#mas-colecciones" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2-7 9h4l-6 8h18l-6-8h4zM12 19v3"/></svg><span>Colecciones</span></a>
-    <a href="../index.html#packs"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9h18v12H3Z M2 6h20v4H2z M12 6v15"/></svg><span>Packs</span></a>
-    <a href="../tracking.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h12v11H3Z M15 10h4l3 4v3h-7"/></svg><span>Pedidos</span></a>
-    <a href="../soporte.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v12H8l-4 4z"/></svg><span>Ayuda</span></a>
-  </nav>
+  <nav class="sc-tabbar" data-site-tabbar data-base="../" data-active="regalos" aria-label="Navegación principal"></nav>
   <script type="module" src="../js/collection-page.js?v=20261105-collection-01"></script>
+  <script type="module" src="../js/shared/site-tabbar.js?v=20261105-tabbar-v1"></script>
 </body>
 </html>

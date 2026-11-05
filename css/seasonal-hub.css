@@ -1,0 +1,55 @@
+/* Shared Navidad / Regalos landing · SANTA CLAUSULA. */
+.sc-hub-page { margin: 0; min-height: 100vh; background: #EDEDED; color: #1F1F1F; font-family: "Manrope", system-ui, sans-serif; }
+.sc-hub-page *, .sc-hub-page *::before, .sc-hub-page *::after { box-sizing: border-box; }
+.sc-hub-hero { position: relative; width: 100%; height: 25svh; overflow: hidden; background: #21492D; }
+.sc-hub-hero img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; }
+.sc-hub-hero::after { content:""; position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,22,10,.49),rgba(5,22,10,.08) 60%,rgba(5,22,10,.40));pointer-events:none; }
+.sc-hub-hero__top { position: absolute; z-index: 1; left: 0; right: 0; top: 0; display: flex; justify-content: space-between; align-items: center; padding: calc(13px + env(safe-area-inset-top,0px)) 17px 12px; }
+.sc-hub-hero__back, .sc-hub-hero__brand { color:#FFF; text-decoration:none; font-weight:800; }
+.sc-hub-hero__back { width:36px;height:36px;display:grid;place-items:center;background:rgba(0,0,0,.20);border-radius:4px;border:0; }
+.sc-hub-hero__back svg { width:22px;height:22px;fill:none;stroke:#FFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round; }
+.sc-hub-hero__brand { font-size:14px;letter-spacing:.055em; }
+.sc-hub-hero__space { width:36px; }
+.sc-hub-hero__caption { position:absolute;z-index:1;bottom:13px;left:0;right:0;text-align:center;color:#FFF;font-size:10px;letter-spacing:.12em;font-weight:700; }
+.sc-hub-main { max-width:1100px;margin:0 auto;padding:22px 21px 90px; }
+.sc-hub-breadcrumb { display:flex;gap:9px;align-items:center;margin:0 0 24px;color:#888;font-size:11px; }
+.sc-hub-breadcrumb a { color:#6F6F6F;text-decoration:none; }
+.sc-hub-head { margin:0 0 31px; }
+.sc-hub-eyebrow { margin:0 0 7px;color:#A20B19;font-size:10px;font-weight:800;letter-spacing:.10em; }
+.sc-hub-head h1 { margin:0;font-size:clamp(29px,5vw,42px);line-height:1.2;letter-spacing:-.03em; }
+.sc-hub-head>p:last-child { margin:11px 0 0;max-width:600px;color:#696969;font-size:13px;line-height:1.7; }
+.sc-hub-section { margin-top:30px; }
+.sc-hub-section h2 { margin:0;color:#222;font-size:21px;font-weight:800; }
+.sc-hub-section__caption { margin:6px 0 15px;font-size:12px;line-height:1.65;color:#777; }
+.sc-hub-collection-grid { display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px; }
+.sc-hub-collection-card { display:flex;min-width:0;align-items:center;gap:10px;min-height:85px;padding:13px;border:0;border-radius:4px;background:#FFF;box-shadow:0 1px 3px rgba(24,35,27,.12);color:#282828;text-decoration:none; }
+.sc-hub-collection-card__monogram { display:grid;place-items:center;width:42px;height:42px;flex:none;border-radius:50%;background:#A20B19;color:#FFF;font-size:20px;font-weight:800; }
+.sc-hub-collection-card__name { flex:1;min-width:0;overflow-wrap:anywhere;font-size:12px;font-weight:800; }
+.sc-hub-collection-card__arrow { margin-left:auto;color:#9A9A9A;font-size:24px;line-height:1; }
+.sc-hub-product-grid { display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px; }
+.sc-hub-product-card { display:flex;flex-direction:column;min-width:0;border:0;border-radius:4px;overflow:hidden;background:#FFF;box-shadow:0 1px 3px rgba(24,35,27,.12); }
+.sc-hub-product-card__media { width:100%;aspect-ratio:4/5;background:#F9F9F9; }
+.sc-hub-product-card__media img { display:block;width:100%;height:100%;object-fit:contain; }
+.sc-hub-product-card__body { display:flex;flex-direction:column;gap:7px;padding:13px; }
+.sc-hub-product-card__body strong { color:#232323;font-size:12px;line-height:1.45; }
+.sc-hub-product-card__body span { color:#777;font-size:11px; }
+.sc-hub-product-card__body b { color:#1E7437;font-size:15px; }
+.sc-hub-demo-note { margin:12px 0 0;color:#929292;font-size:10px;line-height:1.5; }
+.sc-hub-footer { padding:24px 20px 100px;background:#E4E4E4;text-align:center;color:#666;font-size:11px; }
+.sc-hub-footer a { color:#1E7437;text-decoration:none;font-weight:800; }
+.sc-hub-page a:focus-visible { outline:0;text-decoration:underline;text-underline-offset:4px;box-shadow:0 1px 4px rgba(15,27,18,.25); }
+@media (max-width:760px) { .sc-hub-collection-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .sc-hub-product-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width:640px) {
+ .sc-hub-main { padding:18px 13px 100px; }
+ .sc-hub-breadcrumb { margin-bottom:18px; }
+ .sc-hub-head { margin-bottom:25px; }
+ .sc-hub-head h1 { font-size:30px; }
+ .sc-hub-head>p:last-child { font-size:12px; }
+ .sc-hub-section h2 { font-size:18px; }
+ .sc-hub-collection-grid { gap:10px; }
+ .sc-hub-collection-card { gap:9px;min-height:74px;padding:10px; }
+ .sc-hub-collection-card__monogram { width:35px;height:35px;font-size:17px; }
+ .sc-hub-product-grid { gap:11px; }
+ .sc-hub-product-card__body { padding:10px; }
+}
+@media (max-width:360px) { .sc-hub-collection-card { gap:6px;padding:8px; } .sc-hub-collection-card__monogram { width:30px;height:30px; } .sc-hub-collection-card__name { font-size:11px; } }

@@ -65,3 +65,11 @@ FORMATO CATEGORÍA     CÍRCULO ROJO
 - Ocho rutas de colecciones, **una única plantilla y un adapter reemplazable**. Banco temporal de imagen propia `assets/christmas-hero-banner.webp` para los ocho banners; imágenes individuales se incorporarán por datos de colección en Shopify.
 - Mantener norma sin bordes/contornos decorativos coloreados; sombras compactas.
 - Inicio solo cambia navegación de colecciones, sin alterar los módulos comerciales aprobados.
+
+## TAB INFERIOR V1 — REVISIÓN VISUAL 2026-11-05
+
+- Referencia visual aportada por operador: íconos estables de trazo redondeado y destino activo destacado dentro de píldora.
+- El contenedor nav **no se redondea**: `border-radius:0`, `border:0`, `box-shadow:none`, `left:0/right:0/bottom:0`.
+- Fondo blanco/rojo navideño translúcido con desenfoque leve, sin línea divisoria visible. Píldora activa `rgba(178,11,23,.13)`, íconos color `#A20B19`.
+- Orden Inicio / Navidad / Regalos / Pedidos / Ayuda. Regalos es el ítem central y ambos hubs editoriales tienen páginas propias.
+- Contrato `SANTA_CLAUSULA_SHARED_TABBAR_V1_CONTRACT.md`. La barra comparte JS/CSS, sin duplicación; Productos/Logística/Conversaciones permanecen bajo contratos anteriores.

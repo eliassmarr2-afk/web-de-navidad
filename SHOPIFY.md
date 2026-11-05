@@ -152,3 +152,11 @@ Antes de cada promoción se revalidarán los contratos Shopify vigentes y Docume
 - El layout `#EDEDED` y banner `25svh` se aplicarán una sola vez al tema; el header sobrepuesto se valida al migrar.
 - La colección Ofertas no define por sí misma descuentos reales ni bundles. Mantener SKU, Product Set, Commercial Offer y Shopify Variant como identidades distintas.
 - Estado: SHOPIFY COMPATIBLE / NOT CONNECTED.
+
+## 12. TAB INFERIOR ENSAMBLABLE — SHOPIFY
+
+- Documento de sitio: `SANTA_CLAUSULA_SHARED_TABBAR_V1_CONTRACT.md`.
+- Sitio GitHub Pages: una autoridad de rutas/íconos `js/shared/site-tabbar.js`, una CSS global `css/site-tabbar.css`. Las páginas `navidad.html` / `regalos.html` son landings editoriales, no colecciones de comercio por defecto.
+- Blueprint nativo Shopify NO INSTALADO: `shopify/snippets/santa-clausula-site-tabbar.liquid` + `shopify/assets/santa-clausula-site-tabbar.css`. Una inclusión en layout del tema, con cinco enlaces editables en menú `santa-clausula-tabbar`, sin código por página.
+- En la activación deberán resolverse las páginas merchant Navidad, Regalos, Tracking y Soporte y su proveedor autorizado; links de navegación NO confieren acceso a pedidos o conversaciones.
+- Barra responsive borde a borde sin radio externo y fondo navideño traslúcido, píldora activa redondeada. Estado SHOPIFY COMPATIBLE / NO INSTALADO.

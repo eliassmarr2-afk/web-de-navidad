@@ -228,16 +228,6 @@ async function handleLocationSubmit(event) {
   showToast(`Ubicación guardada: ${location.visibleLabel}.`);
 }
 
-function syncBottomNav() {
-  const hash = window.location.hash || "#top";
-  $('a[href^="#"]', $(".holiday-bottom-nav")).forEach(link => {
-    const active = link.getAttribute("href") === hash;
-    link.classList.toggle("is-current", active);
-    if (active) link.setAttribute("aria-current", "location");
-    else link.removeAttribute("aria-current");
-  });
-}
-
 function bindEvents() {
   elements.menuToggle.addEventListener("click", openMenu);
   elements.menuClose.addEventListener("click", closeMenu);
@@ -309,7 +299,6 @@ function bindEvents() {
     elements.cartCount.textContent = String(getCartCount());
   });
 
-  window.addEventListener("hashchange", syncBottomNav);
 
   window.addEventListener("keydown", (event) => {
     if (event.key !== "Escape") return;
@@ -326,7 +315,6 @@ function init() {
   updateLocationUI();
   elements.cartCount.textContent = String(getCartCount());
   bindEvents();
-  syncBottomNav();
   emitSiteEvent("home_viewed", { environment: SITE_CONFIG.environment });
 }
 

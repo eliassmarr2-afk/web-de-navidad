@@ -236,3 +236,13 @@ Original `eliassmarr2-afk/indumentary` intacto. Documentos heredados que todaví
 - Contrato: `SANTA_CLAUSULA_COLLECTIONS_V1_SHOPIFY_CONTRACT.md`; referencia Shopify nativa y NO INSTALADA: `shopify/templates/collection.json` y `shopify/sections/santa-clausula-collection.liquid`, una sola plantilla para todas.
 - **No hay colección ni producto Shopify activos**. Las cards del catálogo mock no enlazan a la página del proyector porque sería una ficha equivocada. Integración con Protocol Data y Shopify sigue reservada.
 - Pendientes: revisión visual, imágenes definitivas por colección, activación autorizada posterior de Shopify.
+
+## Tab inferior compartido V1 / nuevas landings Navidad y Regalos — 2026-11-05
+
+- El operador solicitó replicar conceptualmente la barra de la primera imagen: superficie translúcida navideña sin caja ni contornos, pegada a los bordes izquierdo/derecho/inferior; iconos lineales redondeados; solo opción activa en píldora suave.
+- Se reemplazaron las barras anteriores de Home y colecciones por **una sola implementación** en `js/shared/site-tabbar.js` + `css/site-tabbar.css`; cada pantalla tiene únicamente un punto de montaje.
+- Cinco destinos en orden: Inicio (`index.html`), Navidad (`navidad.html`), Regalos (`regalos.html`), Pedidos (`tracking.html`), Ayuda (`soporte.html`).
+- Las páginas Navidad/Regalos comparten `js/seasonal-hub.js`, `css/seasonal-hub.css` y `scripts/build-seasonal-hubs.mjs`; son hubs editoriales independientes de las colecciones `colecciones/*.html`. Fotos e inventario todavía ilustrativos.
+- El generador de ocho colecciones incorpora el mismo tab compartido. Producto lo monta sin interferir con el sticky de compra (z=75 sobre tab z=60); no cambian checkout, Soporte, Chat ni Tracking.
+- **Contratos:** `SANTA_CLAUSULA_SHARED_TABBAR_V1_CONTRACT.md`; referencia portable Shopify `shopify/snippets/santa-clausula-site-tabbar.liquid` + `shopify/assets/santa-clausula-site-tabbar.css`, menú merchant-editable de cinco enlaces, aún INACTIVO.
+- Estado: código preparado para revisar visualmente en dispositivo; Shopify y Protocol Data no conectados.

@@ -12,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./css/tracking.css?v=20261102-1528" />
   <link rel="stylesheet" href="./css/tracking-results.css?v=20261102-1435" />
+  <link rel="stylesheet" href="./css/site-tabbar.css?v=20261105-tabbar-v1" />
 </head>
 <body class="tracking-body">
   <header class="tracking-header">
@@ -88,6 +89,8 @@
     <section id="trackingResults" class="tracking-results" aria-live="polite" aria-label="Información del pedido" hidden></section>
   </main>
 
+  <nav class="sc-tabbar" data-site-tabbar data-base="./" data-active="pedidos" aria-label="Navegación principal"></nav>
   <script defer src="./js/tracking.js?v=20261102-1435"></script>
+  <script type="module" src="./js/shared/site-tabbar.js?v=20261105-tabbar-v1"></script>
 </body>
 </html>

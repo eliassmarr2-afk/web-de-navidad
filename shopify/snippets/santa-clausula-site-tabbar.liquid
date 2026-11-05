@@ -1,0 +1,50 @@
+{% comment %}
+  SANTA CLAUSULA — portable Shopify tabbar blueprint / NOT INSTALLED.
+  Install once in theme/layout/theme.liquid before </body>:
+  {% render 'santa-clausula-site-tabbar' %}
+  Create Shopify Navigation menu handle "santa-clausula-tabbar" with 5 links:
+  1 Inicio, 2 Navidad, 3 Regalos, 4 Pedidos, 5 Ayuda.
+  Links are edited in Shopify Navigation; no per-page code duplication.
+{% endcomment %}
+{% assign sc_tabs = linklists['santa-clausula-tabbar'].links %}
+{% if sc_tabs.size == 5 %}
+  {{ 'santa-clausula-site-tabbar.css' | asset_url | stylesheet_tag }}
+  <nav class="sc-tabbar" data-site-tabbar aria-label="Navegación principal">
+    {% for link in sc_tabs %}
+      {% liquid
+        assign sc_is_current = link.current
+        if link.child_active
+          assign sc_is_current = true
+        endif
+        if request.page_type == 'collection'
+          if collection.handle == 'regalos' and forloop.index == 3
+            assign sc_is_current = true
+          elsif collection.handle != 'regalos' and forloop.index == 2
+            assign sc_is_current = true
+          endif
+        endif
+      %}
+      <a class="sc-tabbar__item{% if sc_is_current %} sc-tabbar__item--current{% endif %}"
+         href="{{ link.url }}"{% if sc_is_current %} aria-current="page"{% endif %}
+         aria-label="{{ link.title | escape }}">
+        <span class="sc-tabbar__surface">
+          <svg class="sc-tabbar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            {% case forloop.index %}
+              {% when 1 %}
+                <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/>
+              {% when 2 %}
+                <path d="M12 3 5 12h4l-5 6h16l-5-6h4z"/><path d="M12 18v4"/>
+              {% when 3 %}
+                <rect x="3.5" y="9.5" width="17" height="11" rx="2"/><path d="M2.5 6.5h19v3h-19zM12 6.5v14"/><path d="M12 6.5C7.6 6.5 5.4 4 7.8 2.6 10.2 1.2 12 6.5Zm0 0c4.4 0 6.6-2.5 4.2-3.9-2.4-1.4-4.8 2.1-4.2 3.9Z"/>
+              {% when 4 %}
+                <rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 9.3h17M9.5 9.3h5M9 15h6"/>
+              {% when 5 %}
+                <path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H7l-4 2v-7a8.5 8.5 0 1 1 18-3.5Z"/><path d="M10 9.3a2.4 2.4 0 0 1 4.5 1.1c0 1.5-2.5 1.7-2.5 3.3M12 17h.01"/>
+            {% endcase %}
+          </svg>
+          <span class="sc-tabbar__label">{{ link.title | escape }}</span>
+        </span>
+      </a>
+    {% endfor %}
+  </nav>
+{% endif %}
