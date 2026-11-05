@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "santa-clausula-collection",
+      "settings": {
+        "eyebrow": "COLECCIÓN DE TEMPORADA"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

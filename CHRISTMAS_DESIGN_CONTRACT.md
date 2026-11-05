@@ -57,3 +57,11 @@ FORMATO CATEGORÍA     CÍRCULO ROJO
 - Los precios, los productos, las estrellas y los estados comerciales son ilustrativos; no verifican inventario, reputación, entrega ni checkout.
 - No borrar páginas ni contratos heredados del modelo de origen.
 - Etapa siguiente: revisión visual móvil/escritorio; después creatividades/imágenes; luego skin y contenido de Producto, Tracking y Soporte.
+
+## COLECCIONES — EXTENSIÓN 2026-11-05
+
+- Contrato: `SANTA_CLAUSULA_COLLECTIONS_V1_SHOPIFY_CONTRACT.md`.
+- Fondo `#EDEDED`, banner superior `25svh`, ancho completo y pegado al límite superior.
+- Ocho rutas de colecciones, **una única plantilla y un adapter reemplazable**. Banco temporal de imagen propia `assets/christmas-hero-banner.webp` para los ocho banners; imágenes individuales se incorporarán por datos de colección en Shopify.
+- Mantener norma sin bordes/contornos decorativos coloreados; sombras compactas.
+- Inicio solo cambia navegación de colecciones, sin alterar los módulos comerciales aprobados.

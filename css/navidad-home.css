@@ -585,3 +585,16 @@
   }
   .christmas-home .coupon-ticket__frame { border-radius: 10px; }
 }
+
+/* Collections V1 · category circles are now navigable collection links.
+   Preserve the approved red circle / white icon visual with no outlines. */
+.christmas-home .category-one-rail a.category-card {
+  color: inherit;
+  text-decoration: none;
+  border: 0;
+}
+.christmas-home .category-one-rail a.category-card:focus-visible {
+  outline: 0;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(27,35,29,.24);
+}

@@ -1,0 +1,126 @@
+/*
+ * SANTA CLAUSULA / GENERATED STATIC COLLECTION ENTRIES.
+ *
+ * Run: node scripts/build-collection-pages.mjs  (Node 22+)
+ * Source identity: js/commerce/catalog.js -> categories.
+ * Shared page: js/collection-page.js + css/collection-page.css.
+ * Never hand-edit colecciones/*.html; regenerate when adding/renaming handles.
+ *
+ * Future Shopify mode uses ONE collection template and dynamic collection
+ * resource handles. These GitHub Pages HTML entries are static-only adapters.
+ */
+import { mkdir, writeFile } from "node:fs/promises";
+import { join } from "node:path";
+import { fileURLToPath } from "node:url";
+import { dirname } from "node:path";
+import { categories } from "../js/commerce/catalog.js";
+
+const root = join(dirname(fileURLToPath(import.meta.url)), "..");
+const out = join(root, "colecciones");
+const escapeHtml = (value) => String(value).replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;").replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+
+export function renderCollectionDocument(category) {
+  const label = escapeHtml(category.label);
+  const handle = escapeHtml(category.id);
+  return `<!doctype html>
+<html lang="es-AR" data-collection-handle="${handle}">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#EDEDED" />
+  <meta name="santa-clausula-collection-build" content="20261105-collection-01" />
+  <title>${label} | SANTA CLAUSULA</title>
+  <meta name="description" content="Explorá la colección ${label} de SANTA CLAUSULA. Catálogo visual de demostración, preparado para Shopify." />
+  <link rel="icon" type="image/webp" href="../assets/santa-clausula-logo.webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/collection-page.css?v=20261105-collection-01" />
+</head>
+<body class="sc-collection-page">
+  <section class="sc-collection-hero" aria-label="Imagen de cabecera de ${label}">
+    <img id="collectionHeroImage" src="../assets/christmas-hero-banner.webp"
+      alt="Imagen navideña temporal de la colección ${label}"
+      fetchpriority="high" decoding="async" />
+    <div class="sc-collection-hero__shade" aria-hidden="true"></div>
+    <nav class="sc-collection-hero__nav" aria-label="Navegación superior">
+      <a href="../index.html#categorias" class="sc-collection-hero__back" aria-label="Volver a las colecciones">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+      </a>
+      <a href="../index.html" class="sc-collection-hero__brand">SANTA CLAUSULA</a>
+      <a href="../index.html#productos" class="sc-collection-hero__store" aria-label="Explorar productos de la tienda">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h2l2 10h11l2-7H6M10 20h.01M17 20h.01"/></svg>
+      </a>
+    </nav>
+    <span class="sc-collection-hero__caption">NAVIDAD EN SANTA CLAUSULA</span>
+  </section>
+
+  <main class="sc-collection-main" id="contenido">
+    <nav class="sc-collection-breadcrumbs" aria-label="Ruta de navegación">
+      <a href="../index.html">Inicio</a>
+      <span aria-hidden="true">/</span>
+      <span id="collectionBreadcrumb" aria-current="page">${label}</span>
+    </nav>
+
+    <header class="sc-collection-intro">
+      <p id="collectionEyebrow" class="sc-collection-eyebrow">COLECCIÓN DE TEMPORADA</p>
+      <h1 id="collectionTitle">${label}</h1>
+      <p id="collectionDescription" class="sc-collection-description">Descubrí nuestra selección navideña.</p>
+    </header>
+
+    <section class="sc-collection-listing" aria-labelledby="collectionListingTitle">
+      <div class="sc-collection-listing__header">
+        <div>
+          <h2 id="collectionListingTitle">Descubrí la colección</h2>
+          <p id="collectionResultCount" aria-live="polite">Catálogo de demostración</p>
+        </div>
+        <label class="sc-collection-sort-label" for="collectionSort">
+          <span>Ordenar por</span>
+          <select id="collectionSort" name="sort">
+            <option value="featured">Destacados</option>
+            <option value="price-asc">Menor precio</option>
+            <option value="price-desc">Mayor precio</option>
+            <option value="name">Nombre</option>
+          </select>
+        </label>
+      </div>
+      <div id="collectionProductGrid" class="sc-collection-product-grid"></div>
+      <p id="collectionEmpty" class="sc-collection-empty" hidden>No hay productos de ejemplo en esta colección.</p>
+      <p class="sc-collection-demo-note">Catálogo ilustrativo. Los precios, productos y disponibilidad no representan ventas activas.</p>
+    </section>
+
+    <section class="sc-collection-more" id="mas-colecciones" aria-labelledby="collectionMoreTitle">
+      <h2 id="collectionMoreTitle">Explorá otras colecciones</h2>
+      <nav id="collectionOtherLinks" class="sc-collection-more__rail" aria-label="Otras colecciones"></nav>
+    </section>
+  </main>
+  <footer class="sc-collection-footer">
+    <strong>SANTA CLAUSULA</strong>
+    <p>La magia de la Navidad, en un solo lugar.</p>
+    <a href="../soporte.html">Soporte</a>
+  </footer>
+  <nav class="sc-collection-bottom-nav" aria-label="Navegación de la tienda">
+    <a href="../index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-8 9 8v10h-6v-6H9v6H3z"/></svg><span>Inicio</span></a>
+    <a href="#mas-colecciones" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2-7 9h4l-6 8h18l-6-8h4zM12 19v3"/></svg><span>Colecciones</span></a>
+    <a href="../index.html#packs"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9h18v12H3Z M2 6h20v4H2z M12 6v15"/></svg><span>Packs</span></a>
+    <a href="../tracking.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h12v11H3Z M15 10h4l3 4v3h-7"/></svg><span>Pedidos</span></a>
+    <a href="../soporte.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v12H8l-4 4z"/></svg><span>Ayuda</span></a>
+  </nav>
+  <script type="module" src="../js/collection-page.js?v=20261105-collection-01"></script>
+</body>
+</html>
+`;
+}
+
+if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+  await mkdir(out, { recursive: true });
+  for (const category of categories) {
+    if (!/^[a-z0-9-]+$/.test(category.id)) {
+      throw new Error("Invalid static collection handle: " + category.id);
+    }
+    await writeFile(join(out, category.id + ".html"), renderCollectionDocument(category), "utf8");
+  }
+  process.stdout.write("Generated " + categories.length + " collection pages.\n");
+}

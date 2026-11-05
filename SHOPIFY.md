@@ -143,3 +143,12 @@ SHOPIFY INTEGRATED
 ```
 
 Antes de cada promoción se revalidarán los contratos Shopify vigentes y Documento 004 de la banca.
+
+## 11. COLECCIONES / SHOPIFY — SANTA CLAUSULA
+
+- Contrato: `SANTA_CLAUSULA_COLLECTIONS_V1_SHOPIFY_CONTRACT.md`.
+- Sitio estático: ocho rutas generadas desde un único modelo y renderizador. Shopify: **una sola** `collection.json` + sección Liquid, archivadas en `shopify/` como blueprint inactivo.
+- Shopify será la autoridad de `collection.handle`, `title`, `image`, `description`, `products`, SEO, ordenación y publicación. Requiere crear los registros y relaciones de productos en Shopify, pero no ocho códigos de página; esos datos se pueden gestionar en Admin o automatizar por API.
+- El layout `#EDEDED` y banner `25svh` se aplicarán una sola vez al tema; el header sobrepuesto se valida al migrar.
+- La colección Ofertas no define por sí misma descuentos reales ni bundles. Mantener SKU, Product Set, Commercial Offer y Shopify Variant como identidades distintas.
+- Estado: SHOPIFY COMPATIBLE / NOT CONNECTED.

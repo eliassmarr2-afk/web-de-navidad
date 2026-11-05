@@ -293,3 +293,17 @@ REAL CUSTOMER RATINGS / METRICS = 0 REGISTRADOS DESDE LA WEB (NO OPERATIVO)
 - `css/conversation-rating-v1.css` y `js/conversation-rating-v1.js` aislados; la UI de A/B/C se conserva; sin requests, storage, tokens, respuestas ficticias persistentes ni DB.
 - **Contrato aprobado del sitio:** `SANTA_CLAUSULA_SUPPORT_CLOSURE_RATING_INTEGRATION_CONTRACT.md`. Autoridad de estados y cierre: Logistics / Support / Conversations canónico.
 - Transferir a Control de Protocol Data los requisitos pendientes de feedback por ciclo de cierre, idempotencia, almacenamiento y analítica real. No hay justificación para escribir en Experiencias postcompra solo por similitud de la palabra `rating`.
+
+## 17. COLECCIONES / SHOPIFY NAVIGATION READINESS
+
+```text
+COLLECTION STATIC ROUTES = IMPLEMENTED / DEMO
+SHARED COLLECTION ADAPTER / PAGE = IMPLEMENTED
+SHOPIFY NATIVE TEMPLATE REFERENCE = PREPARED / NOT DEPLOYED
+SHOPIFY LIVE COLLECTIONS = NOT CONNECTED
+PROTOCOL DATA PRODUCTS / OFFER AUTHORITY = UNCHANGED
+```
+
+- Ocho entrypoints generados desde `categories`, UI y provider boundary compartidos.
+- Contrato: `SANTA_CLAUSULA_COLLECTIONS_V1_SHOPIFY_CONTRACT.md`.
+- Futura autoridad de imagen, título, descripción y pertenencia de productos: colección Shopify. Los eventos locales `collection_viewed`, `collection_sort_changed`, `collection_open_requested` no transmiten PII ni activan medición central.

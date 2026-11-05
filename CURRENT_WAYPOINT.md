@@ -225,3 +225,14 @@ Original `eliassmarr2-afk/indumentary` intacto. Documentos heredados que todaví
 - Regla de diseño: sin contornos de color en cards/badges/widgets, sombras breves, radios compactos.
 - **Límite absoluto:** el modo demo no ve el cierre real de un caso, no envía, no guarda calificación ni simula ACK real. Integración live CSAT exige futuro contrato canónico de Protocol Data (elegibilidad por cierre, identidad con capacidad, idempotencia, escritura y métricas), con autorización y certificación independientes.
 - **Estado:** `SITE UI + LOCAL INTEGRATION CONTRACT = CLOSED`; `LOGISTICS SUPPORT CSAT BACKEND = NOT ACTIVE`; no se modifican Supabase, Shopify ni módulos comerciales.
+
+## Colecciones V1 — ocho rutas, una plantilla — 2026-11-05
+
+- Implementadas ocho rutas desde las categorías existentes: `arboles`, `regalos`, `decoracion`, `luces`, `envoltorios`, `mesa`, `monos`, `ofertas`; URL `colecciones/<handle>.html`.
+- **No existen ocho layouts mantenidos por separado**: `scripts/build-collection-pages.mjs` genera las ocho entradas desde `categories[]` de `js/commerce/catalog.js`. `js/commerce/collection-adapter.js` entrega el modelo; un solo `js/collection-page.js` y `css/collection-page.css` renderizan todas.
+- Los círculos del Home y sus ocho enlaces de menú ahora abren cada página. La búsqueda y los filtros generales del Inicio permanecen funcionales.
+- Fondo `#EDEDED`; banner navideño edge-to-edge en Y=0 de `25svh`, reutilizando temporalmente la imagen propia `assets/christmas-hero-banner.webp` del repositorio, con encuadres adaptados.
+- Sin contornos decorativos de color en tarjetas/widgets/badges; sombras breves, radios 4px.
+- Contrato: `SANTA_CLAUSULA_COLLECTIONS_V1_SHOPIFY_CONTRACT.md`; referencia Shopify nativa y NO INSTALADA: `shopify/templates/collection.json` y `shopify/sections/santa-clausula-collection.liquid`, una sola plantilla para todas.
+- **No hay colección ni producto Shopify activos**. Las cards del catálogo mock no enlazan a la página del proyector porque sería una ficha equivocada. Integración con Protocol Data y Shopify sigue reservada.
+- Pendientes: revisión visual, imágenes definitivas por colección, activación autorizada posterior de Shopify.

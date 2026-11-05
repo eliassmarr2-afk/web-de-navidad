@@ -1,5 +1,6 @@
 import { SITE_CONFIG } from "./config/site.js";
 import { categories, filters, combos, products, filterProducts } from "./commerce/catalog.js";
+import { collectionPath } from "./commerce/collection-adapter.js";
 import { getCartCount } from "./commerce/cart.js";
 import { getSessionLocation, saveSessionLocation } from "./shared/location-state.js";
 import { emitSiteEvent } from "./shared/events.js";
@@ -36,7 +37,6 @@ const elements = {
 };
 
 let toastTimer;
-let activeCategory = null;
 let activeFilter = null;
 
 function formatMoney(value) {
@@ -114,12 +114,13 @@ function iconSVG(name) {
 }
 
 function renderCategories() {
-  // One rail is the only category view. Category and filtering state stay unchanged.
+  // Each category now has a unique static URL. It shares ONE collection
+  // renderer and will later map to /collections/{handle} in Shopify.
   elements.categoryList.innerHTML = categories.map(category => `
-    <button class="category-card" type="button" data-category="${category.label}" aria-pressed="false">
+    <a class="category-card" href="${collectionPath(category.id)}" data-collection-handle="${category.id}">
       <span class="category-card__image">${iconSVG(category.icon)}</span>
       <span class="category-card__label">${category.label}</span>
-    </button>`).join("");
+    </a>`).join("");
 }
 
 function renderFilters() {
@@ -175,13 +176,11 @@ function renderProducts(list = products) {
 }
 
 function applyCatalog() {
-  renderProducts(filterProducts({ query: elements.productSearch.value, category: activeCategory, filter: activeFilter }));
-  $$("[data-category]", elements.categoryList).forEach(button => button.setAttribute("aria-pressed", String(button.dataset.category === activeCategory)));
-  $$("[data-filter]", elements.filterList).forEach(button => button.setAttribute("aria-pressed", String(button.dataset.filter === activeFilter)));
+  renderProducts(filterProducts({ query: elements.productSearch.value, filter: activeFilter }));
+  $("[data-filter]", elements.filterList).forEach(button => button.setAttribute("aria-pressed", String(button.dataset.filter === activeFilter)));
 }
 
 function runSearch(query) {
-  activeCategory = null;
   activeFilter = null;
   applyCatalog();
   emitSiteEvent("catalog_search_changed", {
@@ -190,18 +189,8 @@ function runSearch(query) {
   });
 }
 
-function selectCategory(category) {
-  activeCategory = activeCategory === category ? null : category;
-  activeFilter = null;
-  elements.productSearch.value = "";
-  applyCatalog();
-  $("#productos")?.scrollIntoView({ behavior: "smooth", block: "start" });
-  emitSiteEvent("category_selected", { category: activeCategory || "all" });
-}
-
 function selectFilter(filter) {
   activeFilter = activeFilter === filter ? null : filter;
-  activeCategory = null;
   elements.productSearch.value = "";
   applyCatalog();
   $("#productos")?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -266,8 +255,11 @@ function bindEvents() {
   elements.productSearch.addEventListener("input", (event) => runSearch(event.target.value));
 
   elements.categoryList.addEventListener("click", (event) => {
-    const button = event.target.closest("[data-category]");
-    if (button) selectCategory(button.dataset.category);
+    const link = event.target.closest("[data-collection-handle]");
+    if (!link) return;
+    emitSiteEvent("collection_open_requested", {
+      handle: link.dataset.collectionHandle, source: "home_rail",
+    });
   });
 
   elements.filterList.addEventListener("click", (event) => {
@@ -300,8 +292,10 @@ function bindEvents() {
     showToast("Carrito preparado arquitectónicamente; su vista se construirá después.");
   });
 
-  $$('[data-category-link]').forEach((link) => link.addEventListener("click", () => {
-    selectCategory(link.dataset.categoryLink);
+  $('[data-collection-nav]').forEach((link) => link.addEventListener("click", () => {
+    emitSiteEvent("collection_open_requested", {
+      handle: link.dataset.collectionNav, source: "home_menu",
+    });
   }));
 
   $$('[data-close-menu]').forEach((link) => link.addEventListener("click", closeMenu));
