@@ -1,0 +1,1 @@
+(() => { 'use strict'; const demo = document.getElementById('conversationDemo'); const empty = document.getElementById('conversationEmpty'); if (!demo || !empty) return; const show = new URLSearchParams(location.search).get('demo') === '1'; demo.hidden = !show; empty.hidden = show; if (location.hash) history.replaceState(null, '', location.pathname + location.search); })();
