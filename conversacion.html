@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#1E7437" />
-  <meta name="santa-clausula-conversation-build" content="20261105-case-c-01" />
+  <meta name="santa-clausula-conversation-build" content="20261105-closure-rating-01" />
   <meta name="robots" content="noindex, nofollow" />
   <title>Conversación de Soporte | SANTA CLAUSULA</title>
   <meta name="description" content="Interfaz de conversación de Soporte. Actualmente disponible solamente como demostración." />
@@ -12,7 +12,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./css/customer-conversation-v1.css?v=20261105-case-c-01" />
+  <link rel="stylesheet" href="./css/customer-conversation-v1.css?v=20261105-closure-rating-01" />
+  <link rel="stylesheet" href="./css/conversation-rating-v1.css?v=20261105-rating-01" />
 </head>
 <body class="customer-conversation-body">
   <main class="conversation-shell" aria-labelledby="conversationHeading">
@@ -42,6 +43,7 @@
         <a href="./conversacion.html?demo=buyer-pending" data-conversation-preview="buyer-pending">Sin verificar</a>
         <a href="./conversacion.html?demo=buyer-verified" data-conversation-preview="buyer-verified">Pedido verificado</a>
         <a href="./conversacion.html?demo=product" data-conversation-preview="product">Producto</a>
+        <a href="./conversacion.html?demo=closed-rating" data-conversation-preview="closed-rating">Calificación</a>
       </nav>
       <div class="conversation-context">
         <div class="conversation-context__row">
@@ -116,7 +118,15 @@
         </article>
         <p class="conversation-privacy">Los mensajes reales serán privados de cada conversación autorizada.</p>
       </div>
-      <div class="conversation-composer" aria-label="Redacción de mensajes: no disponible en demostración">
+      <div id="conversationClosedNotice" class="conversation-closed-notice" role="status" hidden>
+        <span class="conversation-closed-notice__mark" aria-hidden="true">✓</span>
+        <div class="conversation-closed-notice__copy">
+          <strong>Conversación finalizada</strong>
+          <span>Ya no es posible responder en este chat.</span>
+        </div>
+        <button id="conversationReopenRating" type="button" class="conversation-closed-notice__rate">Calificar atención</button>
+      </div>
+      <div id="conversationComposerPreview" class="conversation-composer" aria-label="Redacción de mensajes: no disponible en demostración">
         <div class="conversation-composer__bar">
           <button type="button" disabled aria-label="Adjuntar archivo, no habilitado" title="Adjuntos disponibles tras activar Soporte">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m19 13-7.6 7.6a5 5 0 0 1-7-7L13 4.9a3.4 3.4 0 0 1 4.8 4.8l-8.5 8.5a1.7 1.7 0 0 1-2.4-2.4L14.5 8" /></svg>
@@ -130,6 +140,44 @@
       </div>
     </section>
 
+    <!-- Case A/B/C shared CSAT presentation fixture; no real feedback endpoint. -->
+    <div id="conversationRatingBackdrop" class="conversation-rating-backdrop" hidden>
+      <section id="conversationRatingSheet" class="conversation-rating-sheet" role="dialog" aria-modal="true" aria-labelledby="conversationRatingTitle" aria-describedby="conversationRatingQuestion" tabindex="-1">
+        <div class="conversation-rating-handle" aria-hidden="true"></div>
+        <button id="conversationRatingClose" class="conversation-rating-close" type="button" aria-label="Cerrar calificación">×</button>
+        <div id="conversationRatingFormView" class="conversation-rating-view">
+          <div class="conversation-rating-success-mark" aria-hidden="true">✓</div>
+          <h2 id="conversationRatingTitle">Tu conversación finalizó</h2>
+          <p id="conversationRatingQuestion" class="conversation-rating-question">¿Cómo calificarías la atención recibida?</p>
+          <form id="conversationRatingForm" novalidate>
+            <fieldset class="conversation-rating-fieldset">
+              <legend class="visually-hidden">Seleccioná de una a cinco estrellas</legend>
+              <div class="conversation-rating-stars" role="radiogroup" aria-label="Calificación de la atención">
+                <button type="button" class="conversation-rating-star" data-rating-score="1" role="radio" aria-checked="false" aria-label="1 estrella · Muy mala">★</button>
+                <button type="button" class="conversation-rating-star" data-rating-score="2" role="radio" aria-checked="false" aria-label="2 estrellas · Mala">★</button>
+                <button type="button" class="conversation-rating-star" data-rating-score="3" role="radio" aria-checked="false" aria-label="3 estrellas · Regular">★</button>
+                <button type="button" class="conversation-rating-star" data-rating-score="4" role="radio" aria-checked="false" aria-label="4 estrellas · Buena">★</button>
+                <button type="button" class="conversation-rating-star" data-rating-score="5" role="radio" aria-checked="false" aria-label="5 estrellas · Excelente">★</button>
+              </div>
+            </fieldset>
+            <p id="conversationRatingSelection" class="conversation-rating-selection" aria-live="polite">Seleccioná de 1 a 5 estrellas</p>
+            <label class="conversation-rating-label" for="conversationRatingComment">¿Querés contarnos algo más?</label>
+            <textarea id="conversationRatingComment" class="conversation-rating-comment" rows="3" maxlength="600" placeholder="Escribí tu opinión (opcional)"></textarea>
+            <p class="conversation-rating-helper">Tu opinión nos ayuda a mejorar nuestro servicio.</p>
+            <button id="conversationRatingSubmit" class="conversation-rating-submit" type="submit" disabled>Simular envío de calificación</button>
+            <button id="conversationRatingSkip" class="conversation-rating-skip" type="button">Ahora no</button>
+          </form>
+          <p class="conversation-rating-disclosure">Demostración visual: no se envían ni almacenan calificaciones reales. Esta encuesta evalúa la atención, no el producto.</p>
+        </div>
+        <div id="conversationRatingFinished" class="conversation-rating-finished" hidden>
+          <div class="conversation-rating-success-mark" aria-hidden="true">✓</div>
+          <h2>Gracias por tu opinión</h2>
+          <p>Esta es una confirmación de ejemplo. Tu calificación no se envió ni quedó registrada.</p>
+          <button id="conversationRatingDone" class="conversation-rating-submit" type="button">Volver a la conversación</button>
+        </div>
+      </section>
+    </div>
+
     <section id="conversationEmpty" class="conversation-empty" aria-labelledby="conversationEmptyTitle">
       <div class="conversation-empty__icon" aria-hidden="true">
         <svg viewBox="0 0 24 24"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8Z" /></svg>
@@ -140,8 +188,10 @@
       <a class="conversation-empty__preview" href="./conversacion.html?demo=1">Ver una conversación de ejemplo</a>
       <a class="conversation-empty__preview" href="./conversacion.html?demo=buyer-pending">Ver consulta de pedido de ejemplo</a>
       <a class="conversation-empty__preview" href="./conversacion.html?demo=product">Ver consulta de producto de ejemplo</a>
+      <a class="conversation-empty__preview" href="./conversacion.html?demo=closed-rating">Ver cierre y calificación de ejemplo</a>
     </section>
   </main>
-  <script defer src="./js/customer-conversation-v1.js?v=20261105-case-c-01"></script>
+  <script defer src="./js/customer-conversation-v1.js?v=20261105-closure-rating-01"></script>
+  <script defer src="./js/conversation-rating-v1.js?v=20261105-rating-01"></script>
 </body>
 </html>

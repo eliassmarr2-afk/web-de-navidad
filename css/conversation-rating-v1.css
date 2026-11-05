@@ -1,0 +1,163 @@
+/* SANTA CLAUSULA — Conversation closure CSAT V1.
+   Approved 2026-11-05; presentation only, no remote rating endpoint.
+   IMPORTANT: no decorative outlines around cards, badges or widgets. */
+.conversation-shell { position: relative; }
+.conversation-closed-notice[hidden], .conversation-rating-backdrop[hidden],
+.conversation-rating-view[hidden], .conversation-rating-finished[hidden] { display: none !important; }
+.conversation-closed-notice {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px calc(12px + env(safe-area-inset-bottom, 0px));
+  background: #F7F8F7;
+  box-shadow: 0 -1px 3px rgba(18,30,19,.09);
+}
+.conversation-closed-notice__mark {
+  display: grid; flex: none; width: 30px; height: 30px;
+  place-items: center; border-radius: 50%; border: 0;
+  background: #E7F3E9; color: #1E7437; font-size: 16px; font-weight: 800;
+}
+.conversation-closed-notice__copy { min-width: 0; flex: 1; }
+.conversation-closed-notice__copy strong,
+.conversation-closed-notice__copy span { display: block; }
+.conversation-closed-notice__copy strong { color: #202020; font-size: 11px; font-weight: 800; }
+.conversation-closed-notice__copy span { margin-top: 3px; color: #777777; font-size: 10px; line-height: 1.5; }
+.conversation-closed-notice__rate {
+  flex: none; min-height: 36px; padding: 8px 10px;
+  border: 0; border-radius: 4px; background: #FFFFFF;
+  color: #1E7437; font-size: 10px; font-weight: 800;
+  box-shadow: 0 1px 3px rgba(20,35,24,.12);
+  cursor: pointer;
+}
+.conversation-rating-backdrop {
+  position: absolute; inset: 0; z-index: 130;
+  display: flex; align-items: flex-end; justify-content: center;
+  background: rgba(0,0,0,.47);
+}
+.conversation-rating-sheet {
+  position: relative;
+  width: 100%; max-height: min(92%, 800px);
+  overflow-y: auto; overscroll-behavior: contain;
+  padding: 16px 20px calc(22px + env(safe-area-inset-bottom, 0px));
+  border: 0; border-radius: 20px 20px 0 0;
+  outline: none; background: #FFFFFF;
+  box-shadow: 0 -2px 7px rgba(15,27,18,.18);
+  color: #111111; text-align: center;
+}
+.conversation-rating-handle {
+  width: 42px; height: 4px; margin: 0 auto 22px;
+  border-radius: 999px; background: #D6D9D6;
+}
+.conversation-rating-close {
+  position: absolute; right: 13px; top: 11px;
+  display: grid; place-items: center;
+  width: 36px; height: 36px; border: 0; border-radius: 4px;
+  background: transparent; color: #777777; font-size: 27px;
+  cursor: pointer;
+}
+.conversation-rating-view,
+.conversation-rating-finished {
+  display: flex; flex-direction: column; align-items: stretch; gap: 12px;
+}
+.conversation-rating-success-mark {
+  display: grid; width: 48px; height: 48px; place-items: center;
+  align-self: center; margin-bottom: 2px; border: 0; border-radius: 50%;
+  background: #E8F3EA; color: #1E7437; font-size: 22px; font-weight: 800;
+}
+.conversation-rating-view h2,
+.conversation-rating-finished h2 {
+  margin: 0; color: #151515; font-size: 22px;
+  font-weight: 800; line-height: 1.25; letter-spacing: -.035em;
+}
+.conversation-rating-question,
+.conversation-rating-finished p {
+  margin: 0; color: #777777; font-size: 13px; line-height: 1.6;
+}
+.conversation-rating-fieldset {
+  min-width: 0; margin: 9px 0 0; padding: 0;
+  border: 0;
+}
+.visually-hidden {
+  position: absolute !important; width: 1px !important; height: 1px !important;
+  padding: 0 !important; margin: -1px !important;
+  overflow: hidden !important; clip: rect(0,0,0,0) !important;
+  white-space: nowrap !important; border: 0 !important;
+}
+.conversation-rating-stars {
+  display: flex; align-items: center; justify-content: center;
+  gap: clamp(4px, 1.9vw, 9px);
+}
+.conversation-rating-star {
+  width: min(15%, 50px); min-width: 40px; min-height: 48px;
+  padding: 0; border: 0; border-radius: 4px;
+  background: transparent; color: #C8CCC9;
+  font-size: clamp(32px, 9vw, 43px);
+  line-height: 1; cursor: pointer;
+  transition: color 80ms ease;
+}
+.conversation-rating-star.is-lit { color: #1E7437; }
+.conversation-rating-star[aria-checked="true"] {
+  background: #F1F7F1;
+}
+.conversation-rating-selection {
+  min-height: 18px; margin: -4px 0 2px;
+  color: #777777; font-size: 11px; font-weight: 700;
+}
+.conversation-rating-selection.has-rating { color: #1E7437; }
+.conversation-rating-label {
+  display: block; margin: 3px 0 0;
+  color: #222222; text-align: left; font-size: 12px; font-weight: 800;
+}
+.conversation-rating-comment {
+  display: block; width: 100%; min-height: 90px;
+  margin: 0; padding: 11px 12px;
+  border: 0; border-radius: 4px; outline: 0;
+  background: #F6F7F6; color: #111111;
+  font: 13px/1.6 "Manrope", system-ui, sans-serif;
+  resize: vertical;
+}
+.conversation-rating-comment::placeholder { color: #979797; }
+.conversation-rating-helper {
+  margin: -6px 0 4px; color: #888888;
+  text-align: left; font-size: 10.5px; line-height: 1.5;
+}
+.conversation-rating-submit {
+  display: block; width: 100%; min-height: 48px;
+  padding: 12px 13px; border: 0; border-radius: 4px;
+  background: #1E7437; color: #FFFFFF;
+  font: 800 13px/1.45 "Manrope", system-ui, sans-serif;
+  cursor: pointer;
+}
+.conversation-rating-submit:disabled { opacity: .48; cursor: not-allowed; }
+.conversation-rating-skip {
+  display: block; width: 100%; min-height: 40px;
+  padding: 9px 12px; border: 0; border-radius: 4px;
+  background: transparent; color: #777777;
+  font: 700 12px "Manrope", system-ui, sans-serif;
+  cursor: pointer;
+}
+.conversation-rating-disclosure {
+  margin: 2px 0 0; color: #909090;
+  font-size: 10px; line-height: 1.5;
+}
+.conversation-rating-finished { min-height: 250px; justify-content: center; }
+.conversation-rating-finished .conversation-rating-submit { margin-top: 14px; }
+.conversation-rating-close:focus-visible,
+.conversation-rating-star:focus-visible,
+.conversation-rating-comment:focus-visible,
+.conversation-rating-submit:focus-visible,
+.conversation-rating-skip:focus-visible,
+.conversation-closed-notice__rate:focus-visible {
+  outline: 0;
+  box-shadow: 0 1px 4px rgba(15,27,18,.30);
+}
+@media (max-width: 350px) {
+  .conversation-rating-sheet { padding-right: 14px; padding-left: 14px; }
+  .conversation-rating-star { min-width: 37px; }
+  .conversation-closed-notice { gap: 7px; padding-right: 9px; padding-left: 9px; }
+  .conversation-closed-notice__rate { padding: 7px; font-size: 9px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .conversation-rating-star { transition: none; }
+}

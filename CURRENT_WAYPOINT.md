@@ -216,3 +216,12 @@ Original `eliassmarr2-afk/indumentary` intacto. Documentos heredados que todaví
 - **Nuevo documento candidato:** `SANTA_CLAUSULA_SUPPORT_CLOSURE_RATING_SLIDE_CANDIDATE.md`. Propuesta: sheet blanco de CSAT de atención (1–5 estrellas, comentario opcional, ahora no), apertura solo después de confirmación autorizada de cierre; compositor deshabilitado; estados omitido/enviado/vencido/reabierto. Cero bordes decorativos de color, sombras cortas.
 - **Requiere contrato central nuevo:** elegibilidad y submit seguro asociado a Support Case + ciclo de cierre, idempotencia y métricas reales. NO reutilizar sin autorización las reseñas de compra/producto de Experiencias.
 - **Estado:** diseño **PENDIENTE DE APROBACIÓN**; no se modifica HTML/CSS/JS del chat ni backend con este movimiento. Queda para mock visual siguiente después del acuerdo explícito.
+
+## Cierre de Conversaciones — Slide CSAT aprobado e implementado (demo) — 2026-11-05
+
+- **Aprobación del operador:** slide de calificación 1–5 estrellas, comentario opcional máximo 600 caracteres de UI, botón `Ahora no` y confirmación ilustrativa. Aprueba asimismo el **contrato de vinculación con Logística / Conversaciones** y da por cerrada esta etapa visual/documental.
+- **Contrato local aprobado:** `SANTA_CLAUSULA_SUPPORT_CLOSURE_RATING_INTEGRATION_CONTRACT.md`. Reemplaza como autoridad vigente a `SANTA_CLAUSULA_SUPPORT_CLOSURE_RATING_SLIDE_CANDIDATE.md` (histórico, enmendado).
+- **Frontend:** `conversacion.html?demo=closed-rating` añade preview de caso cerrado, composer oculto y banda de solo lectura, con slide auto-abierto; `css/conversation-rating-v1.css` y `js/conversation-rating-v1.js` encapsulan layout y UI in-memory. El selector permite volver a A/B/C.
+- Regla de diseño: sin contornos de color en cards/badges/widgets, sombras breves, radios compactos.
+- **Límite absoluto:** el modo demo no ve el cierre real de un caso, no envía, no guarda calificación ni simula ACK real. Integración live CSAT exige futuro contrato canónico de Protocol Data (elegibilidad por cierre, identidad con capacidad, idempotencia, escritura y métricas), con autorización y certificación independientes.
+- **Estado:** `SITE UI + LOCAL INTEGRATION CONTRACT = CLOSED`; `LOGISTICS SUPPORT CSAT BACKEND = NOT ACTIVE`; no se modifican Supabase, Shopify ni módulos comerciales.

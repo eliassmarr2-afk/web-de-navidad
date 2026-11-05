@@ -1,10 +1,12 @@
 # SANTA CLAUSULA — SLIDE DE CALIFICACIÓN POR CIERRE DE CONVERSACIÓN
 
 **Fecha de diseño:** 2026-11-05  
-**Estado:** CANDIDATO DE DISEÑO / PENDIENTE DE APROBACIÓN DEL OPERADOR / **FRONTEND NO IMPLEMENTADO**  
+**Estado posterior (2026-11-05): APROBADO POR OPERADOR / IMPLEMENTADO COMO FRONTEND DE DEMOSTRACIÓN / CONTRATO DE VINCULACIÓN APROBADO LOCALMENTE. BACKEND NO ACTIVO.**  
 **Ámbito:** las tres modalidades ya aprobadas: A soporte general, B consulta sobre pedido, C consulta desde landing de producto.  
 **Owner del caso/mensajes/cierre:** Protocol Data V2 — Logistics / Support / Conversations.  
 **Owner de esta nueva respuesta CSAT:** **POR PACTAR EN UN CONTRATO CANÓNICO V2**. No asumir que Experience post-compra tiene ownership sobre la calificación de un caso de Support.
+
+> **Este artefacto conserva su nombre histórico `CANDIDATE` para preservar enlaces.** La aprobación, alcance final y restricciones de implementación están congelados en [SANTA_CLAUSULA_SUPPORT_CLOSURE_RATING_INTEGRATION_CONTRACT.md](./SANTA_CLAUSULA_SUPPORT_CLOSURE_RATING_INTEGRATION_CONTRACT.md). Las referencias históricas a «pendiente» o «no implementado» en las secciones siguientes corresponden al estado anterior a la aprobación y **no** al estado vigente del frontend. La operación real de escritura CSAT en Protocol Data sigue PENDIENTE de diseño y certificación canónica.
 
 ## 1. Documentación auditada y evidencia
 
@@ -95,8 +97,8 @@ Support operator close_case (trusted)
 ```text
 SUPPORT CLOSE/READ/REPLY GUARDS = DOCUMENTED IN CANONICAL V2
 POST-CHAT CSAT BACKEND = NOT PRESENT IN AUDITED CONTRACTS
-SLIDE DESIGN = PROPOSED / AWAITING USER APPROVAL
-SLIDE WEB IMPLEMENTATION = NOT STARTED
+SLIDE DESIGN = APPROVED / CLOSED
+SLIDE WEB IMPLEMENTATION = IMPLEMENTED / DEMO ONLY
 RATING REAL SUBMISSION / METRICS = NOT ACTIVE
 ```
 

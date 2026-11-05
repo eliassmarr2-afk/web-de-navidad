@@ -115,3 +115,11 @@ La implementación aislada de la UI A está documentada en `SANTA_CLAUSULA_SUPPO
 - Las referencias comerciales del DOM **no son identidades de backend**. Futura clasificación `Chats por productos` exige rule server-side confiable y Queue/Segment Store-scoped autorizados por contrato de Protocol Data. Shopify/Commerce deberá brindar referencias canónicas de producto y oferta.
 - Continúa **NO LIVE**: Support Start, customer capability/continuity, mensajes del operador, buyer association y clasificación automática. El caso B verificado requiere proyección customer-safe separada.
 - Regla visual sin contornos, con sombras compactas, se conserva íntegra.
+
+## 11. Cierre de caso y evaluación CSAT — aprobado / 2026-11-05
+
+- Operador aprobó la cuarta estructura compartida: **al confirmar un cierre real `status=cerrada`**, el chat permanece visible en modo solo lectura y el composer se inhabilita; si el backend autoriza calificar ese cierre, se abre bottom sheet de estrellas 1–5, comentario opcional y `Ahora no`.
+- **Contrato de vinculación local aprobado y cerrado:** `SANTA_CLAUSULA_SUPPORT_CLOSURE_RATING_INTEGRATION_CONTRACT.md` (supersede candidato previo). A/B/C usan el mismo componente, sin crear segundo hilo.
+- `conversacion.html?demo=closed-rating` implementa **solo demo visual** con chat cerrado y una encuesta in-memory de ejemplo. Jamás inferir cierre autorizado ni habilitar escritura por parámetro de URL.
+- Cierre `close_case` es dominio de Protocol Data Support; respuesta de caso cerrado se rechaza. Una valoración CSAT es distinta de los mensajes, Orders, productos o Experiencias postcompra.
+- Requerido antes de activar: contrato backend canónico separado, elegibilidad y versionado de cierre, validación de customer capability, escritura idempotente, proyección segura para métricas; sin suponer que V1 Experience tenía este trigger post-chat.

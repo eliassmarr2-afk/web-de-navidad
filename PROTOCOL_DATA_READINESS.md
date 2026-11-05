@@ -276,3 +276,20 @@ TRUSTED PRODUCT ROUTING = NOT ACTIVE
 - `conversacion.html?demo=product` usa mismo diseño A/B y un fixture ilustrativo de producto, sin datos de cliente ni traslado de consulta por URL.
 - Contrato exacto de alcance `SANTA_CLAUSULA_SUPPORT_PRODUCT_V1_IMPLEMENTATION.md`.
 - Futura integración: Shopify/Commerce resuelve producto y oferta; Protocol Data Support posee identidad de caso, mensajes, acceso por capability y routing de Product después de validación server-side.
+
+---
+
+## 16. CSAT POST-CIERRE — UI APROBADA / CONTRATO LOCAL CERRADO
+
+```text
+CLOSURE UI READ-ONLY PREVIEW = IMPLEMENTED
+CSAT VISUAL SLIDE = IMPLEMENTED / DEMO ONLY
+LOCAL LOGISTICS SUPPORT INTEGRATION CONTRACT = APPROVED / CLOSED
+CANONICAL PROTOCOL DATA V2 CSAT ENDPOINT / PERSISTENCE = NOT ACTIVE
+REAL CUSTOMER RATINGS / METRICS = 0 REGISTRADOS DESDE LA WEB (NO OPERATIVO)
+```
+
+- `conversacion.html?demo=closed-rating`: composer oculto, mensaje de caso cerrado, slide automático 1–5 estrellas y comentario opcional 600 caracteres, CTA demo que NO envía, opción omitir/volver a calificar.
+- `css/conversation-rating-v1.css` y `js/conversation-rating-v1.js` aislados; la UI de A/B/C se conserva; sin requests, storage, tokens, respuestas ficticias persistentes ni DB.
+- **Contrato aprobado del sitio:** `SANTA_CLAUSULA_SUPPORT_CLOSURE_RATING_INTEGRATION_CONTRACT.md`. Autoridad de estados y cierre: Logistics / Support / Conversations canónico.
+- Transferir a Control de Protocol Data los requisitos pendientes de feedback por ciclo de cierre, idempotencia, almacenamiento y analítica real. No hay justificación para escribir en Experiencias postcompra solo por similitud de la palabra `rating`.

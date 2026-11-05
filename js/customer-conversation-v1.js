@@ -2,7 +2,7 @@
   "use strict";
 
   /*
-   * SANTA CLAUSULA — Customer Conversation Visual V1 (Cases A + B + C).
+   * SANTA CLAUSULA — Customer Conversation Visual V1 (Cases A + B + C + closed-CSAT fixture).
    * DESIGN PREVIEW ONLY: the "buyer-verified" URL is a static example,
    * never proof of a purchase, ownership, token or authorization.
    * No network requests, no state storage, no live customer messages.
@@ -16,6 +16,7 @@
     : requested === "buyer-pending" ? "buyer-pending"
     : requested === "buyer-verified" ? "buyer-verified"
     : requested === "product" ? "product"
+    : requested === "closed-rating" ? "closed-rating"
     : null;
 
   // The route does not consume capabilities yet. No hash-based possession
@@ -39,13 +40,19 @@
   const pending = document.getElementById("conversationBuyerPending");
   const verified = document.getElementById("conversationBuyerVerified");
   const product = document.getElementById("conversationProductContext");
+  const composer = document.getElementById("conversationComposerPreview");
+  const closedNotice = document.getElementById("conversationClosedNotice");
 
   if (pending) pending.hidden = mode !== "buyer-pending";
   if (verified) verified.hidden = mode !== "buyer-verified";
   if (product) product.hidden = mode !== "product";
+  if (composer) composer.hidden = mode === "closed-rating";
+  if (closedNotice) closedNotice.hidden = mode !== "closed-rating";
 
   const isBuyer = mode === "buyer-pending" || mode === "buyer-verified";
-  if (subtitle) subtitle.textContent = mode === "buyer-verified"
+  if (subtitle) subtitle.textContent = mode === "closed-rating"
+    ? "Conversación finalizada (ejemplo)"
+    : mode === "buyer-verified"
     ? "Consulta sobre tu pedido (ejemplo)"
     : mode === "buyer-pending"
       ? "Consulta de pedido · Sin verificar"
@@ -57,13 +64,19 @@
     : mode === "product"
       ? "Motivo: Consulta sobre producto"
       : "Motivo: Cambios y devoluciones";
-  if (status) status.textContent = "En proceso (ejemplo)";
-  if (customer) customer.textContent = isBuyer
-    ? "Hola, quería consultar cómo va mi compra."
+  if (status) status.textContent = mode === "closed-rating"
+    ? "Finalizada (ejemplo)"
+    : "En proceso (ejemplo)";
+  if (customer) customer.textContent = mode === "closed-rating"
+    ? "Muchas gracias por la ayuda."
+    : isBuyer
+      ? "Hola, quería consultar cómo va mi compra."
     : mode === "product"
       ? "Hola, quisiera saber qué incluye exactamente este proyector."
       : "Hola, quería consultar sobre las opciones de devolución.";
-  if (support) support.textContent = mode === "buyer-verified"
+  if (support) support.textContent = mode === "closed-rating"
+    ? "¡Con gusto! Damos por finalizada esta consulta."
+    : mode === "buyer-verified"
     ? "¡Hola! Podemos ayudarte con el pedido asociado a esta consulta."
     : mode === "buyer-pending"
       ? "¡Hola! Podemos ayudarte. Primero necesitaremos verificar los datos de tu compra."
