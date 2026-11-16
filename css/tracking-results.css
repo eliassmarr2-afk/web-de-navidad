@@ -202,3 +202,27 @@
   .tracking-result-card__body { padding: 16px; }
   .tracking-order-row, .tracking-order-total, .tracking-action { padding-right: 16px; padding-left: 16px; }
 }
+
+
+/* LOG-OP-03B · public Logistics BC-02: no customer or commerce cards */
+.tracking-result-card__title{color:#123f3d}
+.tracking-timeline__item.is-current .tracking-timeline__title{color:#16878C}
+.tracking-timeline__item.is-current .tracking-timeline__node{
+  border-color:#16878C;background:#16878C
+}
+.tracking-result-note{margin:18px 0 0;color:#60716a;font-size:12px;line-height:1.5}
+.tracking-safe-link{
+  display:inline-flex;align-items:center;justify-content:center;
+  margin-top:18px;padding:11px 17px;border-radius:7px;
+  background:#16878C;color:#fff;font-size:13px;font-weight:700;
+  text-decoration:none
+}
+.tracking-safe-link:hover{background:#0f676b}
+.tracking-safe-link:focus-visible{outline:2px solid #16878C;outline-offset:3px}
+.tracking-help-cta{margin-top:4px;background:transparent;color:#16878C;border:1px solid #c1dcd2}
+.tracking-help-cta:hover{background:#e1f3ed}
+.tracking-public-notes{display:grid;gap:15px;margin:0;padding:0;list-style:none}
+.tracking-public-notes li{display:grid;gap:5px;padding-bottom:14px;border-bottom:1px solid #e7ece8}
+.tracking-public-notes li:last-child{border-bottom:0;padding-bottom:0}
+.tracking-public-notes span{color:#263f38;font-size:13px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
+.tracking-public-notes small{color:#74877e;font-size:11px}
