@@ -169,7 +169,7 @@ test("LOG-OP-03B: Santa Clausula page has no IND., mocked order or insecure look
  assert.match(js,/import \{createPublicTrackingAdapter\} from "\.\/protocol\/tracking-public-v2\.js"/);
  assert.match(js,/if\(input\)input\.value=""/);
  assert.match(js,/results\?\.append\(lifecycle\.article,details\.article/);
- assert.match(js,/href="\.\/soporte\.html"/);
+ assert.match(js,/support\.href="\.\/soporte\.html"/);
  assert.match(css,/--tracking-accent: #16878C/);
  assert.match(config,/enabled: false/);
 });
