@@ -1,11 +1,12 @@
 :root {
-  --tracking-bg: #eee4d7;
-  --tracking-surface: #f6f1ea;
+  --tracking-bg: #edf5f2;
+  --tracking-surface: #f6faf8;
   --tracking-white: #ffffff;
   --tracking-text: #111111;
-  --tracking-muted: #77716b;
-  --tracking-line: #ded8d1;
-  --tracking-black: #090909;
+  --tracking-muted: #596960;
+  --tracking-line: #d3e2d9;
+  --tracking-black: #105e62;
+  --tracking-accent: #16878C;
 }
 
 * { box-sizing: border-box; }
@@ -62,9 +63,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .tracking-header__brand {
   justify-self: center;
   color: #fff;
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: .16em;
+  font-size: clamp(15px, 3vw, 23px);
+  font-weight: 800;
+  letter-spacing: .085em;
   text-decoration: none;
 }
 .tracking-header__cart { position: relative; justify-self: end; }
@@ -132,7 +133,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   padding: 0 20px;
   border: 0;
   border-radius: 5px;
-  background: #0a0a0a;
+  background: var(--tracking-accent);
   color: #fff;
   cursor: pointer;
   font-size: 14px;
@@ -289,4 +290,29 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .tracking-empty { margin-top: 24px; }
   .tracking-help-row { margin-top: 46px; }
   .tracking-help-link { font-size: 13px; }
+}
+
+
+/* LOG-OP-03B · Santa Clausula / customer-safe tracking surface */
+.tracking-access-label{
+  grid-column:1 / -1;
+  color:#254a43;font-size:13px;font-weight:700
+}
+.tracking-search{row-gap:10px}
+.tracking-search input:disabled,
+.tracking-search button:disabled{cursor:not-allowed;opacity:.55}
+.tracking-search input:focus-visible,
+.tracking-search button:focus-visible,
+.tracking-help-link:focus-visible{outline:2px solid var(--tracking-accent);outline-offset:3px}
+.tracking-status{
+  min-height:22px;margin:18px 0 0;color:#355c53;
+  font-size:13px;line-height:1.6
+}
+.tracking-help-link{color:var(--tracking-accent)}
+.tracking-drawer__brand{font-size:17px;letter-spacing:.08em}
+@media(max-width:480px){
+  .tracking-header{padding-right:12px;padding-left:12px}
+  .tracking-search{grid-template-columns:minmax(0,1fr)}
+  .tracking-search button{width:100%}
+  .tracking-main{padding-top:34px}
 }
