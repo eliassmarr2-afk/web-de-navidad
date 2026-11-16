@@ -109,11 +109,13 @@ function showFound(data){
     if(logistics.hasMoreObservations)notes.body.append(
       element("p","tracking-result-note","Hay actualizaciones anteriores disponibles.")
     );
-    results?.append(notes.article);
+    results?.append(lifecycle.article,details.article,notes.article);
+  }else{
+    results?.append(lifecycle.article,details.article);
   }
   const support=element("a","tracking-safe-link tracking-help-cta","Contactar a Soporte");
   support.href="./soporte.html";
-  results?.append(lifecycle.article,details.article,support);
+  results?.append(support);
   if(results)results.hidden=false;
   if(empty)empty.hidden=true;
   if(help)help.hidden=true;
