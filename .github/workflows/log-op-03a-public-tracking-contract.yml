@@ -1,0 +1,81 @@
+name: "LOG-OP-03A / public tracking Shopify port contract only"
+
+on:
+  push:
+    branches:
+      - construction/logop03-public-tracking-shopify-contract
+
+permissions:
+  contents: read
+
+concurrency:
+  group: logop03a-tracking-contract
+  cancel-in-progress: false
+
+jobs:
+  document-boundary:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - name: Immutable checkout
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Scope: exactly two documentation/certification files and zero storefront edits
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="c0ec9917f1c4ca769e4e69249806576c620fd5cd"
+          test "$GITHUB_REPOSITORY" = "eliassmarr2-afk/web-de-navidad"
+          test "$GITHUB_REF" = "refs/heads/construction/logop03-public-tracking-shopify-contract"
+          git cat-file -e "$base^{commit}"
+          git merge-base --is-ancestor "$base" HEAD
+          actual="$(git diff --name-only "$base" HEAD | sort)"
+          expected="$(printf '%s\n' \
+            LOG_OP_03_PUBLIC_TRACKING_SHOPIFY_PORT_CONTRACT.md \
+            .github/workflows/log-op-03a-public-tracking-contract.yml | sort)"
+          test "$actual" = "$expected"
+          test -z "$(git diff --name-only --diff-filter=D "$base" HEAD)"
+          git diff --quiet "$base" HEAD -- \
+            tracking.html js/ css/ index.html product.html soporte.html conversacion.html \
+            assets/ shopify/ scripts/ TRACKING_SURFACE_CONTRACT.md \
+            PROTOCOL_DATA_READINESS.md SHOPIFY.md
+          echo "LOGOP03A_DOC_ONLY_NO_STOREFRONT_SOURCE_CHANGE_PASS"
+      - name: Contract authority and capability separation
+        shell: bash
+        run: |
+          set -euo pipefail
+          f="LOG_OP_03_PUBLIC_TRACKING_SHOPIFY_PORT_CONTRACT.md"
+          grep -Fq 'logistics-public-tracking' "$f"
+          grep -Fq 'public_installation_key' "$f"
+          grep -Fq 'access' "$f"
+          grep -Fq 'Origin' "$f"
+          grep -Fq 'verify_jwt=false' "$f"
+          grep -Fq '30 días' "$f"
+          grep -Fq 'TRACKING CAPABILITY ≠ SUPPORT CAPABILITY' "$f"
+          grep -Fq 'NO HABILITADO' "$f"
+          grep -Fq 'NO SHOPIFY CONNECTED' "$f"
+          grep -Fq 'NO CUSTOMER WRITES' "$f"
+          test "$(grep -Fc 'LOG-OP-03B' "$f")" -ge 1
+          test "$(grep -Fc 'LOG-OP-03C' "$f")" -ge 1
+          test "$(grep -Fc 'LOG-OP-03D' "$f")" -ge 1
+          echo "LOGOP03A_CAPABILITY_SCOPE_AND_PHASE_GATE_PASS"
+      - name: Node22 frozen demo JS syntax only (no browser actions)
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify unchanged presentation code parses
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check js/tracking.js
+          node --check js/protocol/logistics.js
+          echo "LOGOP03A_STOREFRONT_JS_FROZEN_PASS"
+      - name: No hosted access, secrets or production deployment
+        shell: bash
+        run: |
+          set -euo pipefail
+          ! grep -Eq '(supabase deploy|supabase db push|wrangler deploy|GH_TOKEN|SUPABASE_SERVICE_ROLE_KEY)' \
+            .github/workflows/log-op-03a-public-tracking-contract.yml
+          echo "LOGOP03A_NO_BACKEND_OR_PRODUCTION_CHANGE_PASS"
