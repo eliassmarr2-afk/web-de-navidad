@@ -1,0 +1,86 @@
+name: "LOG-OP-03B / Santa Clausula public Logistics tracking"
+
+on:
+  push:
+    branches:
+      - construction/logop03b-santa-tracking-surface
+
+permissions:
+  contents: read
+
+concurrency:
+  group: logop03b-public-tracking
+  cancel-in-progress: false
+
+jobs:
+  source-certification:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 14
+    steps:
+      - name: Immutable checkout
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Strict nine-file source delta and no commerce or backend rewrites
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="9cf5f70851eb57fff8ecaef2381ada9998b14812"
+          test "$GITHUB_REPOSITORY" = "eliassmarr2-afk/web-de-navidad"
+          test "$GITHUB_REF" = "refs/heads/construction/logop03b-santa-tracking-surface"
+          git cat-file -e "$base^{commit}"
+          git merge-base --is-ancestor "$base" HEAD
+          actual="$(git diff --name-only "$base" HEAD | sort)"
+          expected="$(printf '%s\n' \
+            tracking.html \
+            js/tracking.js \
+            js/protocol/tracking-public-v2.js \
+            js/protocol/tracking-site-config.js \
+            css/tracking.css \
+            css/tracking-results.css \
+            tests/logop03b-public-tracking.test.mjs \
+            LOG_OP_03B_TRACKING_SURFACE_RESULT.md \
+            .github/workflows/log-op-03b-public-tracking.yml | sort)"
+          test "$actual" = "$expected"
+          test -z "$(git diff --name-only --diff-filter=D "$base" HEAD)"
+          git diff --quiet "$base" HEAD -- \
+            index.html product.html soporte.html conversacion.html \
+            shopify/ assets/ scripts/ js/protocol/logistics.js \
+            TRACKING_SURFACE_CONTRACT.md \
+            LOG_OP_03_PUBLIC_TRACKING_SHOPIFY_PORT_CONTRACT.md \
+            PROTOCOL_DATA_READINESS.md SHOPIFY.md
+          echo "LOGOP03B_EXACT_NINE_FILES_NO_BACKEND_CHANGE_PASS"
+      - name: Node22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Syntax, privacy, default deny and full dedicated regression
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --experimental-default-type=module --check js/tracking.js
+          node --experimental-default-type=module --check js/protocol/tracking-public-v2.js
+          node --experimental-default-type=module --check js/protocol/tracking-site-config.js
+          node --check tests/logop03b-public-tracking.test.mjs
+          node --experimental-default-type=module --test tests/logop03b-public-tracking.test.mjs
+          grep -Fq 'enabled: false' js/protocol/tracking-site-config.js
+          grep -Fq 'publicInstallationKey: ""' js/protocol/tracking-site-config.js
+          grep -Fq 'credentials:"omit"' js/protocol/tracking-public-v2.js
+          grep -Fq 'referrerPolicy:"no-referrer"' js/protocol/tracking-public-v2.js
+          grep -Fq 'redirect:"error"' js/protocol/tracking-public-v2.js
+          grep -Fq 'src="./js/tracking.js?v=20261116-logop03b"' tracking.html
+          grep -Fq 'type="password"' tracking.html
+          ! grep -Eq 'FOUND_DEMO|MOCK_RESULTS|MOCK_DEVELOPMENT_ONLY' js/tracking.js
+          ! grep -Eq 'localStorage|sessionStorage|document.cookie|location.search|location.hash|innerHTML' js/tracking.js
+          ! grep -Eq '(service_role|SUPABASE_SERVICE_ROLE_KEY|Authorization:|customer_email|shipping_street_address)' js/protocol/tracking-public-v2.js
+          echo "LOGOP03B_PUBLIC_ONLY_DEFAULT_DENY_SOURCE_AND_TESTS_PASS"
+      - name: No hosted calls, production deploy, or secret workflows
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --quiet "9cf5f70851eb57fff8ecaef2381ada9998b14812" HEAD -- \
+            shopify/ js/protocol/logistics.js index.html
+          ! grep -Eq '(supabase deploy|supabase db push|wrangler deploy|GH_TOKEN|SUPABASE_SERVICE_ROLE_KEY)' \
+            .github/workflows/log-op-03b-public-tracking.yml
+          echo "LOGOP03B_NO_HOSTED_MUTATION_OR_PRODUCTION_PROMOTION_PASS"
