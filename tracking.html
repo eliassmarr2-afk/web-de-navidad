@@ -3,23 +3,24 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#090909" />
-  <meta name="indumentary-build" content="20261102-1528" />
-  <title>Seguimiento de envío · IND.</title>
-  <meta name="description" content="Consultá el estado de tu envío en IND." />
+  <meta name="theme-color" content="#16878C" />
+  <meta name="referrer" content="no-referrer" />
+  <meta name="santa-clausula-tracking-build" content="20261116-logop03b" />
+  <title>Seguimiento de tu pedido · Santa Clausula</title>
+  <meta name="description" content="Consultá el estado logístico de tu pedido en Santa Clausula mediante un acceso seguro." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./css/tracking.css?v=20261102-1528" />
-  <link rel="stylesheet" href="./css/tracking-results.css?v=20261102-1435" />
+  <link rel="stylesheet" href="./css/tracking.css?v=20261116-logop03b" />
+  <link rel="stylesheet" href="./css/tracking-results.css?v=20261116-logop03b" />
   <link rel="stylesheet" href="./css/site-tabbar.css?v=20261105-tabbar-v1" />
 </head>
-<body class="tracking-body">
+<body class="tracking-body santa-clausula-tracking">
   <header class="tracking-header">
     <button id="trackingMenuButton" class="tracking-header__control" type="button" aria-label="Abrir menú" aria-controls="trackingDrawer" aria-expanded="false">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
-    <a class="tracking-header__brand" href="./index.html" aria-label="Ir al inicio">IND.</a>
+    <a class="tracking-header__brand" href="./index.html" aria-label="Ir al inicio de Santa Clausula">SANTA CLAUSULA</a>
     <a class="tracking-header__cart" href="./index.html#cart" aria-label="Ver carrito">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 1.9-1.4L21 7H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>
       <span class="tracking-header__cart-count">0</span>
@@ -29,19 +30,19 @@
   <div id="trackingDrawerBackdrop" class="tracking-drawer-backdrop" aria-hidden="true"></div>
   <aside id="trackingDrawer" class="tracking-drawer" aria-hidden="true">
     <div class="tracking-drawer__top">
-      <span class="tracking-drawer__brand">IND.</span>
+      <span class="tracking-drawer__brand">SANTA CLAUSULA</span>
       <button id="trackingDrawerClose" class="tracking-drawer__close" type="button" aria-label="Cerrar menú">×</button>
     </div>
     <nav class="tracking-nav" aria-label="Navegación principal">
       <a class="tracking-nav__link" href="./index.html">INICIO</a>
       <button class="tracking-nav__toggle" type="button" data-tracking-submenu aria-controls="trackingCollections" aria-expanded="false">COLECCIONES <span>+</span></button>
       <div id="trackingCollections" class="tracking-nav__sub">
-        <a href="./index.html">CAMISETAS</a>
-        <a href="./index.html">CAMPERAS</a>
-        <a href="./index.html">PANTALONES</a>
-        <a href="./index.html">MEDIAS</a>
-        <a href="./index.html">BOTINES</a>
-        <a href="./index.html">GORRAS Y PILUSOS</a>
+        <a href="./colecciones/arboles.html">ÁRBOLES</a>
+        <a href="./colecciones/regalos.html">REGALOS</a>
+        <a href="./colecciones/decoracion.html">DECORACIÓN</a>
+        <a href="./colecciones/luces.html">LUCES</a>
+        <a href="./colecciones/envoltorios.html">ENVOLTORIOS</a>
+        <a href="./colecciones/mesa.html">MESA</a>
       </div>
       <a class="tracking-nav__link" href="./index.html">CUPONES</a>
       <a class="tracking-nav__link" href="./index.html">NOVEDADES</a>
@@ -62,35 +63,30 @@
 
   <main class="tracking-main">
     <section class="tracking-copy" aria-labelledby="trackingTitle">
-      <h1 id="trackingTitle">Consultá el estado de tu envio</h1>
-      <p>Insertá tu ID de seguimiento para tener noticias actualizadas.</p>
+      <h1 id="trackingTitle">Seguimiento de tu pedido</h1>
+      <p>Conocé el recorrido logístico de tu compra. El acceso seguro estará disponible cuando conectemos el seguimiento de Santa Clausula con Shopify.</p>
     </section>
 
     <form id="trackingSearchForm" class="tracking-search" novalidate>
-      <input id="trackingId" name="tracking_id" type="text" autocomplete="off" placeholder="Poné tu ID de seguimiento" aria-label="ID de seguimiento" />
-      <button type="submit">Buscar</button>
+      <label class="tracking-access-label" for="trackingAccess">Acceso seguro de seguimiento</label>
+      <input id="trackingAccess" name="access" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="43" placeholder="Clave de acceso autorizada" aria-label="Clave de acceso seguro de seguimiento" disabled />
+      <button id="trackingSubmit" type="submit" disabled>Consultar</button>
     </form>
+    <p id="trackingStatus" class="tracking-status" role="status" aria-live="polite"></p>
 
     <section class="tracking-empty" aria-label="Estado inicial de seguimiento" data-tracking-state="empty">
       <img src="./assets/tracking-empty-state-final.png?v=20261102-1305" alt="Ilustración de una persona buscando información de seguimiento con binoculares" />
     </section>
 
     <div class="tracking-help-row">
-      <button id="trackingUnknownId" class="tracking-help-link" type="button" aria-label="No sé mi ID de seguimiento">
-        <span>No sé mi ID de seguimiento</span>
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M14 5h5v5"/>
-          <path d="M11 13l8-8"/>
-          <path d="M19 13v5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/>
-        </svg>
-      </button>
+      <a class="tracking-help-link" href="./soporte.html">¿Necesitás ayuda? Contactá a Soporte</a>
     </div>
 
     <section id="trackingResults" class="tracking-results" aria-live="polite" aria-label="Información del pedido" hidden></section>
   </main>
 
   <nav class="sc-tabbar" data-site-tabbar data-base="./" data-active="pedidos" aria-label="Navegación principal"></nav>
-  <script defer src="./js/tracking.js?v=20261102-1435"></script>
+  <script type="module" src="./js/tracking.js?v=20261116-logop03b"></script>
   <script type="module" src="./js/shared/site-tabbar.js?v=20261105-tabbar-v1"></script>
 </body>
 </html>
