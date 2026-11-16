@@ -22,7 +22,7 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
-      - name: Scope: exactly two documentation/certification files and zero storefront edits
+      - name: 'Scope: exactly two documentation/certification files and zero storefront edits'
         shell: bash
         run: |
           set -euo pipefail
