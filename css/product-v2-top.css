@@ -498,7 +498,7 @@
   padding: 8px 12px 10px;
   border: 0;
   border-radius: 4px;
-  background: #fff;
+  background: #EDEDED;
   color: #171717;
   box-shadow: 0 3px 10px rgba(0, 0, 0, .17);
   text-align: left;
@@ -517,7 +517,7 @@
   height: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-bottom: 10px solid #fff;
+  border-bottom: 10px solid #EDEDED;
   pointer-events: none;
 }
 .christmas-product-v2 .christmas-product-location-popover__top,
@@ -588,4 +588,31 @@
   .christmas-product-v2 .christmas-product-location-popover {
     animation: none;
   }
+}
+
+/* SDS-01.1b — destination display only; not a delivery promise. */
+.christmas-product-v2 .christmas-product-delivery-destination {
+  color: #008744;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+.christmas-product-v2 .christmas-product-delivery-address-action {
+  display: inline;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #1D62C9;
+  font: inherit;
+  font-weight: 800;
+  text-align: left;
+  cursor: pointer;
+}
+.christmas-product-v2 :is(.christmas-product-delivery-destination, .christmas-product-delivery-address-action)[hidden] {
+  display: none !important;
+}
+.christmas-product-v2 .christmas-product-delivery-address-action:focus-visible {
+  outline: 2px solid #1D62C9;
+  outline-offset: 2px;
 }

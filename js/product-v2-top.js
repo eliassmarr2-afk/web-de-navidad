@@ -8,7 +8,8 @@ const locationChange = document.getElementById("productLocationChange");
 const locationChangeLabel = document.getElementById("productLocationChangeLabel");
 const locationDismiss = document.getElementById("productLocationDismiss");
 const deliveryAction = document.getElementById("productDeliveryAction");
-const deliveryMessage = document.getElementById("productDeliveryMessage");
+const deliveryDestination = document.getElementById("productDeliveryDestination");
+const deliveryAddressAction = document.getElementById("productDeliveryAddressAction");
 const legacyLocationTrigger = document.getElementById("locationTrigger");
 
 let appearanceTimer = null;
@@ -23,11 +24,11 @@ function syncLocation() {
   if (locationBanner) {
     locationBanner.setAttribute("aria-label", label ? `Cambiar domicilio de envío: ${label}` : "Colocá tu dirección de envío");
   }
-  if (deliveryMessage) {
-    deliveryMessage.textContent = label
-      ? `Destino: ${label}. Todavía no tenemos una fecha de entrega confirmada.`
-      : "Ingresá tu domicilio para consultar la entrega.";
+  if (deliveryDestination) {
+    deliveryDestination.textContent = label;
+    deliveryDestination.hidden = !label;
   }
+  if (deliveryAddressAction) deliveryAddressAction.hidden = Boolean(label);
 }
 
 function dismissLocationPopover({ restoreFocus = false } = {}) {
@@ -50,6 +51,7 @@ locationBanner?.addEventListener("click", openSharedLocationFlow);
 locationChange?.addEventListener("click", openSharedLocationFlow);
 locationDismiss?.addEventListener("click", () => dismissLocationPopover({ restoreFocus: true }));
 deliveryAction?.addEventListener("click", openSharedLocationFlow);
+deliveryAddressAction?.addEventListener("click", openSharedLocationFlow);
 window.addEventListener("web-de-navidad:location-change", syncLocation);
 window.addEventListener("pageshow", syncLocation);
 window.addEventListener("pagehide", () => dismissLocationPopover());
