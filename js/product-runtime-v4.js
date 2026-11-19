@@ -92,11 +92,8 @@
       ];
   const media = mediaSources.map((src, i) => ({ id: `media-${i + 1}`, src, alt: `${product.title} · vista ${i + 1}` }));
 
-  const offers = [
-    { id: "single", label: "1 unidad", subtitle: "Compra individual", price: product.price, compareAt: null, badge: "" },
-    { id: "x2", label: "Pack x2", subtitle: "Dos unidades · ahorro temporal", price: Math.round(product.price * 1.8), compareAt: product.price * 2, badge: "AHORRÁ 10%" },
-    { id: "look", label: "Look completo", subtitle: "Oferta preparada para Product Set", price: Math.round(product.price * 2.35), compareAt: Math.round(product.price * 2.65), badge: "MEJOR OFERTA" }
-  ];
+  const offers = window.SDSOfferCards.getOffers(product);
+  let offerCards = null;
 
   const state = {
     mediaId: media[0].id,
@@ -204,21 +201,27 @@
 
   function renderOffers() {
     if (!els.offers) return;
-    els.offers.innerHTML = offers.map((offer) => `
-      <button class="offer-card${offer.id === state.offerId ? " is-selected" : ""}" type="button" data-offer-id="${offer.id}">
-        ${offer.badge ? `<span class="offer-badge">${offer.badge}</span>` : ""}
-        <span class="offer-card__copy"><strong>${offer.label}</strong><span>${offer.subtitle}</span></span>
-        <span class="offer-card__price"><strong>${money(offer.price)}</strong>${offer.compareAt ? `<span>${money(offer.compareAt)}</span>` : ""}</span>
-      </button>
-    `).join("");
+    if (!offerCards) {
+      offerCards = window.SDSOfferCards.mount({
+        root: els.offers, offers, selectedId: state.offerId,
+        onSelect(id) {
+          if (!offers.some(offer => offer.id === id)) return;
+          state.offerId = id;
+          renderOffers();
+          renderPrice();
+        }
+      });
+    } else {
+      offerCards.setSelected(state.offerId);
+    }
   }
 
   function renderPrice() {
     const offer = selectedOffer();
     if (els.price) els.price.textContent = money(offer.price);
     if (els.oldPrice) {
-      els.oldPrice.textContent = offer.compareAt ? money(offer.compareAt) : money(Math.round(product.price * 1.2));
-      els.oldPrice.hidden = false;
+      els.oldPrice.textContent = offer.compareAt > offer.price ? money(offer.compareAt) : "";
+      els.oldPrice.hidden = !(offer.compareAt > offer.price);
     }
   }
 
@@ -303,12 +306,6 @@
       const size = event.target.closest("[data-size]");
       if (color) { state.color = color.dataset.color; state.mediaId = color.dataset.mediaId; renderOptions(); renderGallery(); }
       if (size) { state.talle = size.dataset.size; renderOptions(); }
-    });
-    els.offers?.addEventListener("click", (event) => {
-      const button = event.target.closest("[data-offer-id]");
-      if (!button) return;
-      state.offerId = button.dataset.offerId;
-      renderOffers(); renderPrice();
     });
     els.tabsRail?.addEventListener("click", (event) => {
       const button = event.target.closest("[data-tab-id]");

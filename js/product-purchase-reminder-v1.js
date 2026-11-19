@@ -178,7 +178,7 @@
       return;
     }
 
-    const selectedCombo = document.querySelector("#offerList .product-combo-card.is-selected");
+    const selectedCombo = document.querySelector("#offerList .sds-offer-card.is-selected");
     const pageProductId = new URLSearchParams(window.location.search).get("id") || "prod-002";
     const request = {
       site: "santa-clausula",

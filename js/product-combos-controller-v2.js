@@ -1,199 +1,52 @@
 (() => {
   "use strict";
-
-  const offerList = document.getElementById("offerList");
-  const purchasePrice = document.getElementById("productPrice");
-  const oldPrice = document.getElementById("oldPrice");
-  const addToCart = document.getElementById("addToCart");
-  const supportPrice = document.getElementById("supportProductPrice");
-  const detailBackdrop = document.getElementById("comboDetailBackdrop");
-  const detailTitle = document.getElementById("comboDetailTitle");
-  const detailImage = document.getElementById("comboDetailImage");
-  const detailCopy = document.getElementById("comboDetailCopy");
-  const detailItems = document.getElementById("comboDetailItems");
-  const detailPrice = document.getElementById("comboDetailPrice");
-  const detailCompare = document.getElementById("comboDetailCompare");
-  const detailSelect = document.getElementById("comboDetailSelect");
-  const detailClose = document.getElementById("comboDetailClose");
-
-  if (!offerList) return;
-
-  const combo = {
-    id: "combo-street",
-    title: "Combo Street",
-    subtitle: "Campera liviana + jogger para usar dentro y fuera del entrenamiento.",
-    price: 124900,
-    compareAt: 149500,
-    image: "https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=900&q=82",
-    items: ["Campera Core", "Jogger Active", "Gorra Pace"],
-  };
-
-  const money = (value) => new Intl.NumberFormat("es-AR", {
-    style: "currency",
-    currency: "ARS",
-    maximumFractionDigits: 0,
-  }).format(value);
-
-  const productBasePrice = purchasePrice?.textContent || "$ 74.990";
-  const productBaseCompare = oldPrice?.textContent || "$ 89.990";
-  let selected = false;
-
-  /*
-    Legacy CSS kept only the second static offer visible because the original
-    mock contained three cards. The V2 controller owns exactly ONE card.
-    The hidden sentinel preserves compatibility with that historical selector,
-    while the explicit inline !important below guarantees visibility even if
-    that CSS remains cached in the browser.
-  */
-  offerList.innerHTML = `
-    <span hidden aria-hidden="true" data-offer-legacy-sentinel></span>
-    <article class="product-combo-card" data-combo-id="${combo.id}" role="button" tabindex="0" aria-pressed="false">
-      <span class="product-combo-card__best">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13 11 22l-9-9V4h9l9 9Z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg>
-        Mejor oferta
-      </span>
-      <div class="product-combo-card__media">
-        <img src="${combo.image}" alt="${combo.title}" loading="lazy" />
-      </div>
-      <div class="product-combo-card__content">
-        <h3>${combo.title}</h3>
-        <p>${combo.subtitle}</p>
-        <div class="stars" aria-label="5 de 5 estrellas">★★★★★</div>
-        <div class="product-combo-card__price-row">
-          <strong class="product-combo-card__price">${money(combo.price)}</strong>
-          <span class="product-combo-card__compare">${money(combo.compareAt)}</span>
-        </div>
-        <button class="product-combo-card__details" type="button" data-combo-details>
-          Ver detalles
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-        </button>
-      </div>
-    </article>
-  `;
-
-  const card = offerList.querySelector(".product-combo-card");
-  const detailsButton = offerList.querySelector("[data-combo-details]");
-
-  /* Runtime guard against the legacy nth-child visibility rule. */
-  card?.style.setProperty("display", "grid", "important");
-
-  const updatePurchaseState = () => {
-    card?.classList.toggle("is-selected", selected);
-    card?.setAttribute("aria-pressed", String(selected));
-
-    if (selected) {
-      if (purchasePrice) purchasePrice.textContent = money(combo.price);
-      if (oldPrice) {
-        oldPrice.textContent = money(combo.compareAt);
-        oldPrice.hidden = false;
-      }
-      if (supportPrice) supportPrice.textContent = money(combo.price);
-      if (addToCart) addToCart.textContent = "Agregar combo";
-    } else {
-      if (purchasePrice) purchasePrice.textContent = productBasePrice;
-      if (oldPrice) {
-        oldPrice.textContent = productBaseCompare;
-        oldPrice.hidden = false;
-      }
-      if (supportPrice) supportPrice.textContent = productBasePrice;
-      if (addToCart) addToCart.textContent = "Comprar ahora";
+  // SDS-01.2: preview-only offers; runtime is the selection authority.
+  const money=n=>"$"+Number(n).toLocaleString("es-AR");
+  const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const photo=s=>"data:image/svg+xml;charset=UTF-8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><rect width="120" height="120" fill="white"/>'+s+'</svg>');
+  const p='<ellipse cx="60" cy="98" rx="35" ry="5" fill="#e2e5e7"/><rect x="54" y="72" width="12" height="23" fill="#252a35"/><ellipse cx="60" cy="96" rx="24" ry="5" fill="#343b49"/><rect x="25" y="31" width="70" height="45" rx="12" fill="#252a35"/><rect x="29" y="35" width="62" height="37" rx="10" fill="#48515e"/><circle cx="64" cy="54" r="19" fill="#171d26"/><circle cx="64" cy="54" r="13" fill="#698ba8"/><circle cx="68" cy="50" r="7" fill="#d4ebfa"/>';
+  const c='<path d="M12 20H108" stroke="#b9a368" stroke-width="2"/>'+[18,32,46,60,74,88,102].map(x=>'<path d="M'+x+' 20V96" stroke="#c9b786"/>'+[30,43,56,69,82].map(y=>'<circle cx="'+x+'" cy="'+y+'" r="3" fill="#f4c65c"/>').join("")).join("");
+  const l='<g fill="none" stroke="#c49c46" stroke-width="3">'+[18,23,28,33].map(r=>'<ellipse cx="60" cy="65" rx="'+(r+10)+'" ry="'+r/2+'"/>').join("")+'</g>'+Array.from({length:16},(_,i)=>'<circle cx="'+(60+40*Math.cos(i*Math.PI/8))+'" cy="'+(65+18*Math.sin(i*Math.PI/8))+'" r="4" fill="#ffd875"/>').join("");
+  const art={projector:photo(p),pair:photo('<g transform="translate(0 2) scale(.64)">'+p+'</g><g transform="translate(42 35) scale(.64)">'+p+'</g>'),curtain:photo(c),lights:photo(l),mixed:photo('<g transform="translate(1 16) scale(.60)">'+p+'</g><g transform="translate(63 1) scale(.45)">'+c+'</g><g transform="translate(61 58) scale(.47)">'+l+'</g>')};
+  function getOffers(product){
+    const unit={id:"demo-offer-"+product.id+"-single",kind:"single",label:"1 Unidad",subtitle:"",price:product.price,compareAt:Math.round(product.price*1.2/10)*10,badge:"",image:product.id==="prod-002"?art.projector:product.image,productSetId:null,items:[]};
+    if(product.id!=="prod-002")return [unit];
+    const item=quantity=>({sku:"demo-proyector",quantity,title:"Proyector navideño",image:art.projector,referenceUnitPrice:product.price});
+    return [unit,
+      {id:"demo-offer-prod-002-x2",kind:"quantity",label:"Oferta x2",subtitle:"2 unidades",badge:"SOLO HOY",price:134990,compareAt:product.price*2,image:art.pair,productSetId:"demo-set-prod-002-x2",items:[item(2)]},
+      {id:"demo-offer-prod-002-mixed",kind:"bundle",label:"Combo Navidad",subtitle:"3 productos · máximo ahorro",badge:"SOLO HOY",price:109990,compareAt:product.price+29990+19990,image:art.mixed,productSetId:"demo-set-prod-002-mixed",items:[item(1),{sku:"demo-cortina",quantity:1,title:"Cortina LED 3x3",image:art.curtain,referenceUnitPrice:29990},{sku:"demo-guirnalda",quantity:1,title:"Guirnalda LED cálida",image:art.lights,referenceUnitPrice:19990}]}];
+  }
+  function mount({root,offers,selectedId,onSelect}){
+    if(!root||!offers.length)return null;
+    const by=id=>document.getElementById(id),backdrop=by("comboDetailBackdrop"),title=by("comboDetailTitle"),image=by("comboDetailImage"),copy=by("comboDetailCopy"),items=by("comboDetailItems"),price=by("comboDetailPrice"),compare=by("comboDetailCompare"),select=by("comboDetailSelect"),close=by("comboDetailClose");
+    let currentId=selectedId,detailId=null,previousFocus=null;
+    const e=esc;
+    const row=i=>'<li><img src="'+e(i.image)+'" alt="" loading="lazy"><span>'+e(i.quantity+" × "+i.title)+'</span><s>'+e(money(i.referenceUnitPrice)+(i.quantity>1?" c/u":""))+'</s></li>';
+    const card=o=>'<article class="sds-offer-card'+(o.badge?' has-badge':'')+'" data-sds-offer="'+e(o.id)+'" data-combo-id="'+e(o.id)+'" data-offer-kind="'+e(o.kind)+'">'+(o.badge?'<span class="sds-offer-badge">'+e(o.badge)+'</span>':'')+'<div class="sds-offer-head"><button type="button" class="sds-offer-select" data-select-offer="'+e(o.id)+'" aria-label="'+e(o.label+", "+money(o.price))+'" aria-pressed="false"></button><img class="sds-offer-image" src="'+e(o.image)+'" alt="" loading="lazy"><div class="sds-offer-copy"><span class="sds-offer-title">'+e(o.label)+'</span>'+(o.subtitle?'<span class="sds-offer-subtitle">'+e(o.subtitle)+'</span>':'')+'</div><div class="sds-offer-prices"><strong>'+e(money(o.price))+'</strong>'+(o.compareAt>o.price?'<s>'+e(money(o.compareAt))+'</s>':'')+'</div>'+(o.kind!=="single"?'<button type="button" class="sds-offer-details" data-details-offer="'+e(o.id)+'" aria-haspopup="dialog" aria-controls="comboDetailBackdrop">Detalles <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>':'')+'</div>'+(o.items.length?'<ul class="sds-offer-includes" aria-label="Componentes incluidos">'+o.items.map(row).join("")+'</ul>':'')+'</article>';
+    root.innerHTML='<p class="sds-offer-preview">Ofertas de demostración · precios ilustrativos</p>'+offers.map(card).join("");
+    function setSelected(id){
+      if(!offers.some(o=>o.id===id))return;
+      currentId=id;
+      root.querySelectorAll("[data-sds-offer]").forEach(c=>{const active=c.dataset.sdsOffer===id;c.classList.toggle("is-selected",active);c.querySelector("[data-select-offer]")?.setAttribute("aria-pressed",String(active));});
+      if(select&&detailId){select.textContent=detailId===id?"Oferta seleccionada":"Seleccionar oferta";select.classList.toggle("is-selected",detailId===id);}
     }
-  };
-
-  const setSelected = (value) => {
-    selected = Boolean(value);
-    updatePurchaseState();
-  };
-
-  const toggleSelected = () => setSelected(!selected);
-
-  const openDetails = () => {
-    if (!detailBackdrop) return;
-    if (detailTitle) detailTitle.textContent = combo.title;
-    if (detailImage) {
-      detailImage.src = combo.image;
-      detailImage.alt = combo.title;
+    function choose(id){if(offers.some(o=>o.id===id))onSelect(id);}
+    function openDetails(id,trigger){
+      const o=offers.find(v=>v.id===id);if(!o||!backdrop||o.kind==="single")return;
+      detailId=id;previousFocus=trigger;
+      if(title)title.textContent=o.label;if(image){image.src=o.image;image.alt=o.label;}
+      if(copy)copy.textContent=o.subtitle+" · Composición ilustrativa.";
+      if(items)items.replaceChildren(...o.items.map(i=>{const li=document.createElement("li");li.textContent=i.quantity+" × "+i.title;return li;}));
+      if(price)price.textContent=money(o.price);if(compare){compare.textContent=o.compareAt>o.price?money(o.compareAt):"";compare.hidden=!(o.compareAt>o.price);}
+      setSelected(currentId);backdrop.hidden=false;document.body.classList.add("no-scroll");
+      requestAnimationFrame(()=>{if(!backdrop.hidden&&detailId===id){backdrop.classList.add("is-open");close?.focus();}});
     }
-    if (detailCopy) detailCopy.textContent = combo.subtitle;
-    if (detailItems) detailItems.innerHTML = combo.items.map((item) => `<li>${item}</li>`).join("");
-    if (detailPrice) detailPrice.textContent = money(combo.price);
-    if (detailCompare) detailCompare.textContent = money(combo.compareAt);
-    if (detailSelect) {
-      detailSelect.textContent = selected ? "Oferta seleccionada" : "Seleccionar oferta";
-      detailSelect.classList.toggle("is-selected", selected);
-    }
-
-    detailBackdrop.hidden = false;
-    requestAnimationFrame(() => detailBackdrop.classList.add("is-open"));
-    document.body.classList.add("no-scroll");
-  };
-
-  const closeDetails = () => {
-    if (!detailBackdrop) return;
-    detailBackdrop.classList.remove("is-open");
-    document.body.classList.remove("no-scroll");
-    window.setTimeout(() => {
-      if (!detailBackdrop.classList.contains("is-open")) detailBackdrop.hidden = true;
-    }, 190);
-  };
-
-  const storeComboInCart = () => {
-    try {
-      const cartKey = "indumentary.cart.v3";
-      const current = JSON.parse(sessionStorage.getItem(cartKey) || "[]");
-      current.push({
-        type: "commercial_offer_mock",
-        offerId: combo.id,
-        productSetId: `mock-product-set:${combo.id}`,
-        title: combo.title,
-        price: combo.price,
-        quantity: 1,
-        source: "product_combo_card",
-      });
-      sessionStorage.setItem(cartKey, JSON.stringify(current));
-      window.dispatchEvent(new CustomEvent("indumentary:cart-change"));
-    } catch {}
-  };
-
-  card?.addEventListener("click", (event) => {
-    if (event.target.closest("[data-combo-details]")) return;
-    toggleSelected();
-  });
-
-  card?.addEventListener("keydown", (event) => {
-    if (!["Enter", " "].includes(event.key)) return;
-    if (event.target.closest("[data-combo-details]")) return;
-    event.preventDefault();
-    toggleSelected();
-  });
-
-  detailsButton?.addEventListener("click", (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    openDetails();
-  });
-
-  detailSelect?.addEventListener("click", () => {
-    setSelected(true);
-    detailSelect.textContent = "Oferta seleccionada";
-    detailSelect.classList.add("is-selected");
-  });
-
-  detailClose?.addEventListener("click", closeDetails);
-  detailBackdrop?.addEventListener("click", (event) => {
-    if (event.target === detailBackdrop) closeDetails();
-  });
-
-  window.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && detailBackdrop && !detailBackdrop.hidden) closeDetails();
-  });
-
-  addToCart?.addEventListener("click", (event) => {
-    if (!selected) return;
-    event.preventDefault();
-    event.stopImmediatePropagation();
-    storeComboInCart();
-  }, true);
-
-  updatePurchaseState();
+    function closeDetails(){if(!backdrop||backdrop.hidden)return;detailId=null;backdrop.hidden=true;backdrop.classList.remove("is-open");document.body.classList.remove("no-scroll");previousFocus?.focus();previousFocus=null;}
+    root.addEventListener("click",ev=>{const d=ev.target.closest("[data-details-offer]");if(d){openDetails(d.dataset.detailsOffer,d);return;}const c=ev.target.closest("[data-sds-offer]");if(c)choose(c.dataset.sdsOffer);});
+    select?.addEventListener("click",()=>{if(detailId){choose(detailId);closeDetails();}});
+    close?.addEventListener("click",closeDetails);backdrop?.addEventListener("click",ev=>{if(ev.target===backdrop)closeDetails();});
+    window.addEventListener("keydown",ev=>{if(ev.key==="Escape"&&backdrop&&!backdrop.hidden)closeDetails();});
+    setSelected(selectedId);return {setSelected};
+  }
+  window.SDSOfferCards=Object.freeze({getOffers,mount});
 })();

@@ -45,3 +45,32 @@
     0 0 0 3px rgba(36, 121, 255, .10),
     0 2px 6px rgba(36, 121, 255, .20);
 }
+
+/* SDS-01.2 — independent preview offer cards. */
+.christmas-product-v2 .offer-section #offerList.sds-offer-list {display:grid;gap:15px;padding:10px 0 0;margin:0;width:100%;overflow:visible}
+.christmas-product-v2 .sds-offer-preview {margin:0;color:#666;font-size:10px;line-height:1.25}
+.christmas-product-v2 .sds-offer-card {position:relative;min-width:0;border:0;border-radius:4px;padding:8px;background:#EDEDED;color:#111;box-shadow:0 1px 5px rgba(0,0,0,.12);cursor:pointer}
+.christmas-product-v2 .sds-offer-card.is-selected {box-shadow:0 0 0 2px #2479FF,0 2px 4px rgba(0,0,0,.12)}
+.christmas-product-v2 .sds-offer-head {position:relative;display:grid;grid-template-columns:minmax(48px,22%) minmax(0,1fr) auto;grid-template-areas:"image copy prices" "image details prices";align-items:center;column-gap:8px;row-gap:2px;min-height:66px}
+.christmas-product-v2 .sds-offer-card[data-offer-kind="single"] .sds-offer-head {grid-template-areas:"image copy prices";min-height:57px}
+.christmas-product-v2 .sds-offer-card.has-badge .sds-offer-head {padding-top:8px}
+.christmas-product-v2 .sds-offer-select {position:absolute;z-index:1;inset:0;width:100%;height:100%;padding:0;margin:0;border:0;border-radius:4px;background:transparent;cursor:pointer}
+.christmas-product-v2 .sds-offer-select:focus-visible {outline:2px solid #2479FF;outline-offset:2px}
+.christmas-product-v2 .sds-offer-image {grid-area:image;display:block;width:100%;aspect-ratio:1;object-fit:contain;background:#fff;border-radius:4px}
+.christmas-product-v2 .sds-offer-copy {grid-area:copy;min-width:0}
+.christmas-product-v2 .sds-offer-title {display:block;margin:0;color:#111;font-size:14px;font-weight:800;line-height:1.2;overflow-wrap:anywhere}
+.christmas-product-v2 .sds-offer-subtitle {display:block;margin-top:3px;color:#555;font-size:10px;line-height:1.25}
+.christmas-product-v2 .sds-offer-prices {grid-area:prices;display:grid;gap:3px;text-align:right;align-self:center;white-space:nowrap;font-variant-numeric:tabular-nums}
+.christmas-product-v2 .sds-offer-prices strong {font-size:16px;font-weight:800;color:#111}
+.christmas-product-v2 .sds-offer-prices s {font-size:11px;color:#666;text-decoration:line-through}
+.christmas-product-v2 .sds-offer-badge {position:absolute;z-index:2;top:-9px;right:8px;padding:4px 8px;border-radius:4px;background:#008744;color:#fff;font-size:9px;font-weight:800;line-height:1.2;white-space:nowrap;pointer-events:none}
+.christmas-product-v2 .sds-offer-details {grid-area:details;position:relative;z-index:3;justify-self:start;display:inline-flex;align-items:center;gap:4px;min-height:26px;padding:3px 7px;border:1px solid #2479FF;border-radius:4px;background:transparent;color:#1D62C9;font:inherit;font-weight:750;font-size:10px;cursor:pointer}
+.christmas-product-v2 .sds-offer-details svg {width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2}
+.christmas-product-v2 .sds-offer-includes {list-style:none;margin:8px 0 0;padding:1px 7px;border-radius:4px;background:#3974C2;color:#fff}
+.christmas-product-v2 .sds-offer-includes li {display:grid;grid-template-columns:31px minmax(0,1fr) auto;align-items:center;gap:7px;min-height:39px;padding:5px 0;font-size:11px;line-height:1.25;font-weight:650;color:#fff}
+.christmas-product-v2 .sds-offer-includes li+li {border-top:1px solid rgba(255,255,255,.5)}
+.christmas-product-v2 .sds-offer-includes img {display:block;width:31px;height:31px;object-fit:contain;background:#fff;border-radius:4px}
+.christmas-product-v2 .sds-offer-includes s {font-size:10px;font-weight:500;white-space:nowrap;color:#fff;text-decoration:line-through}
+.christmas-product-v2 .sds-offer-includes span {overflow-wrap:anywhere}
+@media(max-width:480px){.christmas-product-v2 .offer-section #offerList.sds-offer-list{width:calc(100% + 24px);margin-inline:-12px}}
+@media(max-width:360px){.christmas-product-v2 .sds-offer-title{font-size:13px}.christmas-product-v2 .sds-offer-prices strong{font-size:14px}.christmas-product-v2 .sds-offer-head{column-gap:6px}.christmas-product-v2 .sds-offer-includes li{gap:5px;font-size:10px}.christmas-product-v2 .sds-offer-includes s{font-size:9px}}

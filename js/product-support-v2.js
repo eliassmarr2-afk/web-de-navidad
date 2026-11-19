@@ -32,8 +32,8 @@
   // Offer identifiers from its own trusted Shopify/Commerce data sources.
   function readProductPreview() {
     const product = byId("productImage");
-    const selected = document.querySelector("#offerList .product-combo-card.is-selected");
-    const selectedTitle = selected?.querySelector(".product-combo-card__content h3");
+    const selected = document.querySelector("#offerList .sds-offer-card.is-selected:not([data-offer-kind=single])");
+    const selectedTitle = selected?.querySelector(".sds-offer-title");
     return {
       title: byId("productTitle")?.textContent?.trim() || "Producto consultado",
       image: product?.currentSrc || product?.src || "./assets/proyector-navideno-producto.webp",
