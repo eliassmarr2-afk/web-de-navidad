@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="./css/product-combos-v1.css?v=20261031-2145" />
   <link rel="stylesheet" href="./css/product-offer-callout-v1.css?v=20261101-1832" />
   <link rel="stylesheet" href="./css/product-refinements-v1.css?v=20261102-0145" />
-  <link rel="stylesheet" href="./css/product-v2-top.css?v=20261104-media-4x5-01" />
+  <link rel="stylesheet" href="./css/product-v2-top.css?v=20261119-sds-01-1" />
   <link rel="stylesheet" href="./css/product-v2-sticky.css?v=20261104-01" />
   <link rel="stylesheet" href="./css/product-v2-combo-refinement.css?v=20261104-01" />
   <link rel="stylesheet" href="./css/product-purchase-reminder-v1.css?v=20261104-01" />
@@ -25,19 +25,26 @@
 <body class="product-body christmas-product-v2">
   <div class="product-shell">
     <header class="product-topbar christmas-product-header" aria-label="Encabezado SANTA CLAUSULA">
-      <a class="round-control" href="./index.html" aria-label="Volver a la tienda"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></a>
+      <div class="christmas-product-header__leading">
+        <a class="round-control" href="./index.html" aria-label="Volver a la tienda"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></a>
+        <button id="productLocationBanner" class="round-control christmas-product-location-trigger" type="button" aria-label="Colocá tu dirección de envío" aria-controls="locationBackdrop" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></button>
+      </div>
       <img class="christmas-product-header__logo" src="./assets/santa-clausula-logo.webp" alt="SANTA CLAUSULA STORE" width="58" height="58" decoding="async" fetchpriority="high" />
       <div class="product-topbar__actions">
         <button id="shareButton" class="round-control" type="button" aria-label="Compartir producto"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.5-4.4M8.2 13.2l7.5 4.4"/></svg></button>
         <button id="favoriteButton" class="round-control" type="button" aria-label="Guardar como favorito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button>
       </div>
+      <div id="productLocationPopover" class="christmas-product-location-popover" role="group" aria-label="Domicilio de envío" hidden>
+        <div class="christmas-product-location-popover__top">
+          <span>Domicilio de envío</span>
+          <button id="productLocationDismiss" class="christmas-product-location-popover__dismiss" type="button" aria-label="Cerrar aviso de domicilio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+        </div>
+        <div class="christmas-product-location-popover__row">
+          <span id="productLocationLabel">Ingresá tu domicilio</span>
+          <button id="productLocationChange" class="christmas-product-location-popover__change" type="button" aria-controls="locationBackdrop" aria-haspopup="dialog"><span id="productLocationChangeLabel">Ingresar</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+        </div>
+      </div>
     </header>
-
-    <button id="productLocationBanner" class="christmas-product-location" type="button" aria-label="Colocá tu dirección de envío" aria-controls="locationBackdrop" aria-haspopup="dialog">
-      <svg class="christmas-product-location__house" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10H3Z"/><path d="M9 20v-7h6v7"/></svg>
-      <span id="productLocationLabel">Colocá tu dirección de envío</span>
-      <svg class="christmas-product-location__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
-    </button>
 
     <section class="product-intro christmas-product-intro" aria-labelledby="productTitle">
       <p class="christmas-product-meta" data-demo="true" title="Información ilustrativa: no representa ventas verificadas"><span>Nuevo</span><span class="christmas-product-meta__divider" aria-hidden="true">|</span><span>+600 vendidos</span></p>
@@ -224,7 +231,7 @@
   <script defer src="./js/product-commercial-v1.js?v=20261104-v2"></script>
   <script defer src="./js/product-purchase-reminder-v1.js?v=20261104-01"></script>
   <script defer src="./js/product-policies-v1.js?v=20261102-0145"></script>
-  <script type="module" src="./js/product-v2-top.js?v=20261104-01"></script>
+  <script type="module" src="./js/product-v2-top.js?v=20261119-sds-01-1"></script>
   <nav class="sc-tabbar" data-site-tabbar data-base="./" data-active="" aria-label="Navegación principal"></nav>
   <script type="module" src="./js/product-v2-sticky.js?v=20261104-01"></script>
   <script type="module" src="./js/shared/site-tabbar.js?v=20261105-tabbar-v1"></script>

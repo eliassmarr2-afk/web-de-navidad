@@ -60,54 +60,9 @@
   gap: 4px;
 }
 .christmas-product-v2 .christmas-product-header :is(a, button):focus-visible,
-.christmas-product-v2 .christmas-product-location:focus-visible,
 .christmas-product-v2 .christmas-product-delivery-action:focus-visible {
   outline: 3px solid #efcc78;
   outline-offset: -3px;
-}
-.christmas-product-v2 .christmas-product-location {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  min-height: 52px;
-  gap: 10px;
-  margin: 0;
-  padding: 12px 17px;
-  border: 0;
-  border-radius: 0;
-  background: #17643F;
-  color: #ffffff;
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 1.35;
-  text-align: left;
-}
-.christmas-product-v2 .christmas-product-location svg {
-  display: block;
-  flex: 0 0 21px;
-  width: 21px;
-  height: 21px;
-  fill: none;
-  stroke: #ffffff;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.christmas-product-v2 .christmas-product-location__house {
-  width: 22px;
-  height: 22px;
-}
-.christmas-product-v2 .christmas-product-location__chevron {
-  margin-left: auto;
-  width: 18px !important;
-  height: 18px !important;
-}
-.christmas-product-v2 #productLocationLabel {
-  display: block;
-  flex: 1 1 auto;
-  min-width: 0;
-  overflow-wrap: anywhere;
 }
 .christmas-product-v2 .christmas-product-intro {
   margin: 0;
@@ -319,10 +274,6 @@
 .christmas-product-v2 .christmas-product-header .round-control {
   color: #1D2E19;
 }
-.christmas-product-v2 .christmas-product-location {
-  background: #1D2E19;
-  color: #FFFFFF;
-}
 .christmas-product-v2 .christmas-product-intro {
   background: #FFFFFF;
 }
@@ -461,17 +412,6 @@
   object-position: center;
   margin: auto;
 }
-.christmas-product-v2 .christmas-product-location {
-  background: #FFFFFF;
-  color: #000000;
-  border-bottom: 1px solid #D5D5D5;
-}
-.christmas-product-v2 .christmas-product-location svg {
-  stroke: #000000;
-}
-.christmas-product-v2 #productLocationLabel {
-  color: #000000;
-}
 .christmas-product-v2 .christmas-product-intro h1,
 .christmas-product-v2 .product-sheet :is(
   .detail-section,
@@ -535,4 +475,117 @@
   margin: 0;
   transform: translate(-50%, -50%);
   pointer-events: none;
+}
+
+/* SDS-01.1 — approved compact product header, 2026-11-19.
+   Overlay only: same shared location flow, no new logistics calculation. */
+.christmas-product-v2 .product-topbar.christmas-product-header {
+  z-index: 12;
+  --location-tip-x: 59px;
+}
+.christmas-product-v2 .christmas-product-header__leading {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  gap: 4px;
+}
+.christmas-product-v2 .christmas-product-location-popover {
+  position: absolute;
+  top: calc(100% + 7px);
+  left: 10px;
+  right: 10px;
+  z-index: 1;
+  padding: 8px 12px 10px;
+  border: 0;
+  border-radius: 4px;
+  background: #fff;
+  color: #171717;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, .17);
+  text-align: left;
+  animation: christmas-location-popover-in 160ms ease-out both;
+}
+.christmas-product-v2 .christmas-product-location-popover[hidden] {
+  display: none !important;
+}
+.christmas-product-v2 .christmas-product-location-popover::before {
+  content: "";
+  position: absolute;
+  top: -9px;
+  left: var(--location-tip-x);
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #fff;
+  pointer-events: none;
+}
+.christmas-product-v2 .christmas-product-location-popover__top,
+.christmas-product-v2 .christmas-product-location-popover__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+}
+.christmas-product-v2 .christmas-product-location-popover__top {
+  color: #777;
+  font-size: 11px;
+  line-height: 1.35;
+}
+.christmas-product-v2 #productLocationLabel {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+.christmas-product-v2 .christmas-product-location-popover :is(button) {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+  cursor: pointer;
+}
+.christmas-product-v2 .christmas-product-location-popover__dismiss {
+  min-width: 28px;
+  min-height: 28px;
+  color: #777;
+}
+.christmas-product-v2 .christmas-product-location-popover__change {
+  min-height: 30px;
+  color: #1E7437;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.christmas-product-v2 .christmas-product-location-popover button svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+@keyframes christmas-location-popover-in {
+  from { opacity: 0; translate: 0 -4px; }
+  to { opacity: 1; translate: 0 0; }
+}
+@media (max-width: 360px) {
+  .christmas-product-v2 .product-topbar.christmas-product-header {
+    --location-tip-x: 49px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .christmas-product-v2 .christmas-product-location-popover {
+    animation: none;
+  }
 }
