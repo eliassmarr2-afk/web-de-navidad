@@ -27,6 +27,34 @@
   }
 
   syncOtherField();
+  // SDS-LOG-02: receive only an allowlisted topic label from the tracking UI.
+  // Never transfer order identifiers, tracking access or customer data.
+  // Preparing a form is NOT opening a case or executing an operation.
+  const trackingIntents=Object.freeze({
+    change_delivery_address:{
+      subject:"envio",
+      draft:"Quiero consultar cómo cambiar mi dirección de entrega."
+    },
+    change_products:{
+      subject:"pedido",
+      draft:"Necesito consultar si puedo cambiar o agregar productos a mi pedido."
+    },
+    report_error:{
+      subject:"pedido",
+      draft:"Quiero reportar un inconveniente con mi pedido."
+    },
+    cancel_purchase:{
+      subject:"cambios",
+      draft:"Quiero consultar cómo solicitar la cancelación de mi compra."
+    }
+  });
+  const topic=new URLSearchParams(window.location.search).get("motivo");
+  if(Object.hasOwn(trackingIntents,topic)){
+    const intent=trackingIntents[topic];
+    subject.value=intent.subject;
+    syncOtherField();
+    if(!message.value.trim())message.value=intent.draft;
+  }
   subject.addEventListener("change", syncOtherField);
   for (const field of form.querySelectorAll("input, select, textarea")) {
     field.addEventListener("input", resetFeedback);

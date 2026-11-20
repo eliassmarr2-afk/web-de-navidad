@@ -141,10 +141,23 @@ function showFound(result){
   slot(third.body,"updates");
   const fourth=card("Ayuda",g.updatedAt,"help");
   fourth.body.classList.add("tracking-result-card__body--flush");
-  const link=node("a","tracking-action","Hablar con Soporte");
-  link.href="./soporte.html";
-  link.append(node("span","tracking-action__chevron","›"));
-  fourth.body.append(link);
+  // SDS-LOG-02: exact INDUMENTARY action sequence. Only safe referrals:
+  // these links CANNOT mutate orders or carry tracking capabilities/IDs.
+  const helpActions=[
+    {label:"Cambiar mi dirección de entrega",href:"./soporte.html?motivo=change_delivery_address"},
+    {label:"Cambiar/Agregar productos",href:"./soporte.html?motivo=change_products"},
+    {label:"Reportar error",href:"./soporte.html?motivo=report_error"},
+    {label:"Cancelar compra",href:"./soporte.html?motivo=cancel_purchase"},
+    {label:"Hablar con Soporte",href:"./soporte.html"}
+  ];
+  const actions=node("div","tracking-actions");
+  for(const action of helpActions){
+    const link=node("a","tracking-action");
+    link.href=action.href;
+    link.append(node("span","",action.label),node("span","tracking-action__chevron","›"));
+    actions.append(link);
+  }
+  fourth.body.append(actions);
   slot(fourth.body,"support");
   els.results?.replaceChildren(first.article,second.article,third.article,fourth.article);
   if(preview){

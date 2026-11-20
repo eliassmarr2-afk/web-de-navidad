@@ -77,3 +77,33 @@ Antes de activar `enabled:true`, certificar:
 5. Contrato separado para acceder a datos comerciales privados desde sesión legítima Shopify, si se decide habilitarlos.
 
 **Sin escrituras a Protocol Data V2, sin cambios a Supabase, sin activación de Shopify y sin secretos nuevos.**
+
+## 8. SDS-LOG-02 — Restauración completa de acciones de Ayuda
+
+**Fecha:** 2026-11-20 (Argentina). La tarjeta original de INDUMENTARY `Ayuda`
+contenía exactamente cinco acciones, aquí recuperadas en su orden original:
+
+1. Cambiar mi dirección de entrega
+2. Cambiar/Agregar productos
+3. Reportar error
+4. Cancelar compra
+5. Hablar con Soporte
+
+**Presentación:** misma tarjeta `tracking-result-card`, contenedor
+`tracking-actions`, cinco filas `tracking-action` con chevrón y divisores.
+Se restauraron únicamente las acciones visuales, sin mutar el estado del pedido.
+
+**Puertos:** los primeros cuatro redirigen a `soporte.html?motivo=<ENUM_FIJO>`.
+El único parámetro transportado es una categoría estática, perteneciente a una
+allowlist cerrada. El quinto enlace abre `soporte.html` sin parámetros.
+
+`js/support.js` usa esos cuatro valores de `motivo` para seleccionar el campo
+`subject` ya existente y preparar una descripción de consulta **editable**.
+No recibe ni almacena ID de seguimiento, token de acceso, nombre, dirección,
+correo, datos comerciales o identidad de pedido desde tracking. No hay escritura,
+envío ni persistencia; el formulario actual continúa en modo demostración.
+
+Las operaciones de cambio/cancelación, la autorización comercial y la apertura real
+de conversaciones permanecen **pendientes de contrato Shopify / Protocol Data**.
+Ningún clic debe presentarse como una orden confirmada. No se modificaron
+las capacidades públicas BC-02, su lector ni la configuración default-deny.
