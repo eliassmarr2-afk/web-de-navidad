@@ -82,15 +82,27 @@
     img.src = src || fallbackSvg(product.title);
   };
 
-  const mediaSources = product.image.startsWith("./")
-    ? [product.image] // Fuente local temporal de demostración; el proveedor futuro definirá media.
+  // SDS-01.3: las dos primeras fotos del árbol base, sin adornos. Oferta y
+  // demás módulos siguen en modo demostración hasta el siguiente movimiento.
+  const treePreviewMedia = product.id === "prod-002"
+    ? [
+        { src: "./assets/productos/arbol-canadiense-150cm/arbol-canadiense-150cm-principal.webp", alt: "Árbol canadiense artificial de Navidad de 150 cm, vista completa sin decoración y base metálica negra" },
+        { src: "./assets/productos/arbol-canadiense-150cm/arbol-canadiense-150cm-ramas.webp", alt: "Árbol canadiense artificial de Navidad de 150 cm, acercamiento de ramas verdes y textura" }
+      ]
+    : null;
+  const mediaSources = treePreviewMedia || (product.image.startsWith("./")
+    ? [product.image]
     : [
         product.image,
         `${product.image}&sat=-10`,
         `${product.image}&con=8`,
         `${product.image}&bri=6`
-      ];
-  const media = mediaSources.map((src, i) => ({ id: `media-${i + 1}`, src, alt: `${product.title} · vista ${i + 1}` }));
+      ].map(src => ({src,alt:product.title})));
+  const media = mediaSources.map((entry, i) => ({
+    id: `media-${i + 1}`,
+    src: typeof entry === "string" ? entry : entry.src,
+    alt: typeof entry === "string" ? `${product.title} · vista ${i + 1}` : entry.alt
+  }));
 
   const offers = window.SDSOfferCards.getOffers(product);
   let offerCards = null;
