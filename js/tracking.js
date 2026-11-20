@@ -26,7 +26,7 @@ const els={
   unknown:by("trackingUnknownId")
 };
 const illustration=els.empty?.querySelector("img");
-const INITIAL="./assets/tracking-empty-state-final.png?v=20261102-1305";
+const INITIAL="./assets/tracking-empty-state-final.webp?v=20261102-1305";
 const NOT_FOUND="./assets/tracking-no-encontrado.png?v=20261102-1415";
 const DEMO_ACCESS="C-1111";
 const DEMO_NOT_FOUND=new Set(["A1111","B1111"]);
