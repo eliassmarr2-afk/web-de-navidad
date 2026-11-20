@@ -74,3 +74,137 @@
 .christmas-product-v2 .sds-offer-includes span {overflow-wrap:anywhere}
 @media(max-width:480px){.christmas-product-v2 .offer-section #offerList.sds-offer-list{width:calc(100% + 24px);margin-inline:-12px}}
 @media(max-width:360px){.christmas-product-v2 .sds-offer-title{font-size:13px}.christmas-product-v2 .sds-offer-prices strong{font-size:14px}.christmas-product-v2 .sds-offer-head{column-gap:6px}.christmas-product-v2 .sds-offer-includes li{gap:5px;font-size:10px}.christmas-product-v2 .sds-offer-includes s{font-size:9px}}
+
+/* SDS-01.5 — reference-matched mobile bundle detail slide. Isolated to the
+   product modal; no changes to offer cards or the shared logistics/support UI. */
+.christmas-product-v2 .combo-detail-sheet{
+  position:relative;display:flex;flex-direction:column;
+  width:min(100%,480px);height:auto;max-height:min(84dvh,860px);
+  overflow:hidden;padding:0;border-radius:14px 14px 0 0;
+  background:#fff;color:#111;font-family:Manrope,sans-serif;
+}
+.christmas-product-v2 .combo-detail-sheet__scroller{
+  min-height:0;overflow-y:auto;overscroll-behavior:contain;
+  scrollbar-width:thin;scrollbar-color:#d7d7d7 transparent;
+}
+.christmas-product-v2 .combo-detail-sheet__close{
+  position:absolute;top:5px;right:9px;z-index:3;
+  display:grid;place-items:center;width:34px;height:34px;
+  border:0;border-radius:4px;padding:0;background:#fff;
+  color:#626262;font-size:29px;line-height:1;font-weight:400;cursor:pointer;
+}
+.christmas-product-v2 .combo-detail-sheet__gallery{
+  display:flex;gap:6px;width:100%;margin:0;padding:43px 12px 11px;
+  overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;
+  scrollbar-width:none;overscroll-behavior-x:contain;
+}
+.christmas-product-v2 .combo-detail-sheet__gallery::-webkit-scrollbar{display:none}
+.christmas-product-v2 .combo-detail-sheet__gallery img{
+  display:block;flex:0 0 min(44vw,210px);
+  width:min(44vw,210px);height:auto;aspect-ratio:3/4;
+  object-fit:contain;object-position:center;
+  background:#f7f7f7;border:0;border-radius:4px;
+  scroll-snap-align:start;
+}
+.christmas-product-v2 .combo-detail-sheet__identity{padding:2px 16px 16px}
+.christmas-product-v2 .combo-detail-sheet__identity h2{
+  margin:0;color:#151515;font-size:16px;font-weight:800;
+  letter-spacing:-.025em;line-height:1.38;
+}
+.christmas-product-v2 .combo-detail-sheet__copy{
+  margin:5px 0 0;font-size:12px;font-weight:500;
+  line-height:1.4;color:#666;
+}
+.christmas-product-v2 .combo-detail-sheet__divider{
+  width:100%;min-height:8px;height:8px;
+  background:#f0f0f0;border-top:1px solid #e7e7e7;
+  border-bottom:1px solid #e7e7e7;
+}
+.christmas-product-v2 .combo-detail-sheet__price-section{padding:14px 16px 16px}
+.christmas-product-v2 .combo-detail-sheet__price-line{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+.christmas-product-v2 .combo-detail-sheet__price-line strong{
+  font-size:25px;font-weight:800;line-height:1.2;color:#2479FF;
+  letter-spacing:-.03em;font-variant-numeric:tabular-nums;
+}
+.christmas-product-v2 .combo-detail-sheet__badge{
+  display:inline-block;padding:4px 7px;border:0;border-radius:4px;
+  background:#008744;color:#fff;font-size:10px;font-weight:800;
+}
+.christmas-product-v2 .combo-detail-sheet__price-section s{
+  display:block;margin-top:4px;color:#858585;
+  font-size:13px;font-weight:500;
+}
+.christmas-product-v2 .combo-detail-sheet__badge[hidden],
+.christmas-product-v2 .combo-detail-sheet__price-section s[hidden]{display:none!important}
+.christmas-product-v2 .combo-detail-sheet__demo-note{
+  margin:5px 0 0;font-size:10px;line-height:1.3;color:#777;
+}
+.christmas-product-v2 .combo-detail-sheet__contents{padding:16px 16px 22px}
+.christmas-product-v2 .combo-detail-sheet__contents h3{
+  margin:0 0 8px;font-size:15px;font-weight:800;color:#171717;
+}
+.christmas-product-v2 .combo-detail-sheet__list{
+  display:grid;gap:0;list-style:none;margin:0;padding:0;
+}
+.christmas-product-v2 .combo-detail-sheet__list li{
+  display:grid;grid-template-columns:48px minmax(0,1fr) auto;
+  align-items:center;gap:9px;min-height:64px;margin:0;
+  padding:8px 0;color:#161616;font-size:12px;font-weight:650;
+  border-bottom:1px solid #e9e9e9;
+}
+.christmas-product-v2 .combo-detail-sheet__list li::before{display:none}
+.christmas-product-v2 .combo-detail-sheet__list img{
+  display:block;width:48px;height:48px;object-fit:contain;
+  border-radius:4px;background:#fff;
+  border:1px solid #ededed;
+}
+.christmas-product-v2 .combo-detail-sheet__list span{min-width:0;overflow-wrap:anywhere}
+.christmas-product-v2 .combo-detail-sheet__list s{
+  color:#8a8a8a;font-size:10px;font-weight:500;
+  max-width:100px;line-height:1.3;text-align:right;
+}
+.christmas-product-v2 .combo-detail-sheet__footer{
+  flex:0 0 auto;display:flex;align-items:center;gap:9px;
+  margin:0;padding:9px 12px calc(11px + env(safe-area-inset-bottom));
+  background:#fff;border-top:1px solid #e9e9e9;
+}
+.christmas-product-v2 .combo-detail-sheet__select{
+  flex:1;min-height:48px;margin:0;padding:0 14px;
+  border:0;border-radius:4px;background:#111;color:#fff;
+  font:inherit;font-size:14px;font-weight:800;cursor:pointer;
+}
+.christmas-product-v2 .combo-detail-sheet__select.is-selected{background:#2479FF}
+.christmas-product-v2 .combo-detail-sheet__favorite{
+  flex:0 0 42px;display:grid;place-items:center;width:42px;height:48px;
+  background:#fff;color:#111;border:0;border-radius:4px;padding:0;cursor:pointer;
+}
+.christmas-product-v2 .combo-detail-sheet__favorite svg{
+  width:27px;height:27px;fill:none;stroke:currentColor;
+  stroke-linecap:round;stroke-linejoin:round;stroke-width:1.8;
+}
+.christmas-product-v2 .combo-detail-sheet__favorite.is-favorite svg{
+  fill:#e4454d;stroke:#e4454d;
+}
+.christmas-product-v2 .combo-detail-sheet :is(button,[tabindex="0"]):focus-visible{
+  outline:2px solid #2479FF;outline-offset:2px;
+}
+@media (min-width:720px){
+  .christmas-product-v2 .combo-detail-sheet{border-radius:14px 14px 0 0}
+  .christmas-product-v2 .combo-detail-sheet__gallery img{
+    flex-basis:205px;width:205px;
+  }
+}
+@media (max-width:360px){
+  .christmas-product-v2 .combo-detail-sheet__list{
+    font-size:11px;
+  }
+  .christmas-product-v2 .combo-detail-sheet__list li{
+    grid-template-columns:43px minmax(0,1fr) auto;
+  }
+  .christmas-product-v2 .combo-detail-sheet__list img{width:43px;height:43px}
+}
+@media (prefers-reduced-motion:reduce){
+  .christmas-product-v2 .combo-detail-sheet{transition:none}
+}

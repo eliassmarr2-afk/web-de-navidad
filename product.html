@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="./css/product-refinements-v1.css?v=20261102-0145" />
   <link rel="stylesheet" href="./css/product-v2-top.css?v=20261119-sds-01-1b" />
   <link rel="stylesheet" href="./css/product-v2-sticky.css?v=20261104-01" />
-  <link rel="stylesheet" href="./css/product-v2-combo-refinement.css?v=20261119-sds-01-2b" />
+  <link rel="stylesheet" href="./css/product-v2-combo-refinement.css?v=20261120-sds-01-5-slide" />
   <link rel="stylesheet" href="./css/product-purchase-reminder-v1.css?v=20261104-01" />
   <link rel="stylesheet" href="./css/product-support-v2.css?v=20261105-case-c-02" />
   <link rel="stylesheet" href="./css/site-tabbar.css?v=20261105-tabbar-v1" />
@@ -131,13 +131,30 @@
     </aside>
 
     <div id="comboDetailBackdrop" class="combo-detail-backdrop" hidden>
-      <section class="combo-detail-sheet" role="dialog" aria-modal="true" aria-labelledby="comboDetailTitle">
-        <div class="combo-detail-sheet__handle" aria-hidden="true"></div>
-        <div class="combo-detail-sheet__top"><div><span>DETALLE DE LA OFERTA</span><h2 id="comboDetailTitle">Detalle de la oferta</h2></div><button id="comboDetailClose" class="combo-detail-sheet__close" type="button" aria-label="Cerrar">×</button></div>
-        <div class="combo-detail-sheet__media"><img id="comboDetailImage" alt="" /></div>
-        <p id="comboDetailCopy" class="combo-detail-sheet__copy"></p>
-        <ul id="comboDetailItems" class="combo-detail-sheet__list"></ul>
-        <div class="combo-detail-sheet__footer"><div class="combo-detail-sheet__prices"><strong id="comboDetailPrice"></strong><span id="comboDetailCompare"></span></div><button id="comboDetailSelect" class="combo-detail-sheet__select" type="button">Seleccionar oferta</button></div>
+      <section id="comboDetailSheet" class="combo-detail-sheet" role="dialog" aria-modal="true" aria-labelledby="comboDetailTitle" tabindex="-1">
+        <button id="comboDetailClose" class="combo-detail-sheet__close" type="button" aria-label="Cerrar detalle del combo">×</button>
+        <div class="combo-detail-sheet__scroller">
+          <div id="comboDetailGallery" class="combo-detail-sheet__gallery" role="region" aria-label="Fotografías del combo" tabindex="0"></div>
+          <section class="combo-detail-sheet__identity">
+            <h2 id="comboDetailTitle"></h2>
+            <p id="comboDetailCopy" class="combo-detail-sheet__copy"></p>
+          </section>
+          <div class="combo-detail-sheet__divider" aria-hidden="true"></div>
+          <section class="combo-detail-sheet__price-section" aria-label="Precio de la oferta">
+            <div class="combo-detail-sheet__price-line"><strong id="comboDetailPrice"></strong><span id="comboDetailBadge" class="combo-detail-sheet__badge" hidden></span></div>
+            <s id="comboDetailCompare" hidden></s>
+            <p class="combo-detail-sheet__demo-note">Precios ilustrativos de la tienda de prueba.</p>
+          </section>
+          <div class="combo-detail-sheet__divider" aria-hidden="true"></div>
+          <section class="combo-detail-sheet__contents" aria-labelledby="comboDetailContentsTitle">
+            <h3 id="comboDetailContentsTitle">Este combo incluye</h3>
+            <ul id="comboDetailItems" class="combo-detail-sheet__list"></ul>
+          </section>
+        </div>
+        <div class="combo-detail-sheet__footer">
+          <button id="comboDetailFavorite" class="combo-detail-sheet__favorite" type="button" aria-label="Guardar producto como favorito" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg></button>
+          <button id="comboDetailSelect" class="combo-detail-sheet__select" type="button">Seleccionar oferta</button>
+        </div>
       </section>
     </div>
 
@@ -198,7 +215,7 @@
     <div id="toast" class="toast product-toast" role="status" aria-live="polite"></div>
   </div>
 
-  <script defer src="./js/product-combos-controller-v2.js?v=20261120-sds-01-4-tree"></script>
+  <script defer src="./js/product-combos-controller-v2.js?v=20261120-sds-01-5-slide"></script>
   <script defer src="./js/product-runtime-v4.js?v=20261120-sds-01-3-galeria"></script>
   <script defer src="./js/product-support-v2.js?v=20261119-sds-01-2"></script>
   <script defer src="./js/product-offer-callout-v1.js?v=20261101-1832"></script>

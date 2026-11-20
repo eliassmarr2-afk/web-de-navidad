@@ -50,6 +50,16 @@
         price: 109990,
         compareAt: components.reduce((sum, item) => sum + item.quantity * item.referenceUnitPrice, 0),
         image: assets.combo,
+        // detailTitle is a separate presentation field, later mapped to the
+        // Shopify internal-title metafield (never used as inventory identity).
+        detailTitle: "Árbol Canadiense 150 cm · Combo Navidad",
+        detailDescription: "Árbol decorado con guirnaldas, esferas y luces multicolor.",
+        detailImages: [
+          { src: assets.combo, alt: "Árbol canadiense 150 cm completo con guirnaldas rojas, esferas rojas y doradas y luces multicolor" },
+          { src: "./assets/productos/arbol-canadiense-150cm/combo-detalle-con-luces.webp", alt: "Detalle de la parte superior del árbol con esferas, guirnaldas metalizadas y luces encendidas" },
+          { src: "./assets/productos/arbol-canadiense-150cm/combo-decorado-sin-luces.webp", alt: "Árbol con guirnaldas y esferas, vista de la decoración sin luces" },
+          { src: "./assets/productos/arbol-canadiense-150cm/combo-detalle-sin-luces.webp", alt: "Acercamiento de ramas, guirnaldas y esferas sin luces" }
+        ],
         productSetId: "demo-set-prod-002-mixed",
         items: components
       }
@@ -57,7 +67,7 @@
   }
   function mount({root,offers,selectedId,onSelect}){
     if(!root||!offers.length)return null;
-    const by=id=>document.getElementById(id),backdrop=by("comboDetailBackdrop"),title=by("comboDetailTitle"),image=by("comboDetailImage"),copy=by("comboDetailCopy"),items=by("comboDetailItems"),price=by("comboDetailPrice"),compare=by("comboDetailCompare"),select=by("comboDetailSelect"),close=by("comboDetailClose");
+    const by=id=>document.getElementById(id),backdrop=by("comboDetailBackdrop"),title=by("comboDetailTitle"),gallery=by("comboDetailGallery"),copy=by("comboDetailCopy"),items=by("comboDetailItems"),price=by("comboDetailPrice"),compare=by("comboDetailCompare"),badge=by("comboDetailBadge"),select=by("comboDetailSelect"),close=by("comboDetailClose"),favorite=by("comboDetailFavorite");
     let currentId=selectedId,detailId=null,previousFocus=null;
     const e=esc;
     const row=i=>'<li><img src="'+e(i.image)+'" alt="" loading="lazy"><span>'+e((i.displayQuantity ?? i.quantity)+" × "+i.title)+'</span><s>'+e(money(i.referenceUnitPrice)+(i.referenceUnitText?" "+i.referenceUnitText:(i.quantity>1?" c/u":"")))+'</s></li>';
@@ -73,18 +83,57 @@
     function openDetails(id,trigger){
       const o=offers.find(v=>v.id===id);if(!o||!backdrop||o.kind==="single")return;
       detailId=id;previousFocus=trigger;
-      if(title)title.textContent=o.label;if(image){image.src=o.image;image.alt=o.label;}
-      if(copy)copy.textContent=o.subtitle+" · Composición ilustrativa.";
-      if(items)items.replaceChildren(...o.items.map(i=>{const li=document.createElement("li");li.textContent=(i.displayQuantity ?? i.quantity)+" × "+i.title;return li;}));
-      if(price)price.textContent=money(o.price);if(compare){compare.textContent=o.compareAt>o.price?money(o.compareAt):"";compare.hidden=!(o.compareAt>o.price);}
-      setSelected(currentId);backdrop.hidden=false;document.body.classList.add("no-scroll");
+      if(title)title.textContent=o.detailTitle || o.label;
+      if(copy)copy.textContent=o.detailDescription || o.subtitle || "";
+      if(gallery){
+        const visuals=(Array.isArray(o.detailImages)&&o.detailImages.length?o.detailImages:[{src:o.image,alt:o.label}]).slice(0,4);
+        gallery.replaceChildren(...visuals.map((v,i)=>{
+          const img=document.createElement("img");
+          img.src=v.src;img.alt=v.alt || o.detailTitle || o.label;
+          img.loading=i===0?"eager":"lazy";img.decoding="async";
+          img.width=900;img.height=1125;
+          return img;
+        }));
+        gallery.scrollLeft=0;
+      }
+      if(items)items.replaceChildren(...o.items.map(i=>{
+        const li=document.createElement("li");
+        const picture=document.createElement("img");picture.src=i.image;picture.alt=i.title;picture.loading="lazy";picture.decoding="async";
+        const text=document.createElement("span");text.textContent=(i.displayQuantity ?? i.quantity)+" × "+i.title;
+        const ref=document.createElement("s");
+        ref.textContent=money(i.referenceUnitPrice)+(i.referenceUnitText?" "+i.referenceUnitText:(i.quantity>1?" c/u":""));
+        li.append(picture,text,ref);
+        return li;
+      }));
+      if(price)price.textContent=money(o.price);
+      if(compare){compare.textContent=o.compareAt>o.price?money(o.compareAt):"";compare.hidden=!(o.compareAt>o.price);}
+      if(badge){badge.textContent=o.badge||"";badge.hidden=!o.badge;}
+      if(favorite){const active=by("favoriteButton")?.classList.contains("is-favorite")||false;favorite.setAttribute("aria-pressed",String(active));favorite.classList.toggle("is-favorite",active);}
+      setSelected(currentId);
+      backdrop.hidden=false;
+      document.body.classList.add("no-scroll");
       requestAnimationFrame(()=>{if(!backdrop.hidden&&detailId===id){backdrop.classList.add("is-open");close?.focus();}});
     }
     function closeDetails(){if(!backdrop||backdrop.hidden)return;detailId=null;backdrop.hidden=true;backdrop.classList.remove("is-open");document.body.classList.remove("no-scroll");previousFocus?.focus();previousFocus=null;}
     root.addEventListener("click",ev=>{const d=ev.target.closest("[data-details-offer]");if(d){openDetails(d.dataset.detailsOffer,d);return;}const c=ev.target.closest("[data-sds-offer]");if(c)choose(c.dataset.sdsOffer);});
     select?.addEventListener("click",()=>{if(detailId){choose(detailId);closeDetails();}});
+    favorite?.addEventListener("click",()=>{
+      by("favoriteButton")?.click();
+      const active=by("favoriteButton")?.classList.contains("is-favorite")||false;
+      favorite.classList.toggle("is-favorite",active);
+      favorite.setAttribute("aria-pressed",String(active));
+    });
     close?.addEventListener("click",closeDetails);backdrop?.addEventListener("click",ev=>{if(ev.target===backdrop)closeDetails();});
-    window.addEventListener("keydown",ev=>{if(ev.key==="Escape"&&backdrop&&!backdrop.hidden)closeDetails();});
+    window.addEventListener("keydown",ev=>{
+      if(!backdrop||backdrop.hidden)return;
+      if(ev.key==="Escape"){closeDetails();return;}
+      if(ev.key==="Tab"){
+        const controls=[close,favorite,select].filter(Boolean);
+        const first=controls[0],last=controls[controls.length-1];
+        if(ev.shiftKey&&document.activeElement===first){ev.preventDefault();last.focus();}
+        else if(!ev.shiftKey&&document.activeElement===last){ev.preventDefault();first.focus();}
+      }
+    });
     setSelected(selectedId);return {setSelected};
   }
   window.SDSOfferCards=Object.freeze({getOffers,mount});
