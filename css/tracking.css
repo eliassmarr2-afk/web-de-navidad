@@ -290,3 +290,13 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .tracking-help-row { margin-top: 46px; }
   .tracking-help-link { font-size: 13px; }
 }
+
+/* SDS-LOG-01: conserva la geometría INDUMENTARY; capa mínima de identidad/estado */
+.tracking-header__brand{font-size:clamp(11px,3.2vw,17px);letter-spacing:.055em;white-space:nowrap}
+.tracking-demo-banner{margin:13px 0 0;padding:9px 12px;background:#e7f0ff;border:1px solid #bfd6ff;border-radius:5px;color:#164c9a;font-size:11px;font-weight:750}
+.tracking-demo-banner[hidden]{display:none!important}
+.tracking-status{margin:11px 0 0;font-size:12px;line-height:1.45;color:#656565}
+.tracking-status:empty{display:none}
+.tracking-search input:disabled,.tracking-search button:disabled{opacity:.62;cursor:not-allowed}
+.tracking-empty[hidden],.tracking-help-row[hidden]{display:none!important}
+.tracking-results[hidden]{display:none!important}

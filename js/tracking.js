@@ -1,349 +1,230 @@
-(() => {
-  "use strict";
+/* SDS-LOG-01 | The INDUMENTARY tracking design with BC-02-safe data.
+ * Real lookup: capability-only public reader, default disabled until site
+ * installation and safe delivery are certified. Preview: synthetic only.
+ * No order/customer/commerce data is returned by the public reader.
+ */
+import {trackingSiteConfig} from "./protocol/tracking-site-config.js";
+import {createPublicTrackingAdapter} from "./protocol/tracking-public-v2.js";
 
-  const drawer = document.getElementById("trackingDrawer");
-  const backdrop = document.getElementById("trackingDrawerBackdrop");
-  const openButton = document.getElementById("trackingMenuButton");
-  const closeButton = document.getElementById("trackingDrawerClose");
-  const form = document.getElementById("trackingSearchForm");
-  const input = document.getElementById("trackingId");
-  const emptyState = document.querySelector(".tracking-empty");
-  const helpRow = document.querySelector(".tracking-help-row");
-  const illustration = emptyState?.querySelector("img");
-  const resultsRoot = document.getElementById("trackingResults");
-
-  const INITIAL_ILLUSTRATION = "./assets/tracking-empty-state-final.png?v=20261102-1305";
-  const NOT_FOUND_ILLUSTRATION = "./assets/tracking-no-encontrado.png?v=20261102-1415";
-  const LIFECYCLE_ORDER = ["received", "dispatched", "in_transit", "delivered"];
-
-  const DEMO_STEPS = Object.freeze([
-    Object.freeze({
-      code: "received",
-      label: "Recibido",
-      subtitle: "Tu pedido ingresó a Logística y está listo para ser preparado."
-    }),
-    Object.freeze({
-      code: "dispatched",
-      label: "Despachado",
-      subtitle: "El pedido fue despachado y entregado al circuito de distribución."
-    }),
-    Object.freeze({
-      code: "in_transit",
-      label: "En tránsito",
-      subtitle: "El envío está viajando hacia la dirección de entrega."
-    }),
-    Object.freeze({
-      code: "delivered",
-      label: "Entregado",
-      subtitle: "El pedido fue entregado en el destino informado."
-    })
-  ]);
-
-  const FOUND_DEMO = Object.freeze({
-    status: "FOUND",
-    authorization: Object.freeze({
-      mode: "MOCK_DEVELOPMENT_ONLY",
-      authorized: true
-    }),
-    projection: Object.freeze({
-      logistics: Object.freeze({
-        source: "PROTOCOL_DATA_LOGISTICS_PUBLIC_TRACKING_TARGET",
-        updatedAt: "2026-11-02T14:12:00-03:00",
-        lifecycleStatus: "dispatched",
-        steps: DEMO_STEPS,
-        carrierLabel: "Transportista de prueba",
-        trackingNumber: "C-1111"
-      }),
-      customer: Object.freeze({
-        source: "AUTHORIZED_POSTPURCHASE_ORDER_PROJECTION_TARGET",
-        updatedAt: "2026-11-02T12:48:00-03:00",
-        fullName: "Martín González",
-        address: "Tucumán 2896, Ciudad Autónoma de Buenos Aires",
-        userNote: "Entregar en portería."
-      }),
-      commerce: Object.freeze({
-        source: "AUTHORIZED_COMMERCE_ORDER_SNAPSHOT_TARGET",
-        updatedAt: "2026-11-02T11:36:00-03:00",
-        currency: "ARS",
-        items: Object.freeze([
-          Object.freeze({ title: "Campera Core", variant: "Gris · M", quantity: 1, totalAmount: 74990 })
-        ]),
-        shippingAmount: 0,
-        totalAmount: 74990
-      }),
-      help: Object.freeze({
-        source: "AUTHORIZED_ACTION_ELIGIBILITY_TARGET",
-        updatedAt: "2026-11-02T14:12:00-03:00",
-        actions: Object.freeze([
-          Object.freeze({ id: "change_delivery_address", label: "Cambiar mi dirección de entrega" }),
-          Object.freeze({ id: "change_products", label: "Cambiar/Agregar productos" }),
-          Object.freeze({ id: "report_error", label: "Reportar error" }),
-          Object.freeze({ id: "cancel_purchase", label: "Cancelar compra" }),
-          Object.freeze({ id: "talk_to_support", label: "Hablar con Soporte" })
-        ])
-      })
-    })
+const by=id=>document.getElementById(id);
+const adapter=createPublicTrackingAdapter(trackingSiteConfig);
+const preview=new URLSearchParams(window.location.search).get("vista")==="demo";
+const STATES=["received","dispatched","in_transit","delivered"];
+const TEXT={
+  received:["Recibido","Tu pedido ingresó a nuestro circuito logístico."],
+  dispatched:["Despachado","El paquete fue despachado para su distribución."],
+  in_transit:["En camino","El envío se encuentra en camino."],
+  delivered:["Entregado","El pedido figura como entregado."]
+};
+const els={
+  form:by("trackingSearchForm"),input:by("trackingId"),
+  submit:by("trackingSubmit"),status:by("trackingStatus"),
+  demo:by("trackingDemoBanner"),empty:document.querySelector(".tracking-empty"),
+  help:document.querySelector(".tracking-help-row"),results:by("trackingResults"),
+  drawer:by("trackingDrawer"),backdrop:by("trackingDrawerBackdrop"),
+  menu:by("trackingMenuButton"),close:by("trackingDrawerClose"),
+  unknown:by("trackingUnknownId")
+};
+const illustration=els.empty?.querySelector("img");
+const INITIAL="./assets/tracking-empty-state-final.png?v=20261102-1305";
+const NOT_FOUND="./assets/tracking-no-encontrado.png?v=20261102-1415";
+const DEMO_ACCESS="C-1111";
+const DEMO_NOT_FOUND=new Set(["A1111","B1111"]);
+let loading=false;
+function node(tag,className,value){
+  const e=document.createElement(tag);
+  if(className)e.className=className;
+  if(value!==undefined&&value!==null)e.textContent=String(value);
+  return e;
+}
+function put(root,...children){for(const child of children)if(child)root.append(child);return root;}
+function stamp(raw){
+  if(typeof raw!=="string"||!Number.isFinite(Date.parse(raw)))return "Fecha no disponible";
+  return new Intl.DateTimeFormat("es-AR",{timeZone:"America/Argentina/Buenos_Aires",day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit",hour12:false}).format(new Date(raw)).replace(",","");
+}
+function line(label,value){
+  if(value===undefined||value===null||value==="")return null;
+  return put(node("div","tracking-data-item"),node("dt","",label),node("dd","",value));
+}
+function card(title,updatedAt,area){
+  const article=node("article","tracking-result-card");
+  article.dataset.projection=area;
+  const header=put(node("header","tracking-result-card__header"),node("h2","tracking-result-card__title",title),node("span","tracking-result-card__updated",stamp(updatedAt)));
+  const body=node("div","tracking-result-card__body");
+  put(article,header,body);return {article,body};
+}
+function slot(body,area){
+  // Reserved for a separately certified PUBLIC incidents projection. BC-02
+  // currently does not authorize any structured incident field.
+  const e=node("div","tracking-public-incident");e.hidden=true;
+  e.dataset.publicIncidentSlot=area;body.append(e);return e;
+}
+function demoIncident(area,title,message){
+  // Never used for backend payloads. Synthetic preview-only evidence.
+  const element=els.results?.querySelector('[data-public-incident-slot="'+area+'"]');
+  if(!element)return;
+  element.dataset.severity="warning";
+  element.replaceChildren(node("strong","tracking-public-incident__title",title),node("span","tracking-public-incident__body",message));
+  element.hidden=false;
+}
+function showState(state){
+  els.results?.replaceChildren();
+  if(els.results)els.results.hidden=true;
+  if(els.empty){els.empty.hidden=false;els.empty.dataset.trackingState=state.toLowerCase();}
+  if(els.help)els.help.hidden=false;
+  if(illustration){
+    const missing=state==="NOT_FOUND";
+    illustration.src=missing?NOT_FOUND:INITIAL;
+    illustration.alt=missing?"Ilustración de seguimiento no encontrado":"Ilustración de una persona buscando información de seguimiento con binoculares";
+  }
+  const message={
+    EMPTY:preview?"Vista de prueba: usá C-1111 para ver una consulta exitosa; A1111 para una no encontrada.":"",
+    NOT_FOUND:"No encontramos un seguimiento válido con ese acceso.",
+    UNAVAILABLE:"El seguimiento real todavía no está habilitado. Estamos preparando la conexión segura.",
+    ERROR:"No pudimos consultar el seguimiento en este momento. Intentá nuevamente."
+  }[state]||"";
+  if(els.status)els.status.textContent=message;
+}
+function showFound(result){
+  const g=result?.projection?.logistics;
+  if(!g||!STATES.includes(g.lifecycleStatus)){showState("ERROR");return;}
+  const stepIndex=STATES.indexOf(g.lifecycleStatus);
+  const first=card("Estado de tu pedido",g.updatedAt,"logistics");
+  const timeline=node("ol","tracking-timeline");timeline.setAttribute("aria-label","Estados logísticos del pedido");
+  STATES.forEach((id,index)=>{
+    const [title,subtitle]=TEXT[id];
+    const cls=index<stepIndex?"is-complete":index===stepIndex?"is-current":"is-pending";
+    const item=put(node("li","tracking-timeline__item "+cls),
+      node("span","tracking-timeline__node"),
+      node("p","tracking-timeline__title",title),
+      node("p","tracking-timeline__subtitle",subtitle));
+    item.dataset.lifecycleStatus=id;timeline.append(item);
   });
-
-  const MOCK_RESULTS = Object.freeze({
-    A1111: Object.freeze({ status: "NOT_FOUND" }),
-    B1111: Object.freeze({ status: "NOT_FOUND" }),
-    "C-1111": FOUND_DEMO
+  first.body.append(timeline);
+  // BC-02 supplies PUBLIC observation bodies; the most recent may be rendered
+  // under the operator-facing label “Mensaje de logística” without inventions.
+  const publicNotes=Array.isArray(g.observations)?g.observations:[];
+  if(publicNotes.length){
+    const latest=publicNotes[0];
+    const message=put(node("section","tracking-public-message"),
+      node("h3","","Mensaje de logística"),
+      node("p","",latest.body),
+      node("time","",stamp(latest.createdAt)));
+    first.body.append(message);
+  }
+  if(g.lifecycleStatus==="delivered"&&g.deliveredAt)
+    first.body.append(node("p","tracking-public-note","Entrega registrada: "+stamp(g.deliveredAt)));
+  slot(first.body,"status");
+  const second=card("Información del envío",g.updatedAt,"shipment");
+  const facts=node("dl","tracking-data-list");
+  const promise=g.promiseLabel||(g.deliveryMinDays!==null&&g.deliveryMaxDays!==null?
+    g.deliveryMinDays+" a "+g.deliveryMaxDays+" días operativos":null);
+  put(facts,line("Estado",TEXT[g.lifecycleStatus][0]),line("Transportista",g.carrierLabel),
+    line("Seguimiento",g.trackingNumber),line("Entrega prevista",promise),line("Franja horaria",g.deliveryTimeBand));
+  if(!facts.children.length)facts.append(line("Información","Datos aún no disponibles"));
+  second.body.append(facts);
+  if(g.trackingUrl){
+    const link=node("a","tracking-safe-link","Consultar con el transportista");
+    link.href=g.trackingUrl;link.target="_blank";link.rel="noopener noreferrer";second.body.append(link);
+  }
+  slot(second.body,"shipment");
+  const third=card("Actualizaciones del envío",g.updatedAt,"updates");
+  if(publicNotes.length){
+    const ul=node("ul","tracking-public-notes");
+    for(const note of publicNotes){
+      ul.append(put(node("li",""),node("span","",note.body),node("small","",stamp(note.createdAt))));
+    }
+    third.body.classList.add("tracking-result-card__body--flush");
+    third.body.append(ul);
+    if(g.hasMoreObservations)third.body.append(node("p","tracking-public-note","Hay actualizaciones anteriores disponibles."));
+  }else third.body.append(node("p","tracking-public-note","Todavía no hay mensajes públicos adicionales."));
+  slot(third.body,"updates");
+  const fourth=card("Ayuda",g.updatedAt,"help");
+  fourth.body.classList.add("tracking-result-card__body--flush");
+  const link=node("a","tracking-action","Hablar con Soporte");
+  link.href="./soporte.html";
+  link.append(node("span","tracking-action__chevron","›"));
+  fourth.body.append(link);
+  slot(fourth.body,"support");
+  els.results?.replaceChildren(first.article,second.article,third.article,fourth.article);
+  if(preview){
+    demoIncident("shipment","Ejemplo de incidencia","El transportista notificó una reprogramación. Este mensaje es de demostración.");
+  }
+  if(els.results)els.results.hidden=false;
+  if(els.empty)els.empty.hidden=true;
+  if(els.help)els.help.hidden=true;
+  if(els.status)els.status.textContent=preview?"Resultado ficticio de demostración.":"Consulta realizada correctamente.";
+}
+const synthetic=Object.freeze({
+  status:"FOUND",
+  projection:{logistics:{
+    lifecycleStatus:"in_transit",
+    updatedAt:"2026-11-20T12:00:00-03:00",
+    deliveredAt:null,carrierLabel:"Transportista de demostración",trackingNumber:"DEMO-1111",
+    trackingUrl:null,promiseLabel:"Entrega estimada (ejemplo)",deliveryMinDays:null,deliveryMaxDays:null,
+    deliveryTimeBand:"14:00–18:00 (ejemplo)",
+    observations:[{body:"Tu envío presenta una actualización logística de ejemplo.",createdAt:"2026-11-20T12:00:00-03:00"}],
+    hasMoreObservations:false
+  }}
+});
+function setDrawer(isOpen){
+  els.drawer?.classList.toggle("is-open",isOpen);
+  els.backdrop?.classList.toggle("is-open",isOpen);
+  els.drawer?.setAttribute("aria-hidden",String(!isOpen));
+  els.menu?.setAttribute("aria-expanded",String(isOpen));
+  document.body.style.overflow=isOpen?"hidden":"";
+}
+els.menu?.addEventListener("click",()=>setDrawer(true));
+els.close?.addEventListener("click",()=>setDrawer(false));
+els.backdrop?.addEventListener("click",()=>setDrawer(false));
+document.querySelectorAll("[data-tracking-submenu]").forEach(toggle=>{
+  toggle.addEventListener("click",()=>{
+    const target=by(toggle.getAttribute("aria-controls"));
+    const open=!target?.classList.contains("is-open");
+    target?.classList.toggle("is-open",open);
+    toggle.setAttribute("aria-expanded",String(open));
   });
-
-  const normalizeTrackingId = (value) => String(value ?? "").trim();
-
-  const escapeHtml = (value) => String(value ?? "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-
-  const formatUpdatedAt = (value) => {
-    const date = new Date(value);
-    if (!Number.isFinite(date.getTime())) return "Actualización no disponible";
-    return `Actualizado · ${new Intl.DateTimeFormat("es-AR", {
-      timeZone: "America/Argentina/Buenos_Aires",
-      day: "2-digit",
-      month: "short",
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: false
-    }).format(date).replace(",", "")}`;
-  };
-
-  const formatMoney = (amount, currency = "ARS") => new Intl.NumberFormat("es-AR", {
-    style: "currency",
-    currency,
-    maximumFractionDigits: 0
-  }).format(Number(amount) || 0);
-
-  // Stable boundary. Production replaces this adapter with an authorized
-  // storefront boundary backed by Protocol Data. UI rendering remains unchanged.
-  const mockTrackingLookupAdapter = Object.freeze({
-    async lookup(rawTrackingId) {
-      const trackingId = normalizeTrackingId(rawTrackingId);
-      if (!trackingId) return { status: "EMPTY", trackingId: "" };
-
-      // Comparison is case-insensitive only. Hyphens, slashes, dots and other
-      // meaningful characters remain part of the identifier.
-      const fixtureKey = trackingId.toUpperCase();
-      const fixture = MOCK_RESULTS[fixtureKey];
-      if (fixture) {
-        return { ...fixture, trackingId, source: "MOCK_DEVELOPMENT_ONLY" };
-      }
-      return { status: "NOT_FOUND", trackingId, source: "MOCK_DEVELOPMENT_ONLY" };
-    }
-  });
-
-  const injectedAdapter = window.IND_TRACKING_LOOKUP_ADAPTER;
-  const trackingLookupAdapter =
-    injectedAdapter && typeof injectedAdapter.lookup === "function"
-      ? injectedAdapter
-      : mockTrackingLookupAdapter;
-
-  const setDrawer = (open) => {
-    drawer?.classList.toggle("is-open", open);
-    backdrop?.classList.toggle("is-open", open);
-    drawer?.setAttribute("aria-hidden", String(!open));
-    openButton?.setAttribute("aria-expanded", String(open));
-    document.body.style.overflow = open ? "hidden" : "";
-  };
-
-  const cardHeader = (title, updatedAt) => `
-    <header class="tracking-result-card__header">
-      <h2 class="tracking-result-card__title">${escapeHtml(title)}</h2>
-      <span class="tracking-result-card__updated">${escapeHtml(formatUpdatedAt(updatedAt))}</span>
-    </header>`;
-
-  const renderTimeline = (logistics) => {
-    const currentIndex = LIFECYCLE_ORDER.indexOf(logistics.lifecycleStatus);
-    const items = (logistics.steps || []).map((step) => {
-      const stepIndex = LIFECYCLE_ORDER.indexOf(step.code);
-      const state = stepIndex < currentIndex
-        ? "is-complete"
-        : stepIndex === currentIndex
-          ? "is-current"
-          : "is-pending";
-      return `
-        <li class="tracking-timeline__item ${state}" data-lifecycle-status="${escapeHtml(step.code)}">
-          <span class="tracking-timeline__node" aria-hidden="true"></span>
-          <p class="tracking-timeline__title">${escapeHtml(step.label)}</p>
-          <p class="tracking-timeline__subtitle">${escapeHtml(step.subtitle)}</p>
-        </li>`;
-    }).join("");
-
-    return `
-      <article class="tracking-result-card" data-projection="logistics">
-        ${cardHeader("Estado de tu pedido", logistics.updatedAt)}
-        <div class="tracking-result-card__body">
-          <ol class="tracking-timeline" aria-label="Estados logísticos del pedido">${items}</ol>
-        </div>
-      </article>`;
-  };
-
-  const renderCustomer = (customer) => `
-    <article class="tracking-result-card" data-projection="customer">
-      ${cardHeader("Datos del cliente", customer.updatedAt)}
-      <div class="tracking-result-card__body">
-        <dl class="tracking-data-list">
-          <div class="tracking-data-item">
-            <dt>Nombre y apellido</dt>
-            <dd>${escapeHtml(customer.fullName)}</dd>
-          </div>
-          <div class="tracking-data-item">
-            <dt>Domicilio</dt>
-            <dd>${escapeHtml(customer.address)}</dd>
-          </div>
-          <div class="tracking-data-item">
-            <dt>Observación de usuario</dt>
-            <dd class="is-muted">${escapeHtml(customer.userNote || "Sin observaciones")}</dd>
-          </div>
-        </dl>
-      </div>
-    </article>`;
-
-  const renderCommerce = (commerce) => {
-    const rows = (commerce.items || []).map((item) => `
-      <div class="tracking-order-row">
-        <div class="tracking-order-row__label">
-          <span>${escapeHtml(item.title)}</span>
-          <span class="tracking-order-row__meta">${escapeHtml(item.variant || "")} · Cant. ${escapeHtml(item.quantity)}</span>
-        </div>
-        <strong class="tracking-order-row__value">${escapeHtml(formatMoney(item.totalAmount, commerce.currency))}</strong>
-      </div>`).join("");
-
-    const shipping = Number(commerce.shippingAmount) === 0
-      ? "Gratis"
-      : formatMoney(commerce.shippingAmount, commerce.currency);
-
-    return `
-      <article class="tracking-result-card" data-projection="commerce">
-        ${cardHeader("Productos comprados", commerce.updatedAt)}
-        <div class="tracking-result-card__body tracking-result-card__body--flush">
-          ${rows}
-          <div class="tracking-order-row">
-            <div class="tracking-order-row__label"><span>Envío</span></div>
-            <strong class="tracking-order-row__value">${escapeHtml(shipping)}</strong>
-          </div>
-          <div class="tracking-order-total">
-            <strong>TOTAL</strong>
-            <strong>${escapeHtml(formatMoney(commerce.totalAmount, commerce.currency))}</strong>
-          </div>
-        </div>
-      </article>`;
-  };
-
-  const renderHelp = (help) => {
-    const actions = (help.actions || []).map((action) => `
-      <button class="tracking-action" type="button" data-tracking-action="${escapeHtml(action.id)}">
-        <span>${escapeHtml(action.label)}</span>
-        <span class="tracking-action__chevron" aria-hidden="true">›</span>
-      </button>`).join("");
-
-    return `
-      <article class="tracking-result-card" data-projection="help">
-        ${cardHeader("Ayuda", help.updatedAt)}
-        <div class="tracking-result-card__body tracking-result-card__body--flush">
-          <div class="tracking-actions">${actions}</div>
-        </div>
-      </article>`;
-  };
-
-  const renderFound = (result) => {
-    if (!resultsRoot || !result?.projection) return;
-    const { logistics, customer, commerce, help } = result.projection;
-    resultsRoot.innerHTML = [
-      renderTimeline(logistics),
-      renderCustomer(customer),
-      renderCommerce(commerce),
-      renderHelp(help)
-    ].join("");
-    resultsRoot.hidden = false;
-    resultsRoot.setAttribute("data-tracking-id", result.trackingId || "");
-  };
-
-  const renderTrackingState = (result) => {
-    const status = result?.status || "ERROR";
-    emptyState?.setAttribute("data-tracking-state", status.toLowerCase());
-
-    if (status === "FOUND") {
-      if (emptyState) emptyState.hidden = true;
-      if (helpRow) helpRow.hidden = true;
-      renderFound(result);
-      return;
-    }
-
-    if (resultsRoot) {
-      resultsRoot.hidden = true;
-      resultsRoot.innerHTML = "";
-    }
-    if (emptyState) emptyState.hidden = false;
-    if (helpRow) helpRow.hidden = false;
-    if (!illustration) return;
-
-    if (status === "NOT_FOUND") {
-      illustration.src = NOT_FOUND_ILLUSTRATION;
-      illustration.alt = "Ilustración que indica que no se encontró el ID de seguimiento buscado";
-      return;
-    }
-
-    if (status === "EMPTY") {
-      illustration.src = INITIAL_ILLUSTRATION;
-      illustration.alt = "Ilustración de una persona buscando información de seguimiento con binoculares";
-    }
-  };
-
-  openButton?.addEventListener("click", () => setDrawer(true));
-  closeButton?.addEventListener("click", () => setDrawer(false));
-  backdrop?.addEventListener("click", () => setDrawer(false));
-
-  document.querySelectorAll("[data-tracking-submenu]").forEach((toggle) => {
-    toggle.addEventListener("click", () => {
-      const target = document.getElementById(toggle.getAttribute("aria-controls"));
-      const open = !target?.classList.contains("is-open");
-      target?.classList.toggle("is-open", open);
-      toggle.setAttribute("aria-expanded", String(open));
-    });
-  });
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && drawer?.classList.contains("is-open")) setDrawer(false);
-  });
-
-  resultsRoot?.addEventListener("click", (event) => {
-    const button = event.target.closest("[data-tracking-action]");
-    if (!button) return;
-    const action = button.getAttribute("data-tracking-action");
-    window.dispatchEvent(new CustomEvent("indumentary:tracking:action", {
-      detail: {
-        action,
-        trackingId: resultsRoot.getAttribute("data-tracking-id") || "",
-        authority: "ACTION_INTENT_ONLY"
-      }
-    }));
-  });
-
-  form?.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    const trackingId = normalizeTrackingId(input?.value);
-
-    if (!trackingId) {
-      input?.setAttribute("aria-invalid", "true");
-      renderTrackingState({ status: "EMPTY", trackingId: "" });
-      return;
-    }
-
-    input?.removeAttribute("aria-invalid");
-
-    try {
-      const result = await trackingLookupAdapter.lookup(trackingId);
-      renderTrackingState(result);
-    } catch (error) {
-      console.error("[IND Tracking] lookup failed", error);
-      if (resultsRoot) resultsRoot.hidden = true;
-      emptyState?.setAttribute("data-tracking-state", "error");
-    }
-  });
-})();
+});
+document.addEventListener("keydown",event=>{
+  if(event.key==="Escape"&&els.drawer?.classList.contains("is-open"))setDrawer(false);
+});
+els.unknown?.addEventListener("click",()=>{window.location.assign("./soporte.html");});
+if(preview){
+  if(els.demo)els.demo.hidden=false;
+  if(els.input){
+    els.input.disabled=false;els.input.type="text";els.input.maxLength=100;
+    els.input.placeholder="ID de prueba: C-1111";
+    els.input.setAttribute("aria-label","ID de seguimiento de demostración");
+    els.input.name="demo_tracking_id";
+  }
+  if(els.submit)els.submit.disabled=false;
+  showState("EMPTY");
+}else if(adapter.enabled){
+  if(els.input)els.input.disabled=false;
+  if(els.submit)els.submit.disabled=false;
+  showState("EMPTY");
+}else{showState("UNAVAILABLE");}
+els.form?.addEventListener("submit",async event=>{
+  event.preventDefault();
+  if(loading)return;
+  if(preview){
+    const id=String(els.input?.value||"").trim().toUpperCase();
+    if(!id){showState("EMPTY");return;}
+    if(id===DEMO_ACCESS){showFound(synthetic);return;}
+    showState(DEMO_NOT_FOUND.has(id)?"NOT_FOUND":"NOT_FOUND");return;
+  }
+  if(!adapter.enabled)return;
+  // Access is a single-use in-memory form value. No URL, logs or storage.
+  const access=String(els.input?.value||"").trim();
+  if(els.input)els.input.value="";
+  if(!/^[A-Za-z0-9_-]{43}$/.test(access)){showState("NOT_FOUND");return;}
+  loading=true;
+  if(els.submit)els.submit.disabled=true;
+  if(els.status)els.status.textContent="Consultando...";
+  try{
+    const result=await adapter.lookup(access);
+    if(result.status==="FOUND")showFound(result);
+    else showState(result.status);
+  }catch{showState("ERROR");}
+  finally{loading=false;if(els.submit)els.submit.disabled=false;}
+});
