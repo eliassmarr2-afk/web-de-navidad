@@ -1,0 +1,51 @@
+{{ 'sds-home.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'sds-home.js' | asset_url }}" defer></script>
+<section class="sds-home-hero" aria-labelledby="sdsHomeTitle">
+{% if section.settings.hero_image != blank %}{{ section.settings.hero_image | image_url: width: 2400 | image_tag: class: 'sds-home-hero__image', loading: 'eager', fetchpriority: 'high' }}{% endif %}
+<h1 class="sds-home-hero__sr" id="sdsHomeTitle">{{ section.settings.page_title | escape }}</h1>
+<div class="sds-home-hero__top">
+<button class="sds-location-trigger" type="button" data-sds-location-open aria-haspopup="dialog" aria-controls="sds-location-dialog">
+<svg class="sds-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+<span id="sds-location-label">{{ section.settings.location_prompt | escape }}</span>
+<svg class="sds-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+<nav class="sds-home-hero__actions" aria-label="Accesos rápidos">
+<button class="sds-hero-icon" type="button" data-sds-menu-open aria-label="Abrir menú" aria-haspopup="dialog" aria-controls="sds-menu-dialog"><svg class="sds-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+{% if section.settings.tracking_url != blank %}<a class="sds-hero-icon" href="{{ section.settings.tracking_url }}" aria-label="Consultar mi pedido">{% else %}<span class="sds-hero-icon sds-hero-icon--inactive" aria-label="Seguimiento pendiente de habilitación" title="Seguimiento próximamente">{% endif %}
+<svg class="sds-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h11v10H3Z"/><path d="M14 9h4l3 3v4h-7Z"/><circle cx="7" cy="19" r="2"/><circle cx="17" cy="19" r="2"/></svg>
+{% if section.settings.tracking_url != blank %}</a>{% else %}</span>{% endif %}
+<a class="sds-hero-icon" href="{{ routes.cart_url }}" aria-label="Carrito, {{ cart.item_count }} artículos"><svg class="sds-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 2-1.6L20.5 8H6.1"/><circle cx="10" cy="20" r="1"/><circle cx="17" cy="20" r="1"/></svg></a>
+</nav></div>
+<div class="sds-home-hero__bottom"><form class="sds-search" role="search" method="get" action="{{ routes.search_url }}">
+<svg class="sds-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+<label class="sds-home-hero__sr" for="sdsHeroSearch">Buscar productos</label>
+<input id="sdsHeroSearch" type="search" name="q" placeholder="{{ section.settings.search_placeholder | escape }}" autocomplete="off"></form>
+<button class="sds-map-button" type="button" data-sds-location-open aria-label="Elegir ubicación" aria-haspopup="dialog" aria-controls="sds-location-dialog">
+<svg class="sds-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3Z"/><path d="M9 3v15M15 6v15"/></svg>
+</button></div></section>
+<dialog class="sds-home-menu" id="sds-menu-dialog" aria-labelledby="sdsMenuTitle">
+  <div class="sds-home-menu__header"><strong id="sdsMenuTitle">SANTA DEL SUR STORE</strong><button type="button" data-sds-menu-close aria-label="Cerrar menú">Cerrar</button></div>
+  <nav aria-label="Navegación">
+    {% for link in section.settings.menu.links %}
+      <a href="{{ link.url }}">{{ link.title | escape }}</a>
+    {% else %}
+      <a href="{{ routes.root_url }}">Inicio</a>
+      <a href="{{ routes.search_url }}">Buscar productos</a>
+    {% endfor %}
+  </nav>
+</dialog>
+<dialog id="sds-location-dialog" class="sds-location-modal" aria-labelledby="sdsLocationTitle"><h2 id="sdsLocationTitle">¿A dónde lo enviamos?</h2>
+<form id="sds-location-form"><label for="sdsPostal">Código postal</label><input id="sdsPostal" name="postal" inputmode="text" maxlength="8" autocomplete="postal-code" required placeholder="Ej. 1414 o C1414ABC">
+<label for="sdsAddress">Dirección (opcional)</label><input id="sdsAddress" name="address" maxlength="120" autocomplete="street-address" placeholder="Calle y altura">
+<p>Se conserva durante esta sesión. No confirma tarifa, disponibilidad ni tiempo de entrega.</p>
+<div class="sds-location-modal__actions"><button type="button" data-sds-location-close>Cancelar</button><button type="submit">Guardar ubicación</button></div></form></dialog>
+{% schema %}
+{"name":"SDS · Portada","tag":"section","settings":[
+{"type":"image_picker","id":"hero_image","label":"Imagen de portada"},
+{"type":"text","id":"page_title","label":"Título accesible","default":"Santa Del Sur Store · Navidad"},
+{"type":"text","id":"location_prompt","label":"Texto de ubicación","default":"¿A dónde lo enviamos?"},
+{"type":"text","id":"search_placeholder","label":"Texto del buscador","default":"Buscá regalos, adornos, luces..."},
+{"type":"link_list","id":"menu","label":"Menú Shopify"},
+{"type":"url","id":"tracking_url","label":"Seguimiento (cuando exista)"}],
+"presets":[{"name":"SDS · Portada"}]}
+{% endschema %}
+

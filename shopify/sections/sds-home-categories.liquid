@@ -1,0 +1,47 @@
+<section class="sds-home-rail" id="categorias" aria-labelledby="sdsCatHeading">
+  <header class="sds-rail-heading"><div><p class="sds-rail-eyebrow">{{ section.settings.category_eyebrow | escape }}</p><h2 id="sdsCatHeading">{{ section.settings.category_heading | escape }}</h2></div></header>
+  <div class="sds-category-track" aria-label="Categorías navideñas">
+  {% for block in section.blocks %}{% if block.type == 'category' %}
+    <div class="sds-category" {{ block.shopify_attributes }}>
+      {% if block.settings.destination != blank %}
+        <a class="sds-category" href="{{ block.settings.destination }}">
+      {% else %}
+        <span class="sds-category sds-disabled-link" title="Colección pendiente de habilitación">
+      {% endif %}
+          <span class="sds-category__circle">{% render 'sds-home-icon', name: block.settings.icon %}</span>
+          <span class="sds-category__label">{{ block.settings.label | escape }}</span>
+      {% if block.settings.destination != blank %}</a>{% else %}</span>{% endif %}
+    </div>
+  {% endif %}{% endfor %}
+  </div>
+</section>
+<section class="sds-home-rail sds-home-rail--filters" aria-labelledby="sdsFilterHeading">
+  <header class="sds-rail-heading"><div><p class="sds-rail-eyebrow">{{ section.settings.filter_eyebrow | escape }}</p><h2 id="sdsFilterHeading">{{ section.settings.filter_heading | escape }}</h2></div></header>
+  <div class="sds-filter-track" aria-label="Filtros rápidos">
+  {% for block in section.blocks %}{% if block.type == 'filter' %}
+    {% assign query = block.settings.query | strip %}
+    {% if query != blank %}
+      <a class="sds-filter" href="{{ routes.search_url }}?q={{ query | url_encode }}" {{ block.shopify_attributes }}>
+        {% render 'sds-home-icon', name: block.settings.filter_icon %}
+        <span>{{ block.settings.label | escape }}</span>
+      </a>
+    {% else %}
+      <span class="sds-filter sds-disabled-link" {{ block.shopify_attributes }}>
+        {% render 'sds-home-icon', name: block.settings.filter_icon %}
+        <span>{{ block.settings.label | escape }}</span>
+      </span>
+    {% endif %}
+  {% endif %}{% endfor %}
+  </div>
+</section>
+{% schema %}
+{"name":"SDS · Categorías","tag":"section","settings":[
+{"type":"text","id":"category_eyebrow","label":"Introducción categorías","default":"TODO PARA CELEBRAR"},
+{"type":"text","id":"category_heading","label":"Título categorías","default":"Elegí tu inspiración"},
+{"type":"text","id":"filter_eyebrow","label":"Introducción filtros","default":"ENCONTRÁ TU ESTILO"},
+{"type":"text","id":"filter_heading","label":"Título filtros","default":"Descubrí más"}],
+"blocks":[
+{"type":"category","name":"Categoría","settings":[{"type":"text","id":"label","label":"Nombre","default":"Árboles"},{"type":"select","id":"icon","label":"Ícono","default":"tree","options":[{"value":"tree","label":"Árbol"},{"value":"gift","label":"Regalo"},{"value":"ornament","label":"Decoración"},{"value":"lights","label":"Luces"},{"value":"wrap","label":"Envoltorios"},{"value":"table","label":"Mesa"},{"value":"bow","label":"Moños"},{"value":"sale","label":"Ofertas"}]},{"type":"url","id":"destination","label":"Colección real"}]},
+{"type":"filter","name":"Filtro de búsqueda","settings":[{"type":"text","id":"label","label":"Nombre","default":"Promociones"},{"type":"text","id":"query","label":"Consulta Shopify"},{"type":"select","id":"filter_icon","label":"Ícono","default":"sale","options":[{"value":"gift","label":"Packs"},{"value":"sale","label":"Promociones"},{"value":"bow","label":"Para regalar"},{"value":"ornament","label":"Decoración"},{"value":"wrap","label":"Envoltorios"}]}]}],
+"max_blocks":20,"presets":[{"name":"SDS · Categorías"}]}
+{% endschema %}

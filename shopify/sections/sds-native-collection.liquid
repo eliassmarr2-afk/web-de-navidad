@@ -1,0 +1,164 @@
+{{ 'sds-native-collection.css' | asset_url | stylesheet_tag }}
+{{ 'sds-shared-tabbar.css' | asset_url | stylesheet_tag }}
+{% liquid
+  assign fallback = section.settings.default_banner
+  assign hero = collection.image
+  if hero == blank
+    assign hero = fallback
+  endif
+  assign eyebrow = section.settings.default_eyebrow
+  assign position = '50% 50%'
+  case collection.handle
+    when 'arboles'
+      assign eyebrow = 'EL CORAZÓN DE LA NAVIDAD'
+      assign position = '50% 46%'
+    when 'regalos'
+      assign eyebrow = 'PARA SORPRENDER'
+      assign position = '50% 58%'
+    when 'decoracion'
+      assign eyebrow = 'HACÉ TU CASA MÁS NAVIDEÑA'
+      assign position = '58% 43%'
+    when 'luces'
+      assign eyebrow = 'ENCENDÉ LA MAGIA'
+      assign position = '45% 45%'
+    when 'envoltorios'
+      assign eyebrow = 'EL DETALLE TAMBIÉN IMPORTA'
+      assign position = '51% 65%'
+    when 'mesa'
+      assign eyebrow = 'MOMENTOS PARA COMPARTIR'
+      assign position = '55% 52%'
+    when 'monos'
+      assign eyebrow = 'UN TOQUE ESPECIAL'
+      assign position = '48% 62%'
+    when 'ofertas'
+      assign eyebrow = 'OPORTUNIDADES DE TEMPORADA'
+      assign position = '50% 52%'
+  endcase
+  assign image_style = 'object-position: ' | append: position
+%}
+<section class="sc-collection-page" aria-labelledby="sdsCollectionTitle-{{ section.id }}">
+  <div class="sc-collection-hero" aria-label="Imagen de cabecera de {{ collection.title | escape }}">
+    {% if hero != blank %}
+      {{ hero | image_url: width: 2400 | image_tag: loading: 'eager', fetchpriority: 'high', class: 'sc-collection-hero__image', style: image_style }}
+    {% endif %}
+    <div class="sc-collection-hero__shade" aria-hidden="true"></div>
+    <nav class="sc-collection-hero__nav" aria-label="Navegación superior">
+      <a href="{{ routes.root_url }}#categorias" class="sc-collection-hero__back" aria-label="Volver a categorías">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+      </a>
+      <a href="{{ routes.root_url }}" class="sc-collection-hero__brand">{{ section.settings.brand | escape }}</a>
+      <a href="{{ routes.cart_url }}" class="sc-collection-hero__store" aria-label="Ver carrito">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h2l2 10h11l2-7H6M10 20h.01M17 20h.01"/></svg>
+      </a>
+    </nav>
+    <span class="sc-collection-hero__caption">{{ section.settings.hero_caption | escape }}</span>
+  </div>
+  <div class="sc-collection-main" id="contenido">
+    <nav class="sc-collection-breadcrumbs" aria-label="Ruta de navegación">
+      <a href="{{ routes.root_url }}">Inicio</a><span aria-hidden="true">/</span><span aria-current="page">{{ collection.title | escape }}</span>
+    </nav>
+    <header class="sc-collection-intro">
+      <p class="sc-collection-eyebrow">{{ eyebrow | escape }}</p>
+      <h1 id="sdsCollectionTitle-{{ section.id }}">{{ collection.title | escape }}</h1>
+      {% if collection.description != blank %}
+        <div class="sc-collection-description">{{ collection.description }}</div>
+      {% endif %}
+    </header>
+    <section class="sc-collection-listing" aria-labelledby="sdsCollectionProducts-{{ section.id }}">
+      {% paginate collection.products by 24 %}
+        <div class="sc-collection-listing__header">
+          <div>
+            <h2 id="sdsCollectionProducts-{{ section.id }}">{{ section.settings.products_heading | escape }}</h2>
+            <p aria-live="polite">{{ collection.products_count }} productos</p>
+          </div>
+          <form class="sc-collection-sort-label" action="{{ collection.url }}" method="get">
+            <label for="sdsCollectionSort-{{ section.id }}">Ordenar por</label>
+            {% assign selected_sort = collection.sort_by | default: collection.default_sort_by %}
+            <select name="sort_by" id="sdsCollectionSort-{{ section.id }}">
+              {% for option in collection.sort_options %}
+                <option value="{{ option.value | escape }}"{% if option.value == selected_sort %} selected{% endif %}>{{ option.name | escape }}</option>
+              {% endfor %}
+            </select>
+            <button type="submit" class="sc-collection-sort-submit">Aplicar</button>
+          </form>
+        </div>
+        <div class="sc-collection-product-grid">
+          {% for product in collection.products %}
+            <article class="sc-collection-product-card">
+              <a href="{{ product.url }}" class="sc-collection-product-card__link">
+                <div class="sc-collection-product-card__media">
+                  {% if product.featured_image != blank %}
+                    {{ product.featured_image | image_url: width: 720 | image_tag: loading: 'lazy' }}
+                  {% endif %}
+                </div>
+                <div class="sc-collection-product-card__copy">
+                  <h3>{{ product.title | escape }}</h3>
+                  <strong class="sc-collection-product-card__price">{{ product.price | money }}</strong>
+                </div>
+              </a>
+            </article>
+          {% else %}
+            <p class="sc-collection-empty">Por ahora no hay productos disponibles en esta colección.</p>
+          {% endfor %}
+        </div>
+        {% if paginate.pages > 1 %}
+          <nav class="sc-collection-pagination" aria-label="Páginas de la colección">
+            {{ paginate | default_pagination }}
+          </nav>
+        {% endif %}
+      {% endpaginate %}
+    </section>
+    <section class="sc-collection-more" id="mas-colecciones" aria-labelledby="sdsCollectionMore-{{ section.id }}">
+      <h2 id="sdsCollectionMore-{{ section.id }}">Explorá otras colecciones</h2>
+      <nav class="sc-collection-more__rail" aria-label="Otras colecciones">
+        {% assign handles = 'arboles,regalos,decoracion,luces,envoltorios,mesa,monos,ofertas' | split: ',' %}
+        {% for handle in handles %}
+          {% case handle %}
+            {% when 'arboles' %}{% assign label = 'Árboles' %}
+            {% when 'regalos' %}{% assign label = 'Regalos' %}
+            {% when 'decoracion' %}{% assign label = 'Decoración' %}
+            {% when 'luces' %}{% assign label = 'Luces' %}
+            {% when 'envoltorios' %}{% assign label = 'Envoltorios' %}
+            {% when 'mesa' %}{% assign label = 'Mesa' %}
+            {% when 'monos' %}{% assign label = 'Moños' %}
+            {% when 'ofertas' %}{% assign label = 'Ofertas' %}
+          {% endcase %}
+          {% assign other = collections[handle] %}
+          {% if other != blank %}
+            <a href="{{ other.url }}" class="sc-collection-more__link"{% if collection.handle == handle %} aria-current="page"{% endif %}>{{ label }}</a>
+          {% else %}
+            <span class="sc-collection-more__link sc-collection-more__link--inactive">{{ label }}</span>
+          {% endif %}
+        {% endfor %}
+      </nav>
+    </section>
+  </div>
+  <footer class="sc-collection-footer">
+    <strong>{{ section.settings.brand | escape }}</strong>
+    <p>{{ section.settings.footer_copy | escape }}</p>
+    {% assign support = pages['soporte'] %}
+    {% if support != blank %}<a href="{{ support.url }}">Soporte</a>{% endif %}
+  </footer>
+</section>
+{% liquid
+  assign active_tab = 'navidad'
+  if collection.handle == 'regalos'
+    assign active_tab = 'regalos'
+  endif
+%}
+{% render 'sds-seasonal-tabbar', active: active_tab %}
+{% schema %}
+{
+  "name":"SDS · Colección",
+  "tag":"section",
+  "settings":[
+    {"type":"image_picker","id":"default_banner","label":"Banner por defecto"},
+    {"type":"text","id":"brand","label":"Nombre de marca","default":"SANTA DEL SUR STORE"},
+    {"type":"text","id":"default_eyebrow","label":"Sobretexto general","default":"COLECCIÓN DE TEMPORADA"},
+    {"type":"text","id":"hero_caption","label":"Leyenda hero","default":"NAVIDAD EN SANTA DEL SUR"},
+    {"type":"text","id":"products_heading","label":"Título productos","default":"Descubrí la colección"},
+    {"type":"text","id":"footer_copy","label":"Texto footer","default":"La magia de la Navidad, en un solo lugar."}
+  ],
+  "presets":[{"name":"SDS · Colección"}]
+}
+{% endschema %}

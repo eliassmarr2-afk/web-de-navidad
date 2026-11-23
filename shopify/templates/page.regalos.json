@@ -1,0 +1,25 @@
+{
+  "sections": {
+    "hub": {
+      "type": "sds-seasonal-hub",
+      "settings": {
+        "hub_mode": "regalos",
+        "banner": "shopify://shop_images/sds-christmas-hero-banner.webp",
+        "brand": "SANTA DEL SUR STORE",
+        "hero_caption": "LA MAGIA DE LA NAVIDAD",
+        "eyebrow": "LA ALEGRÍA DE REGALAR",
+        "title": "Regalos para sorprender",
+        "intro": "Inspirate con detalles especiales, envoltorios y pequeños gestos navideños.",
+        "collections_heading": "Elegí cómo sorprender",
+        "collections_caption": "Explorá colecciones pensadas para regalar.",
+        "products_heading": "Ideas para regalar",
+        "products_caption": "Selección de productos de la tienda.",
+        "products_limit": 4,
+        "footer_note": "Tu Navidad, a tu manera."
+      }
+    }
+  },
+  "order": [
+    "hub"
+  ]
+}

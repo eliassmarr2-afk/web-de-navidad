@@ -1,0 +1,120 @@
+{{ 'sds-seasonal-hub.css' | asset_url | stylesheet_tag }}
+{{ 'sds-shared-tabbar.css' | asset_url | stylesheet_tag }}
+{% liquid
+  assign hub_mode = section.settings.hub_mode
+  if hub_mode == 'regalos'
+    assign selected_handles = 'regalos,envoltorios,monos,ofertas' | split: ','
+  else
+    assign selected_handles = 'arboles,regalos,decoracion,luces,envoltorios,mesa,monos,ofertas' | split: ','
+  endif
+%}
+<section class="sc-hub-page" aria-labelledby="sdsHubTitle-{{ section.id }}">
+  <div class="sc-hub-hero" aria-label="Imagen navideña de temporada">
+    {% if section.settings.banner != blank %}
+      {{ section.settings.banner | image_url: width: 2400 | image_tag: loading: 'eager', fetchpriority: 'high', alt: section.settings.banner_alt }}
+    {% endif %}
+    <div class="sc-hub-hero__top">
+      <a href="{{ routes.root_url }}" class="sc-hub-hero__back" aria-label="Volver al inicio">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+      </a>
+      <a href="{{ routes.root_url }}" class="sc-hub-hero__brand">{{ section.settings.brand | escape }}</a>
+      <span class="sc-hub-hero__space" aria-hidden="true"></span>
+    </div>
+    <span class="sc-hub-hero__caption">{{ section.settings.hero_caption | escape }}</span>
+  </div>
+  <div class="sc-hub-main">
+    <nav class="sc-hub-breadcrumb" aria-label="Ruta de navegación">
+      <a href="{{ routes.root_url }}">Inicio</a><span aria-hidden="true">/</span><span aria-current="page">{{ page.title | escape }}</span>
+    </nav>
+    <header class="sc-hub-head">
+      <p class="sc-hub-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      <h1 id="sdsHubTitle-{{ section.id }}">{{ section.settings.title | escape }}</h1>
+      <p>{{ section.settings.intro | escape }}</p>
+    </header>
+    <section class="sc-hub-section" aria-labelledby="sdsHubCollection-{{ section.id }}">
+      <h2 id="sdsHubCollection-{{ section.id }}">{{ section.settings.collections_heading | escape }}</h2>
+      <p class="sc-hub-section__caption">{{ section.settings.collections_caption | escape }}</p>
+      <div class="sc-hub-collection-grid" aria-label="Colecciones navideñas">
+        {% for handle in selected_handles %}
+          {% case handle %}
+            {% when 'arboles' %}{% assign label = 'Árboles' %}
+            {% when 'regalos' %}{% assign label = 'Regalos' %}
+            {% when 'decoracion' %}{% assign label = 'Decoración' %}
+            {% when 'luces' %}{% assign label = 'Luces' %}
+            {% when 'envoltorios' %}{% assign label = 'Envoltorios' %}
+            {% when 'mesa' %}{% assign label = 'Mesa' %}
+            {% when 'monos' %}{% assign label = 'Moños' %}
+            {% when 'ofertas' %}{% assign label = 'Ofertas' %}
+          {% endcase %}
+          {% assign category = collections[handle] %}
+          {% if category != blank %}
+            <a class="sc-hub-collection-card" href="{{ category.url }}">
+          {% else %}
+            <span class="sc-hub-collection-card sc-hub-collection-card--inactive" title="Colección pendiente de habilitación">
+          {% endif %}
+              <span class="sc-hub-collection-card__monogram" aria-hidden="true">{{ label | slice: 0, 1 }}</span>
+              <span class="sc-hub-collection-card__name">{{ label }}</span>
+              <span class="sc-hub-collection-card__arrow" aria-hidden="true">›</span>
+          {% if category != blank %}</a>{% else %}</span>{% endif %}
+        {% endfor %}
+      </div>
+    </section>
+    <section class="sc-hub-section" aria-labelledby="sdsHubProducts-{{ section.id }}">
+      <h2 id="sdsHubProducts-{{ section.id }}">{{ section.settings.products_heading | escape }}</h2>
+      <p class="sc-hub-section__caption">{{ section.settings.products_caption | escape }}</p>
+      <div class="sc-hub-product-grid">
+        {% assign featured = section.settings.featured_collection %}
+        {% if featured != blank and featured.products_count > 0 %}
+          {% for product in featured.products limit: section.settings.products_limit %}
+            <article class="sc-hub-product-card">
+              <a href="{{ product.url }}">
+                <div class="sc-hub-product-card__media">
+                  {% if product.featured_image != blank %}
+                    {{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy' }}
+                  {% endif %}
+                </div>
+                <div class="sc-hub-product-card__body">
+                  <strong>{{ product.title | escape }}</strong>
+                  <b>{{ product.price | money }}</b>
+                </div>
+              </a>
+            </article>
+          {% endfor %}
+        {% else %}
+          <p class="sc-hub-empty">{{ section.settings.empty_products | escape }}</p>
+        {% endif %}
+      </div>
+    </section>
+  </div>
+  <footer class="sc-hub-footer">
+    <p><strong>{{ section.settings.brand | escape }}</strong> · {{ section.settings.footer_note | escape }}</p>
+    {% assign support = pages['soporte'] %}
+    {% if support != blank %}<a href="{{ support.url }}">¿Necesitás ayuda?</a>{% endif %}
+  </footer>
+</section>
+{% render 'sds-seasonal-tabbar', active: hub_mode %}
+{% schema %}
+{
+  "name": "SDS · Landing navideña",
+  "tag": "section",
+  "settings": [
+    {"type":"select","id":"hub_mode","label":"Landing","default":"navidad","options":[{"value":"navidad","label":"Navidad"},{"value":"regalos","label":"Regalos"}]},
+    {"type":"image_picker","id":"banner","label":"Hero"},
+    {"type":"text","id":"banner_alt","label":"Texto alternativo","default":"Escena ilustrativa de Navidad"},
+    {"type":"text","id":"brand","label":"Marca","default":"SANTA DEL SUR STORE"},
+    {"type":"text","id":"hero_caption","label":"Leyenda del hero","default":"LA MAGIA DE LA NAVIDAD"},
+    {"type":"text","id":"eyebrow","label":"Sobretexto","default":"LA TEMPORADA MÁS ESPERADA"},
+    {"type":"text","id":"title","label":"Título","default":"Viví la Navidad"},
+    {"type":"textarea","id":"intro","label":"Introducción","default":"Ideas, detalles y pequeños momentos que hacen que cada celebración sea especial."},
+    {"type":"text","id":"collections_heading","label":"Título colecciones","default":"Encontrá tu inspiración"},
+    {"type":"text","id":"collections_caption","label":"Descripción colecciones","default":"Ocho colecciones para preparar la Navidad a tu manera."},
+    {"type":"text","id":"products_heading","label":"Título productos","default":"Favoritos de temporada"},
+    {"type":"text","id":"products_caption","label":"Subtítulo productos","default":"Selección de productos de la tienda."},
+    {"type":"collection","id":"featured_collection","label":"Colección real de productos"},
+    {"type":"range","id":"products_limit","label":"Máximo de productos","min":2,"max":16,"step":2,"default":4},
+    {"type":"text","id":"empty_products","label":"Sin productos","default":"Los productos aparecerán cuando incorporemos el catálogo real."},
+    {"type":"text","id":"footer_note","label":"Texto del footer","default":"Tu Navidad, a tu manera."}
+  ],
+  "presets":[{"name":"SDS · Landing navideña"}]
+}
+{% endschema %}

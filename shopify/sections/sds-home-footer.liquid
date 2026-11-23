@@ -1,0 +1,36 @@
+<section class="sds-home-footer" aria-labelledby="sdsFooterTitle">
+  <div class="sds-home-footer__brand">
+    <h2 id="sdsFooterTitle">{{ section.settings.brand | escape }}</h2>
+    <p>{{ section.settings.description | escape }}</p>
+  </div>
+  <nav class="sds-home-footer__links" aria-label="Información y políticas">
+    {% for block in section.blocks %}
+      {% if block.type == 'link' %}
+        {% if block.settings.destination != blank %}
+          <a href="{{ block.settings.destination }}" {{ block.shopify_attributes }}>{{ block.settings.label | escape }}</a>
+        {% else %}
+          <span {{ block.shopify_attributes }}>{{ block.settings.label | escape }}</span>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  </nav>
+</section>
+{% schema %}
+{
+  "name": "SDS · Pie de página",
+  "tag": "section",
+  "settings": [
+    {"type":"text","id":"brand","label":"Marca","default":"SANTA DEL SUR STORE"},
+    {"type":"textarea","id":"description","label":"Descripción","default":"Tienda navideña · Sitio en preparación. Información y políticas disponibles próximamente."}
+  ],
+  "blocks": [
+    {"type":"link","name":"Enlace informativo","settings":[
+      {"type":"text","id":"label","label":"Texto","default":"Política"},
+      {"type":"url","id":"destination","label":"Página Shopify"}
+    ]}
+  ],
+  "max_blocks": 8,
+  "presets": [{"name":"SDS · Pie de página"}]
+}
+{% endschema %}
+

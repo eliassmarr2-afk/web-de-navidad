@@ -1,0 +1,268 @@
+{
+  "sections": {
+    "sds_hero": {
+      "type": "sds-home-hero",
+      "settings": {
+        "hero_image": "shopify://shop_images/sds-christmas-hero-banner.webp",
+        "page_title": "Santa Del Sur Store · Navidad",
+        "location_prompt": "¿A dónde lo enviamos?",
+        "search_placeholder": "Buscá regalos, adornos, luces..."
+      }
+    },
+    "sds_categories": {
+      "type": "sds-home-categories",
+      "blocks": {
+        "cat_arboles": {
+          "type": "category",
+          "settings": {
+            "label": "Árboles",
+            "icon": "tree"
+          }
+        },
+        "cat_regalos": {
+          "type": "category",
+          "settings": {
+            "label": "Regalos",
+            "icon": "gift"
+          }
+        },
+        "cat_decoracion": {
+          "type": "category",
+          "settings": {
+            "label": "Decoración",
+            "icon": "ornament"
+          }
+        },
+        "cat_luces": {
+          "type": "category",
+          "settings": {
+            "label": "Luces",
+            "icon": "lights"
+          }
+        },
+        "cat_envoltorios": {
+          "type": "category",
+          "settings": {
+            "label": "Envoltorios",
+            "icon": "wrap"
+          }
+        },
+        "cat_mesa": {
+          "type": "category",
+          "settings": {
+            "label": "Mesa",
+            "icon": "table"
+          }
+        },
+        "cat_monos": {
+          "type": "category",
+          "settings": {
+            "label": "Moños",
+            "icon": "bow"
+          }
+        },
+        "cat_ofertas": {
+          "type": "category",
+          "settings": {
+            "label": "Ofertas",
+            "icon": "sale"
+          }
+        },
+        "filter_packs": {
+          "type": "filter",
+          "settings": {
+            "label": "Packs",
+            "query": "pack",
+            "filter_icon": "gift"
+          }
+        },
+        "filter_promociones": {
+          "type": "filter",
+          "settings": {
+            "label": "Promociones",
+            "query": "promociones",
+            "filter_icon": "sale"
+          }
+        },
+        "filter_regalar": {
+          "type": "filter",
+          "settings": {
+            "label": "Para regalar",
+            "query": "regalos",
+            "filter_icon": "bow"
+          }
+        },
+        "filter_decoracion": {
+          "type": "filter",
+          "settings": {
+            "label": "Decoración",
+            "query": "decoración",
+            "filter_icon": "ornament"
+          }
+        },
+        "filter_envoltorios": {
+          "type": "filter",
+          "settings": {
+            "label": "Envoltorios",
+            "query": "envoltorios",
+            "filter_icon": "wrap"
+          }
+        }
+      },
+      "block_order": [
+        "cat_arboles",
+        "cat_regalos",
+        "cat_decoracion",
+        "cat_luces",
+        "cat_envoltorios",
+        "cat_mesa",
+        "cat_monos",
+        "cat_ofertas",
+        "filter_packs",
+        "filter_promociones",
+        "filter_regalar",
+        "filter_decoracion",
+        "filter_envoltorios"
+      ],
+      "settings": {
+        "category_eyebrow": "TODO PARA CELEBRAR",
+        "category_heading": "Elegí tu inspiración",
+        "filter_eyebrow": "ENCONTRÁ TU ESTILO",
+        "filter_heading": "Descubrí más"
+      }
+    },
+    "sds_coupon": {
+      "type": "sds-home-coupon",
+      "settings": {
+        "artwork": "shopify://shop_images/sds-christmas-coupon-banner.png",
+        "accessible_label": "Cupón navideño ilustrativo",
+        "preview_only": true
+      }
+    },
+    "sds_packs": {
+      "type": "sds-home-merch",
+      "settings": {
+        "anchor": "packs",
+        "eyebrow": "IDEAS PARA COMPARTIR",
+        "heading": "Regalá más | Packs para disfrutar la Navidad",
+        "layout": "rail",
+        "max_products": 8,
+        "empty_text": "Los packs se mostrarán al incorporar productos reales."
+      }
+    },
+    "sds_products": {
+      "type": "sds-home-merch",
+      "settings": {
+        "anchor": "productos",
+        "eyebrow": "SELECCIÓN DE TEMPORADA",
+        "heading": "Favoritos navideños",
+        "layout": "grid",
+        "max_products": 8,
+        "empty_text": "Los productos destacados se mostrarán al incorporar el catálogo real."
+      }
+    },
+    "sds_tabs": {
+      "type": "sds-home-tabs",
+      "blocks": {
+        "tab_home": {
+          "type": "tab",
+          "settings": {
+            "icon": "home",
+            "label": "Inicio"
+          }
+        },
+        "tab_tree": {
+          "type": "tab",
+          "settings": {
+            "icon": "tree",
+            "label": "Navidad"
+          }
+        },
+        "tab_gift": {
+          "type": "tab",
+          "settings": {
+            "icon": "gift",
+            "label": "Regalos"
+          }
+        },
+        "tab_package": {
+          "type": "tab",
+          "settings": {
+            "icon": "package",
+            "label": "Pedidos"
+          }
+        },
+        "tab_help": {
+          "type": "tab",
+          "settings": {
+            "icon": "help",
+            "label": "Ayuda"
+          }
+        }
+      },
+      "block_order": [
+        "tab_home",
+        "tab_tree",
+        "tab_gift",
+        "tab_package",
+        "tab_help"
+      ],
+      "settings": {}
+    },
+    "sds_footer": {
+      "type": "sds-home-footer",
+      "blocks": {
+        "policy_shipping": {
+          "type": "link",
+          "settings": {
+            "label": "Envío"
+          }
+        },
+        "policy_returns": {
+          "type": "link",
+          "settings": {
+            "label": "Devoluciones y cambios"
+          }
+        },
+        "policy_privacy": {
+          "type": "link",
+          "settings": {
+            "label": "Privacidad"
+          }
+        },
+        "policy_navigation": {
+          "type": "link",
+          "settings": {
+            "label": "Navegación"
+          }
+        },
+        "policy_terms": {
+          "type": "link",
+          "settings": {
+            "label": "Términos de uso"
+          }
+        }
+      },
+      "block_order": [
+        "policy_shipping",
+        "policy_returns",
+        "policy_privacy",
+        "policy_navigation",
+        "policy_terms"
+      ],
+      "settings": {
+        "brand": "SANTA DEL SUR STORE",
+        "description": "Tienda navideña · Sitio en preparación. Información y políticas disponibles próximamente."
+      }
+    }
+  },
+  "order": [
+    "sds_hero",
+    "sds_categories",
+    "sds_coupon",
+    "sds_packs",
+    "sds_products",
+    "sds_footer",
+    "sds_tabs"
+  ]
+}

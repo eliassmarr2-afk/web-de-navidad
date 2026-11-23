@@ -1,0 +1,17 @@
+<nav class="sds-home-tabs" aria-label="Navegación inferior">{% for block in section.blocks %}
+{% assign page_link = block.settings.destination %}{% if block.settings.icon == 'home' %}{% assign page_link = routes.root_url %}{% endif %}
+{% if page_link != blank %}<a class="sds-home-tab{% if block.settings.icon == 'home' %} sds-home-tab--current{% endif %}" href="{{ page_link }}" {% if block.settings.icon == 'home' %}aria-current="page"{% endif %} {{ block.shopify_attributes }}>
+{% else %}<span class="sds-home-tab sds-disabled-link" {{ block.shopify_attributes }}>{% endif %}
+<svg viewBox="0 0 24 24" aria-hidden="true">{% case block.settings.icon %}
+{% when 'home' %}<path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/>
+{% when 'tree' %}<path d="M12 3 5 12h4l-5 6h16l-5-6h4zM12 18v4"/>
+{% when 'gift' %}<rect x="3.5" y="9.5" width="17" height="11" rx="2"/><path d="M2.5 6.5h19v3h-19zM12 6.5v14"/>
+{% when 'package' %}<rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 9.3h17M9.5 9.3h5M9 15h6"/>
+{% when 'help' %}<path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H7l-4 2v-7a8.5 8.5 0 1 1 18-3.5Z"/><path d="M10 9.3a2.4 2.4 0 0 1 4.5 1.1c0 1.5-2.5 1.7-2.5 3.3M12 17h.01"/>
+{% endcase %}</svg><span>{{ block.settings.label | escape }}</span>
+{% if page_link != blank %}</a>{% else %}</span>{% endif %}{% endfor %}</nav>
+{% schema %}
+{"name":"SDS · Pestañas","tag":"section","settings":[],"blocks":[{"type":"tab","name":"Destino","settings":[{"type":"text","id":"label","label":"Nombre","default":"Inicio"},{"type":"select","id":"icon","label":"Ícono","default":"home","options":[{"value":"home","label":"Inicio"},{"value":"tree","label":"Navidad"},{"value":"gift","label":"Regalos"},{"value":"package","label":"Pedidos"},{"value":"help","label":"Ayuda"}]},{"type":"url","id":"destination","label":"Página de destino real"}]}],"max_blocks":5,
+"presets":[{"name":"SDS · Pestañas"}]}
+{% endschema %}
+

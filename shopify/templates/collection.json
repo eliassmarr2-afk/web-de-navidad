@@ -1,13 +1,18 @@
 {
   "sections": {
-    "main": {
-      "type": "santa-clausula-collection",
+    "sds_main": {
+      "type": "sds-native-collection",
       "settings": {
-        "eyebrow": "COLECCIÓN DE TEMPORADA"
+        "default_banner": "shopify://shop_images/sds-christmas-hero-banner.webp",
+        "brand": "SANTA DEL SUR STORE",
+        "default_eyebrow": "COLECCIÓN DE TEMPORADA",
+        "hero_caption": "NAVIDAD EN SANTA DEL SUR",
+        "products_heading": "Descubrí la colección",
+        "footer_copy": "La magia de la Navidad, en un solo lugar."
       }
     }
   },
   "order": [
-    "main"
+    "sds_main"
   ]
 }

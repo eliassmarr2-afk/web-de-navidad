@@ -1,0 +1,49 @@
+{% comment %}MIG-SHFY-02 · One reusable native Shopify navigation. No fake destination is linked.{% endcomment %}
+<nav class="sc-tabbar" data-site-tabbar aria-label="Navegación principal">
+  {% assign sds_tabs = 'inicio,navidad,regalos,pedidos,ayuda' | split: ',' %}
+  {% for tab in sds_tabs %}
+    {% assign tab_href = blank %}
+    {% assign tab_name = '' %}
+    {% case tab %}
+      {% when 'inicio' %}
+        {% assign tab_name = 'Inicio' %}
+        {% assign tab_href = routes.root_url %}
+      {% when 'navidad' %}
+        {% assign tab_name = 'Navidad' %}
+        {% assign sds_page = pages['navidad'] %}
+        {% if sds_page != blank %}{% assign tab_href = sds_page.url %}{% endif %}
+      {% when 'regalos' %}
+        {% assign tab_name = 'Regalos' %}
+        {% assign sds_page = pages['regalos'] %}
+        {% if sds_page != blank %}{% assign tab_href = sds_page.url %}{% endif %}
+      {% when 'pedidos' %}
+        {% assign tab_name = 'Pedidos' %}
+        {% assign sds_page = pages['seguimiento'] %}
+        {% if sds_page != blank %}{% assign tab_href = sds_page.url %}{% endif %}
+      {% when 'ayuda' %}
+        {% assign tab_name = 'Ayuda' %}
+        {% assign sds_page = pages['soporte'] %}
+        {% if sds_page != blank %}{% assign tab_href = sds_page.url %}{% endif %}
+    {% endcase %}
+    {% assign is_active = false %}
+    {% if tab == active %}{% assign is_active = true %}{% endif %}
+    {% if tab_href != blank %}
+      <a class="sc-tabbar__item{% if is_active %} sc-tabbar__item--current{% endif %}" href="{{ tab_href }}"{% if is_active %} aria-current="page"{% endif %}>
+    {% else %}
+      <span class="sc-tabbar__item sc-tabbar__item--inactive{% if is_active %} sc-tabbar__item--current{% endif %}" aria-label="{{ tab_name }}: próximamente">
+    {% endif %}
+      <span class="sc-tabbar__surface">
+        <svg class="sc-tabbar__icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9">
+          {% case tab %}
+            {% when 'inicio' %}<path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/>
+            {% when 'navidad' %}<path d="M12 3 5 12h4l-5 6h16l-5-6h4zM12 18v4"/>
+            {% when 'regalos' %}<rect x="3.5" y="9.5" width="17" height="11" rx="2"/><path d="M2.5 6.5h19v3h-19zM12 6.5v14M12 6.5c-7-7-11-4-7 0 3 2 7 0 7 0Zm0 0c7-7 11-4 7 0-3 2-7 0-7 0Z"/>
+            {% when 'pedidos' %}<path d="M3.5 5h17v15.5h-17zM3.5 9.3h17M9.5 9.3h5M9 15h6"/>
+            {% when 'ayuda' %}<path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H7l-4 2v-7a8.5 8.5 0 1 1 18-3.5Z"/><path d="M10 9.3a2.4 2.4 0 0 1 4.5 1.1c0 1.5-2.5 1.7-2.5 3.3M12 17h.01"/>
+          {% endcase %}
+        </svg>
+        <span class="sc-tabbar__label">{{ tab_name }}</span>
+      </span>
+    {% if tab_href != blank %}</a>{% else %}</span>{% endif %}
+  {% endfor %}
+</nav>

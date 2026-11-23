@@ -1,0 +1,18 @@
+<section class="sds-home-merch" id="{{ section.settings.anchor | escape }}" aria-labelledby="sdsMerchTitle-{{ section.id }}"><header class="sds-rail-heading"><div><p class="sds-rail-eyebrow">{{ section.settings.eyebrow | escape }}</p><h2 id="sdsMerchTitle-{{ section.id }}">{{ section.settings.heading | escape }}</h2></div></header>
+<div class="sds-home-merch__track{% if section.settings.layout == 'grid' %} sds-home-merch__track--grid{% endif %}">
+{% assign chosen_collection = section.settings.collection %}
+{% if chosen_collection != blank and chosen_collection.products_count > 0 %}
+{% for product in chosen_collection.products limit: section.settings.max_products %}<article class="sds-home-merch__card"><a href="{{ product.url }}">
+{% if product.featured_image != blank %}{{ product.featured_image | image_url: width: 760 | image_tag: loading: 'lazy' }}{% endif %}
+<div class="sds-home-merch__card-body"><h3>{{ product.title | escape }}</h3><strong>{{ product.price | money }}</strong></div></a></article>{% endfor %}
+{% else %}<p class="sds-home-merch__empty">{{ section.settings.empty_text | escape }}</p>{% endif %}</div></section>
+{% schema %}
+{"name":"SDS · Productos","tag":"section","settings":[
+{"type":"text","id":"anchor","label":"Ancla HTML","default":"packs"},{"type":"text","id":"eyebrow","label":"Introducción","default":"IDEAS PARA COMPARTIR"},
+{"type":"text","id":"heading","label":"Título","default":"Regalá más | Packs para disfrutar la Navidad"},
+{"type":"collection","id":"collection","label":"Colección real"},{"type":"select","id":"layout","label":"Diseño","default":"rail","options":[{"value":"rail","label":"Carrusel"},{"value":"grid","label":"Cuadrícula"}]},
+{"type":"range","id":"max_products","label":"Cantidad","min":2,"max":20,"step":2,"default":8},
+{"type":"text","id":"empty_text","label":"Sin productos","default":"Los productos se mostrarán cuando carguemos el catálogo real."}],
+"presets":[{"name":"SDS · Productos"}]}
+{% endschema %}
+

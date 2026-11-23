@@ -1,0 +1,25 @@
+{
+  "sections": {
+    "hub": {
+      "type": "sds-seasonal-hub",
+      "settings": {
+        "hub_mode": "navidad",
+        "banner": "shopify://shop_images/sds-christmas-hero-banner.webp",
+        "brand": "SANTA DEL SUR STORE",
+        "hero_caption": "LA MAGIA DE LA NAVIDAD",
+        "eyebrow": "LA TEMPORADA MÁS ESPERADA",
+        "title": "Viví la Navidad",
+        "intro": "Ideas, detalles y pequeños momentos que hacen que cada celebración sea especial.",
+        "collections_heading": "Encontrá tu inspiración",
+        "collections_caption": "Ocho colecciones para preparar la Navidad a tu manera.",
+        "products_heading": "Favoritos de temporada",
+        "products_caption": "Selección de productos de la tienda.",
+        "products_limit": 4,
+        "footer_note": "Tu Navidad, a tu manera."
+      }
+    }
+  },
+  "order": [
+    "hub"
+  ]
+}

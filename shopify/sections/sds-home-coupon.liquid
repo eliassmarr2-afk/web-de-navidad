@@ -1,0 +1,15 @@
+<section class="sds-home-coupon" aria-label="{{ section.settings.accessible_label | escape }}">{% if section.settings.artwork != blank %}
+{% if section.settings.destination != blank and section.settings.preview_only == false %}<a class="sds-home-coupon__picture" href="{{ section.settings.destination }}">{% else %}<div class="sds-home-coupon__picture">{% endif %}
+{{ section.settings.artwork | image_url: width: 2200 | image_tag: loading: 'lazy', alt: section.settings.accessible_label }}
+{% if section.settings.destination != blank and section.settings.preview_only == false %}</a>{% else %}</div>{% endif %}
+{% if section.settings.preview_only %}<p class="sds-home-coupon__draft">Imagen de demostración. Cupón y descuentos no habilitados.</p>{% endif %}
+{% else %}<p class="sds-home-merch__empty">Seleccioná el cupón en el editor.</p>{% endif %}</section>
+{% schema %}
+{"name":"SDS · Cupón","tag":"section","settings":[
+{"type":"image_picker","id":"artwork","label":"Imagen del cupón"},
+{"type":"text","id":"accessible_label","label":"Descripción de imagen","default":"Cupón navideño ilustrativo"},
+{"type":"url","id":"destination","label":"Destino de promoción real"},
+{"type":"checkbox","id":"preview_only","label":"Mostrar como diseño no activo","default":true}],
+"presets":[{"name":"SDS · Cupón"}]}
+{% endschema %}
+
