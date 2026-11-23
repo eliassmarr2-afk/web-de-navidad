@@ -7,7 +7,7 @@
   dir="{{ request.locale.direction | default: 'ltr' }}"
 >
   <head>
-    {% if request.page_type == 'index' or request.page_type == 'collection' or page.handle == 'navidad' or page.handle == 'regalos' %}
+    {% if request.page_type == 'index' or request.page_type == 'collection' or request.page_type == 'product' or page.handle == 'navidad' or page.handle == 'regalos' %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -44,7 +44,7 @@
     <div class="page-wrapper">
       {% liquid
         assign sds_fullbleed = false
-        if request.page_type == 'index' or request.page_type == 'collection'
+        if request.page_type == 'index' or request.page_type == 'collection' or request.page_type == 'product'
           assign sds_fullbleed = true
         elsif request.page_type == 'page'
           if page.handle == 'navidad' or page.handle == 'regalos'

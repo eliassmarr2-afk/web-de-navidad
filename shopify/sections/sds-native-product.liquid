@@ -1,0 +1,208 @@
+{{ 'sds-product.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'sds-product.js' | asset_url }}" defer></script>
+{% liquid
+  assign selected_variant = product.selected_or_first_available_variant
+  assign form_id = 'sds-product-form-' | append: section.id
+  assign hero_image = selected_variant.featured_image | default: product.featured_image
+  assign badge = product.metafields.custom.sds_product_badge.value
+  assign selected_can_sell = selected_variant.available
+  assign selected_components = selected_variant.metafields.custom.sds_components.value
+  assign selected_bundle_blocked = false
+  if selected_components != blank
+    if selected_variant.metafields.custom.sds_bundle_ready.value != true
+      assign selected_can_sell = false
+      assign selected_bundle_blocked = true
+    endif
+  endif
+  assign back_url = routes.root_url
+  if collection != blank
+    assign back_url = collection.url
+  endif
+%}
+<article class="sds-pdp" data-sds-product data-product-form="{{ form_id }}" aria-labelledby="sdsProductTitle-{{ section.id }}">
+  <header class="sds-pdp-top"><div class="sds-pdp-top__bar">
+    <div class="sds-pdp-top__left"><a href="{{ back_url }}" class="sds-pdp-icon" aria-label="Volver"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></a></div>
+    <a href="{{ routes.root_url }}" class="sds-pdp-top__brand">{{ section.settings.brand | escape }}</a>
+    <nav class="sds-pdp-top__right" aria-label="Producto">
+      <button type="button" class="sds-pdp-icon" data-sds-share aria-label="Compartir producto"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.5-4.4M8.2 13.2l7.5 4.4"/></svg></button>
+      <a href="{{ routes.cart_url }}" class="sds-pdp-icon" aria-label="Ver carrito"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 2-1.6L20.5 8H6.1"/><circle cx="10" cy="20" r="1"/><circle cx="17" cy="20" r="1"/></svg></a>
+    </nav>
+  </div></header>
+  <div class="sds-pdp-destination">
+    <button type="button" class="sds-pdp-destination__button" data-sds-location-open aria-haspopup="dialog">
+      <span class="sds-pdp-destination__label" data-sds-location-label>Llega a · Completá tu dirección de envío</span>
+      <span aria-hidden="true">›</span>
+    </button>
+    <span class="sds-pdp-destination__info">Envío por calcular</span>
+  </div>
+  <div class="sds-pdp-shell">
+    <section class="sds-pdp-intro">
+      <p class="sds-pdp-pretitle">{% if product.vendor != blank %}{{ product.vendor | escape }}{% endif %}{% if product.type != blank %} · {{ product.type | escape }}{% endif %}</p>
+      <h1 class="sds-pdp-title" id="sdsProductTitle-{{ section.id }}">{{ product.title | escape }}</h1>
+      <div class="sds-pdp-intro__row">
+        {% if badge != blank %}<span class="sds-pdp-badge">{{ badge | escape }}</span>{% endif %}
+        <p class="sds-pdp-delivery"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>Entrega por confirmar en carrito</p>
+      </div>
+      <p class="sds-pdp-delivery-note">El plazo y costo de envío se calculan antes del pago.</p>
+    </section>
+    <div class="sds-pdp-gallery" aria-label="Imagen principal del producto">
+      {% if hero_image != blank %}
+        <img class="sds-pdp-gallery__image" data-sds-main-image src="{{ hero_image | image_url: width: 1600 }}" alt="{{ hero_image.alt | default: product.title | escape }}" width="{{ hero_image.width }}" height="{{ hero_image.height }}" fetchpriority="high">
+      {% else %}
+        <div class="sds-pdp-gallery__empty">Imagen pendiente de carga</div>
+      {% endif %}
+      {% if product.images.size > 1 %}<span class="sds-pdp-gallery__count">{{ product.images.size }} fotos</span>{% endif %}
+    </div>
+    {% if product.images.size > 1 %}
+      <div class="sds-pdp-thumbs" aria-label="Galería de imágenes">
+        {% for photo in product.images limit: 12 %}
+          <button class="sds-pdp-thumb{% if photo.id == hero_image.id %} is-selected{% endif %}" type="button" data-sds-thumb data-image="{{ photo | image_url: width: 1600 }}" data-alt="{{ photo.alt | default: product.title | escape }}" aria-label="Ver imagen {{ forloop.index }}" aria-pressed="{% if photo.id == hero_image.id %}true{% else %}false{% endif %}">
+            {{ photo | image_url: width: 150 | image_tag: loading: 'lazy' }}
+          </button>
+        {% endfor %}
+      </div>
+    {% endif %}
+    <div class="sds-pdp-body">
+      <section class="sds-pdp-panel" aria-labelledby="sdsAbout-{{ section.id }}">
+        <h2 id="sdsAbout-{{ section.id }}">Sobre este producto</h2>
+        {% if product.metafields.custom.sds_short_description.value != blank %}
+          <p class="sds-pdp-summary">{{ product.metafields.custom.sds_short_description.value | escape }}</p>
+        {% elsif product.description != blank %}
+          <p class="sds-pdp-summary">{{ product.description | strip_html | truncate: 220 | escape }}</p>
+        {% else %}
+          <p class="sds-pdp-summary">La descripción se mostrará al completar el catálogo.</p>
+        {% endif %}
+      </section>
+      <section class="sds-pdp-panel" aria-labelledby="sdsOffers-{{ section.id }}">
+        <h2 id="sdsOffers-{{ section.id }}">{{ section.settings.offer_heading | escape }}</h2>
+        <div class="sds-pdp-options" role="group" aria-label="Opciones del producto">
+          {% for variant in product.variants limit: 100 %}
+            {% liquid
+              assign vimage = variant.featured_image | default: product.featured_image
+              assign label = variant.title
+              if product.has_only_default_variant
+                assign label = product.title
+              endif
+              assign vbadge = variant.metafields.custom.sds_offer_badge.value
+              assign vsummary = variant.metafields.custom.sds_offer_summary.value
+              assign components = variant.metafields.custom.sds_components.value
+              assign vready = variant.available
+              assign bundle_blocked = false
+              if components != blank
+                if variant.metafields.custom.sds_bundle_ready.value != true
+                  assign vready = false
+                  assign bundle_blocked = true
+                endif
+              endif
+              assign chosen = false
+              if variant.id == selected_variant.id
+                assign chosen = true
+              endif
+              assign compare = false
+              if variant.compare_at_price > variant.price
+                assign compare = true
+              endif
+            %}
+            <article class="sds-pdp-option{% if chosen %} is-selected{% endif %}{% unless vready %} is-unavailable{% endunless %}" data-sds-offer="{{ variant.id }}" data-label="{{ label | escape }}" data-price="{{ variant.price | money | escape }}" data-compare="{% if compare %}{{ variant.compare_at_price | money | escape }}{% endif %}" data-available="{{ vready }}" data-reason="{% if bundle_blocked %}bundle{% else %}stock{% endif %}"{% if vimage != blank %} data-image="{{ vimage | image_url: width: 1600 }}" data-image-alt="{{ vimage.alt | default: product.title | escape }}"{% endif %}>
+              {% if vbadge != blank %}<span class="sds-pdp-option__badge">{{ vbadge | escape }}</span>{% endif %}
+              <span class="sds-pdp-option__image">{% if vimage != blank %}{{ vimage | image_url: width: 200 | image_tag: loading: 'lazy' }}{% endif %}</span>
+              <strong class="sds-pdp-option__title">{{ label | escape }}</strong>
+              <span class="sds-pdp-option__prices"><strong>{{ variant.price | money }}</strong>{% if compare %}<s>{{ variant.compare_at_price | money }}</s>{% endif %}</span>
+              <button type="button" class="sds-pdp-option__select" data-sds-select-offer="{{ variant.id }}" aria-label="Elegir {{ label | escape }} a {{ variant.price | money | escape }}" aria-pressed="{{ chosen }}"></button>
+              {% if vsummary != blank or components != blank %}
+                <button type="button" class="sds-pdp-option__details" data-sds-details="{{ variant.id }}" aria-haspopup="dialog" aria-controls="sdsOfferDialog-{{ section.id }}">Detalles</button>
+                <template data-sds-details-template>
+                  <div class="sds-pdp-dialog__hero">
+                    {% if vimage != blank %}{{ vimage | image_url: width: 240 | image_tag: loading: 'lazy' }}{% endif %}
+                    <div><strong>{{ label | escape }}</strong><span class="sds-pdp-dialog__price">{{ variant.price | money }}</span>{% if compare %}<s>{{ variant.compare_at_price | money }}</s>{% endif %}</div>
+                  </div>
+                  {% if vsummary != blank %}<p class="sds-pdp-dialog__note">{{ vsummary | escape }}</p>{% endif %}
+                  {% if components != blank %}
+                    <h3>Este combo incluye</h3>
+                    <ul class="sds-pdp-dialog__list">
+                      {% for item in components limit: 20 %}
+                        {% assign component_product = blank %}
+                        {% if item.handle != blank %}
+                          {% assign component_product = all_products[item.handle] %}
+                        {% endif %}
+                        <li>
+                          {% if component_product != blank and component_product.featured_image != blank %}
+                            {{ component_product.featured_image | image_url: width: 96 | image_tag: loading: 'lazy' }}
+                          {% endif %}
+                          <span>{{ item.quantity | default: 1 }} × {% if component_product != blank %}{{ component_product.title | escape }}{% else %}{{ item.title | escape }}{% endif %}</span>
+                          {% if component_product != blank %}
+                            <small>Precio individual: {{ component_product.price | money }}</small>
+                          {% endif %}
+                        </li>
+                      {% endfor %}
+                    </ul>
+                    <p class="sds-pdp-dialog__note">Composición descriptiva. El inventario del combo deberá configurarse en Shopify.</p>
+                  {% endif %}
+                </template>
+              {% endif %}
+              {% unless vready %}<span class="sds-pdp-option__info">{% if bundle_blocked %}Combo en preparación{% else %}Sin stock{% endif %}</span>{% endunless %}
+            </article>
+          {% else %}
+            <p class="sds-pdp-option__single">No hay opciones cargadas.</p>
+          {% endfor %}
+        </div>
+      </section>
+      <section class="sds-pdp-panel" aria-labelledby="sdsPricing-{{ section.id }}">
+        <h2 id="sdsPricing-{{ section.id }}">Precio de tu opción</h2>
+        <div class="sds-pdp-price">
+          <div><span data-sds-selected-label>{{ selected_variant.title | escape }}</span><s data-sds-current-compare{% unless selected_variant.compare_at_price > selected_variant.price %} hidden{% endunless %}>{% if selected_variant.compare_at_price > selected_variant.price %}{{ selected_variant.compare_at_price | money }}{% endif %}</s></div>
+          <strong data-sds-current-price>{{ selected_variant.price | money }}</strong>
+        </div>
+        {% form 'product', product, id: form_id, class: 'sds-pdp-product-form' %}
+          <input type="hidden" name="id" value="{{ selected_variant.id }}">
+          <div class="sds-pdp-qty"><label for="sdsQty-{{ section.id }}">Cantidad</label><input type="number" id="sdsQty-{{ section.id }}" name="quantity" min="1" max="99" value="1" required></div>
+        {% endform %}
+      </section>
+      <section class="sds-pdp-panel" aria-labelledby="sdsAssistance-{{ section.id }}">
+        <h2 id="sdsAssistance-{{ section.id }}">Información y asistencia</h2>
+        <div class="sds-pdp-info-list">
+          <div class="sds-pdp-info-row"><strong>Vendido por</strong><span>{{ section.settings.brand | escape }}</span></div>
+          <div class="sds-pdp-info-row"><strong>Entrega</strong><span>Tarifa y fecha por confirmar</span></div>
+          {% if shop.refund_policy != blank %}<a class="sds-pdp-info-row" href="{{ shop.refund_policy.url }}"><strong>Devoluciones y cambios</strong><span>Ver política ›</span></a>{% else %}<div class="sds-pdp-info-row sds-pdp-info-row--muted"><strong>Devoluciones y cambios</strong><span>Política pendiente</span></div>{% endif %}
+          {% if shop.privacy_policy != blank %}<a class="sds-pdp-info-row" href="{{ shop.privacy_policy.url }}"><strong>Privacidad</strong><span>Ver política ›</span></a>{% endif %}
+          {% assign help = pages['soporte'] %}
+          {% if help != blank %}<a class="sds-pdp-info-row" href="{{ help.url }}"><strong>Consultar por este producto</strong><span>Soporte ›</span></a>{% else %}<div class="sds-pdp-info-row sds-pdp-info-row--muted"><strong>Consultar por este producto</strong><span>Atención próximamente</span></div>{% endif %}
+          <div class="sds-pdp-info-row sds-pdp-info-row--muted"><strong>Programá un recordatorio para comprar este producto</strong><span>Próximamente</span></div>
+        </div>
+      </section>
+      {% if product.description != blank %}
+        <section class="sds-pdp-panel" aria-labelledby="sdsDescription-{{ section.id }}"><h2 id="sdsDescription-{{ section.id }}">Descripción</h2><div class="sds-pdp-detail-copy rte">{{ product.description }}</div></section>
+      {% endif %}
+    </div>
+  </div>
+  <aside class="sds-pdp-sticky" aria-label="Resumen de compra">
+    <div class="sds-pdp-sticky__total"><span>Precio unitario de la oferta</span><strong data-sds-sticky-price>{{ selected_variant.price | money }}</strong></div>
+    <div class="sds-pdp-sticky__delivery"><span>Calculá el envío en el carrito</span><span class="sds-pdp-sticky__badge">Entrega por confirmar</span></div>
+    <p class="sds-pdp-sticky__installments">Cuotas por confirmar</p>
+    <button class="sds-pdp-sticky__button" type="submit" form="{{ form_id }}" data-sds-buy-button{% unless selected_can_sell %} disabled{% endunless %}>{% if selected_can_sell %}Iniciar compra ›{% else %}{% if selected_bundle_blocked %}Combo en preparación{% else %}Sin stock{% endif %}{% endif %}</button>
+    <p class="sds-pdp-sticky__disclaimer">Se agrega al carrito Shopify. Envío y total final se confirman antes del pago.</p>
+  </aside>
+  <dialog class="sds-pdp-dialog" id="sdsOfferDialog-{{ section.id }}" data-sds-detail-dialog aria-labelledby="sdsDetailTitle-{{ section.id }}">
+    <header class="sds-pdp-dialog__top"><h2 id="sdsDetailTitle-{{ section.id }}">Detalles de la oferta</h2><button type="button" class="sds-pdp-dialog__close" data-sds-detail-close aria-label="Cerrar">×</button></header>
+    <div class="sds-pdp-dialog__contents" data-sds-dialog-content></div>
+    <div class="sds-pdp-dialog__contents"><button type="button" class="sds-pdp-dialog__action" data-sds-detail-select>Seleccionar esta oferta</button></div>
+  </dialog>
+  <dialog class="sds-pdp-dialog sds-pdp-location-dialog" data-sds-location-dialog aria-labelledby="sdsLocationTitle-{{ section.id }}">
+    <header class="sds-pdp-dialog__top"><h2 id="sdsLocationTitle-{{ section.id }}">¿A dónde lo enviamos?</h2><button type="button" class="sds-pdp-dialog__close" data-sds-location-close aria-label="Cerrar">×</button></header>
+    <form class="sds-pdp-location-dialog__form" data-sds-location-form>
+      <label for="sdsPostal-{{ section.id }}">Código postal</label>
+      <input id="sdsPostal-{{ section.id }}" name="postal" maxlength="8" autocomplete="postal-code" placeholder="Ej. 1414 o C1414ABC" required>
+      <label for="sdsAddress-{{ section.id }}">Dirección (opcional)</label>
+      <input id="sdsAddress-{{ section.id }}" name="address" maxlength="120" autocomplete="street-address" placeholder="Calle y altura">
+      <p>Esta ubicación se conserva solo en tu sesión; no calcula costos ni plazos de entrega.</p>
+      <button type="submit" class="sds-pdp-dialog__action">Guardar ubicación</button>
+    </form>
+  </dialog>
+</article>
+{% schema %}
+{"name":"SDS · Ficha de producto","tag":"section","settings":[
+{"type":"text","id":"brand","label":"Marca comercial","default":"SANTA DEL SUR STORE"},
+{"type":"text","id":"offer_heading","label":"Título de ofertas","default":"Elegí tu oferta"}],
+"presets":[{"name":"SDS · Ficha de producto"}]}
+{% endschema %}
+

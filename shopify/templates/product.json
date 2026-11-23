@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "sds_main": {
+      "type": "sds-native-product",
+      "settings": {
+        "brand": "SANTA DEL SUR STORE",
+        "offer_heading": "Elegí tu oferta"
+      }
+    }
+  },
+  "order": [
+    "sds_main"
+  ]
+}
