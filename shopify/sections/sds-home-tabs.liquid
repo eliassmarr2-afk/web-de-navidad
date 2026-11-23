@@ -1,5 +1,37 @@
 <nav class="sds-home-tabs" aria-label="Navegación inferior">{% for block in section.blocks %}
-{% assign page_link = block.settings.destination %}{% if block.settings.icon == 'home' %}{% assign page_link = routes.root_url %}{% endif %}
+{% assign page_link = block.settings.destination %}
+{% case block.settings.icon %}
+  {% when 'home' %}
+    {% assign page_link = routes.root_url %}
+  {% when 'tree' %}
+    {% if page_link == blank %}
+      {% assign sds_dest = pages['navidad'] %}
+      {% if sds_dest != blank %}
+        {% assign page_link = sds_dest.url %}
+      {% endif %}
+    {% endif %}
+  {% when 'gift' %}
+    {% if page_link == blank %}
+      {% assign sds_dest = pages['regalos'] %}
+      {% if sds_dest != blank %}
+        {% assign page_link = sds_dest.url %}
+      {% endif %}
+    {% endif %}
+  {% when 'package' %}
+    {% if page_link == blank %}
+      {% assign sds_dest = pages['seguimiento'] %}
+      {% if sds_dest != blank %}
+        {% assign page_link = sds_dest.url %}
+      {% endif %}
+    {% endif %}
+  {% when 'help' %}
+    {% if page_link == blank %}
+      {% assign sds_dest = pages['soporte'] %}
+      {% if sds_dest != blank %}
+        {% assign page_link = sds_dest.url %}
+      {% endif %}
+    {% endif %}
+{% endcase %}
 {% if page_link != blank %}<a class="sds-home-tab{% if block.settings.icon == 'home' %} sds-home-tab--current{% endif %}" href="{{ page_link }}" {% if block.settings.icon == 'home' %}aria-current="page"{% endif %} {{ block.shopify_attributes }}>
 {% else %}<span class="sds-home-tab sds-disabled-link" {{ block.shopify_attributes }}>{% endif %}
 <svg viewBox="0 0 24 24" aria-hidden="true">{% case block.settings.icon %}
