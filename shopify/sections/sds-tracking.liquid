@@ -1,0 +1,87 @@
+{{ 'sds-tracking.css' | asset_url | stylesheet_tag }}
+{{ 'sds-shared-tabbar.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'sds-tracking-preview.js' | asset_url }}" defer></script>
+<section class="tracking-body" data-empty-image="{{ 'sds-tracking-empty.svg' | asset_url }}" data-missing-image="{% if section.settings.not_found_image != blank %}{{ section.settings.not_found_image | image_url: width: 900 }}{% endif %}" aria-label="Seguimiento seguro">
+<header class="tracking-header">
+    <button id="trackingMenuButton" class="tracking-header__control" type="button" aria-label="Abrir menú" aria-controls="trackingDrawer" aria-expanded="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <a class="tracking-header__brand" href="{{ routes.root_url }}" aria-label="Ir al inicio de Santa Del Sur Store">SANTA DEL SUR</a>
+    <a class="tracking-header__cart" href="{{ routes.cart_url }}" aria-label="Ver carrito">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 1.9-1.4L21 7H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>
+      <span class="tracking-header__cart-count">{{ cart.item_count }}</span>
+    </a>
+  </header>
+
+  <div id="trackingDrawerBackdrop" class="tracking-drawer-backdrop" aria-hidden="true"></div>
+  <aside id="trackingDrawer" class="tracking-drawer" aria-hidden="true">
+    <div class="tracking-drawer__top">
+      <span class="tracking-drawer__brand">SANTA DEL SUR</span>
+      <button id="trackingDrawerClose" class="tracking-drawer__close" type="button" aria-label="Cerrar menú">×</button>
+    </div>
+    <nav class="tracking-nav" aria-label="Navegación principal">
+      <a class="tracking-nav__link" href="{{ routes.root_url }}">INICIO</a>
+      <button class="tracking-nav__toggle" type="button" data-tracking-submenu aria-controls="trackingCollections" aria-expanded="false">COLECCIONES <span>+</span></button>
+      <div id="trackingCollections" class="tracking-nav__sub">
+        <a href="/pages/navidad">ÁRBOLES</a>
+        <a href="/pages/navidad">DECORACIÓN</a>
+        <a href="/pages/navidad">LUCES</a>
+        <a href="/pages/regalos">REGALOS</a>
+        <a href="/pages/navidad">OFERTAS Y COMBOS</a>
+      </div>
+      <a class="tracking-nav__link" href="{{ routes.root_url }}">CUPONES</a>
+      <a class="tracking-nav__link" href="{{ routes.root_url }}">NOVEDADES</a>
+      <div class="tracking-nav__divider" aria-hidden="true"></div>
+      <a class="tracking-nav__link is-active" href="/pages/seguimiento">SABER DE MI ENVÍO</a>
+      <a class="tracking-nav__link" href="/pages/soporte">SOPORTE</a>
+      <div class="tracking-nav__divider" aria-hidden="true"></div>
+      <button class="tracking-nav__toggle" type="button" data-tracking-submenu aria-controls="trackingPolicies" aria-expanded="false">POLÍTICAS <span>+</span></button>
+      <div id="trackingPolicies" class="tracking-nav__sub">
+        <a href="{{ routes.root_url }}">ENVÍO</a>
+        <a href="{{ routes.root_url }}">DEVOLUCIÓN O CAMBIOS</a>
+        <a href="{{ routes.root_url }}">NAVEGACIÓN</a>
+        <a href="{{ routes.root_url }}">PRIVACIDAD Y DATOS</a>
+        <a href="{{ routes.root_url }}">TÉRMINOS DE USO</a>
+      </div>
+    </nav>
+  </aside>
+
+  <div class="tracking-main">
+    <section class="tracking-copy" aria-labelledby="trackingTitle">
+      <h1 id="trackingTitle">Consultá el estado de tu envío</h1>
+      <p>Consultá las novedades públicas de tu envío de manera segura.</p>
+    </section>
+
+    <form id="trackingSearchForm" class="tracking-search" novalidate>
+      <input id="trackingId" name="access" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="43" placeholder="Clave de acceso segura" aria-label="Clave de acceso segura de seguimiento" disabled />
+      <button id="trackingSubmit" type="submit" disabled>Buscar</button>
+    </form>
+
+    <p id="trackingDemoBanner" class="tracking-demo-banner" hidden>VISTA DE PRUEBA · Los datos no corresponden a pedidos reales.</p>
+    <p id="trackingStatus" class="tracking-status" role="status" aria-live="polite"></p>
+    <section class="tracking-empty" aria-label="Estado inicial de seguimiento" data-tracking-state="empty">
+      <img src="{{ 'sds-tracking-empty.svg' | asset_url }}" alt="Ilustración de una persona buscando información de seguimiento con binoculares" />
+    </section>
+
+    <div class="tracking-help-row">
+      <button id="trackingUnknownId" class="tracking-help-link" type="button" aria-label="Necesito ayuda con mi seguimiento">
+        <span>Necesito ayuda con mi seguimiento</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M14 5h5v5"/>
+          <path d="M11 13l8-8"/>
+          <path d="M19 13v5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/>
+        </svg>
+      </button>
+    </div>
+
+    <section id="trackingResults" class="tracking-results" aria-live="polite" aria-label="Información del pedido" hidden></section>
+  </div>
+
+
+{% render 'sds-seasonal-tabbar', active: 'pedidos' %}
+</section>
+{% schema %}
+{"name":"SDS · Seguimiento","tag":"section","settings":[
+{"type":"image_picker","id":"not_found_image","label":"Ilustración de búsqueda sin resultados"}
+],"presets":[{"name":"SDS · Seguimiento"}]}
+{% endschema %}

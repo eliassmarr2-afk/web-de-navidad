@@ -1,0 +1,76 @@
+{{ 'sds-support.css' | asset_url | stylesheet_tag }}
+{{ 'sds-shared-tabbar.css' | asset_url | stylesheet_tag }}
+<section class="support-body" aria-label="Atención al cliente en preparación">
+<header class="support-header" aria-label="Soporte de SANTA DEL SUR STORE">
+    <a class="support-header__back" href="{{ routes.root_url }}" aria-label="Volver a la tienda">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>
+    </a>
+    <div class="support-header__identity">
+      <strong>Soporte | SANTA DEL SUR STORE</strong>
+      <span>Estamos para ayudarte</span>
+    </div>
+    <a class="support-header__avatar" href="{{ routes.root_url }}" aria-label="Ir al inicio de SANTA DEL SUR STORE">
+      <span class="support-header__monogram" aria-hidden="true">SDS</span>
+    </a>
+  </header>
+
+  <div class="support-main">
+    <section class="support-intro" aria-labelledby="supportTitle">
+      <h1 id="supportTitle">Contactá con Soporte</h1>
+      <p>Contanos qué necesitás. Cuando habilitemos la atención, podrás continuar mediante un acceso seguro a tu conversación.</p>
+    </section>
+
+    <section class="support-form-card" aria-label="Iniciar consulta de Soporte">
+      <form id="supportStartForm" novalidate>
+        <div class="support-field">
+          <label for="supportName">Nombre</label>
+          <input disabled id="supportName" name="name" type="text" autocomplete="name" maxlength="120" placeholder="Tu nombre y apellido" required />
+        </div>
+        <div class="support-field">
+          <label for="supportEmail">Correo electrónico</label>
+          <input disabled id="supportEmail" name="email" type="email" autocomplete="email" maxlength="254" placeholder="tuemail@ejemplo.com" required />
+        </div>
+        <div class="support-field">
+          <label for="supportSubject">Motivo de consulta</label>
+          <select disabled id="supportSubject" name="subject" required>
+            <option value="" selected disabled>Seleccioná un motivo</option>
+            <option value="pedido">Consulta sobre mi pedido</option>
+            <option value="envio">Envío y seguimiento</option>
+            <option value="cambios">Cambios y devoluciones</option>
+            <option value="productos">Productos y disponibilidad</option>
+            <option value="otro">Otro</option>
+          </select>
+          <span class="support-field__chevron" aria-hidden="true"></span>
+        </div>
+        <div class="support-field" id="supportOtherField" hidden>
+          <label for="supportOther">Contanos el asunto</label>
+          <input disabled id="supportOther" name="other_subject" type="text" maxlength="160" placeholder="¿Sobre qué necesitás ayuda?" />
+        </div>
+        <div class="support-field">
+          <label for="supportMessage">¿En qué podemos ayudarte?</label>
+          <textarea disabled id="supportMessage" name="message" rows="4" maxlength="4000" placeholder="Escribí tu consulta..." required></textarea>
+        </div>
+
+        <button disabled id="supportSubmit" class="support-submit" type="submit" aria-describedby="supportDemoNote">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z" /><path d="M22 2 11 13" /></svg>
+          <span>Consultas próximamente</span>
+        </button>
+        <p id="supportDemoNote" class="support-disclaimer">Atención en preparación. No se pueden ingresar ni enviar datos personales desde esta versión.</p>
+        <p id="supportFeedback" class="support-feedback" role="status" aria-live="polite" hidden></p>
+      </form>
+      {% if pages['conversacion'] != blank %}<a class="support-preview-link" href="{{ pages['conversacion'].url }}?demo=1">
+        <span>Ver vista previa del chat</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+      </a>{% else %}<span class="support-preview-link">
+        <span>Ver vista previa del chat</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+      </span>{% endif %}
+      <p class="support-preview-note">La vista previa usa mensajes de ejemplo; no muestra conversaciones reales.</p>
+    </section>
+  </div>
+
+{% render 'sds-seasonal-tabbar', active: 'ayuda' %}
+</section>
+{% schema %}
+{"name":"SDS · Soporte","tag":"section","settings":[],"presets":[{"name":"SDS · Soporte"}]}
+{% endschema %}
