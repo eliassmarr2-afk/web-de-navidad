@@ -10,9 +10,9 @@
 <svg class="sds-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
 <nav class="sds-home-hero__actions" aria-label="Accesos rápidos">
 <button class="sds-hero-icon" type="button" data-sds-menu-open aria-label="Abrir menú" aria-haspopup="dialog" aria-controls="sds-menu-dialog"><svg class="sds-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-{% if section.settings.tracking_url != blank %}<a class="sds-hero-icon" href="{{ section.settings.tracking_url }}" aria-label="Consultar mi pedido">{% else %}<span class="sds-hero-icon sds-hero-icon--inactive" aria-label="Seguimiento pendiente de habilitación" title="Seguimiento próximamente">{% endif %}
+{% assign sds_tracking_href = section.settings.tracking_url | default: '/pages/seguimiento' %}<a class="sds-hero-icon" href="{{ sds_tracking_href }}" aria-label="Estado de mi compra">
 <svg class="sds-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h11v10H3Z"/><path d="M14 9h4l3 3v4h-7Z"/><circle cx="7" cy="19" r="2"/><circle cx="17" cy="19" r="2"/></svg>
-{% if section.settings.tracking_url != blank %}</a>{% else %}</span>{% endif %}
+</a>
 <a class="sds-hero-icon" href="{{ routes.cart_url }}" aria-label="Carrito, {{ cart.item_count }} artículos"><svg class="sds-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 2-1.6L20.5 8H6.1"/><circle cx="10" cy="20" r="1"/><circle cx="17" cy="20" r="1"/></svg></a>
 </nav></div>
 <div class="sds-home-hero__bottom"><form class="sds-search" role="search" method="get" action="{{ routes.search_url }}">
@@ -31,6 +31,8 @@
       <a href="{{ routes.root_url }}">Inicio</a>
       <a href="{{ routes.search_url }}">Buscar productos</a>
     {% endfor %}
+    <a href="/pages/seguimiento" data-sds-nav="estado-de-mi-compra">Estado de mi compra</a>
+    <a href="/pages/soporte" data-sds-nav="soporte">Soporte</a>
   </nav>
 </dialog>
 <dialog id="sds-location-dialog" class="sds-location-modal" aria-labelledby="sdsLocationTitle"><h2 id="sdsLocationTitle">¿A dónde lo enviamos?</h2>
