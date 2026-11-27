@@ -279,3 +279,72 @@ Transcripción del HTML efectivo leído del producto piloto, con URLs sustituida
 ```
 
 Fin de checkpoint. No implica autorización de merge, modificación de Protocol Data ni publicación futura de temas.
+
+---
+
+## CIERRE VIGENTE — SDS-L01.6 / DESCRIPCIÓN COMERCIAL R1
+27/11/2026. **4/4 componentes integrados en MAIN y aprobados visualmente por el operador.** Este cierre sustituye la condición pendiente del explorador indicada en la actualización anterior. No implica certificación exhaustiva ni cierre de los restantes sticky tabs o de la integración Protocol Data.
+
+### Explorador interactivo HTML directo
+- Fondo #EDEDED de borde a borde, después del tramo blanco Problema/solución; compensación de gutter y divisoria superior con profundidad sutil. Título negro, instrucción breve, imagen WebP 3:4 sin recorte. Reutiliza el archivo 07_NOSOTROS_ROLLO_50M.webp (MediaImage 47615758303431; 1086×1448), sin nueva carga ni duplicación de galería.
+- Contenedor .sds-description__block.sds-hotspots; elemento sds-image-hotspots.sds-hotspots__wide con stage, imagen, botones y paneles. Los botones type=button llevan data-sds-hotspot con índice base cero, data-sds-tone (blue/green/amber), coordenadas porcentuales mediante --sds-hotspot-x/y, aria-label con número y título, aria-pressed inicial false y span con número. Paneles en idéntico orden, data-sds-hotspot-panel y mismo tone. Región de anuncio data-sds-hotspot-status. El motor actual empareja por orden DOM, no por búsqueda de índice; mantener cantidades y orden iguales.
+- Motor global existente (assets/sds-description.css/js): selección inicial del primero; una tarjeta visible con JS, todas visibles sin JS, 44px área táctil, centro limitado a 22px de borde, halo de invitación finito y pulsos sincronizados al seleccionar, respeto a movimiento reducido. No duplicar JS por producto. Se recomienda hasta 12 puntos (límite del contrato modular anterior, no límite impuesto por el controlador HTML directo); ajustar densidad y coordenadas a cada imagen. No asignar propiedades a piezas que no están visibles como si fueran componentes identificados.
+- Piloto: seis puntos, numerados 1–6: carrete organizador verde (27%,44%); 240 luces LED azul (72%,30%); 50 metros verde (76%,66%); uso interior/exterior azul (29%,25%); cable flexible/reforzado verde (26%,63%); datos de funcionamiento ámbar (45%,51%). Los puntos generales de uso, longitud y alimentación no identifican una pieza eléctrica concreta.
+- Fuente técnica: fotos del embalaje ELECLU AH80207 aportadas por operador: 240 LED, 50 m, 220–240 Vca, 50/60 Hz, 10 W, lámparas no reemplazables, cable reforzado flexible, interior/exterior conforme a instrucciones. No declarar IP, impermeabilidad, diámetro de cable ilegible ni funciones de controlador no verificadas. Reservar especificaciones completas para Ficha técnica.
+- Evidencia: readback de Shopify confirma 15 referencias img (14 archivos únicos en descripción, uno reutilizado), tres ranges, tres situaciones, tres tabs, seis marcadores y seis paneles. Navegador público, run 47afa175-b54d-409b-8307-eb6c366fab3d: seis botones presentes sobre imagen, 6/6 pulsados, correspondencia exacta de títulos/textos y una tarjeta visible por vez; sin fallas observadas. Colores y animaciones no medidos por esa automatización; operador aprobó visualmente el resultado completo. No declarar validación exhaustiva cross-browser, accesibilidad o rendimiento. No se modificaron archivos del tema para montar este bloque.
+- Reutilización: añadir el siguiente bloque después de Problema/solución en descripción HTML (o posición comercial aprobada). Sustituir PRODUCTO, REEMPLAZAR_URL_WEBP_15 por URL real de Shopify, dimensiones/alt, textos, colores, índices y coordenadas. Si se usa el mismo activo de comparación, puede referenciarse la misma URL. Verificar todos los puntos en landing pública. Mantener la plantilla anterior y este apéndice como conjunto de cuatro componentes.
+
+```html
+<div id="sds-PRODUCTO-hotspots" style="background:#EDEDED;margin:19px calc(-1 * var(--sds-content-gutter,28px)) -19px;padding:19px var(--sds-content-gutter,28px);border-top:1px solid #C8C8C8;box-shadow:inset 0 2px 3px rgba(0,0,0,.06);color:#000000">
+<div class="sds-description__block sds-hotspots" style="padding:0">
+<h3 style="color:#000000">Conocé cada detalle.</h3>
+<p style="color:#000000">Tocá los puntos para descubrir las características de tu rollo LED.</p>
+<sds-image-hotspots class="sds-hotspots__wide" role="region" aria-label="Detalles interactivos del producto">
+<div class="sds-hotspots__stage">
+<img src="REEMPLAZAR_URL_WEBP_15" width="1086" height="1448" loading="lazy" alt="Rollo LED multicolor con carrete plástico transparente y cableado oscuro">
+<button type="button" class="sds-hotspots__marker" data-sds-hotspot="0" data-sds-tone="green" style="--sds-hotspot-x:27%;--sds-hotspot-y:44%" aria-label="1. Carrete organizador" aria-pressed="false"><span aria-hidden="true">1</span></button>
+<button type="button" class="sds-hotspots__marker" data-sds-hotspot="1" data-sds-tone="blue" style="--sds-hotspot-x:72%;--sds-hotspot-y:30%" aria-label="2. 240 luces LED" aria-pressed="false"><span aria-hidden="true">2</span></button>
+<button type="button" class="sds-hotspots__marker" data-sds-hotspot="2" data-sds-tone="green" style="--sds-hotspot-x:76%;--sds-hotspot-y:66%" aria-label="3. 50 metros de longitud" aria-pressed="false"><span aria-hidden="true">3</span></button>
+<button type="button" class="sds-hotspots__marker" data-sds-hotspot="3" data-sds-tone="blue" style="--sds-hotspot-x:29%;--sds-hotspot-y:25%" aria-label="4. Uso interior y exterior" aria-pressed="false"><span aria-hidden="true">4</span></button>
+<button type="button" class="sds-hotspots__marker" data-sds-hotspot="4" data-sds-tone="green" style="--sds-hotspot-x:26%;--sds-hotspot-y:63%" aria-label="5. Cable flexible y reforzado" aria-pressed="false"><span aria-hidden="true">5</span></button>
+<button type="button" class="sds-hotspots__marker" data-sds-hotspot="5" data-sds-tone="amber" style="--sds-hotspot-x:45%;--sds-hotspot-y:51%" aria-label="6. Datos de funcionamiento" aria-pressed="false"><span aria-hidden="true">6</span></button>
+</div>
+<div class="sds-hotspots__panels">
+<div class="sds-hotspots__panel" data-sds-hotspot-panel="0" data-sds-tone="green">
+<h4>
+<span>1.</span> Carrete organizador</h4>
+<p style="color:#000000">Facilita el manejo del rollo y ayuda a guardarlo de forma más ordenada.</p>
+</div>
+<div class="sds-hotspots__panel" data-sds-hotspot-panel="1" data-sds-tone="blue">
+<h4>
+<span>2.</span> 240 luces LED</h4>
+<p style="color:#000000">El producto cuenta con 240 LED distribuidos a lo largo del rollo.</p>
+</div>
+<div class="sds-hotspots__panel" data-sds-hotspot-panel="2" data-sds-tone="green">
+<h4>
+<span>3.</span> 50 metros de longitud</h4>
+<p style="color:#000000">Ideal para decorar recorridos más extensos con un solo rollo.</p>
+</div>
+<div class="sds-hotspots__panel" data-sds-hotspot-panel="3" data-sds-tone="blue">
+<h4>
+<span>4.</span> Uso interior y exterior</h4>
+<p style="color:#000000">Pensado para decorar distintos espacios del hogar. Respetá las condiciones de instalación del manual.</p>
+</div>
+<div class="sds-hotspots__panel" data-sds-hotspot-panel="4" data-sds-tone="green">
+<h4>
+<span>5.</span> Cable flexible y reforzado</h4>
+<p style="color:#000000">Su cableado flexible y resistente está pensado para uso decorativo.</p>
+</div>
+<div class="sds-hotspots__panel" data-sds-hotspot-panel="5" data-sds-tone="amber">
+<h4>
+<span>6.</span> Datos de funcionamiento</h4>
+<p style="color:#000000">Alimentación: 220–240 Vca, 50/60 Hz, 10 W. Las lámparas no son reemplazables.</p>
+</div>
+</div>
+<span class="sds-pdp-sr" data-sds-hotspot-status="" aria-live="polite" aria-atomic="true"></span>
+</sds-image-hotspots>
+</div>
+</div>
+```
+
+**Frontera cerrada: Descripción comercial interactiva del piloto.** Los demás contenidos de landing, otros productos y certificaciones integrales siguen sujetos a su hoja de ruta y autorizaciones. No merge ni cambios productivos en este checkpoint documental.
