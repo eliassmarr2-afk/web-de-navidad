@@ -1,0 +1,22 @@
+# ENVÍOS — SDS-L01.12 Envío rastreable
+
+28/11/2026 · **CONSTRUIDO / GUARDADO EN R1 / NO LIVE / ADMISIÓN DE RASTREO PENDIENTE.** Operador aprobó el acceso verde debajo de Condiciones de envío y slide informativo reutilizable, con habilitación pública condicionada a la certificación del seguimiento real.
+
+## Contrato visual
+- Dentro de la misma tarjeta de envío, inmediatamente después de Condiciones de envío: «Rastreá tu envío después de comprar», verde #238636, icono lineal mapa/ubicación 20px (misma escala del camión), texto 15px y chevron 16px. Fila botón semántico, altura mínima 44px, sin tarjeta adicional ni nueva separación estructural.
+- Slide tracking-info: motor vertical existente, ancho hasta 480px, altura 80dvh según CSS R1, borde a borde móvil, fondo blanco, encabezado verde pastel #E5F2E8. Flecha volver y cierre/retorno/foco gestionados por router existente. Ilustración SVG decorativa y tres bloques separados por líneas #D9D9D9.
+- Texto: correo usado en la compra recibe acceso privado; ruta Menú > Estado de mi compra, clave privada recibida por correo; conservar y no compartir acceso. Enlace al recurso pages['seguimiento'].url únicamente con admisión. No exponer ID de pedido como credencial, no prometer rastreo GPS en vivo.
+
+## Arquitectura y admisión
+- snippets/sds-tracking-info.liquid: un renderer con modos row y slide, misma condición estricta para ambos. Requiere shop.metafields.custom.sds_tracking_ready.type == 'boolean', value == true y pages['seguimiento'].url disponible. Campo inexistente, false, tipo incorrecto o página ausente => acceso y slide no renderizan públicamente. No se creó ni activó el metacampo. En request.design_mode se permite preview señalizada del recorrido previsto, sin enlace a página no admitida. No habilitar el gate hasta aprobación y certificación independientes.
+- assets/sds-tracking-info.css: estilos acotados a componente, cargados solo por modo row renderizado.
+- snippets/sds-commercial-rows.liquid: una llamada render inmediatamente después del botón Condiciones de envío.
+- snippets/sds-commercial-screens.liquid: una llamada render modo slide al final. Contrato data-sds-open-screen="tracking-info" / data-sds-screen="tracking-info", aria-controls e id emparejados por section.id, hidden inert inicial. Sin JS nuevo ni modificación del router.
+- La página existente /pages/seguimiento usa assets/sds-tracking-preview.js con adapter.enabled=false, lector real deshabilitado; simulación explícita vista=demo no equivale a rastreo real. El protocolo de lectura real espera acceso privado de 43 caracteres; no se modificó ni se expuso acceso alguno. La cotización logística está habilitada y es una capacidad distinta: no usar su estado como admisión del rastreo.
+
+## Evidencia y límites
+R1 MAIN 191487017159. Preflight pending=[]; se verificó ausencia de sds_tracking_ready, adapter.enabled=false y render del bloque de cotización. Readback 12/12 controles estáticos: alcance exacto cuatro archivos, gate booleano, preview editor, condición compartida, controles pareados, hidden/inert, texto privado, enlace condicionado, estilo verde 20px, adaptador deshabilitado, cotización habilitada preservada y foco. Captura móvil solicitada 390px devolvió metadatos previewUrl:null; no se obtuvo imagen inspeccionable del slide ni prueba runtime. Commit Shopify 1f1e38e0e72a2a49452ab4dcdfdc0bda5b686295, pending=[], pushErrors=[], awaitingPublish exactamente los cuatro archivos. No theme_publish. Sin cambios de cotización, tarifas, zonas, checkout, productos, router, tracking adapter, credenciales, correo, Protocol Data o tema paralelo. No merge.
+
+## Puertas siguientes
+1. Publicación del componente inactivo: autorización expresa de publicación R1, comprobar lista completa awaitingPublish y concurrencia; verificar que no aparezca promesa de rastreo con gate ausente/false, y que la cotización siga intacta.
+2. Admisión real por MANDO/WORK: certificar lector privado, correo de acceso al destinatario, validez/expiración y aislamiento del token, ruta segura desde correo y menú, errores y revocación; no filtrar acceso en URL, logs o storage fuera del contrato certificado. Reconciliar la denominación de clave privada con la interfaz real. Solo tras evidencia y autorización definir el metacampo booleano de tienda y habilitarlo. No confundir publicación de código con habilitación comercial. Probar editor/slide, apertura/retorno, teclado, móvil y estados de no admisión. Ante pérdida de capacidad, deshabilitar gate.
