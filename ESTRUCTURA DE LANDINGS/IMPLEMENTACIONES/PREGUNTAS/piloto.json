@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "title": "Preguntas frecuentes",
+  "contact": {
+    "enabled": false,
+    "title": "¿Tenés alguna pregunta?",
+    "text": "Consultanos sobre este producto.",
+    "button": "Hacer una pregunta"
+  },
+  "items": [
+    {
+      "id": "longitud",
+      "enabled": true,
+      "question": "¿Cuántos metros tiene el rollo?",
+      "answer": "Tiene 50 metros de longitud y 240 luces LED."
+    },
+    {
+      "id": "exterior",
+      "enabled": true,
+      "question": "¿Se puede utilizar en exteriores?",
+      "answer": "El fabricante indica uso interior y exterior. Respetá las condiciones de instalación del manual."
+    },
+    {
+      "id": "combo",
+      "enabled": true,
+      "question": "¿La compra incluye los tubos LED?",
+      "answer": "Depende de la oferta seleccionada. El Combo 2 incluye el rollo de 50 metros y ocho tubos LED colgantes."
+    },
+    {
+      "id": "alimentacion",
+      "enabled": true,
+      "question": "¿Las luces necesitan pilas?",
+      "answer": "No. El rollo funciona con alimentación eléctrica de 220–240 Vca."
+    },
+    {
+      "id": "presentacion",
+      "enabled": true,
+      "question": "¿Cómo viene presentado el producto?",
+      "answer": "En su caja original, con las luces enrolladas en un carrete."
+    }
+  ]
+}
