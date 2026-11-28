@@ -45,3 +45,6 @@ Los placeholders editor-only no son secciones comerciales terminadas. Pactar ind
 - assets/sds-product-r1.css
 
 No modificar Protocol Data, puertos, precios, inventarios, SKU, variantes, ofertas ni publicar el tema. Los hitos SDS-L01 y SDS-L02 siguen pendientes de aceptación de MANDO.
+
+## SDS-L01.8 — Reordenamiento aprobado (28/11/2026)
+**Construido, publicación pendiente.** El nuevo orden canónico y del registro global es Preguntas, Descripción, Ficha técnica, Imágenes, Depósito, Reseñas, Videos. Ficha técnica se coloca inmediatamente después de Descripción; su disponibilidad deriva del HTML capturado del render de especificaciones estructuradas. Imágenes queda postergado, sin eliminar su capacidad futura. No se alteran los IDs, destinos ni el controlador de scroll. Consultar FICHA TÉCNICA.md. Shopify commit fa217c628c26368c86547247e7ed907d07e5ef28.
