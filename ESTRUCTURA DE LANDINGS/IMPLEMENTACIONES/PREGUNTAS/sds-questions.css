@@ -1,0 +1,18 @@
+/* SDS-L01.11 — editorial FAQ, native details/summary, no new JS. */
+.sds-pdp .sds-commercial-content>.sds-questions{background:#fff;color:#000}
+.sds-pdp .sds-questions>h2{font-size:18px;line-height:1.3;color:#000;margin:0 0 12px}
+.sds-pdp .sds-questions__contact{background:#ededed;border-radius:4px;padding:12px;margin:0 0 12px}
+.sds-pdp .sds-questions__contact-heading{display:grid;grid-template-columns:24px minmax(0,1fr);gap:10px;align-items:start}
+.sds-pdp .sds-questions__contact-heading svg{width:24px;height:24px;fill:none;stroke:#2479ff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.sds-pdp .sds-questions__contact h3{font-size:14px;line-height:1.4;color:#000;font-weight:700;margin:0 0 4px}
+.sds-pdp .sds-questions__contact p{font-size:12px;line-height:1.5;color:#555;margin:0}
+.sds-pdp .sds-questions__contact-button{display:block;width:100%;min-height:44px;padding:10px 12px;margin:12px 0 0;background:#2479ff;color:#fff;border:0;border-radius:4px;font:inherit;font-size:14px;font-weight:700;cursor:pointer}
+.sds-pdp .sds-questions__item{margin:0;border:0;border-bottom:1px solid #d9d9d9}
+.sds-pdp .sds-questions__item:last-child{border-bottom:0}
+.sds-pdp .sds-questions__item summary{display:grid;grid-template-columns:minmax(0,1fr) 20px;gap:12px;align-items:center;min-height:44px;padding:12px 0;list-style:none;cursor:pointer;font-size:14px;line-height:1.45;font-weight:650;color:#000;overflow-wrap:anywhere}
+.sds-pdp .sds-questions__item summary::-webkit-details-marker{display:none}
+.sds-pdp .sds-questions__item summary::marker{content:""}
+.sds-pdp .sds-questions__item summary svg{width:20px;height:20px;fill:none;stroke:#2479ff;stroke-width:1.8;stroke-linecap:round}
+.sds-pdp .sds-questions__item[open] .sds-questions__plus{display:none}
+.sds-pdp .sds-questions__answer{color:#555;font-size:13px;line-height:1.55;padding:0 24px 12px 0;overflow-wrap:anywhere}
+.sds-pdp .sds-questions__item summary:focus-visible,.sds-pdp .sds-questions__contact-button:focus-visible{outline:2px solid #2479ff;outline-offset:2px}
