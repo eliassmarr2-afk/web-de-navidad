@@ -1,0 +1,38 @@
+# VIDEOS — HISTORIAS SDS-L01.9
+
+28/11/2026 · **CONSTRUIDO / GUARDADO / NO PUBLICADO / SIN ARCHIVOS COMERCIALES VINCULADOS.**
+Autorización: construir motor global, reordenar Sticky Tabs y documentar, sin publicar. Tema Santa Del Sur | Migración R1, 191487017159. Commit Shopify 0f68276397f6711416cc7ef6ffb58afdc5902575. Cinco archivos awaitingPublish, sin pending ni pushErrors.
+
+## Contrato de catálogo
+- PRODUCT custom.sds_stories (JSON), definición 637220192455.
+- PRODUCT custom.sds_story_media (list.file_reference), definición 637220225223. Referencias ordenadas de archivos Shopify; índices base 1.
+- Ejemplo de configuración (no cargado):
+```json
+{"schema_version":1,"items":[{"id":"story-01","title":"Demostración del producto","enabled":true,"video_index":1,"preview_index":2,"poster_index":3,"illustrative":false}]}
+```
+- video_index requerido: video Shopify con fuente MP4. preview_index opcional: video de previsualización del mismo contenido; si falta se selecciona la menor fuente MP4 por ancho del original. Original para visor: mayor fuente MP4 por ancho. poster_index opcional: imagen aprobada, preferentemente WebP; fallback preview_image de Shopify a 360px, formato efectivo no garantizado. Conservar índices al actualizar archivos. IDs estables; títulos no vacíos; enabled explícitamente true; máximo 12 entradas válidas. illustrative=true muestra identificación de ambientación ilustrativa.
+- No confiar en el esquema como validación editorial, de derechos ni de fidelidad del producto. Solo vincular archivos previamente aprobados; no inferir equivalencia de producto ni permiso comercial por mera presencia de un archivo.
+
+## Diseño y comportamiento
+- Videos inmediatamente antes de Descripción. Fondo blanco, historias 9:16, object-fit cover en previews, radio 4px, gap 6px, margen lateral 8px, objetivo 3,5 visibles cuando hay suficientes historias. Scroll horizontal nativo con snap proximity; anchura de tarjeta calc((100% - 18px)/3.5).
+- Preview muted, loop, playsinline, preload none; sin src inicial, asignación diferida al alcanzar visibilidad >=50% del área efectiva (rail, viewport, navegación sticky y dock inferior). Hasta 4 previews elegibles simultáneas. Pausa cuando salen del área visible, documento oculto, producto inert, visor abierto, hover mouse o foco en rail, pausa explícita, movimiento reducido o Save-Data cuando el navegador lo expone. Fuentes ya asignadas se conservan hasta desconexión; no garantizar cero transferencia residual. Protección de generación en promesas de play para descartar fallos obsoletos por pausa.
+- Controles de pausa/reanudación y audio inicial silenciado; fallback de poster ante fallo. Sin JS o sin showModal, enlace nativo al MP4 original.
+- Visor dialog nativo en top layer, controles de video, audio inicial muted, título, contador, anterior/siguiente y cierre. Video original en contain, sin forzar recorte; reproducción tras selección salvo movimiento reducido. Escape/cierre nativo; restauración de scroll vertical/horizontal y foco. Sin navegación automática entre historias. No implementar gesto de swipe en visor ni integración específica con historial del navegador en esta versión; navegación mediante botones/teclado. El resto de la página queda modalmente inactivo.
+- Si no hay entradas válidas, no se renderiza sección pública ni se cargan sus assets; placeholder exclusivamente editor. La disponibilidad de tab deriva del cuerpo capturado.
+
+## Orden canónico
+Videos, Descripción, Ficha técnica, Imágenes, Depósito, Reseñas, Preguntas. Registry shop custom.sds_global_tabs actualizado con compareDigest y mismos ids/targets/enabled. Plantilla y registro reconciliados. Preguntas al final también en orden físico; Imágenes sigue postergado. Sin contenido, los tabs permanecen ocultos según motor de disponibilidad. No se altera controlador de navegación ni lógica de compra.
+
+## Archivos
+- assets/sds-stories.css
+- assets/sds-stories.js
+- snippets/sds-product-stories.liquid
+- snippets/sds-commercial-tabs.liquid
+- sections/sds-native-product.liquid
+Título de sección configurable en stories_heading. No se modificaron HTML de descripción (15 referencias img), ficha técnica (13 filas), precios, inventario, SKU, variantes, ofertas ni Protocol Data. No se cargaron videos, no se recortaron marcas de agua ni se modificaron los originales.
+
+## Evidencia y límites
+- Prueba sintáctica JavaScript PASS sobre fuente final. DOM/media simulados 20/20 PASS antes de añadir guardia final de generación; incluye elegibilidad, silencio, pausa persistente, visibilidad, ahorro de datos, reduced motion, documento oculto, inert, hover/foco independiente, visor, anterior/siguiente, cierre/foco y liberación de fuentes. Primera corrida 12/17 por defecto del mock (Object.assign evaluaba getters/setters); corregido mock con descriptores y casos extendidos, no contar como fallo real del producto. Guardia final de generación verificada sintácticamente, no repetición completa posterior.
+- No certificación Liquid con videos reales, reproducción/codec, consumo de red, proporción medida, teclado real, iOS/Android, zoom o regresión de dock/visor. theme_screenshot móvil 390 devolvió metadatos sin previewUrl ni captura inspeccionable por el asistente; no hay contenido de historias en el piloto.
+- Readback de producto: sds_stories y sds_story_media sin valores. Por tanto no se puede observar el carrusel público aún. Registro y definiciones de catálogo sí están guardados; el tema no se publicó. No merge.
+- Próxima frontera: aprobar selección de archivos, derechos de reutilización comercial y correspondencia exacta con el rollo de 240 LED. Excluir archivo 1000140019.mp4 por discrepancia de 500 LED detectada en revisión previa. 0018 tiene marca TikTok; no editar ni reutilizar hasta confirmar permiso/fuente. 0017, 0023, 0024 candidatos, no aprobados por inferencia. Comprimir previews, preparar posters WebP, subir medios aprobados y comprobar READY/referencias. Publicar solo con autorización expresa y certificar en navegador móvil el tab contiguo, loop/mute, carga, pausa, navegación horizontal, visor y retorno, dock y tabs existentes. Validar producto sin historias. Registrar aprobación visual antes del cierre.
