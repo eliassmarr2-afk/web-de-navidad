@@ -1,0 +1,49 @@
+{% comment %}SDS-L01.11 — FAQ editorial por producto. CTA únicamente con admisión contextual certificada por el integrador.{% endcomment %}
+{% liquid
+  assign faq = product.metafields.custom.sds_faq.value
+  assign admitted = 0
+  assign contact_available = false
+  if faq.schema_version == 1 and faq.contact.enabled == true and contextual_support_ready == true
+    if faq.contact.title != blank and faq.contact.text != blank and faq.contact.button != blank
+      assign contact_available = true
+    endif
+  endif
+%}
+{% capture entries %}
+  {% if faq.schema_version == 1 %}
+    {% for item in faq['items'] %}
+      {% if admitted >= 20 %}{% break %}{% endif %}
+      {% if item.enabled != true or item.id == blank or item.question == blank or item.answer == blank %}{% continue %}{% endif %}
+      <details class="sds-questions__item"{% if admitted == 0 %} open{% endif %}>
+        <summary>
+          <span>{{ item.question | escape }}</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path class="sds-questions__plus" d="M12 5v14"/></svg>
+        </summary>
+        <div class="sds-questions__answer">{{ item.answer | escape | newline_to_br }}</div>
+      </details>
+      {% assign admitted = admitted | plus: 1 %}
+    {% endfor %}
+  {% endif %}
+{% endcapture %}
+{% if admitted > 0 %}
+  <section class="sds-commercial-section sds-questions" id="sds-questions" data-sds-commercial-section aria-labelledby="sdsQuestionsTitle-{{ section.id }}">
+    <h2 id="sdsQuestionsTitle-{{ section.id }}">{{ faq.title | default: 'Preguntas frecuentes' | escape }}</h2>
+    {% if contact_available %}
+      <div class="sds-questions__contact">
+        <div class="sds-questions__contact-heading">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 15a4 4 0 0 1-4 4H8l-5 4V8a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4Z"/><path d="M8 10h8M8 14h5"/></svg>
+          <div><h3>{{ faq.contact.title | escape }}</h3><p>{{ faq.contact.text | escape }}</p></div>
+        </div>
+        <button type="button" class="sds-questions__contact-button" data-sds-open-screen="support" aria-controls="sds-support-{{ section.id }}">{{ faq.contact.button | escape }}</button>
+      </div>
+    {% elsif request.design_mode %}
+      <p class="sds-commercial-section__pending">Acceso a consulta contextual pendiente de admisión certificada.</p>
+    {% endif %}
+    <div class="sds-questions__list">{{ entries }}</div>
+  </section>
+{% elsif request.design_mode %}
+  <section class="sds-commercial-section sds-questions" id="sds-questions" data-sds-commercial-section aria-label="Preguntas">
+    <h2>Preguntas frecuentes</h2>
+    <p class="sds-commercial-section__pending">Vista del editor · completá las preguntas del producto.</p>
+  </section>
+{% endif %}
